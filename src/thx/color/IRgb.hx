@@ -5,7 +5,7 @@ package thx.color;
  * @author Franco Ponticelli
  */
 
-interface IRgb implements IColor
+interface IRgb
 {
 	public var red(get, set) : Int;
 	public var green(get, set) : Int;

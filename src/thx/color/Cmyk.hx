@@ -7,7 +7,7 @@ package thx.color;
 
 using thx.core.Floats;
 
-class Cmyk implements IColor
+class Cmyk extends Color
 {
 	@:isVar public var black(get, set): Float;
 	@:isVar public var cyan(get, set): Float;
@@ -22,7 +22,7 @@ class Cmyk implements IColor
 		this.black   = black.normalize();
 	}
 	
-	public function toRgb64()
+	override public function toRgb64()
 	{
 		return new Rgb64(
 			(1 - cyan    - black).normalize(),
@@ -31,7 +31,7 @@ class Cmyk implements IColor
 		);
 	}
 
-	public function toString() return 'cmyk($cyan,$magenta,$yellow,$black)'
+	override public function toString() return 'cmyk($cyan,$magenta,$yellow,$black)'
 	
 	function get_black() return black
 	function set_black(value : Float) return black = value.normalize()
