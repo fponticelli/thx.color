@@ -7,7 +7,7 @@ package thx.color;
 
 using thx.core.Floats;
 
-class Hsl implements IColor
+class Hsl extends Color
 {
 	@:isVar public var hue(get, set) : Float;
 	@:isVar public var saturation(get, set) : Float;
@@ -20,7 +20,7 @@ class Hsl implements IColor
 		this.lightness = lightness;
 	}
 	
-	public function toRgb64()
+	override public function toRgb64()
 	{
 		return new Rgb64(
 			_c(hue + 120, saturation, lightness),
@@ -30,7 +30,7 @@ class Hsl implements IColor
 	}
 	
 	public function clone() return new Hsl(hue, saturation, lightness)
-	public function toString() return 'hsl($hue,$(saturation*100)%,$(lightness*100)%)'
+	override public function toString() return 'hsl($hue,$(saturation*100)%,$(lightness*100)%)'
 	
 	function get_hue() return hue
 	function set_hue(value : Float) return hue = value.wrapCircular(360)	
