@@ -10,7 +10,7 @@ using thx.core.Floats;
 using thx.core.Ints;
 using Math;
 
-class Rgb64 implements IRgb
+class Rgb64 extends Color, implements IRgb
 {
 	inline public static function fromInts(red : Int, green : Int, blue : Int) return new Rgb64(red / 255, green / 255, blue / 255)
 	public var red(get, set) : Int;
@@ -27,12 +27,12 @@ class Rgb64 implements IRgb
 		this.bluef  = blue.normalize();
 	}
 	
-	public function toRgb64() return clone()
+	override public function toRgb64() return clone()
 	
 	public function clone() return new Rgb64(redf, greenf, bluef)
 	
-	public function toString() return 'rgb($(redf*100)%,$(greenf*100)%,$(bluef*100)%)'
-	public function toHex(prefix = "#") return '$prefix$(red.hex(2))$(green.hex(2))$(blue.hex(2))'
+	override public function toString() return 'rgb($(redf*100)%,$(greenf*100)%,$(bluef*100)%)'
+	override public function toHex(prefix = "#") return '$prefix$(red.hex(2))$(green.hex(2))$(blue.hex(2))'
 	
 	function get_red()   return (redf   * 255).round()
 	function get_green() return (greenf * 255).round()

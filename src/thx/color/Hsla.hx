@@ -7,7 +7,7 @@ package thx.color;
 
 using thx.core.Floats;
 
-class Hsla extends Hsl, implements IColorAlpha
+class Hsla extends Hsl
 {
 	@:isVar public var alpha(get, set) : Float;
 	public function new(hue : Float, saturation : Float, lightness : Float, alpha : Float)
