@@ -9,7 +9,7 @@ using thx.core.Floats;
 using StringTools;
 using Math;
 
-class Rgb8 implements IRgb
+class Rgb8 extends Color, implements IRgb
 {
 	inline public static function fromFloats(red : Float, green : Float, blue : Float)
 	{
@@ -32,11 +32,13 @@ class Rgb8 implements IRgb
 	public var green(get, set) : Int;
 	public var blue(get, set)  : Int;
 	
-	public function toRgb64() return new Rgb64(red / 255, green / 255, blue / 255)
+	override public function toRgb64() return new Rgb64(red / 255, green / 255, blue / 255)
 	
-	public function toString() return 'rgb($red,$green,$blue)'
-	public function toStringAlpha(alpha : Float) return 'rgba($red,$green,$blue,$(alpha.normalize()))'
-	public function toHex(prefix = "#") return '$prefix$(red.hex(2))$(green.hex(2))$(blue.hex(2))'
+	override public function toCss3() return toString()
+	override public function toCss3Alpha(alpha : Float) return toStringAlpha(alpha)
+	override public function toString() return 'rgb($red,$green,$blue)'
+	override public function toStringAlpha(alpha : Float) return 'rgba($red,$green,$blue,$(alpha.normalize()))'
+	override public function toHex(prefix = "#") return '$prefix$(red.hex(2))$(green.hex(2))$(blue.hex(2))'
 	
 	function get_rgb() return rgb
 	function set_rgb(value : Int) return rgb = value

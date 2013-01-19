@@ -1,10 +1,18 @@
 package thx.color;
-class ColorAlpha extends Color{
-	public function toRgba64() : Rgba64{
-		return null;
+import thx.core.Floats;
+class ColorAlpha extends Color {
+	@:isVar public var alpha(get, set) : Int;
+	public var alpha : Color;
+	public function new(color : Color, alpha : Floats)
+	{
+		if (null == color) throw "null argument color";
+		this.color = color;
+		this.alpha = alpha;
 	}
-	override public function toString(){
-		var rgba = this.toRgba64();
-		return 'rgba($(rgba.redf*100)%,$(rgba.greenf*100)%,$(rgba.bluef*100)%)';
-	}
+	
+	override public function toString() return color.toAlphaString(alpha)
+	override public function toCss3() return color.toCss3String(alpha)
+	
+	function get_alpha() return alpha
+	function set_alpha(value : Float) return alpha = value.normalize()
 }
