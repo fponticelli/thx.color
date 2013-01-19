@@ -7,7 +7,6 @@ class ColorAlpha extends Color {
 	@:isVar public var alpha(get, set) : Float;
 	function new(color : Color, alpha : Float)
 	{
-		if (null == color) throw "null argument color";
 		this.color = color;
 		this.alpha = alpha;
 	}
