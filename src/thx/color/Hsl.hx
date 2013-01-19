@@ -29,7 +29,7 @@ class Hsl extends Color
 		);
 	}
 	
-	public function clone() return new Hsl(hue, saturation, lightness)
+	override public function clone() : Hsl return new Hsl(hue, saturation, lightness)
 	override public function toCss3() return toString()
 	override public function toCss3Alpha(alpha : Float) return toStringAlpha(alpha)
 	override public function toString() return 'hsl($hue,$(saturation*100)%,$(lightness*100)%)'

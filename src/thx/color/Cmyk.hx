@@ -22,6 +22,9 @@ class Cmyk extends Color
 		this.black   = black.normalize();
 	}
 	
+	override public function clone() : Cmyk {
+		return new Cmyk(cyan, magenta, yellow, black);
+	}
 	override public function toRgb64()
 	{
 		return new Rgb64(

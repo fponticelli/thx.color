@@ -1,9 +1,12 @@
 package thx.color;
-using thx.core.Ints;
+
 using StringTools;
 
 class Color {
 	public function toRgb64() : Rgb64 {
+		return throw "abstract method, must override";
+	}
+	public function clone() : Color {
 		return throw "abstract method, must override";
 	}
 	public function toHex(prefix = "#") {
@@ -21,5 +24,8 @@ class Color {
 	public function toStringAlpha(alpha : Float) {
 		return toRgb64().toStringAlpha(alpha);
 	}
+	
+	@:access(thx.color.ColorAlpha)
+	public function withAlpha(alpha : Float) return new ColorAlpha(this.clone(), alpha)
 }
 

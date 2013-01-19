@@ -26,7 +26,7 @@ class Rgb8 extends Color, implements IRgb
 		this.rgb = rgb;
 	}
 	
-	public function clone() return new Rgb8(rgb)
+	override public function clone() : Rgb8 return new Rgb8(rgb)
 	
 	public var red(get, set)   : Int;
 	public var green(get, set) : Int;

@@ -29,7 +29,7 @@ class Rgb64 extends Color, implements IRgb
 	
 	override public function toRgb64() return clone()
 	
-	public function clone() return new Rgb64(redf, greenf, bluef)
+	override public function clone() : Rgb64 return new Rgb64(redf, greenf, bluef)
 	
 	override public function toCss3() return toString()
 	override public function toCss3Alpha(alpha : Float) return toStringAlpha(alpha)
