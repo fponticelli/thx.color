@@ -11,9 +11,7 @@ class ColorAlpha extends Color {
 		this.alpha = alpha;
 	}
 	
-	override public function clone() : ColorAlpha {
-		return new ColorAlpha(color.clone(), alpha);
-	}
+	override public function clone() : ColorAlpha return new ColorAlpha(color.clone(), alpha)
 	override public function toString() return color.toStringAlpha(alpha)
 	override public function toCss3() return color.toCss3Alpha(alpha)
 	
