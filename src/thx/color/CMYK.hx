@@ -7,7 +7,7 @@ package thx.color;
 
 using thx.core.Floats;
 
-class Cmyk extends Color
+class CMYK extends Color
 {
 	@:isVar public var black(get, set): Float;
 	@:isVar public var cyan(get, set): Float;
@@ -22,12 +22,12 @@ class Cmyk extends Color
 		this.black   = black.normalize();
 	}
 	
-	override public function clone() : Cmyk {
-		return new Cmyk(cyan, magenta, yellow, black);
+	override public function clone() : CMYK {
+		return new CMYK(cyan, magenta, yellow, black);
 	}
-	override public function toRgb64()
+	override public function toRGBHR()
 	{
-		return new Rgb64(
+		return new RGBHR(
 			(1 - cyan    - black).normalize(),
 			(1 - magenta - black).normalize(),
 			(1 - yellow  - black).normalize()

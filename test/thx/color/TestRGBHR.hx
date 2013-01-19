@@ -1,24 +1,28 @@
+/**
+ * ...
+ * @author Franco Ponticelli
+ */
 
 package thx.color;
 
 import utest.Assert;
 
-class TestHsv
+class TestRGBHR
 {
 	public function new() { }
 	
-	public function testBasics() 
+	public function testBasics()
 	{
-		var hsv = new Hsv(1, 0, 0);
-		Assert.equals(1, hsv.hue);
-		Assert.equals(0, hsv.saturation);
-		Assert.equals(0, hsv.value);
+		var red = new RGBHR(1, 0, 0);
+		Assert.equals(0xFF, red.red);
+		Assert.equals(0x00, red.green);
+		Assert.equals(0x00, red.blue);
 	}
 	
-	public function testSetHsv()
+	public function testSetRgb()
 	{
 		/*
-		var color = new Rgb8(0x000000);
+		var color = new RGB(0x000000);
 		color.red   = 0xCC;
 		color.green = 0xDD;
 		color.blue  = 0xEE;
@@ -29,10 +33,10 @@ class TestHsv
 		*/
 	}
 	
-	public function testSetHsvf()
+	public function testSetRgbf()
 	{
 		/*
-		var color = new Rgb8(0x000000);
+		var color = new RGB(0x000000);
 		color.red   = 0xCC;
 		color.green = 0xDD;
 		color.blue  = 0xEE;
@@ -46,7 +50,7 @@ class TestHsv
 	public function testStrings()
 	{
 		/*
-		var color = new Rgb8(0x00AAFF);
+		var color = new RGB(0x00AAFF);
 		Assert.equals("#00AAFF", color.toCss());
 		Assert.equals("rgb(0,170,255)", color.toString());
 		*/

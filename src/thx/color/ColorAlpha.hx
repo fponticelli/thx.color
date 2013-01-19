@@ -13,7 +13,7 @@ class ColorAlpha extends Color {
 	
 	override public function clone() : ColorAlpha return new ColorAlpha(color.clone(), alpha)
 	override public function toString() return color.toStringAlpha(alpha)
-	override public function toCss3() return color.toCss3Alpha(alpha)
+	override public function toCSS3() return color.toCSS3Alpha(alpha)
 	
 	function get_alpha() return alpha
 	function set_alpha(value : Float) return alpha = value.normalize()

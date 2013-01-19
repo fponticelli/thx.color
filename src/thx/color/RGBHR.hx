@@ -10,9 +10,9 @@ using thx.core.Floats;
 using thx.core.Ints;
 using Math;
 
-class Rgb64 extends Color, implements IRgb
+class RGBHR extends Color, implements IRgb
 {
-	inline public static function fromInts(red : Int, green : Int, blue : Int) return new Rgb64(red / 255, green / 255, blue / 255)
+	inline public static function fromInts(red : Int, green : Int, blue : Int) return new RGBHR(red / 255, green / 255, blue / 255)
 	public var red(get, set) : Int;
 	public var green(get, set) : Int;
 	public var blue(get, set) : Int;
@@ -27,12 +27,12 @@ class Rgb64 extends Color, implements IRgb
 		this.bluef  = blue.normalize();
 	}
 	
-	override public function toRgb64() return clone()
+	override public function toRGBHR() return clone()
 	
-	override public function clone() : Rgb64 return new Rgb64(redf, greenf, bluef)
+	override public function clone() : RGBHR return new RGBHR(redf, greenf, bluef)
 	
-	override public function toCss3() return toString()
-	override public function toCss3Alpha(alpha : Float) return toStringAlpha(alpha)
+	override public function toCSS3() return toString()
+	override public function toCSS3Alpha(alpha : Float) return toStringAlpha(alpha)
 	override public function toString() return 'rgb($(redf*100)%,$(greenf*100)%,$(bluef*100)%)'
 	override public function toStringAlpha(alpha : Float) return 'rgba($(redf*100)%,$(greenf*100)%,$(bluef*100)%,$(alpha.normalize()*100)%)'
 	override public function toHex(prefix = "#") return '$prefix$(red.hex(2))$(green.hex(2))$(blue.hex(2))'

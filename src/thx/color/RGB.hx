@@ -9,7 +9,7 @@ using thx.core.Floats;
 using StringTools;
 using Math;
 
-class Rgb8 extends Color, implements IRgb
+class RGB extends Color, implements IRgb
 {
 	inline public static function fromFloats(red : Float, green : Float, blue : Float)
 	{
@@ -17,7 +17,7 @@ class Rgb8 extends Color, implements IRgb
 	}
 	inline public static function fromInts(red : Int, green : Int, blue : Int)
 	{
-		return new Rgb8(((red & 0xFF) << 16) | ((green & 0xFF) << 8) | ((blue & 0xFF) << 0));
+		return new RGB(((red & 0xFF) << 16) | ((green & 0xFF) << 8) | ((blue & 0xFF) << 0));
 	}
 	
 	@:isVar public var rgb(get, set) : Int;
@@ -26,16 +26,16 @@ class Rgb8 extends Color, implements IRgb
 		this.rgb = rgb;
 	}
 	
-	override public function clone() : Rgb8 return new Rgb8(rgb)
+	override public function clone() : RGB return new RGB(rgb)
 	
 	public var red(get, set)   : Int;
 	public var green(get, set) : Int;
 	public var blue(get, set)  : Int;
 	
-	override public function toRgb64() return new Rgb64(red / 255, green / 255, blue / 255)
+	override public function toRGBHR() return new RGBHR(red / 255, green / 255, blue / 255)
 	
-	override public function toCss3() return toString()
-	override public function toCss3Alpha(alpha : Float) return toStringAlpha(alpha)
+	override public function toCSS3() return toString()
+	override public function toCSS3Alpha(alpha : Float) return toStringAlpha(alpha)
 	override public function toString() return 'rgb($red,$green,$blue)'
 	override public function toStringAlpha(alpha : Float) return 'rgba($red,$green,$blue,$(alpha.normalize()))'
 	override public function toHex(prefix = "#") return '$prefix$(red.hex(2))$(green.hex(2))$(blue.hex(2))'

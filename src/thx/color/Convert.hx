@@ -17,15 +17,15 @@ class ConvertRgba64
 
 class ConvertRgb64
 {
-	inline public static function toRgb64(src : Rgb64)
+	inline public static function toRGBHR(src : RGBHR)
 		return src.clone()
-	inline public static function toRgba64(src : Rgb64, alpha = 0.0)
+	inline public static function toRgba64(src : RGBHR, alpha = 0.0)
 		return new Rgba64(src.red, src.green, src.blue, alpha)
-	inline public static function toHsl(src : Rgb64)
+	inline public static function toHsl(src : RGBHR)
 		return ConvertRgbChannels.toHsl(src.redf, src.bluef, src.greenf)
-	inline public static function toHsla(src : Rgb64, alpha = 0.0)
+	inline public static function toHsla(src : RGBHR, alpha = 0.0)
 		return ConvertRgbChannels.toHsla(src.redf, src.greenf, src.bluef, alpha)
-	inline public static function toCmyk(src : Rgb64)
+	inline public static function toCmyk(src : RGBHR)
 		return ConvertRgbChannels.toCmyk(src.redf, src.greenf, src.bluef)
 }
 
@@ -42,11 +42,11 @@ class ConvertIRgba
 class ConvertIRgb
 {
 	inline public static function toRgb8(src : IRgb)
-		return Rgb8.fromInts(src.red, src.green, src.blue)
+		return RGB.fromInts(src.red, src.green, src.blue)
 //	inline public static function toRgba8(src : IRgb, alpha = 0.0)
 //		return Rgba8.fromInts(src.red, src.green, src.blue, alpha)
-//	inline public static function toRgb64(src : IRgb)
-//		return Rgb64.fromInts(src.red, src.green, src.blue)
+//	inline public static function toRGBHR(src : IRgb)
+//		return RGBHR.fromInts(src.red, src.green, src.blue)
 //	inline public static function toRgba64(src : IRgb, alpha = 0.0)
 //		return Rgba64.fromInts(src.red, src.green, src.blue, alpha)
 	inline public static function toHsl(src : IRgb)
@@ -85,7 +85,7 @@ class ConvertRgbChannels
 	public static function toHsl(r : Float, g : Float, b : Float)
 	{
 		var arr = toHslArray(r, g, b);
-		return new Hsl(arr[0], arr[1], arr[2]);
+		return new HSL(arr[0], arr[1], arr[2]);
 	}
 	/*
 	public static function toHsla(r : Float, g : Float, b : Float, a : Float)
@@ -109,6 +109,6 @@ class ConvertRgbChannels
 			m = (m - k) / (1 - k);
 			y = (y - k) / (1 - k);
 		}
-		return new Cmyk(c, m, y, k);
+		return new CMYK(c, m, y, k);
 	}
 }

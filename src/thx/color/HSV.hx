@@ -1,6 +1,6 @@
 package thx.color;
 using thx.core.Floats;
-class Hsv extends Color
+class HSV extends Color
 {
 	@:isVar public var hue(get, set) : Float;
 	@:isVar public var saturation(get, set) : Float;
@@ -12,7 +12,7 @@ class Hsv extends Color
 		this.saturation = saturation;
 		this.value = value;
 	}
-	override public function toRgb64()
+	override public function toRGBHR()
 	{
 		var r = 0.0, g = 0.0, b = 0.0;
 
@@ -31,10 +31,10 @@ class Hsv extends Color
 			case 5: r = value; g = p; b = q;
 		}
 
-		return new Rgb64(r,g,b);
+		return new RGBHR(r,g,b);
 	}
 
-	override public function clone() : Hsv return new Hsv(hue, saturation, value)
+	override public function clone() : HSV return new HSV(hue, saturation, value)
 
 	override public function toString() return 'hsv($hue,$(saturation*100)%,$(value*100)%)'
 	override public function toStringAlpha(alpha : Float) return 'hsva($hue,$(saturation*100)%,$(value*100)%,$(alpha.normalize()*100)%)'

@@ -7,7 +7,7 @@ package thx.color;
 
 using thx.core.Floats;
 
-class Hsl extends Color
+class HSL extends Color
 {
 	@:isVar public var hue(get, set) : Float;
 	@:isVar public var saturation(get, set) : Float;
@@ -20,18 +20,18 @@ class Hsl extends Color
 		this.lightness = lightness;
 	}
 	
-	override public function toRgb64()
+	override public function toRGBHR()
 	{
-		return new Rgb64(
+		return new RGBHR(
 			_c(hue + 120, saturation, lightness),
 			_c(hue, saturation, lightness),
 			_c(hue - 120, saturation, lightness)
 		);
 	}
 	
-	override public function clone() : Hsl return new Hsl(hue, saturation, lightness)
-	override public function toCss3() return toString()
-	override public function toCss3Alpha(alpha : Float) return toStringAlpha(alpha)
+	override public function clone() : HSL return new HSL(hue, saturation, lightness)
+	override public function toCSS3() return toString()
+	override public function toCSS3Alpha(alpha : Float) return toStringAlpha(alpha)
 	override public function toString() return 'hsl($hue,$(saturation*100)%,$(lightness*100)%)'
 	override public function toStringAlpha(alpha : Float) return 'hsla($hue,$(saturation*100)%,$(lightness*100)%,$(alpha.normalize()*100)%)'
 	
