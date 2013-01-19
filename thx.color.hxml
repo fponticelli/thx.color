@@ -2,7 +2,6 @@
 -cp test
 -cp ../thx.core/src
 -lib utest
-#-neko bin/test/thxcolor.n
+-neko bin/test/thxcolor.n
 -D haxe3
 -main TestAll
--x bin/test/thxcolor

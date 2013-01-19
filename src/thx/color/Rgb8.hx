@@ -35,6 +35,7 @@ class Rgb8 implements IRgb
 	public function toRgb64() return new Rgb64(red / 255, green / 255, blue / 255)
 	
 	public function toString() return 'rgb($red,$green,$blue)'
+	public function toStringAlpha(alpha : Float) return 'rgba($red,$green,$blue,$(alpha.normalize()))'
 	public function toHex(prefix = "#") return '$prefix$(red.hex(2))$(green.hex(2))$(blue.hex(2))'
 	
 	function get_rgb() return rgb

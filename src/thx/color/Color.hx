@@ -6,14 +6,14 @@ class Color {
 	public function toRgb64() : Rgb64{
 		return null;
 	}
-	public function toString(){
-		var rgb = this.toRgb64();
-		return 'rgb($(rgb.redf*100)%,$(rgb.greenf*100)%,$(rgb.bluef*100)%)';
-	}
 	public function toHex(prefix = "#"){
-		var rgb = this.toRgb64();
-		return '$prefix$(rgb.red.hex(2))$(rgb.green.hex(2))$(rgb.blue.hex(2))';
+		return toRgb64().toHex(prefix);
 	}
-
+	public function toString() {
+		return toRgb64().toString();
+	}
+	public function toStringAlpha(alpha : Float) {
+		return toRgb64().toStringAlpha(alpha);
+	}
 }
 

@@ -32,6 +32,7 @@ class Cmyk extends Color
 	}
 
 	override public function toString() return 'cmyk($cyan,$magenta,$yellow,$black)'
+	override public function toStringAlpha(alpha : Float) return 'cmyka($cyan,$magenta,$yellow,$black,$(alpha.normalize()))'
 	
 	function get_black() return black
 	function set_black(value : Float) return black = value.normalize()
