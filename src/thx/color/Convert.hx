@@ -6,60 +6,22 @@
 package thx.color;
 import thx.core.Floats;
 using Math;
-/*
-class ConvertRgba64
+
+class ConvertRGB
 {
-	inline public static function toRgba8(src : Rgba64)
-		return Rgba8.fromInts(src.red, src.green, src.blue, src.alpha)
-	inline public static function toHsla(src : Rgba64)
-		return ConvertRgbChannels.toHsla(src.redf, src.greenf, src.bluef, src.alpha)
+	inline public static function toCMYK(rgb : RGB)
+		return ConvertRGBChannels.toCMYK(rgb.red / 255, rgb.green / 255, rgb.blue / 255)
 }
 
 class ConvertRGBX
 {
-	inline public static function toRGBX(src : RGBX)
-		return src.clone()
-	inline public static function toRgba64(src : RGBX, alpha = 0.0)
-		return new Rgba64(src.red, src.green, src.blue, alpha)
-	inline public static function toHsl(src : RGBX)
-		return ConvertRgbChannels.toHsl(src.redf, src.bluef, src.greenf)
-	inline public static function toHsla(src : RGBX, alpha = 0.0)
-		return ConvertRgbChannels.toHsla(src.redf, src.greenf, src.bluef, alpha)
-	inline public static function toCmyk(src : RGBX)
-		return ConvertRgbChannels.toCmyk(src.redf, src.greenf, src.bluef)
+	inline public static function toCMYK(rgb : RGBX)
+		return ConvertRGBChannels.toCMYK(rgb.redf, rgb.greenf, rgb.bluef)
 }
 
-class ConvertIRgba
+class ConvertRGBChannels
 {
-	inline public static function toRgba8(src : IRgba)
-		return Rgba8.fromInts(src.red, src.green, src.blue, src.alpha)
-	inline public static function toRgba64(src : IRgba)
-		return Rgba64.fromInts(src.red, src.green, src.blue, src.alpha)
-	inline public static function toHsla(src : IRgba)
-		return ConvertRgbChannels.toHsla(src.red / 255, src.green / 255, src.blue / 255, src.alpha)
-}
-*/
-class ConvertIRgb
-{
-	inline public static function toRgb8(src : IRgb)
-		return RGB.fromInts(src.red, src.green, src.blue)
-//	inline public static function toRgba8(src : IRgb, alpha = 0.0)
-//		return Rgba8.fromInts(src.red, src.green, src.blue, alpha)
-//	inline public static function toRGBX(src : IRgb)
-//		return RGBX.fromInts(src.red, src.green, src.blue)
-//	inline public static function toRgba64(src : IRgb, alpha = 0.0)
-//		return Rgba64.fromInts(src.red, src.green, src.blue, alpha)
-	inline public static function toHsl(src : IRgb)
-		return ConvertRgbChannels.toHsl(src.red / 255, src.blue / 255, src.green / 255)
-//	inline public static function toHsla(src : IRgb, alpha = 0.0)
-//		return ConvertRgbChannels.toHsla(src.red / 255, src.blue / 255, src.green / 255, alpha)
-	inline public static function toCmyk(src : IRgb)
-		return ConvertRgbChannels.toCmyk(src.red / 255, src.green / 255, src.blue / 255)
-}
-
-class ConvertRgbChannels
-{
-	static function toHslArray(r : Float, g : Float, b : Float)
+	static function toHSLArray(r : Float, g : Float, b : Float)
 	{
 		var	min = r.min(g).min(b),
 			max = r.max(g).max(b),
@@ -82,19 +44,13 @@ class ConvertRgbChannels
 		return [h, s, l];
 	}
 	
-	public static function toHsl(r : Float, g : Float, b : Float)
+	public static function toHSL(r : Float, g : Float, b : Float)
 	{
-		var arr = toHslArray(r, g, b);
+		var arr = toHSLArray(r, g, b);
 		return new HSL(arr[0], arr[1], arr[2]);
 	}
-	/*
-	public static function toHsla(r : Float, g : Float, b : Float, a : Float)
-	{
-		var arr = toHslArray(r, g, b);
-		return new Hsla(arr[0], arr[1], arr[2], a);
-	}
-	*/
-	public static function toCmyk(r : Float, g : Float, b : Float)
+	
+	public static function toCMYK(r : Float, g : Float, b : Float)
 	{
 		var c = 0.0, y = 0.0, m = 0.0, k;
 		if (r + g + b == 0)

@@ -2,6 +2,7 @@
 package thx.color;
 
 import utest.Assert;
+using thx.color.Convert;
 
 class TestCMYK
 {
@@ -36,10 +37,20 @@ class TestCMYK
 		Assert.equals("cmyka(0.1,0.2,0.3,0.4,0.5)", cmyk.toStringAlpha(0.5));
 	}
 
-	public function testToRGBX()
+	public function testConversion()
 	{
-		var cmyk = CMYK.parse("CMYK(0.76, 0.30, 0.77, 0.11)");
-		Assert.equals("#ABD7AA", cmyk.toRGBX().toHex()); //171, 215 170
-		trace(cmyk.toCSS3());
+		var tests = [
+			{ rgb : RGB.fromInts(255,0,0),     cmyk : new CMYK(0,1,1,0) },
+			{ rgb : RGB.fromInts(255,102,0),   cmyk : new CMYK(0,0.6,1,0) },
+			{ rgb : RGB.fromInts(0,255,0),     cmyk : new CMYK(1,0,1,0) },
+			{ rgb : RGB.fromInts(102,255,102), cmyk : new CMYK(0.6,0,0.6,0) },
+			{ rgb : RGB.fromInts(0,102,255),   cmyk : new CMYK(1,0.6,0,0) },
+		];
+		for (test in tests)
+		{
+			Assert.isTrue(test.rgb.equalRGB(test.cmyk), "expected " + test.rgb.toHex() + " but was " + test.cmyk.toHex() + " for " + test.cmyk);
+			var c = test.rgb.toCMYK();
+			Assert.isTrue(c.equalRGB(test.cmyk), "expected " + c.toHex() + " but was " + test.cmyk.toHex() + " for " + test.cmyk);
+		}
 	}
 }
