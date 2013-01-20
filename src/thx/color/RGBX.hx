@@ -10,7 +10,7 @@ using thx.core.Floats;
 using thx.core.Ints;
 using Math;
 
-class RGBX extends Color, implements IRgb
+class RGBX extends Color
 {
 	inline public static function fromInts(red : Int, green : Int, blue : Int) return new RGBX(red / 255, green / 255, blue / 255)
 	public var red(get, set) : Int;

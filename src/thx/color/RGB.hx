@@ -11,7 +11,7 @@ using thx.core.Ints;
 using StringTools;
 using Math;
 
-class RGB extends Color, implements IRgb
+class RGB extends Color
 {
 	inline public static function fromFloats(red : Float, green : Float, blue : Float)
 	{
