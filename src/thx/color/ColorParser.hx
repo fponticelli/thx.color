@@ -115,3 +115,27 @@ enum ChannelInfo
 	CIInt(value : Int);
 	CI0or1(value : Int);
 }
+
+class ColorAssembler<T : Color>
+{
+	public function toSolid(info : ColorInfo) : Null<T>
+	{
+		return throw "abstract method";
+	}
+	
+	@:access(thx.color.ColorAlpha)
+	public function toColor(info : ColorInfo) : Null<Color>
+	{
+		var color = toSolid(info);
+		if (null == color)
+			return null;
+		if (!info.hasAlpha)
+			return color;
+		if (null == info.channels[info.channels.length-1])
+			return null;
+		var alpha = ColorParser.getFloatChannel(info.channels[info.channels.length-1]);
+		if (null == alpha)
+			return null;
+		return new ColorAlpha(color, alpha);
+	}
+}

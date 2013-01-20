@@ -18,21 +18,22 @@ class TestCMYK
 	
 	public function testParse()
 	{
-		var cmyk = CMYK.parse("CMYK(0.1, 0.2, 0.3, 0.4)");
+		var cmyk = CMYK.parse("CMYK(10%, 0.2, 0.3, 0.4)");
 		Assert.notNull(cmyk);
 		Assert.equals(0.1, cmyk.cyan);
 		Assert.equals(0.2, cmyk.magenta);
 		Assert.equals(0.3, cmyk.yellow);
 		Assert.equals(0.4, cmyk.black);
+		
+		Assert.equals("cmyk(0.1,0.2,0.3,0.4)", CMYK.parse("cmyka(0.1,0.2,0.3,0.4,0.5)"));
+		Assert.equals("cmyka(0.1,0.2,0.3,0.4,0.5)", CMYK.parseColor("cmyka(0.1,0.2,0.3,0.4,0.5)"));
 	}
 	
 	public function testStrings()
 	{
-		/*
-		var color = new RGB(0x00AAFF);
-		Assert.equals("#00AAFF", color.toCss());
-		Assert.equals("rgb(0,170,255)", color.toString());
-		*/
+		var cmyk = CMYK.parse("CMYK(0.1, 0.2, 0.3, 0.4)");
+		Assert.equals("cmyk(0.1,0.2,0.3,0.4)", cmyk.toString());
+		Assert.equals("cmyka(0.1,0.2,0.3,0.4,0.5)", cmyk.toStringAlpha(0.5));
 	}
 	
 	public function testToRgb64()
