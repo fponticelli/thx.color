@@ -35,9 +35,11 @@ class TestCMYK
 		Assert.equals("cmyk(0.1,0.2,0.3,0.4)", cmyk.toString());
 		Assert.equals("cmyka(0.1,0.2,0.3,0.4,0.5)", cmyk.toStringAlpha(0.5));
 	}
-	
+
 	public function testToRGBX()
 	{
-		
+		var cmyk = CMYK.parse("CMYK(0.76, 0.30, 0.77, 0.11)");
+		Assert.equals("#ABD7AA", cmyk.toRGBX().toHex()); //171, 215 170
+		trace(cmyk.toCSS3());
 	}
 }
