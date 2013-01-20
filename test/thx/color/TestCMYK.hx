@@ -9,38 +9,21 @@ class TestCMYK
 	
 	public function testBasics()
 	{
-		var hsv = new HSV(1, 0, 0);
-		Assert.equals(1, hsv.hue);
-		Assert.equals(0, hsv.saturation);
-		Assert.equals(0, hsv.value);
+		var cmyk = new CMYK(0.1, 0.2, 0.3, 0.4);
+		Assert.equals(0.1, cmyk.cyan);
+		Assert.equals(0.2, cmyk.magenta);
+		Assert.equals(0.3, cmyk.yellow);
+		Assert.equals(0.4, cmyk.black);
 	}
 	
-	public function testSetHsv()
+	public function testParse()
 	{
-		/*
-		var color = new RGB(0x000000);
-		color.red   = 0xCC;
-		color.green = 0xDD;
-		color.blue  = 0xEE;
-		
-		Assert.equals(0xCC, color.red);
-		Assert.equals(0xDD, color.green);
-		Assert.equals(0xEE, color.blue);
-		*/
-	}
-	
-	public function testSetHsvf()
-	{
-		/*
-		var color = new RGB(0x000000);
-		color.red   = 0xCC;
-		color.green = 0xDD;
-		color.blue  = 0xEE;
-		
-		Assert.equals(0xCC, color.red);
-		Assert.equals(0xDD, color.green);
-		Assert.equals(0xEE, color.blue);
-		*/
+		var cmyk = CMYK.parse("CMYK(0.1, 0.2, 0.3, 0.4)");
+		Assert.notNull(cmyk);
+		Assert.equals(0.1, cmyk.cyan);
+		Assert.equals(0.2, cmyk.magenta);
+		Assert.equals(0.3, cmyk.yellow);
+		Assert.equals(0.4, cmyk.black);
 	}
 	
 	public function testStrings()
@@ -52,22 +35,7 @@ class TestCMYK
 		*/
 	}
 	
-	public function testFromInts()
-	{
-		
-	}
-	
-	public function testFromInt()
-	{
-		
-	}
-	
 	public function testToRgb64()
-	{
-		
-	}
-	
-	public function testToRgb8()
 	{
 		
 	}

@@ -6,6 +6,8 @@
 package thx.color;
 
 using thx.core.Floats;
+using thx.core.Ints;
+
 using StringTools;
 using Math;
 
@@ -21,9 +23,9 @@ class RGB extends Color, implements IRgb
 	}
 	
 	@:isVar public var rgb(get, set) : Int;
-	public function new(rgb : Int) 
+	public function new(rgb : Int)
 	{
-		this.rgb = rgb;
+		this.rgb = rgb.clamp(0, 0xFFFFFF);
 	}
 	
 	override public function clone() : RGB return new RGB(rgb)
