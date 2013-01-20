@@ -66,6 +66,35 @@ class ConvertRGBChannels
 		return [h, s, l];
 	}
 	
+	static function toHSVArray(r : Float, g : Float, b : Float)
+	{
+		var	min = r.min(g).min(b),
+			max = r.max(g).max(b),
+			delta = max - min,
+			h : Float,
+			s : Float,
+			v : Float = max;
+		if (delta != 0)
+			s = delta / max;
+		else {
+			s = 0;
+			h = -1;
+			return [h, s, v];
+		}
+		
+		if (r == max)
+			h = (g - b) / delta;
+		else if (g == max)
+			h = 2 + (b - r) / delta;
+		else
+			h = 4 + (r - g) / delta;
+			
+		h *= 60;
+		if (h < 0)
+			h += 360;
+		return [h, s, v];
+	}
+	
 	public static function toHSL(r : Float, g : Float, b : Float) : HSL
 	{
 		var arr = toHSLArray(r, g, b);
@@ -74,7 +103,8 @@ class ConvertRGBChannels
 	
 	public static function toHSV(r : Float, g : Float, b : Float) : HSV
 	{
-		return null;
+		var arr = toHSVArray(r, g, b);
+		return new HSV(arr[0], arr[1], arr[2]);
 	}
 	
 	public static function toCMYK(r : Float, g : Float, b : Float) : CMYK

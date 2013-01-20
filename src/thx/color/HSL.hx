@@ -46,7 +46,7 @@ class HSL extends Color
 	override public function toCSS3() return toString()
 	override public function toCSS3Alpha(alpha : Float) return toStringAlpha(alpha)
 	override public function toString() return 'hsl($hue,${saturation*100}%,${lightness*100}%)'
-	override public function toStringAlpha(alpha : Float) return 'hsla($hue,${saturation*100},${lightness*100}%,${alpha.normalize()*100}%)'
+	override public function toStringAlpha(alpha : Float) return 'hsla($hue,${saturation*100}%,${lightness*100}%,${alpha.normalize()})'
 	
 	function get_hue() return hue
 	function set_hue(value : Float) return hue = value.wrapCircular(360)

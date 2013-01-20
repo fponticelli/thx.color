@@ -28,30 +28,34 @@ class HSV extends Color
 	}
 	override public function toRGBX()
 	{
-		var r = 0.0, g = 0.0, b = 0.0;
+		if (saturation == 0)
+			return new RGBX(value, value, value);
+		
+		var r : Float, g : Float, b : Float, i : Int, f : Float, p : Float, q : Float, t : Float;
+		var h = hue / 60;
+		
+		i = Math.floor(h);
+		f = h - i;
+		p = value * (1 - saturation);
+		q = value * (1 - f * saturation);
+		t = value * (1 - (1 - f) * saturation);
 
-		var i = Math.floor(hue * 6);
-		var f = hue * 6 - i;
-		var p = value * (1 - saturation);
-		var q = value * (1 - f * saturation);
-		var t = value * (1 - (1 - f) * saturation);
-
-		switch(i % 6){
+		switch(i){
 			case 0: r = value; g = t; b = p;
 			case 1: r = q; g = value; b = p;
 			case 2: r = p; g = value; b = t;
 			case 3: r = p; g = q; b = value;
 			case 4: r = t; g = p; b = value;
-			case 5: r = value; g = p; b = q;
+			default: r = value; g = p; b = q; // case 5
 		}
 
-		return new RGBX(r,g,b);
+		return new RGBX(r, g, b);
 	}
 
 	override public function clone() : HSV return new HSV(hue, saturation, value)
 
 	override public function toString() return 'hsv($hue,${saturation*100}%,${value*100}%)'
-	override public function toStringAlpha(alpha : Float) return 'hsva($hue,${saturation*100}%,${value*100}%,${alpha.normalize()*100}%)'
+	override public function toStringAlpha(alpha : Float) return 'hsva($hue,${saturation*100}%,${value*100}%,${alpha.normalize()})'
 	
 	function get_hue() return hue
 	function set_hue(value : Float) return hue = value.wrapCircular(360)
