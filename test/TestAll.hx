@@ -7,7 +7,7 @@ class TestAll
 	{
 		runner.addCase(new thx.color.TestColorParser());
 		runner.addCase(new thx.color.TestCMYK());
-		//runner.addCase(new thx.color.TestHSL());
+		runner.addCase(new thx.color.TestHSL());
 		//runner.addCase(new thx.color.TestHSV());
 		//runner.addCase(new thx.color.TestRGB());
 		//runner.addCase(new thx.color.TestRGBX());

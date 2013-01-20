@@ -29,12 +29,36 @@ class ColorParser
 		pattern_channel = ~/^\s*(\d*.\d+|\d+)(%|deg|º)?\s*$/i;
 	}
 	
+	public function processHex(s : String) : ColorInfo
+	{
+		if (s.substr(0, 1) == "#")
+			s = "0x" + s.substr(1);
+		else if (s != "0x")
+			return null;
+		if (s.length == 5)
+		{
+			s = "0x" + s.charAt(2) + s.charAt(2) + s.charAt(3) + s.charAt(3) + s.charAt(4) + s.charAt(4);
+		} else if(s.length == 6) {
+			s = "0x" + s.charAt(2) + s.charAt(2) + s.charAt(3) + s.charAt(3) + s.charAt(4) + s.charAt(4) + s.charAt(5) + s.charAt(5);
+		} else if (s.length != 8 && s.length != 10)
+			return null;
+		var i = Ints.parse(s),
+			has_alpha = s.length == 10;
+		if (has_alpha)
+			return new ColorInfo("rgb", true, [CIInt8((i >> 24) & 0xFF), CIInt8((i >> 16) & 0xFF), CIInt8((i >> 8) & 0xFF), CIFloat((i & 0xFF)/255)]);
+		else
+			return new ColorInfo("rgb", false, [CIInt8((i >> 16) & 0xFF), CIInt8((i >> 8) & 0xFF), CIInt8(i & 0xFF)]);
+	}
+	
 	public function processColor(s : String) : ColorInfo
 	{
-		if (!pattern_color.match(s)) return null;
+		var hex = processHex(s);
+		if (null != hex)
+			return hex;
+		if (!pattern_color.match(s))
+			return null;
 		
 		var name = pattern_color.matched(1);
-
 		if (null == name) return null;
 		
 		name = name.toLowerCase();
@@ -88,6 +112,16 @@ class ColorParser
 				null;
 		};
 	}
+
+	public static function getInt8Channel(channel : ChannelInfo)
+	{
+		return switch(channel) {
+			case CI0or1(v) | CIInt8(v) :
+				v;
+			default :
+				null;
+		};
+	}
 }
 
 class ColorInfo
@@ -123,7 +157,6 @@ class ColorAssembler<T : Color>
 		return throw "abstract method";
 	}
 	
-	@:access(thx.color.ColorAlpha)
 	public function toColor(info : ColorInfo) : Null<Color>
 	{
 		var color = toSolid(info);
@@ -136,6 +169,12 @@ class ColorAssembler<T : Color>
 		var alpha = ColorParser.getFloatChannel(info.channels[info.channels.length-1]);
 		if (null == alpha)
 			return null;
+		return withAlpha(color, alpha);
+	}
+	
+	@:access(thx.color.ColorAlpha)
+	inline public function withAlpha(color : Color, alpha : Float)
+	{
 		return new ColorAlpha(color, alpha);
 	}
 }

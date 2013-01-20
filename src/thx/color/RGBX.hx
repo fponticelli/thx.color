@@ -5,6 +5,7 @@
 
 package thx.color;
 
+import thx.color.ColorParser;
 using StringTools;
 using thx.core.Floats;
 using thx.core.Ints;
@@ -12,6 +13,18 @@ using Math;
 
 class RGBX extends Color
 {
+	public static function parseRGBX(s : String) : Null<RGBX>
+	{
+		var info = ColorParser.parseColor(s);
+		return null == info ? null : RGBXAssembler.instance.toSolid(info);
+	}
+	
+	public static function parse(s : String) : Null<Color>
+	{
+		var info = ColorParser.parseColor(s);
+		return null == info ? null : RGBXAssembler.instance.toColor(info);
+	}
+	
 	inline public static function fromInts(red : Int, green : Int, blue : Int) return new RGBX(red / 255, green / 255, blue / 255)
 	public var red(get, set) : Int;
 	public var green(get, set) : Int;
@@ -64,4 +77,20 @@ class RGBX extends Color
 	function set_redf(value : Float)   return redf   = value.normalize()
 	function set_greenf(value : Float) return greenf = value.normalize()
 	function set_bluef(value : Float)  return bluef  = value.normalize()
+}
+
+class RGBXAssembler extends ColorAssembler<RGBX>
+{
+	public static var instance(default, null) : RGBXAssembler = new RGBXAssembler();
+	function new() { }
+	override public function toSolid(info : ColorInfo) : Null<RGBX>
+	{
+		if (info.name != "rgb" || info.channels.length < 3) return null;
+		var red   = ColorParser.getFloatChannel(info.channels[0]),
+			green = ColorParser.getFloatChannel(info.channels[1]),
+			blue  = ColorParser.getFloatChannel(info.channels[2]);
+		if (null == red || null == green || null == blue)
+			return null;
+		return new RGBX(red, green, blue);
+	}
 }

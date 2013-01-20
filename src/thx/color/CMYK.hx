@@ -10,22 +10,16 @@ import thx.color.ColorParser;
 
 class CMYK extends Color
 {
-	public static function parse(s : String) : Null<CMYK>
+	public static function parseCMYK(s : String) : Null<CMYK>
 	{
 		var info = ColorParser.parseColor(s);
-		if (null == info)
-			return null;
-		else
-			return CMYKAssembler.instance.toSolid(info);
+		return null == info ? null : CMYKAssembler.instance.toSolid(info);
 	}
 	
-	public static function parseColor(s : String) : Null<Color>
+	public static function parse(s : String) : Null<Color>
 	{
 		var info = ColorParser.parseColor(s);
-		if (null == info)
-			return null;
-		else
-			return CMYKAssembler.instance.toColor(info);
+		return null == info ? null : CMYKAssembler.instance.toColor(info);
 	}
 	
 	@:isVar public var black(get, set): Float;

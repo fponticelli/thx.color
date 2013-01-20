@@ -1,8 +1,31 @@
 package thx.color;
 
 using StringTools;
+import thx.color.ColorParser;
 
 class Color {
+	static var assemblers : Array<ColorAssembler<Dynamic>> = [
+		RGB.RGBAssembler.instance,
+		RGBX.RGBXAssembler.instance,
+		HSV.HSVAssembler.instance,
+		HSL.HSLAssembler.instance,
+		CMYK.CMYKAssembler.instance
+	];
+	
+	public static function parse(s : String)
+	{
+		var info = ColorParser.parseColor(s),
+			color;
+		if (null == info) return null;
+		for (assembler in assemblers)
+		{
+			color = assembler.toColor(info);
+			if (null != color)
+				return color;
+		}
+		return null;
+	}
+	
 	public function toRGBX() : RGBX
 	{
 		return throw "abstract method, must override";

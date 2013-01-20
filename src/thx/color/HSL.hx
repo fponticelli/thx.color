@@ -6,9 +6,22 @@
 package thx.color;
 
 using thx.core.Floats;
+import thx.color.ColorParser;
 
 class HSL extends Color
 {
+	public static function parseHSL(s : String) : Null<HSL>
+	{
+		var info = ColorParser.parseColor(s);
+		return null == info ? null : HSLAssembler.instance.toSolid(info);
+	}
+	
+	public static function parse(s : String) : Null<Color>
+	{
+		var info = ColorParser.parseColor(s);
+		return null == info ? null : HSLAssembler.instance.toColor(info);
+	}
+	
 	@:isVar public var hue(get, set) : Float;
 	@:isVar public var saturation(get, set) : Float;
 	@:isVar public var lightness(get, set) : Float;
@@ -56,5 +69,21 @@ class HSL extends Color
 			return m1 + (m2 - m1) * (240 - d) / 60;
 		else
 			return m1;
+	}
+}
+
+class HSLAssembler extends ColorAssembler<HSL>
+{
+	public static var instance(default, null) : HSLAssembler = new HSLAssembler();
+	function new() { }
+	override public function toSolid(info : ColorInfo) : Null<HSL>
+	{
+		if (info.name != "hsl" || info.channels.length < 3) return null;
+		var hue        = ColorParser.getFloatChannel(info.channels[0]),
+			saturation = ColorParser.getFloatChannel(info.channels[1]),
+			lightness  = ColorParser.getFloatChannel(info.channels[2]);
+		if (null == hue || null == saturation || null == lightness)
+			return null;
+		return new HSL(hue, saturation, lightness);
 	}
 }

@@ -1,7 +1,21 @@
 package thx.color;
 using thx.core.Floats;
+import thx.color.ColorParser;
+
 class HSV extends Color
 {
+	public static function parseHSV(s : String) : Null<HSV>
+	{
+		var info = ColorParser.parseColor(s);
+		return null == info ? null : HSVAssembler.instance.toSolid(info);
+	}
+	
+	public static function parse(s : String) : Null<Color>
+	{
+		var info = ColorParser.parseColor(s);
+		return null == info ? null : HSVAssembler.instance.toColor(info);
+	}
+	
 	@:isVar public var hue(get, set) : Float;
 	@:isVar public var saturation(get, set) : Float;
 	@:isVar public var value(get, set) : Float;
@@ -45,4 +59,20 @@ class HSV extends Color
 	function set_saturation(value : Float) return saturation = value.normalize()
 	function get_value() return value
 	function set_value(value : Float) return this.value = value.normalize()
+}
+
+class HSVAssembler extends ColorAssembler<HSV>
+{
+	public static var instance(default, null) : HSVAssembler = new HSVAssembler();
+	function new() { }
+	override public function toSolid(info : ColorInfo) : Null<HSV>
+	{
+		if (info.name != "hsv" || info.channels.length < 3) return null;
+		var hue        = ColorParser.getFloatChannel(info.channels[0]),
+			saturation = ColorParser.getFloatChannel(info.channels[1]),
+			value      = ColorParser.getFloatChannel(info.channels[2]);
+		if (null == hue || null == saturation || null == value)
+			return null;
+		return new HSV(hue, saturation, value);
+	}
 }
