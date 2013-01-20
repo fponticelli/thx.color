@@ -2,6 +2,7 @@
 package thx.color;
 
 import utest.Assert;
+using thx.color.Convert;
 
 class TestHSV
 {
@@ -15,60 +16,34 @@ class TestHSV
 		Assert.equals(0, hsv.value);
 	}
 	
-	public function testSetHsv()
+	public function testParse()
 	{
-		/*
-		var color = new RGB(0x000000);
-		color.red   = 0xCC;
-		color.green = 0xDD;
-		color.blue  = 0xEE;
-		
-		Assert.equals(0xCC, color.red);
-		Assert.equals(0xDD, color.green);
-		Assert.equals(0xEE, color.blue);
-		*/
-	}
-	
-	public function testSetHsvf()
-	{
-		/*
-		var color = new RGB(0x000000);
-		color.red   = 0xCC;
-		color.green = 0xDD;
-		color.blue  = 0xEE;
-		
-		Assert.equals(0xCC, color.red);
-		Assert.equals(0xDD, color.green);
-		Assert.equals(0xEE, color.blue);
-		*/
+		var hsv = HSV.parseHSV("hsv(0,0%,100%)");
+		Assert.equals("hsv(0,0%,100%)", hsv.toString());
 	}
 	
 	public function testStrings()
 	{
-		/*
-		var color = new RGB(0x00AAFF);
-		Assert.equals("#00AAFF", color.toCss());
-		Assert.equals("rgb(0,170,255)", color.toString());
-		*/
+		var hsv = new HSV(0, 0, 1);
+		Assert.equals("hsv(0,0%,100%)", hsv.toString());
+		Assert.equals("hsva(0,0%,100%,0.25)", hsv.toStringAlpha(0.25));
+		Assert.equals("#FFFFFF", hsv.toHex());
+		Assert.equals("rgb(100%,100%,100%)", hsv.toCSS3());
+		Assert.equals("rgba(100%,100%,100%,0.5)", hsv.toCSS3Alpha(0.5));
 	}
 	
-	public function testFromInts()
+	public function testConvert()
 	{
-		
-	}
-	
-	public function testFromInt()
-	{
-		
-	}
-	
-	public function testToRGBX()
-	{
-		
-	}
-	
-	public function testToRgb8()
-	{
-		
+		var tests = [
+			{ rgb : new RGBX(1.00,1.00,1.00),    hsv : new HSV(0,0,1) },
+			{ rgb : new RGBX(0.75,0.75,0.00),    hsv : new HSV(60,1,0.75) },
+			{ rgb : new RGBX(0.931,0.463,0.315), hsv : new HSV(14.3,0.661,0.931) }
+		];
+		for (test in tests)
+		{
+			Assert.isTrue(test.rgb.equalRGB(test.hsv), "expected " + test.rgb.toHex() + " but was " + test.hsv.toHex() + " for " + test.hsv);
+			var c = test.rgb.toHSV();
+			Assert.isTrue(c.equalRGB(test.hsv), "expected " + c.toHex() + " but was " + test.hsv.toHex() + " for " + test.hsv);
+		}
 	}
 }

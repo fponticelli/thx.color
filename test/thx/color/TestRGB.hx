@@ -72,19 +72,4 @@ class TestRGB
 		Assert.equals("#00AAFF", color.toHex());
 		Assert.equals("rgb(0,170,255)", color.toString());
 	}
-	
-	public function testFromInts()
-	{
-		
-	}
-	
-	public function testFromFloats()
-	{
-		
-	}
-	
-	public function testToRGBX()
-	{
-		
-	}
 }

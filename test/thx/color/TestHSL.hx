@@ -29,7 +29,7 @@ class TestHSL
 		Assert.equals("hsla(0,0%,100%,0.25)", hsl.toStringAlpha(0.25));
 		Assert.equals("#FFFFFF", hsl.toHex());
 		Assert.equals("hsl(0,0%,100%)", hsl.toCSS3());
-		Assert.equals("hsla(0,0%,100%,0.25)", hsl.toCSS3Alpha(0.5));
+		Assert.equals("hsla(0,0%,100%,0.5)", hsl.toCSS3Alpha(0.5));
 	}
 	
 	public function testConvert()
