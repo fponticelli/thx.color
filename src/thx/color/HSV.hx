@@ -36,8 +36,8 @@ class HSV extends Color
 
 	override public function clone() : HSV return new HSV(hue, saturation, value)
 
-	override public function toString() return 'hsv($hue,$(saturation*100)%,$(value*100)%)'
-	override public function toStringAlpha(alpha : Float) return 'hsva($hue,$(saturation*100)%,$(value*100)%,$(alpha.normalize()*100)%)'
+	override public function toString() return 'hsv($hue,${saturation*100}%,${value*100}%)'
+	override public function toStringAlpha(alpha : Float) return 'hsva($hue,${saturation*100}%,${value*100}%,${alpha.normalize()*100}%)'
 	
 	function get_hue() return hue
 	function set_hue(value : Float) return hue = value.wrapCircular(360)

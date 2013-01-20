@@ -39,8 +39,8 @@ class RGB extends Color, implements IRgb
 	override public function toCSS3() return toString()
 	override public function toCSS3Alpha(alpha : Float) return toStringAlpha(alpha)
 	override public function toString() return 'rgb($red,$green,$blue)'
-	override public function toStringAlpha(alpha : Float) return 'rgba($red,$green,$blue,$(alpha.normalize()))'
-	override public function toHex(prefix = "#") return '$prefix$(red.hex(2))$(green.hex(2))$(blue.hex(2))'
+	override public function toStringAlpha(alpha : Float) return 'rgba($red,$green,$blue,${alpha.normalize()})'
+	override public function toHex(prefix = "#") return '$prefix${red.hex(2)}${green.hex(2)}${blue.hex(2)}'
 	
 	function get_rgb() return rgb
 	function set_rgb(value : Int) return rgb = value

@@ -62,7 +62,7 @@ class TestHSL
 		
 	}
 	
-	public function testToRgb64()
+	public function testToRGBHR()
 	{
 		
 	}

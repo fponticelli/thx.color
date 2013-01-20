@@ -25,8 +25,8 @@ class TestCMYK
 		Assert.equals(0.3, cmyk.yellow);
 		Assert.equals(0.4, cmyk.black);
 		
-		Assert.equals("cmyk(0.1,0.2,0.3,0.4)", CMYK.parse("cmyka(0.1,0.2,0.3,0.4,0.5)"));
-		Assert.equals("cmyka(0.1,0.2,0.3,0.4,0.5)", CMYK.parseColor("cmyka(0.1,0.2,0.3,0.4,0.5)"));
+		Assert.equals("cmyk(0.1,0.2,0.3,0.4)", CMYK.parse("cmyka(0.1,0.2,0.3,0.4,0.5)").toString());
+		Assert.equals("cmyka(0.1,0.2,0.3,0.4,0.5)", CMYK.parseColor("cmyka(0.1,0.2,0.3,0.4,0.5)").toString());
 	}
 	
 	public function testStrings()
@@ -36,7 +36,7 @@ class TestCMYK
 		Assert.equals("cmyka(0.1,0.2,0.3,0.4,0.5)", cmyk.toStringAlpha(0.5));
 	}
 	
-	public function testToRgb64()
+	public function testToRGBHR()
 	{
 		
 	}

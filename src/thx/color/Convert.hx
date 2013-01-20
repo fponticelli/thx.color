@@ -15,7 +15,7 @@ class ConvertRgba64
 		return ConvertRgbChannels.toHsla(src.redf, src.greenf, src.bluef, src.alpha)
 }
 
-class ConvertRgb64
+class ConvertRGBHR
 {
 	inline public static function toRGBHR(src : RGBHR)
 		return src.clone()

@@ -83,7 +83,7 @@ class TestRGB
 		
 	}
 	
-	public function testToRgb64()
+	public function testToRGBHR()
 	{
 		
 	}

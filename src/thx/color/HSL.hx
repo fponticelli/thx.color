@@ -13,7 +13,7 @@ class HSL extends Color
 	@:isVar public var saturation(get, set) : Float;
 	@:isVar public var lightness(get, set) : Float;
 	
-	public function new(hue : Float, saturation : Float, lightness : Float) 
+	public function new(hue : Float, saturation : Float, lightness : Float)
 	{
 		this.hue = hue;
 		this.saturation = saturation;
@@ -32,13 +32,13 @@ class HSL extends Color
 	override public function clone() : HSL return new HSL(hue, saturation, lightness)
 	override public function toCSS3() return toString()
 	override public function toCSS3Alpha(alpha : Float) return toStringAlpha(alpha)
-	override public function toString() return 'hsl($hue,$(saturation*100)%,$(lightness*100)%)'
-	override public function toStringAlpha(alpha : Float) return 'hsla($hue,$(saturation*100)%,$(lightness*100)%,$(alpha.normalize()*100)%)'
+	override public function toString() return 'hsl($hue,${saturation*100}%,${lightness*100}%)'
+	override public function toStringAlpha(alpha : Float) return 'hsla($hue,${saturation*100},${lightness*100}%,${alpha.normalize()*100}%)'
 	
 	function get_hue() return hue
-	function set_hue(value : Float) return hue = value.wrapCircular(360)	
+	function set_hue(value : Float) return hue = value.wrapCircular(360)
 	function get_saturation() return saturation
-	function set_saturation(value : Float) return saturation = value.normalize()	
+	function set_saturation(value : Float) return saturation = value.normalize()
 	function get_lightness() return lightness
 	function set_lightness(value : Float) return lightness = value.normalize()
 	

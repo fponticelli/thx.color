@@ -33,9 +33,9 @@ class RGBHR extends Color, implements IRgb
 	
 	override public function toCSS3() return toString()
 	override public function toCSS3Alpha(alpha : Float) return toStringAlpha(alpha)
-	override public function toString() return 'rgb($(redf*100)%,$(greenf*100)%,$(bluef*100)%)'
-	override public function toStringAlpha(alpha : Float) return 'rgba($(redf*100)%,$(greenf*100)%,$(bluef*100)%,$(alpha.normalize()*100)%)'
-	override public function toHex(prefix = "#") return '$prefix$(red.hex(2))$(green.hex(2))$(blue.hex(2))'
+	override public function toString() return 'rgb(${redf*100}%,${greenf*100}%,${bluef*100}%)'
+	override public function toStringAlpha(alpha : Float) return 'rgba{$(redf*100})%,${greenf*100}%,${bluef*100}%,${alpha.normalize()*100}%)'
+	override public function toHex(prefix = "#") return '$prefix${red.hex(2)}${green.hex(2)}${blue.hex(2)}'
 	
 	function get_red()   return (redf   * 255).round()
 	function get_green() return (greenf * 255).round()

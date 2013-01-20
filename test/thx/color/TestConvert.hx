@@ -22,7 +22,7 @@ class TestConvert
 		
 	}
 	
-	public function testFromRgb64()
+	public function testFromRGBHR()
 	{
 		
 	}

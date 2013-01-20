@@ -66,7 +66,7 @@ class TestRGBHR
 		
 	}
 	
-	public function testToRgb64()
+	public function testToRGBHR()
 	{
 		
 	}
