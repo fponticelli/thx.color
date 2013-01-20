@@ -15,17 +15,17 @@ class ConvertRgba64
 		return ConvertRgbChannels.toHsla(src.redf, src.greenf, src.bluef, src.alpha)
 }
 
-class ConvertRGBHR
+class ConvertRGBX
 {
-	inline public static function toRGBHR(src : RGBHR)
+	inline public static function toRGBX(src : RGBX)
 		return src.clone()
-	inline public static function toRgba64(src : RGBHR, alpha = 0.0)
+	inline public static function toRgba64(src : RGBX, alpha = 0.0)
 		return new Rgba64(src.red, src.green, src.blue, alpha)
-	inline public static function toHsl(src : RGBHR)
+	inline public static function toHsl(src : RGBX)
 		return ConvertRgbChannels.toHsl(src.redf, src.bluef, src.greenf)
-	inline public static function toHsla(src : RGBHR, alpha = 0.0)
+	inline public static function toHsla(src : RGBX, alpha = 0.0)
 		return ConvertRgbChannels.toHsla(src.redf, src.greenf, src.bluef, alpha)
-	inline public static function toCmyk(src : RGBHR)
+	inline public static function toCmyk(src : RGBX)
 		return ConvertRgbChannels.toCmyk(src.redf, src.greenf, src.bluef)
 }
 
@@ -45,8 +45,8 @@ class ConvertIRgb
 		return RGB.fromInts(src.red, src.green, src.blue)
 //	inline public static function toRgba8(src : IRgb, alpha = 0.0)
 //		return Rgba8.fromInts(src.red, src.green, src.blue, alpha)
-//	inline public static function toRGBHR(src : IRgb)
-//		return RGBHR.fromInts(src.red, src.green, src.blue)
+//	inline public static function toRGBX(src : IRgb)
+//		return RGBX.fromInts(src.red, src.green, src.blue)
 //	inline public static function toRgba64(src : IRgb, alpha = 0.0)
 //		return Rgba64.fromInts(src.red, src.green, src.blue, alpha)
 	inline public static function toHsl(src : IRgb)

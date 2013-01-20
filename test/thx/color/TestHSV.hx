@@ -62,7 +62,7 @@ class TestHSV
 		
 	}
 	
-	public function testToRGBHR()
+	public function testToRGBX()
 	{
 		
 	}

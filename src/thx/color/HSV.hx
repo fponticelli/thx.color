@@ -12,7 +12,7 @@ class HSV extends Color
 		this.saturation = saturation;
 		this.value = value;
 	}
-	override public function toRGBHR()
+	override public function toRGBX()
 	{
 		var r = 0.0, g = 0.0, b = 0.0;
 
@@ -31,7 +31,7 @@ class HSV extends Color
 			case 5: r = value; g = p; b = q;
 		}
 
-		return new RGBHR(r,g,b);
+		return new RGBX(r,g,b);
 	}
 
 	override public function clone() : HSV return new HSV(hue, saturation, value)

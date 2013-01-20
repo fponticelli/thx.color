@@ -3,26 +3,26 @@ package thx.color;
 using StringTools;
 
 class Color {
-	public function toRGBHR() : RGBHR {
+	public function toRGBX() : RGBX {
 		return throw "abstract method, must override";
 	}
 	public function clone() : Color {
 		return throw "abstract method, must override";
 	}
 	public function toHex(prefix = "#") {
-		return toRGBHR().toHex(prefix);
+		return toRGBX().toHex(prefix);
 	}
 	public function toCSS3() {
-		return toRGBHR().toCSS3();
+		return toRGBX().toCSS3();
 	}
 	public function toString() {
-		return toRGBHR().toString();
+		return toRGBX().toString();
 	}
 	public function toCSS3Alpha(alpha : Float) {
-		return toRGBHR().toCSS3Alpha(alpha);
+		return toRGBX().toCSS3Alpha(alpha);
 	}
 	public function toStringAlpha(alpha : Float) {
-		return toRGBHR().toStringAlpha(alpha);
+		return toRGBX().toStringAlpha(alpha);
 	}
 	
 	@:access(thx.color.ColorAlpha)

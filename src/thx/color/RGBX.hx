@@ -10,9 +10,9 @@ using thx.core.Floats;
 using thx.core.Ints;
 using Math;
 
-class RGBHR extends Color, implements IRgb
+class RGBX extends Color, implements IRgb
 {
-	inline public static function fromInts(red : Int, green : Int, blue : Int) return new RGBHR(red / 255, green / 255, blue / 255)
+	inline public static function fromInts(red : Int, green : Int, blue : Int) return new RGBX(red / 255, green / 255, blue / 255)
 	public var red(get, set) : Int;
 	public var green(get, set) : Int;
 	public var blue(get, set) : Int;
@@ -27,9 +27,9 @@ class RGBHR extends Color, implements IRgb
 		this.bluef  = blue.normalize();
 	}
 	
-	override public function toRGBHR() return clone()
+	override public function toRGBX() return clone()
 	
-	override public function clone() : RGBHR return new RGBHR(redf, greenf, bluef)
+	override public function clone() : RGBX return new RGBX(redf, greenf, bluef)
 	
 	override public function toCSS3() return toString()
 	override public function toCSS3Alpha(alpha : Float) return toStringAlpha(alpha)

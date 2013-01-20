@@ -44,9 +44,9 @@ class CMYK extends Color
 	override public function clone() : CMYK {
 		return new CMYK(cyan, magenta, yellow, black);
 	}
-	override public function toRGBHR()
+	override public function toRGBX()
 	{
-		return new RGBHR(
+		return new RGBX(
 			(1 - cyan    - black).normalize(),
 			(1 - magenta - black).normalize(),
 			(1 - yellow  - black).normalize()

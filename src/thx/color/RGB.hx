@@ -34,7 +34,7 @@ class RGB extends Color, implements IRgb
 	public var green(get, set) : Int;
 	public var blue(get, set)  : Int;
 	
-	override public function toRGBHR() return new RGBHR(red / 255, green / 255, blue / 255)
+	override public function toRGBX() return new RGBX(red / 255, green / 255, blue / 255)
 	
 	override public function toCSS3() return toString()
 	override public function toCSS3Alpha(alpha : Float) return toStringAlpha(alpha)

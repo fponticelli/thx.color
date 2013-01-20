@@ -20,9 +20,9 @@ class HSL extends Color
 		this.lightness = lightness;
 	}
 	
-	override public function toRGBHR()
+	override public function toRGBX()
 	{
-		return new RGBHR(
+		return new RGBX(
 			_c(hue + 120, saturation, lightness),
 			_c(hue, saturation, lightness),
 			_c(hue - 120, saturation, lightness)

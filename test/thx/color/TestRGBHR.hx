@@ -7,13 +7,13 @@ package thx.color;
 
 import utest.Assert;
 
-class TestRGBHR
+class TestRGBX
 {
 	public function new() { }
 	
 	public function testBasics()
 	{
-		var red = new RGBHR(1, 0, 0);
+		var red = new RGBX(1, 0, 0);
 		Assert.equals(0xFF, red.red);
 		Assert.equals(0x00, red.green);
 		Assert.equals(0x00, red.blue);
@@ -66,7 +66,7 @@ class TestRGBHR
 		
 	}
 	
-	public function testToRGBHR()
+	public function testToRGBX()
 	{
 		
 	}

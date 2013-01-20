@@ -62,7 +62,7 @@ class TestHSL
 		
 	}
 	
-	public function testToRGBHR()
+	public function testToRGBX()
 	{
 		
 	}
