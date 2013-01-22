@@ -9,7 +9,8 @@ class Color {
 		RGBX.RGBXAssembler.instance,
 		HSV.HSVAssembler.instance,
 		HSL.HSLAssembler.instance,
-		CMYK.CMYKAssembler.instance
+		CMYK.CMYKAssembler.instance,
+		Grey.GreyAssembler.instance
 	];
 	
 	public static function parse(s : String)

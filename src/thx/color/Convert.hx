@@ -15,6 +15,12 @@ class ConvertRGB
 		return ConvertRGBChannels.toHSL(rgb.red / 255, rgb.green / 255, rgb.blue / 255)
 	inline public static function toHSV(rgb : RGB)
 		return ConvertRGBChannels.toHSV(rgb.red / 255, rgb.green / 255, rgb.blue / 255)
+	inline public static function toGrey(rgb : RGB)
+		return ConvertRGBChannels.toGrey(rgb.red / 255, rgb.green / 255, rgb.blue / 255)
+	inline public static function toPerceivedGrey(rgb : RGB)
+		return ConvertRGBChannels.toPerceivedGrey(rgb.red / 255, rgb.green / 255, rgb.blue / 255)
+	inline public static function toPerceivedAccurateGrey(rgb : RGB)
+		return ConvertRGBChannels.toPerceivedAccurateGrey(rgb.red / 255, rgb.green / 255, rgb.blue / 255)
 }
 
 class ConvertRGBX
@@ -27,6 +33,12 @@ class ConvertRGBX
 		return ConvertRGBChannels.toHSV(rgb.redf, rgb.greenf, rgb.bluef)
 	inline public static function toRGB(rgb : RGBX)
 		return RGB.fromFloats(rgb.redf, rgb.greenf, rgb.bluef)
+	inline public static function toGrey(rgb : RGBX)
+		return ConvertRGBChannels.toGrey(rgb.redf, rgb.greenf, rgb.bluef)
+	inline public static function toPerceivedGrey(rgb : RGBX)
+		return ConvertRGBChannels.toPerceivedGrey(rgb.redf, rgb.greenf, rgb.bluef)
+	inline public static function toPerceivedAccurateGrey(rgb : RGBX)
+		return ConvertRGBChannels.toPerceivedAccurateGrey(rgb.redf, rgb.greenf, rgb.bluef)
 }
 
 class ConvertColor
@@ -39,10 +51,25 @@ class ConvertColor
 		return ConvertRGBX.toHSV(color.toRGBX())
 	inline public static function toRGB(color : Color)
 		return ConvertRGBX.toRGB(color.toRGBX())
+	inline public static function toGrey(color : Color)
+		return ConvertRGBX.toGrey(color.toRGBX())
+	inline public static function toPerceivedGrey(color : Color)
+		return ConvertRGBX.toPerceivedGrey(color.toRGBX())
+	inline public static function toPerceivedAccurateGrey(color : Color)
+		return ConvertRGBX.toPerceivedAccurateGrey(color.toRGBX())
 }
 
 class ConvertRGBChannels
 {
+	public inline static function toGrey(r : Float, g : Float, b : Float)
+		return new Grey(r * .2126 + g * .7152 + b * .0722)
+	
+	public inline static function toPerceivedGrey(r : Float, g : Float, b : Float)
+		return new Grey(r * .299 + g * .587 + b * .114)
+	
+	public inline static function toPerceivedAccurateGrey(r : Float, g : Float, b : Float)
+		return new Grey(Math.pow(r, 2) * .241 + Math.pow(g, 2) * .691 + Math.pow(b, 2) * .068)
+	
 	static function toHSLArray(r : Float, g : Float, b : Float)
 	{
 		var	min = r.min(g).min(b),
