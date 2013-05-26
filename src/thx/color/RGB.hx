@@ -40,26 +40,38 @@ class RGB extends Color
 		this.rgb = rgb.clamp(0, 0xFFFFFF);
 	}
 	
-	override public function clone() : RGB return new RGB(rgb)
+	override public function clone() : RGB
+		return new RGB(rgb);
 	
 	public var red(get, set)   : Int;
 	public var green(get, set) : Int;
 	public var blue(get, set)  : Int;
 	
-	override public function toRGBX() return new RGBX(red / 255, green / 255, blue / 255)
+	override public function toRGBX()
+		return new RGBX(red / 255, green / 255, blue / 255);
 	
-	override public function toCSS3() return toString()
-	override public function toCSS3Alpha(alpha : Float) return toStringAlpha(alpha)
-	override public function toString() return 'rgb($red,$green,$blue)'
-	override public function toStringAlpha(alpha : Float) return 'rgba($red,$green,$blue,${alpha.normalize()})'
-	override public function toHex(prefix = "#") return '$prefix${red.hex(2)}${green.hex(2)}${blue.hex(2)}'
+	override public function toCSS3()
+		return toString();
+	override public function toCSS3Alpha(alpha : Float)
+		return toStringAlpha(alpha);
+	override public function toString()
+		return 'rgb($red,$green,$blue)';
+	override public function toStringAlpha(alpha : Float)
+		return 'rgba($red,$green,$blue,${alpha.normalize()})';
+	override public function toHex(prefix = "#")
+		return '$prefix${red.hex(2)}${green.hex(2)}${blue.hex(2)}';
 	
-	function get_rgb() return rgb
-	function set_rgb(value : Int) return rgb = value
+	function get_rgb()
+		return rgb;
+	function set_rgb(value : Int)
+		return rgb = value;
 	
-	function get_red()   return (rgb >> 16) & 0xFF
-	function get_green() return (rgb >> 8) & 0xFF
-	function get_blue()  return rgb & 0xFF
+	function get_red()
+		return (rgb >> 16) & 0xFF;
+	function get_green()
+		return (rgb >> 8) & 0xFF;
+	function get_blue()
+		return rgb & 0xFF;
 	
 	function set_red(value : Int)
 	{

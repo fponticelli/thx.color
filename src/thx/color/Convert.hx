@@ -10,65 +10,65 @@ using Math;
 class ConvertRGB
 {
 	inline public static function toCMYK(rgb : RGB)
-		return ConvertRGBChannels.toCMYK(rgb.red / 255, rgb.green / 255, rgb.blue / 255)
+		return ConvertRGBChannels.toCMYK(rgb.red / 255, rgb.green / 255, rgb.blue / 255);
 	inline public static function toHSL(rgb : RGB)
-		return ConvertRGBChannels.toHSL(rgb.red / 255, rgb.green / 255, rgb.blue / 255)
+		return ConvertRGBChannels.toHSL(rgb.red / 255, rgb.green / 255, rgb.blue / 255);
 	inline public static function toHSV(rgb : RGB)
-		return ConvertRGBChannels.toHSV(rgb.red / 255, rgb.green / 255, rgb.blue / 255)
+		return ConvertRGBChannels.toHSV(rgb.red / 255, rgb.green / 255, rgb.blue / 255);
 	inline public static function toGrey(rgb : RGB)
-		return ConvertRGBChannels.toGrey(rgb.red / 255, rgb.green / 255, rgb.blue / 255)
+		return ConvertRGBChannels.toGrey(rgb.red / 255, rgb.green / 255, rgb.blue / 255);
 	inline public static function toPerceivedGrey(rgb : RGB)
-		return ConvertRGBChannels.toPerceivedGrey(rgb.red / 255, rgb.green / 255, rgb.blue / 255)
+		return ConvertRGBChannels.toPerceivedGrey(rgb.red / 255, rgb.green / 255, rgb.blue / 255);
 	inline public static function toPerceivedAccurateGrey(rgb : RGB)
-		return ConvertRGBChannels.toPerceivedAccurateGrey(rgb.red / 255, rgb.green / 255, rgb.blue / 255)
+		return ConvertRGBChannels.toPerceivedAccurateGrey(rgb.red / 255, rgb.green / 255, rgb.blue / 255);
 }
 
 class ConvertRGBX
 {
 	inline public static function toCMYK(rgb : RGBX)
-		return ConvertRGBChannels.toCMYK(rgb.redf, rgb.greenf, rgb.bluef)
+		return ConvertRGBChannels.toCMYK(rgb.redf, rgb.greenf, rgb.bluef);
 	inline public static function toHSL(rgb : RGBX)
-		return ConvertRGBChannels.toHSL(rgb.redf, rgb.greenf, rgb.bluef)
+		return ConvertRGBChannels.toHSL(rgb.redf, rgb.greenf, rgb.bluef);
 	inline public static function toHSV(rgb : RGBX)
-		return ConvertRGBChannels.toHSV(rgb.redf, rgb.greenf, rgb.bluef)
+		return ConvertRGBChannels.toHSV(rgb.redf, rgb.greenf, rgb.bluef);
 	inline public static function toRGB(rgb : RGBX)
-		return RGB.fromFloats(rgb.redf, rgb.greenf, rgb.bluef)
+		return RGB.fromFloats(rgb.redf, rgb.greenf, rgb.bluef);
 	inline public static function toGrey(rgb : RGBX)
-		return ConvertRGBChannels.toGrey(rgb.redf, rgb.greenf, rgb.bluef)
+		return ConvertRGBChannels.toGrey(rgb.redf, rgb.greenf, rgb.bluef);
 	inline public static function toPerceivedGrey(rgb : RGBX)
-		return ConvertRGBChannels.toPerceivedGrey(rgb.redf, rgb.greenf, rgb.bluef)
+		return ConvertRGBChannels.toPerceivedGrey(rgb.redf, rgb.greenf, rgb.bluef);
 	inline public static function toPerceivedAccurateGrey(rgb : RGBX)
-		return ConvertRGBChannels.toPerceivedAccurateGrey(rgb.redf, rgb.greenf, rgb.bluef)
+		return ConvertRGBChannels.toPerceivedAccurateGrey(rgb.redf, rgb.greenf, rgb.bluef);
 }
 
 class ConvertColor
 {
 	inline public static function toCMYK(color : Color)
-		return ConvertRGBX.toCMYK(color.toRGBX())
+		return ConvertRGBX.toCMYK(color.toRGBX());
 	inline public static function toHSL(color : Color)
-		return ConvertRGBX.toHSL(color.toRGBX())
+		return ConvertRGBX.toHSL(color.toRGBX());
 	inline public static function toHSV(color : Color)
-		return ConvertRGBX.toHSV(color.toRGBX())
+		return ConvertRGBX.toHSV(color.toRGBX());
 	inline public static function toRGB(color : Color)
-		return ConvertRGBX.toRGB(color.toRGBX())
+		return ConvertRGBX.toRGB(color.toRGBX());
 	inline public static function toGrey(color : Color)
-		return ConvertRGBX.toGrey(color.toRGBX())
+		return ConvertRGBX.toGrey(color.toRGBX());
 	inline public static function toPerceivedGrey(color : Color)
-		return ConvertRGBX.toPerceivedGrey(color.toRGBX())
+		return ConvertRGBX.toPerceivedGrey(color.toRGBX());
 	inline public static function toPerceivedAccurateGrey(color : Color)
-		return ConvertRGBX.toPerceivedAccurateGrey(color.toRGBX())
+		return ConvertRGBX.toPerceivedAccurateGrey(color.toRGBX());
 }
 
 class ConvertRGBChannels
 {
 	public inline static function toGrey(r : Float, g : Float, b : Float)
-		return new Grey(r * .2126 + g * .7152 + b * .0722)
+		return new Grey(r * .2126 + g * .7152 + b * .0722);
 	
 	public inline static function toPerceivedGrey(r : Float, g : Float, b : Float)
-		return new Grey(r * .299 + g * .587 + b * .114)
+		return new Grey(r * .299 + g * .587 + b * .114);
 	
 	public inline static function toPerceivedAccurateGrey(r : Float, g : Float, b : Float)
-		return new Grey(Math.pow(r, 2) * .241 + Math.pow(g, 2) * .691 + Math.pow(b, 2) * .068)
+		return new Grey(Math.pow(r, 2) * .241 + Math.pow(g, 2) * .691 + Math.pow(b, 2) * .068);
 	
 	static function toHSLArray(r : Float, g : Float, b : Float)
 	{

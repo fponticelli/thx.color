@@ -35,9 +35,9 @@ class CMYK extends Color
 		this.black   = black.normalize();
 	}
 	
-	override public function clone() : CMYK {
+	override public function clone() : CMYK
 		return new CMYK(cyan, magenta, yellow, black);
-	}
+
 	override public function toRGBX()
 	{
 		return new RGBX(
@@ -47,17 +47,27 @@ class CMYK extends Color
 		);
 	}
 
-	override public function toString() return 'cmyk($cyan,$magenta,$yellow,$black)'
-	override public function toStringAlpha(alpha : Float) return 'cmyka($cyan,$magenta,$yellow,$black,${alpha.normalize()})'
+	override public function toString()
+		return 'cmyk($cyan,$magenta,$yellow,$black)';
+	override public function toStringAlpha(alpha : Float)
+		return 'cmyka($cyan,$magenta,$yellow,$black,${alpha.normalize()})';
 	
-	function get_black() return black
-	function set_black(value : Float) return black = value.normalize()
-	function get_cyan() return cyan
-	function set_cyan(value : Float) return cyan = value.normalize()
-	function get_magenta() return magenta
-	function set_magenta(value : Float) return magenta = value.normalize()
-	function get_yellow() return yellow
-	function set_yellow(value : Float) return yellow = value.normalize()
+	function get_black()
+		return black;
+	function set_black(value : Float)
+		return black = value.normalize();
+	function get_cyan()
+		return cyan;
+	function set_cyan(value : Float)
+		return cyan = value.normalize();
+	function get_magenta()
+		return magenta;
+	function set_magenta(value : Float)
+		return magenta = value.normalize();
+	function get_yellow()
+		return yellow;
+	function set_yellow(value : Float)
+		return yellow = value.normalize();
 }
 
 class CMYKAssembler extends ColorAssembler<CMYK>

@@ -23,15 +23,21 @@ class Grey extends Color
 		this.grey = grey.normalize();
 	}
 	
-	override public function clone() : Grey return new Grey(grey)
+	override public function clone() : Grey
+		return new Grey(grey);
 	
-	override public function toRGBX() return new RGBX(grey, grey, grey)
+	override public function toRGBX()
+		return new RGBX(grey, grey, grey);
 	
-	override public function toString() return 'grey(${grey*100}%)'
-	override public function toStringAlpha(alpha : Float) return 'greya(${grey*100}%,${alpha.normalize()})'
+	override public function toString()
+		return 'grey(${grey*100}%)';
+	override public function toStringAlpha(alpha : Float)
+		return 'greya(${grey*100}%,${alpha.normalize()})';
 	
-	function get_grey() return grey
-	function set_grey(value : Float) return grey = value
+	function get_grey()
+		return grey;
+	function set_grey(value : Float)
+		return grey = value;
 }
 
 class GreyAssembler extends ColorAssembler<Grey>

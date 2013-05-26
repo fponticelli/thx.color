@@ -42,18 +42,29 @@ class HSL extends Color
 		);
 	}
 	
-	override public function clone() : HSL return new HSL(hue, saturation, lightness)
-	override public function toCSS3() return toString()
-	override public function toCSS3Alpha(alpha : Float) return toStringAlpha(alpha)
-	override public function toString() return 'hsl($hue,${saturation*100}%,${lightness*100}%)'
-	override public function toStringAlpha(alpha : Float) return 'hsla($hue,${saturation*100}%,${lightness*100}%,${alpha.normalize()})'
+	override public function clone() : HSL
+		return new HSL(hue, saturation, lightness);
+	override public function toCSS3()
+		return toString();
+	override public function toCSS3Alpha(alpha : Float)
+		return toStringAlpha(alpha);
+	override public function toString()
+		return 'hsl($hue,${saturation*100}%,${lightness*100}%)';
+	override public function toStringAlpha(alpha : Float)
+		return 'hsla($hue,${saturation*100}%,${lightness*100}%,${alpha.normalize()})';
 	
-	function get_hue() return hue
-	function set_hue(value : Float) return hue = value.wrapCircular(360)
-	function get_saturation() return saturation
-	function set_saturation(value : Float) return saturation = value.normalize()
-	function get_lightness() return lightness
-	function set_lightness(value : Float) return lightness = value.normalize()
+	function get_hue()
+		return hue;
+	function set_hue(value : Float)
+		return hue = value.wrapCircular(360);
+	function get_saturation()
+		return saturation;
+	function set_saturation(value : Float)
+		return saturation = value.normalize();
+	function get_lightness()
+		return lightness;
+	function set_lightness(value : Float)
+		return lightness = value.normalize();
 	
 	// Based on D3.js by Michael Bostock
 	static function _c(d : Float, s : Float, l : Float) {

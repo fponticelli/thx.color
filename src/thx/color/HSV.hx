@@ -52,17 +52,26 @@ class HSV extends Color
 		return new RGBX(r, g, b);
 	}
 
-	override public function clone() : HSV return new HSV(hue, saturation, value)
+	override public function clone() : HSV
+		return new HSV(hue, saturation, value);
 
-	override public function toString() return 'hsv($hue,${saturation*100}%,${value*100}%)'
-	override public function toStringAlpha(alpha : Float) return 'hsva($hue,${saturation*100}%,${value*100}%,${alpha.normalize()})'
+	override public function toString()
+		return 'hsv($hue,${saturation*100}%,${value*100}%)';
+	override public function toStringAlpha(alpha : Float)
+		return 'hsva($hue,${saturation*100}%,${value*100}%,${alpha.normalize()})';
 	
-	function get_hue() return hue
-	function set_hue(value : Float) return hue = value.wrapCircular(360)
-	function get_saturation() return saturation
-	function set_saturation(value : Float) return saturation = value.normalize()
-	function get_value() return value
-	function set_value(value : Float) return this.value = value.normalize()
+	function get_hue()
+		return hue;
+	function set_hue(value : Float)
+		return hue = value.wrapCircular(360);
+	function get_saturation()
+		return saturation;
+	function set_saturation(value : Float)
+		return saturation = value.normalize();
+	function get_value()
+		return value;
+	function set_value(value : Float)
+		return this.value = value.normalize();
 }
 
 class HSVAssembler extends ColorAssembler<HSV>

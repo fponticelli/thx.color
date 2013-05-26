@@ -137,7 +137,8 @@ class ColorInfo
 		this.channels = channels;
 	}
 	
-	public function toString() return '$name, has alpha: $hasAlpha, channels: $channels'
+	public function toString()
+		return '$name, has alpha: $hasAlpha, channels: $channels';
 }
 
 enum ChannelInfo
