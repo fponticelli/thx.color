@@ -1,7 +1,8 @@
 -cp src
 -cp test
--cp ../thx.core/src
+-lib thx.core
 -lib utest
--neko bin/test/thxcolor.n
--D haxe3
+-js bin/test/main.js
 -main TestAll
+-cmd node bin/test/main.js
+-D nodejs

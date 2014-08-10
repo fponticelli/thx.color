@@ -1,10 +1,8 @@
 import utest.Runner;
 import utest.ui.Report;
 
-class TestAll
-{
-	public static function addTests(runner : Runner)
-	{
+class TestAll {
+	public static function addTests(runner : Runner) {
 		runner.addCase(new thx.color.TestColorParser());
 		runner.addCase(new thx.color.TestCMYK());
 		runner.addCase(new thx.color.TestGrey());
@@ -14,8 +12,7 @@ class TestAll
 		runner.addCase(new thx.color.TestRGBX());
 	}
 
-	public static function main()
-	{
+	public static function main() {
 		var runner = new Runner();
 		addTests(runner);
 		Report.create(runner);

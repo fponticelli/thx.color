@@ -12,21 +12,19 @@ class Color {
 		CMYK.CMYKAssembler.instance,
 		Grey.GreyAssembler.instance
 	];
-	
-	public static function parse(s : String)
-	{
+
+	public static function parse(s : String) {
 		var info = ColorParser.parseColor(s),
 			color;
 		if (null == info) return null;
-		for (assembler in assemblers)
-		{
+		for (assembler in assemblers) {
 			color = assembler.toColor(info);
 			if (null != color)
 				return color;
 		}
 		return null;
 	}
-	
+
 	public function toRGBX() : RGBX
 		return throw "abstract method, must override";
 
@@ -48,13 +46,12 @@ class Color {
 	public function toStringAlpha(alpha : Float)
 		return toRGBX().toStringAlpha(alpha);
 
-	public function equalRGB(other : Color)
-	{
+	public function equalRGB(other : Color) {
 		var a = toRGBX(),
 			b = other.toRGBX();
 		return a.red == b.red && a.green == b.green && a.blue == b.blue;
 	}
-	
+
 	@:access(thx.color.ColorAlpha)
 	public function withAlpha(alpha : Float)
 		return new ColorAlpha(this.clone(), alpha);

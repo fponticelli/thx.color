@@ -10,12 +10,10 @@ import thx.core.Floats;
 import utest.Assert;
 import thx.color.ColorParser;
 
-class TestColorParser
-{
+class TestColorParser {
 	public function new() {}
-	
-	public function testFeatures()
-	{
+
+	public function testFeatures() {
 		assert(
 			"a",	false,	[CIInt8(2)],
 			"a(2)");
@@ -32,9 +30,8 @@ class TestColorParser
 			"hsl",	true,	[CIDegree(1), CIPercent(2), CIPercent(3), CIFloat(0.5)],
 			"hsla(1º,2%,3%,0.5)");
 	}
-	
-	public function testChannels()
-	{
+
+	public function testChannels() {
 		assertStringChannel(CIDegree(1),	"1º");
 		assertStringChannel(CIDegree(1),	"1deg");
 		assertStringChannel(CIPercent(1),	"1%");
@@ -44,28 +41,21 @@ class TestColorParser
 		assertStringChannel(CIInt8(2),		"2");
 		assertStringChannel(CIInt(256),		"256");
 	}
-	
-	public function testInvalidColor()
-	{
+
+	public function testInvalidColor() {
 		Assert.isNull(ColorParser.parseColor("x"));
 		Assert.isNull(ColorParser.parseColor("x[]"));
 		Assert.isNull(ColorParser.parseColor("x(x)"));
 	}
-	
+
 	public function testInvalidChannel()
-	{
 		Assert.isNull(ColorParser.parseChannel("x"));
-	}
-	
+
 	public function assertStringChannel(expected : ChannelInfo, test : String, ?pos : PosInfos)
-	{
 		assertChannel(expected, ColorParser.parseChannel(test), pos);
-	}
-	
-	public function assertChannel(expected : ChannelInfo, test : ChannelInfo, ?pos : PosInfos)
-	{
-		if (null == test)
-		{
+
+	public function assertChannel(expected : ChannelInfo, test : ChannelInfo, ?pos : PosInfos) {
+		if (null == test) {
 			Assert.fail('channel is null', pos);
 			return;
 		}
@@ -76,20 +66,17 @@ class TestColorParser
 		Assert.equals(ec, tc, 'expected $ec but is $tc', pos);
 		Assert.equals(ep, tp, 'expected $ep but is $tp', pos);
 	}
-	
-	public function assert(name : String, has_alpha : Bool, channels : Array<ChannelInfo>, test_string : String, ?pos : PosInfos)
-	{
+
+	public function assert(name : String, has_alpha : Bool, channels : Array<ChannelInfo>, test_string : String, ?pos : PosInfos) {
 		var expected = new ColorInfo(name, has_alpha, channels),
 			test = ColorParser.parseColor(test_string);
-		if (null == test)
-		{
+		if (null == test) {
 			Assert.fail("test is null", pos);
 			return;
 		}
 		Assert.equals(expected.name, test.name, pos);
 		Assert.equals(expected.hasAlpha, test.hasAlpha, pos);
-		for (i in 0...expected.channels.length)
-		{
+		for (i in 0...expected.channels.length) {
 			assertChannel(expected.channels[i], test.channels[i], pos);
 		}
 	}

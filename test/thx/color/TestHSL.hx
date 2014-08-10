@@ -4,26 +4,22 @@ package thx.color;
 import utest.Assert;
 using thx.color.Convert;
 
-class TestHSL
-{
+class TestHSL {
 	public function new() { }
-	
-	public function testBasics()
-	{
+
+	public function testBasics() {
 		var hsl = new HSL(1, 0, 0);
 		Assert.equals(1, hsl.hue);
 		Assert.equals(0, hsl.saturation);
 		Assert.equals(0, hsl.lightness);
 	}
-	
-	public function testParse()
-	{
+
+	public function testParse() {
 		var hsl = HSL.parseHSL("hsl(0,0%,100%)");
 		Assert.equals("hsl(0,0%,100%)", hsl.toString());
 	}
-	
-	public function testStrings()
-	{
+
+	public function testStrings() {
 		var hsl = new HSL(0, 0, 1);
 		Assert.equals("hsl(0,0%,100%)", hsl.toString());
 		Assert.equals("hsla(0,0%,100%,0.25)", hsl.toStringAlpha(0.25));
@@ -31,9 +27,8 @@ class TestHSL
 		Assert.equals("hsl(0,0%,100%)", hsl.toCSS3());
 		Assert.equals("hsla(0,0%,100%,0.5)", hsl.toCSS3Alpha(0.5));
 	}
-	
-	public function testConvert()
-	{
+
+	public function testConvert() {
 		var tests = [
 			{ rgb : RGB.fromFloats(1.00,1.00,1.00), hsl : new HSL(0,0,1) },
 			{ rgb : RGB.fromFloats(0.50,0.50,0.50), hsl : new HSL(0,0,0.5) },

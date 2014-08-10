@@ -1,7 +1,0 @@
--cp src
--cp test
--cp ../thx.core/src
--lib utest
--cpp bin/test/cpp
--D haxe3
--main TestAll

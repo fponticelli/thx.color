@@ -7,8 +7,7 @@ package thx.color;
 import thx.core.Floats;
 using Math;
 
-class ConvertRGB
-{
+class ConvertRGB {
 	inline public static function toCMYK(rgb : RGB)
 		return ConvertRGBChannels.toCMYK(rgb.red / 255, rgb.green / 255, rgb.blue / 255);
 	inline public static function toHSL(rgb : RGB)
@@ -23,8 +22,7 @@ class ConvertRGB
 		return ConvertRGBChannels.toPerceivedAccurateGrey(rgb.red / 255, rgb.green / 255, rgb.blue / 255);
 }
 
-class ConvertRGBX
-{
+class ConvertRGBX {
 	inline public static function toCMYK(rgb : RGBX)
 		return ConvertRGBChannels.toCMYK(rgb.redf, rgb.greenf, rgb.bluef);
 	inline public static function toHSL(rgb : RGBX)
@@ -41,8 +39,7 @@ class ConvertRGBX
 		return ConvertRGBChannels.toPerceivedAccurateGrey(rgb.redf, rgb.greenf, rgb.bluef);
 }
 
-class ConvertColor
-{
+class ConvertColor {
 	inline public static function toCMYK(color : Color)
 		return ConvertRGBX.toCMYK(color.toRGBX());
 	inline public static function toHSL(color : Color)
@@ -59,19 +56,17 @@ class ConvertColor
 		return ConvertRGBX.toPerceivedAccurateGrey(color.toRGBX());
 }
 
-class ConvertRGBChannels
-{
+class ConvertRGBChannels {
 	public inline static function toGrey(r : Float, g : Float, b : Float)
 		return new Grey(r * .2126 + g * .7152 + b * .0722);
-	
+
 	public inline static function toPerceivedGrey(r : Float, g : Float, b : Float)
 		return new Grey(r * .299 + g * .587 + b * .114);
-	
+
 	public inline static function toPerceivedAccurateGrey(r : Float, g : Float, b : Float)
 		return new Grey(Math.pow(r, 2) * .241 + Math.pow(g, 2) * .691 + Math.pow(b, 2) * .068);
-	
-	static function toHSLArray(r : Float, g : Float, b : Float)
-	{
+
+	static function toHSLArray(r : Float, g : Float, b : Float) {
 		var	min = r.min(g).min(b),
 			max = r.max(g).max(b),
 			delta = max - min,
@@ -92,9 +87,8 @@ class ConvertRGBChannels
 		}
 		return [h, s, l];
 	}
-	
-	static function toHSVArray(r : Float, g : Float, b : Float)
-	{
+
+	static function toHSVArray(r : Float, g : Float, b : Float) {
 		var	min = r.min(g).min(b),
 			max = r.max(g).max(b),
 			delta = max - min,
@@ -108,37 +102,33 @@ class ConvertRGBChannels
 			h = -1;
 			return [h, s, v];
 		}
-		
+
 		if (r == max)
 			h = (g - b) / delta;
 		else if (g == max)
 			h = 2 + (b - r) / delta;
 		else
 			h = 4 + (r - g) / delta;
-			
+
 		h *= 60;
 		if (h < 0)
 			h += 360;
 		return [h, s, v];
 	}
-	
-	public static function toHSL(r : Float, g : Float, b : Float) : HSL
-	{
+
+	public static function toHSL(r : Float, g : Float, b : Float) : HSL {
 		var arr = toHSLArray(r, g, b);
 		return new HSL(arr[0], arr[1], arr[2]);
 	}
-	
-	public static function toHSV(r : Float, g : Float, b : Float) : HSV
-	{
+
+	public static function toHSV(r : Float, g : Float, b : Float) : HSV {
 		var arr = toHSVArray(r, g, b);
 		return new HSV(arr[0], arr[1], arr[2]);
 	}
-	
-	public static function toCMYK(r : Float, g : Float, b : Float) : CMYK
-	{
+
+	public static function toCMYK(r : Float, g : Float, b : Float) : CMYK {
 		var c = 0.0, y = 0.0, m = 0.0, k;
-		if (r + g + b == 0)
-		{
+		if (r + g + b == 0) {
 			k = 1.0;
 		} else {
 			c = 1 - r;
