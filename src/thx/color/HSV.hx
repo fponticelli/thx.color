@@ -13,17 +13,18 @@ class HSV extends Color {
 		return null == info ? null : HSVAssembler.instance.toColor(info);
 	}
 
-	@:isVar public var hue(get, set) : Float;
+	@:isVar public var hue(get, set) : Angle;
+    @:isVar public var hueFloat(get, set) : Float;
 	@:isVar public var saturation(get, set) : Float;
 	@:isVar public var value(get, set) : Float;
 
-	public function new(hue : Float, saturation : Float, value : Float) {
+	public function new(hue : Angle, saturation : Float, value : Float) {
 		this.hue = hue;
 		this.saturation = saturation;
 		this.value = value;
 	}
 	override public function toRGBX() {
-		if (saturation == 0)
+		if(saturation == 0)
 			return new RGBX(value, value, value);
 
 		var r : Float, g : Float, b : Float, i : Int, f : Float, p : Float, q : Float, t : Float;
@@ -51,13 +52,17 @@ class HSV extends Color {
 		return new HSV(hue, saturation, value);
 
 	override public function toString()
-		return 'hsv($hue,${saturation*100}%,${value*100}%)';
+		return 'hsv($hueFloat,${saturation*100}%,${value*100}%)';
 	override public function toStringAlpha(alpha : Float)
-		return 'hsva($hue,${saturation*100}%,${value*100}%,${alpha.normalize()})';
+		return 'hsva($hueFloat,${saturation*100}%,${value*100}%,${alpha.normalize()})';
 
-	function get_hue()
+	function get_hue() : Angle
 		return hue;
-	function set_hue(value : Float)
+	function set_hue(value : Angle) : Angle
+		return hue = value.wrapCircular(360);
+	function get_hueFloat() : Float
+		return hue;
+	function set_hueFloat(value : Float) : Float
 		return hue = value.wrapCircular(360);
 	function get_saturation()
 		return saturation;
@@ -73,11 +78,11 @@ class HSVAssembler extends ColorAssembler<HSV> {
 	public static var instance(default, null) : HSVAssembler = new HSVAssembler();
 	function new() { }
 	override public function toSolid(info : ColorInfo) : Null<HSV> {
-		if (info.name != "hsv" || info.channels.length < 3) return null;
+		if(info.name != "hsv" || info.channels.length < 3) return null;
 		var hue        = ColorParser.getFloatChannel(info.channels[0]),
 			saturation = ColorParser.getFloatChannel(info.channels[1]),
 			value      = ColorParser.getFloatChannel(info.channels[2]);
-		if (null == hue || null == saturation || null == value)
+		if(null == hue || null == saturation || null == value)
 			return null;
 		return new HSV(hue, saturation, value);
 	}

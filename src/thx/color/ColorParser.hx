@@ -80,7 +80,13 @@ class ColorParser {
 				CIDegree(Floats.parse(value));
 			case "" if (Ints.canParse(value)) :
 				var i = Ints.parse(value);
-				if (i == 0 || i == 1) CI0or1(i) else if (i < 256) CIInt8(i) else CIInt(i);
+				if (i == 0)
+					CIBool(false)
+				else if (i == 1)
+					CIBool(true)
+				else if (i < 256)
+					CIInt8(i)
+				else CIInt(i);
 			case "" if (Floats.canParse(value)) :
 				CIFloat(Floats.parse(value));
 			default: null;
@@ -89,23 +95,18 @@ class ColorParser {
 
 	public static function getFloatChannel(channel : ChannelInfo) {
 		return switch(channel) {
-			case CI0or1(v) :
-				v;
-			case CIFloat(v) :
-				v;
-			case CIPercent(v) :
-				v / 100;
-			default :
-				null;
+			case CIBool(v) : v ? 1 : 0;
+			case CIFloat(v) : v;
+			case CIPercent(v) : v / 100;
+			default : null;
 		};
 	}
 
 	public static function getInt8Channel(channel : ChannelInfo) {
 		return switch(channel) {
-			case CI0or1(v) | CIInt8(v) :
-				v;
-			default :
-				null;
+			case CIBool(v) : v ? 1 : 0;
+			case CIInt8(v) : v;
+			default : null;
 		};
 	}
 }
@@ -131,7 +132,7 @@ enum ChannelInfo {
 	CIDegree(value : Float);
 	CIInt8(value : Int);
 	CIInt(value : Int);
-	CI0or1(value : Int);
+	CIBool(value : Bool);
 }
 
 class ColorAssembler<T : Color> {

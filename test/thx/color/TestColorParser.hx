@@ -36,8 +36,8 @@ class TestColorParser {
 		assertStringChannel(CIDegree(1),	"1deg");
 		assertStringChannel(CIPercent(1),	"1%");
 		assertStringChannel(CIFloat(0.1),	"0.1");
-		assertStringChannel(CI0or1(0),		"0");
-		assertStringChannel(CI0or1(1),		"1");
+		assertStringChannel(CIBool(false),	"0");
+		assertStringChannel(CIBool(true),	"1");
 		assertStringChannel(CIInt8(2),		"2");
 		assertStringChannel(CIInt(256),		"256");
 	}

@@ -1,8 +1,10 @@
 -cp src
 -cp test
 -lib thx.core
+-lib thx-unit
 -lib utest
 -js bin/test/main.js
 -main TestAll
 -cmd node bin/test/main.js
 -D nodejs
+-D thxunit

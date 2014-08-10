@@ -19,11 +19,12 @@ class HSL extends Color {
 		return null == info ? null : HSLAssembler.instance.toColor(info);
 	}
 
-	@:isVar public var hue(get, set) : Float;
+	@:isVar public var hue(get, set) : Angle;
+    @:isVar public var hueFloat(get, set) : Float;
 	@:isVar public var saturation(get, set) : Float;
 	@:isVar public var lightness(get, set) : Float;
 
-	public function new(hue : Float, saturation : Float, lightness : Float) {
+	public function new(hue : Angle, saturation : Float, lightness : Float) {
 		this.hue = hue;
 		this.saturation = saturation;
 		this.lightness = lightness;
@@ -44,14 +45,18 @@ class HSL extends Color {
 	override public function toCSS3Alpha(alpha : Float)
 		return toStringAlpha(alpha);
 	override public function toString()
-		return 'hsl($hue,${saturation*100}%,${lightness*100}%)';
+		return 'hsl(${hueFloat},${saturation*100}%,${lightness*100}%)';
 	override public function toStringAlpha(alpha : Float)
-		return 'hsla($hue,${saturation*100}%,${lightness*100}%,${alpha.normalize()})';
+		return 'hsla(${hueFloat},${saturation*100}%,${lightness*100}%,${alpha.normalize()})';
 
-	function get_hue()
+	function get_hue() : Angle
 		return hue;
-	function set_hue(value : Float)
+	function set_hue(value : Angle) : Angle
 		return hue = value.wrapCircular(360);
+    function get_hueFloat() : Float
+		return hue;
+	function set_hueFloat(value : Float)
+		return hue = value;
 	function get_saturation()
 		return saturation;
 	function set_saturation(value : Float)
