@@ -6,65 +6,53 @@
 package thx.color;
 
 using thx.core.Floats;
-import thx.color.ColorParser;
 
-class HSL extends Color {
-	public static function parseHSL(s : String) : Null<HSL> {
-		var info = ColorParser.parseColor(s);
-		return null == info ? null : HSLAssembler.instance.toSolid(info);
-	}
+@:access(thx.color.RGBX)
+abstract HSL(Array<Float>) {
+	public var hue(get, never) : Angle;
+    public var huef(get, never) : Float;
+	public var saturation(get, never) : Float;
+	public var lightness(get, never) : Float;
 
-	public static function parse(s : String) : Null<Color> {
-		var info = ColorParser.parseColor(s);
-		return null == info ? null : HSLAssembler.instance.toColor(info);
-	}
+	inline public static function fromFloats(hue: Float, saturation: Float, lightness: Float)
+		return new HSL([
+			hue,
+			saturation,
+			lightness
+		]);
 
-	@:isVar public var hue(get, set) : Angle;
-    @:isVar public var hueFloat(get, set) : Float;
-	@:isVar public var saturation(get, set) : Float;
-	@:isVar public var lightness(get, set) : Float;
+	inline function new(channels : Array<Float>)
+		this = channels;
 
-	public function new(hue : Angle, saturation : Float, lightness : Float) {
-		this.hue = hue;
-		this.saturation = saturation;
-		this.lightness = lightness;
-	}
+	@:to inline public function toCMYK()
+		return toRGBX().toCMYK();
 
-	override public function toRGBX() {
-		return new RGBX(
+	@:to inline public function toGrey()
+		return toRGBX().toGrey();
+
+	@:to inline public function toHSV()
+		return toRGBX().toHSV();
+
+	@:to inline public function toRGBX()
+		return new RGBX([
 			_c(hue + 120, saturation, lightness),
 			_c(hue, saturation, lightness),
 			_c(hue - 120, saturation, lightness)
-		);
-	}
+		]);
 
-	override public function clone() : HSL
-		return new HSL(hue, saturation, lightness);
-	override public function toCSS3()
+	inline public function toCSS3()
 		return toString();
-	override public function toCSS3Alpha(alpha : Float)
-		return toStringAlpha(alpha);
-	override public function toString()
-		return 'hsl(${hueFloat},${saturation*100}%,${lightness*100}%)';
-	override public function toStringAlpha(alpha : Float)
-		return 'hsla(${hueFloat},${saturation*100}%,${lightness*100}%,${alpha.normalize()})';
+	inline public function toString()
+		return 'hsl(${huef},${saturation*100}%,${lightness*100}%)';
 
-	function get_hue() : Angle
-		return hue;
-	function set_hue(value : Angle) : Angle
-		return hue = value.wrapCircular(360);
-    function get_hueFloat() : Float
-		return hue;
-	function set_hueFloat(value : Float)
-		return hue = value;
-	function get_saturation()
-		return saturation;
-	function set_saturation(value : Float)
-		return saturation = value.normalize();
-	function get_lightness()
-		return lightness;
-	function set_lightness(value : Float)
-		return lightness = value.normalize();
+	inline function get_hue() : Angle
+		return this[0];
+    inline function get_huef() : Float
+		return this[0];
+	inline function get_saturation()
+		return this[1];
+	inline function get_lightness()
+		return this[2];
 
 	// Based on D3.js by Michael Bostock
 	static function _c(d : Float, s : Float, l : Float) {
@@ -80,19 +68,5 @@ class HSL extends Color {
 			return m1 + (m2 - m1) * (240 - d) / 60;
 		else
 			return m1;
-	}
-}
-
-class HSLAssembler extends ColorAssembler<HSL> {
-	public static var instance(default, null) : HSLAssembler = new HSLAssembler();
-	function new() { }
-	override public function toSolid(info : ColorInfo) : Null<HSL> {
-		if (info.name != "hsl" || info.channels.length < 3) return null;
-		var hue        = ColorParser.getFloatChannel(info.channels[0]),
-			saturation = ColorParser.getFloatChannel(info.channels[1]),
-			lightness  = ColorParser.getFloatChannel(info.channels[2]);
-		if (null == hue || null == saturation || null == lightness)
-			return null;
-		return new HSL(hue, saturation, lightness);
 	}
 }

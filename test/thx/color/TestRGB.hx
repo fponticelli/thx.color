@@ -52,17 +52,6 @@ class TestRGB {
 		Assert.equals(0x00, black.blue);
 	}
 
-	public function testSet() {
-		var color = new RGB(0x000000);
-		color.red   = 0xCC;
-		color.green = 0xDD;
-		color.blue  = 0xEE;
-
-		Assert.equals(0xCC, color.red);
-		Assert.equals(0xDD, color.green);
-		Assert.equals(0xEE, color.blue);
-	}
-
 	public function testStrings() {
 		var color = new RGB(0x00AAFF);
 		Assert.equals("#00AAFF", color.toHex());
