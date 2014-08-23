@@ -18,4 +18,8 @@ class TestCMYK {
 		var cmyk = CMYK.fromFloats(0,1,1,0);
 		Assert.equals("cmyk(0,1,1,0)", cmyk.toString());
 	}
+
+	public function testWhite() {
+		Assert.isTrue(Color.white.toCMYK().equals(CMYK.fromFloats(0,0,0,0)));
+	}
 }
