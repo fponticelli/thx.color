@@ -41,6 +41,9 @@ abstract CMYK(Array<Float>) {
 			(1 - yellow  - black).normalize()
 		]);
 
+	@:to inline public function toRGBXA()
+		return toRGBX().toRGBXA();
+
 	@:to inline public function toString()
 		return 'cmyk($cyan,$magenta,$yellow,$black)';
 

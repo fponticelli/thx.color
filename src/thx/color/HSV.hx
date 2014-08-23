@@ -53,6 +53,9 @@ abstract HSV(Array<Float>) {
 		return new RGBX([r, g, b]);
 	}
 
+	@:to inline public function toRGBXA()
+		return toRGBX().toRGBXA();
+
 	@:to inline public function toHSVA()
 		return withAlpha(1.0);
 

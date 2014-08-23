@@ -20,6 +20,9 @@ abstract Grey(Float) {
 	@:to inline public function toRGBX()
 		return new RGBX([grey, grey, grey]);
 
+	@:to inline public function toRGBXA()
+		return toRGBX().toRGBXA();
+
 	@:op(A==B) public function equals(other : Grey)
 		return this == other.grey;
 

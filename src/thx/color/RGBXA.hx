@@ -15,6 +15,9 @@ using Math;
 @:access(thx.color.RGBA)
 @:access(thx.color.RGBX)
 abstract RGBXA(Array<Float>) {
+	public static function fromArray(values : Array<Float>)
+		return new RGBXA(values.map(function(v) return v.normalize()).concat([0,0,0,0]).slice(0,4));
+
 	inline public static function fromInts(red : Int, green : Int, blue : Int, alpha : Int)
 		return new RGBXA([red / 255, green / 255, blue / 255, alpha / 255]);
 
@@ -36,7 +39,7 @@ abstract RGBXA(Array<Float>) {
 	inline public function toCSS3()
 		return toString();
 	@:to inline public function toString()
-		return 'rgba(${redf*100}%,${greenf*100}%,${bluef*100}%,$alpha)';
+		return 'rgba(${redf*100}%,${greenf*100}%,${bluef*100}%,$alphaf)';
 	inline public function toHex(prefix = "#")
 		return '$prefix${alpha.hex(2)}${red.hex(2)}${green.hex(2)}${blue.hex(2)}';
 

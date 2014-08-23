@@ -39,7 +39,10 @@ abstract RGB(Int) {
 		return RGBX.fromInts(red, green, blue);
 
 	@:to inline public function toRGBA()
-		return withAlpha(100);
+		return withAlpha(255);
+
+	@:to inline public function toRGBXA()
+		return toRGBA().toRGBXA();
 
 	inline public function withAlpha(alpha : Int)
 		return RGBA.fromInts(red, green, blue, alpha);

@@ -17,6 +17,9 @@ using Math;
 @:access(thx.color.Grey)
 @:access(thx.color.RGBXA)
 abstract RGBX(Array<Float>) {
+	public static function fromArray(values : Array<Float>)
+		return new RGBX(values.map(function(v) return v.normalize()).concat([0,0,0]).slice(0,3));
+
 	inline public static function fromInts(red : Int, green : Int, blue : Int)
 		return new RGBX([red / 255, green / 255, blue / 255]);
 

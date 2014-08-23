@@ -41,6 +41,9 @@ abstract HSL(Array<Float>) {
 			_c(hue - 120, saturation, lightness)
 		]);
 
+	@:to inline public function toRGBXA()
+		return toRGBX().toRGBXA();
+
 	@:to inline public function toHSLA()
 		return withAlpha(1.0);
 
