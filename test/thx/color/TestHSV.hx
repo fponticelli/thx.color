@@ -2,6 +2,7 @@
 package thx.color;
 
 import utest.Assert;
+import thx.color.HSVA;
 
 class TestHSV {
 	public function new() { }

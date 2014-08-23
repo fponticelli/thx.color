@@ -15,6 +15,7 @@ using Math;
 @:access(thx.color.CMYK)
 @:access(thx.color.RGB)
 @:access(thx.color.Grey)
+@:access(thx.color.RGBXA)
 abstract RGBX(Array<Float>) {
 	inline public static function fromInts(red : Int, green : Int, blue : Int)
 		return new RGBX([red / 255, green / 255, blue / 255]);
@@ -86,7 +87,7 @@ abstract RGBX(Array<Float>) {
 		return new HSL([h, s, l]);
 	}
 
-	@:to public function toHSV() {
+	@:to public function toHSV() : HSV {
 		var	min = redf.min(greenf).min(bluef),
 			max = redf.max(greenf).max(bluef),
 			delta = max - min,
@@ -98,7 +99,7 @@ abstract RGBX(Array<Float>) {
 		else {
 			s = 0;
 			h = -1;
-			return [h, s, v];
+			return new HSV([h, s, v]);
 		}
 
 		if (redf == max)
@@ -113,6 +114,12 @@ abstract RGBX(Array<Float>) {
 			h += 360;
 		return new HSV([h, s, v]);
 	}
+
+	@:to inline public function toRGBXA()
+		return withAlpha(1.0);
+
+	inline public function withAlpha(alpha : Float)
+		return new RGBXA(this.concat([alpha]));
 
 	@:to inline public function toRGB()
 		return RGB.fromFloats(redf, greenf, bluef);

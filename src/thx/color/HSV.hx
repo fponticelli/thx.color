@@ -2,6 +2,7 @@ package thx.color;
 using thx.core.Floats;
 
 @:access(thx.color.RGBX)
+@:access(thx.color.HSVA)
 abstract HSV(Array<Float>) {
 	public var hue(get, never) : Angle;
     public var huef(get, never) : Float;
@@ -51,6 +52,12 @@ abstract HSV(Array<Float>) {
 
 		return new RGBX([r, g, b]);
 	}
+
+	@:to inline public function toHSVA()
+		return withAlpha(1.0);
+
+	inline public function withAlpha(alpha : Float)
+		return new HSVA(this.concat([alpha]));
 
 	inline public function toString()
 		return 'hsv($huef,${saturation*100}%,${value*100}%)';

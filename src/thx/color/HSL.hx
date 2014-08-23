@@ -8,6 +8,7 @@ package thx.color;
 using thx.core.Floats;
 
 @:access(thx.color.RGBX)
+@:access(thx.color.HSLA)
 abstract HSL(Array<Float>) {
 	public var hue(get, never) : Angle;
     public var huef(get, never) : Float;
@@ -39,6 +40,12 @@ abstract HSL(Array<Float>) {
 			_c(hue, saturation, lightness),
 			_c(hue - 120, saturation, lightness)
 		]);
+
+	@:to inline public function toHSLA()
+		return withAlpha(1.0);
+
+	inline public function withAlpha(alpha : Float)
+		return new HSLA(this.concat([alpha]));
 
 	inline public function toCSS3()
 		return toString();

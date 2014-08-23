@@ -6,6 +6,7 @@
 package thx.color;
 
 import utest.Assert;
+import thx.color.RGBA;
 
 class TestRGB {
 	public function new() { }

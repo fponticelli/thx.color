@@ -38,6 +38,12 @@ abstract RGB(Int) {
 	@:to public function toRGBX()
 		return RGBX.fromInts(red, green, blue);
 
+	@:to inline public function toRGBA()
+		return withAlpha(100);
+
+	inline public function withAlpha(alpha : Int)
+		return RGBA.fromInts(red, green, blue, alpha);
+
 	inline public function toCSS3()
 		return toString();
 	@:to inline  public function toString()

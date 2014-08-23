@@ -2,6 +2,7 @@
 package thx.color;
 
 import utest.Assert;
+import thx.color.HSLA;
 
 class TestHSL {
 	public function new() { }
