@@ -45,6 +45,30 @@ abstract HSL(Array<Float>) {
 	inline public function toString()
 		return 'hsl(${huef},${saturation*100}%,${lightness*100}%)';
 
+	@:op(A==B) public function equals(other : HSL)
+		return hue == other.hue && saturation == other.saturation && lightness == other.lightness;
+
+	public function darker(t : Float)
+		return new HSL([
+			hue,
+			saturation,
+			t.interpolateBetween(lightness, 0)
+		]);
+
+	public function lighter(t : Float)
+		return new HSL([
+			hue,
+			saturation,
+			t.interpolateBetween(lightness, 1)
+		]);
+
+	public function interpolate(other : HSL, t : Float)
+		return new HSL([
+			t.interpolateBetween(hue, other.hue),
+			t.interpolateBetween(saturation, other.saturation),
+			t.interpolateBetween(lightness, other.lightness)
+		]);
+
 	inline function get_hue() : Angle
 		return this[0];
     inline function get_huef() : Float

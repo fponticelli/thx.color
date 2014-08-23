@@ -44,6 +44,23 @@ abstract CMYK(Array<Float>) {
 	@:to inline public function toString()
 		return 'cmyk($cyan,$magenta,$yellow,$black)';
 
+	@:op(A==B) public function equals(other : CMYK)
+		return cyan == other.cyan && magenta == other.magenta && yellow == other.yellow && black == other.black;
+
+	inline public function darker(t : Float)
+		return new CMYK([cyan, magenta, yellow, t.interpolateBetween(black, 1)]);
+
+	inline public function lighter(t : Float)
+		return new CMYK([cyan, magenta, yellow, t.interpolateBetween(black, 0)]);
+
+	public function interpolate(other : CMYK, t : Float)
+		return new CMYK([
+			t.interpolateBetween(cyan,    other.cyan),
+			t.interpolateBetween(magenta, other.magenta),
+			t.interpolateBetween(yellow,  other.yellow),
+			t.interpolateBetween(black,   other.black)
+		]);
+
 	inline function get_black()
 		return this[3];
 	inline function get_cyan()

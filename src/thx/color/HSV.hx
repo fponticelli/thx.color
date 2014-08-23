@@ -54,6 +54,31 @@ abstract HSV(Array<Float>) {
 
 	inline public function toString()
 		return 'hsv($huef,${saturation*100}%,${value*100}%)';
+
+	@:op(A==B) public function equals(other : HSV)
+		return hue == other.hue && saturation == other.saturation && value == other.value;
+
+	public function darker(t : Float)
+		return new HSV([
+			hue,
+			saturation,
+			t.interpolateBetween(value, 0)
+		]);
+
+	public function lighter(t : Float)
+		return new HSV([
+			hue,
+			saturation,
+			t.interpolateBetween(value, 1)
+		]);
+
+	public function interpolate(other : HSV, t : Float)
+		return new HSV([
+			t.interpolateBetween(hue, other.hue),
+			t.interpolateBetween(saturation, other.saturation),
+			t.interpolateBetween(value, other.value)
+		]);
+
 	inline function get_hue() : Angle
 		return this[0];
 	inline function get_huef() : Float
