@@ -58,4 +58,16 @@ class TestRGB {
 		Assert.equals("#00AAFF", color.toHex());
 		Assert.equals("rgb(0,170,255)", color.toString());
 	}
+
+	public function testFromString() {
+		Assert.isTrue(new RGB(0xFF0000).equals("#ff0000"));
+		Assert.isTrue(new RGB(0xFF0000).equals("#f00"));
+		Assert.isTrue(new RGB(0xFF0000).equals("rgb(255,0,0)"));
+		Assert.isTrue(new RGB(0xFF0000).equals("rgb(100%,0,0)"));
+
+		Assert.isTrue(new RGBA(0xFF00FF00).equals("#ff00ff00"));
+		Assert.isTrue(new RGBA(0xFF00FF00).equals("#f0f0"));
+		Assert.isTrue(new RGBA(0xFF00FF00).equals("rgba(0,255,0,1)"));
+		Assert.isTrue(new RGBA(0xFF00FF00).equals("rgba(0,100%,0,1)"));
+	}
 }

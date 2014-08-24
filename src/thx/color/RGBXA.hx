@@ -9,12 +9,27 @@ using StringTools;
 using thx.core.Floats;
 using thx.core.Ints;
 using Math;
+import thx.color.parse.ColorParser;
 
 @:access(thx.color.HSLA)
 @:access(thx.color.HSVA)
 @:access(thx.color.RGBA)
 @:access(thx.color.RGBX)
 abstract RGBXA(Array<Float>) {
+	@:from public static function parse(color : String) : RGBXA {
+		var info = ColorParser.parseHex(color);
+		if(null == info)
+			info = ColorParser.parseColor(color);
+		if(null == info)
+			return null;
+
+		return try switch info.name {
+			case 'rgba':
+				thx.color.RGBXA.fromArray(ColorParser.getFloatChannels(info.channels, 4));
+			case _:
+				null;
+		} catch(e : Dynamic) null;
+	}
 	public static function fromArray(values : Array<Float>)
 		return new RGBXA(values.map(function(v) return v.normalize()).concat([0,0,0,0]).slice(0,4));
 

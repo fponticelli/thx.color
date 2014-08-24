@@ -15,4 +15,8 @@ class TestGrey {
 		var grey = new Grey(0.5);
 		Assert.equals("grey(50%)", grey.toString());
 	}
+
+	public function testFromString() {
+		Assert.isTrue(new Grey(0.2).equals("grey(20%)"));
+	}
 }

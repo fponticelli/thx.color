@@ -6,6 +6,7 @@
 package thx.color;
 
 using thx.core.Floats;
+import thx.color.parse.ColorParser;
 
 @:access(thx.color.RGBX)
 abstract CMYK(Array<Float>) {
@@ -13,6 +14,18 @@ abstract CMYK(Array<Float>) {
 	public var cyan(get, never): Float;
 	public var magenta(get, never): Float;
 	public var yellow(get, never): Float;
+
+	@:from public static function fromString(color : String) : CMYK {
+		var info = ColorParser.parseColor(color);
+		if(null == info)
+			return null;
+		return try switch info.name {
+			case 'cmyk':
+				new thx.color.CMYK(ColorParser.getFloatChannels(info.channels, 4));
+			case _:
+				null;
+		} catch(e : Dynamic) null;
+	}
 
 	inline public static function fromFloats(cyan: Float, magenta: Float, yellow: Float, black: Float)
 		return new CMYK([

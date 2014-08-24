@@ -22,4 +22,8 @@ class TestCMYK {
 	public function testWhite() {
 		Assert.isTrue(Color.white.toCMYK().equals(CMYK.fromFloats(0,0,0,0)));
 	}
+
+	public function testFromString() {
+		Assert.isTrue(CMYK.fromFloats(0.5, 0.2, 0.1, 0.3).equals("cmyk(50%,0.2,10%,0.3)"));
+	}
 }

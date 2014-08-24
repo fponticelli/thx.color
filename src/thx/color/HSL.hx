@@ -6,6 +6,7 @@
 package thx.color;
 
 using thx.core.Floats;
+import thx.color.parse.ColorParser;
 
 @:access(thx.color.RGBX)
 @:access(thx.color.HSLA)
@@ -14,6 +15,19 @@ abstract HSL(Array<Float>) {
     public var huef(get, never) : Float;
 	public var saturation(get, never) : Float;
 	public var lightness(get, never) : Float;
+
+	@:from public static function fromString(color : String) : HSL {
+		var info = ColorParser.parseColor(color);
+		if(null == info)
+			return null;
+
+		return try switch info.name {
+			case 'hsl':
+				new thx.color.HSL(ColorParser.getFloatChannels(info.channels, 3));
+			case _:
+				null;
+		} catch(e : Dynamic) null;
+	}
 
 	inline public static function fromFloats(hue: Float, saturation: Float, lightness: Float)
 		return new HSL([

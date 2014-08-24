@@ -167,7 +167,9 @@ class Color {
 	public static function parse(color : String) : RGBXA {
 		if(names.exists(color))
 			return names.get(color).toRGBXA();
-		var info = ColorParser.parseColor(color);
+		var info = ColorParser.parseHex(color);
+		if(null == info)
+			info = ColorParser.parseColor(color);
 		if(null == info)
 			return null;
 

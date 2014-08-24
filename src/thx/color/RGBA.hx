@@ -3,8 +3,30 @@ package thx.color;
 using Math;
 using StringTools;
 using thx.core.Floats;
+import thx.color.parse.ColorParser;
 
 abstract RGBA(Int) {
+	@:from public static function fromString(color : String) : RGBA {
+		var info = ColorParser.parseHex(color);
+		if(null == info)
+			info = ColorParser.parseColor(color);
+		if(null == info)
+			return null;
+
+		return try switch info.name {
+			case 'rgba':
+				thx.color.RGBA.fromArray([
+					ColorParser.getInt8Channel(info.channels[0]),
+					ColorParser.getInt8Channel(info.channels[1]),
+					ColorParser.getInt8Channel(info.channels[2]),
+					Math.round(ColorParser.getFloatChannel(info.channels[3]) * 255)
+				]);
+			case _:
+				null;
+		} catch(e : Dynamic) null;
+	}
+	inline public static function fromArray(arr : Array<Int>)
+		return fromInts(arr[0], arr[1], arr[2], arr[3]);
 	public static function fromFloats(red : Float, green : Float, blue : Float, alpha : Float)
 		return fromInts((red.normalize() * 255).round(), (green.normalize() * 255).round(), (blue.normalize() * 255).round(), (alpha.normalize() * 255).round());
 	inline public static function fromInts(red : Int, green : Int, blue : Int, alpha : Int)

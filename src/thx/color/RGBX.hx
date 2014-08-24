@@ -9,6 +9,7 @@ using StringTools;
 using thx.core.Floats;
 using thx.core.Ints;
 using Math;
+import thx.color.parse.ColorParser;
 
 @:access(thx.color.HSL)
 @:access(thx.color.HSV)
@@ -17,6 +18,20 @@ using Math;
 @:access(thx.color.Grey)
 @:access(thx.color.RGBXA)
 abstract RGBX(Array<Float>) {
+	@:from public static function fromString(color : String) : RGBX {
+		var info = ColorParser.parseHex(color);
+		if(null == info)
+			info = ColorParser.parseColor(color);
+		if(null == info)
+			return null;
+
+		return try switch info.name {
+			case 'rgb':
+				thx.color.RGBX.fromArray(ColorParser.getFloatChannels(info.channels, 3));
+			case _:
+				null;
+		} catch(e : Dynamic) null;
+	}
 	public static function fromArray(values : Array<Float>)
 		return new RGBX(values.map(function(v) return v.normalize()).concat([0,0,0]).slice(0,3));
 

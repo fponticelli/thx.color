@@ -1,5 +1,7 @@
 package thx.color;
+
 using thx.core.Floats;
+import thx.color.parse.ColorParser;
 
 @:access(thx.color.RGBXA)
 @:access(thx.color.HSV)
@@ -9,6 +11,19 @@ abstract HSVA(Array<Float>) {
 	public var saturation(get, never) : Float;
 	public var value(get, never) : Float;
 	public var alpha(get, never) : Float;
+
+	@:from public static function fromString(color : String) : HSVA {
+		var info = ColorParser.parseColor(color);
+		if(null == info)
+			return null;
+
+		return try switch info.name {
+			case 'hsva':
+				new thx.color.HSVA(ColorParser.getFloatChannels(info.channels, 4));
+			case _:
+				null;
+		} catch(e : Dynamic) null;
+	}
 
 	inline public static function fromFloats(hue: Float, saturation: Float, value: Float, alpha: Float)
 		return new HSVA([

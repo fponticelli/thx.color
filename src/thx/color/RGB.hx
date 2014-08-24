@@ -3,11 +3,28 @@ package thx.color;
 using StringTools;
 using thx.core.Floats;
 using Math;
+import thx.color.parse.ColorParser;
 
 @:access(thx.color.RGBX)
 abstract RGB(Int) {
+	@:from public static function fromString(color : String) : RGB {
+		var info = ColorParser.parseHex(color);
+		if(null == info)
+			info = ColorParser.parseColor(color);
+		if(null == info)
+			return null;
+
+		return try switch info.name {
+			case 'rgb':
+				thx.color.RGB.fromArray(ColorParser.getInt8Channels(info.channels, 3));
+			case _:
+				null;
+		} catch(e : Dynamic) null;
+	}
 	public static function fromFloats(red : Float, green : Float, blue : Float)
 		return fromInts((red.normalize() * 255).round(), (green.normalize() * 255).round(), (blue.normalize() * 255).round());
+	inline public static function fromArray(arr : Array<Int>)
+		return fromInts(arr[0], arr[1], arr[2]);
 	inline public static function fromInts(red : Int, green : Int, blue : Int)
 		return new RGB(((red & 0xFF) << 16) | ((green & 0xFF) << 8) | ((blue & 0xFF) << 0));
 	inline public static function fromInt(rgb : Int)
