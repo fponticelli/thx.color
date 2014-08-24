@@ -66,6 +66,9 @@ abstract RGBXA(Array<Float>) {
 	@:to public function toHSVA() : HSVA
 		return toRGBX().toHSV().withAlpha(alpha);
 
+	@:to inline public function toRGB() : RGB
+		return toRGBX().toRGB();
+
 	@:to inline public function toRGBX() : RGBX
 		return new RGBX(this.slice(0,3));
 

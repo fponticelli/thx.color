@@ -48,6 +48,9 @@ abstract HSL(Array<Float>) {
 	@:to inline public function toHSV() : HSV
 		return toRGBX().toHSV();
 
+	@:to inline public function toRGB() : RGB
+		return toRGBX().toRGB();
+
 	@:to inline public function toRGBX() : RGBX
 		return new RGBX([
 			_c(hue + 120, saturation, lightness),

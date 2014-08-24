@@ -43,6 +43,9 @@ abstract HSV(Array<Float>) {
 	@:to inline public function toHSL() : HSL
 		return toRGBX().toHSL();
 
+	@:to inline public function toRGB() : RGB
+		return toRGBX().toRGB();
+
 	@:to inline public function toRGBX() : RGBX {
 		if(saturation == 0)
 			return new RGBX([value, value, value]);

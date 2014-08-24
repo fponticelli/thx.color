@@ -65,9 +65,9 @@ abstract RGB(Int) {
 		return RGBA.fromInts(red, green, blue, alpha);
 
 	inline public function toCSS3() : String
-		return toString();
-	@:to inline  public function toString() : String
 		return 'rgb($red,$green,$blue)';
+	@:to inline  public function toString() : String
+		return toHex();
 	inline  public function toHex(prefix = "#")
 		return '$prefix${red.hex(2)}${green.hex(2)}${blue.hex(2)}';
 

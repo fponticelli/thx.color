@@ -1,0 +1,6 @@
+-cp src
+-cp demo
+-lib thx.core
+-js bin/demo.js
+-main Demo
+-D nodejs

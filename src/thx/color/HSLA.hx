@@ -49,6 +49,9 @@ abstract HSLA(Array<Float>) {
 	@:to inline public function toHSVA() : HSVA
 		return toRGBXA().toHSVA();
 
+	@:to inline public function toRGB() : RGB
+		return toRGBXA().toRGB();
+
 	@:to inline public function toRGBXA() : RGBXA
 		return new RGBXA([
 			_c(hue + 120, saturation, lightness),

@@ -5,6 +5,9 @@ import thx.color.parse.ColorParser;
 
 @:access(thx.color.RGBX)
 abstract Grey(Float) {
+	public static var black(default, null) : Grey = new Grey(0);
+	public static var white(default, null) : Grey = new Grey(1);
+
 	@:from public static function fromString(color : String) : Null<Grey> {
 		var info = ColorParser.parseColor(color);
 		if(null == info)
@@ -31,6 +34,9 @@ abstract Grey(Float) {
 	@:to inline public function toHSV() : HSV
 		return toRGBX().toHSV();
 
+	@:to inline public function toRGB() : RGB
+		return toRGBX().toRGB();
+
 	@:to inline public function toRGBX() : RGBX
 		return new RGBX([grey, grey, grey]);
 
@@ -39,6 +45,9 @@ abstract Grey(Float) {
 
 	@:op(A==B) public function equals(other : Grey) : Bool
 		return this == other.grey;
+
+	public function contrast()
+		return this > 0.5 ? black : white;
 
 	public static function darker(color : Grey, t : Float) : Grey
 		return new Grey(t.interpolateBetween(color.grey, 0));
