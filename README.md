@@ -9,7 +9,7 @@ API uses abstracts to make it easy to use colors with strings and numbers.
     trace(rgb.green);
 ```
 
-## Some examples from ![Demo](/demo/Demo.hx)
+## Some examples from [Demo](/demo/Demo.hx)
 
 ### HSL Rainbow
 
@@ -47,7 +47,7 @@ var left : RGB = '#0000ff';
 return left.lighter;
 ```
 
-![Alt text](/images/lighterrgb.png?raw=true "HSV Gradient")
+![Alt text](/images/lighterrgb.png?raw=true "Lighter RGB")
 
 ### Named Colors Table
 
@@ -79,8 +79,8 @@ colors.mapi(function(name, i) {
 });
 ```
 
-![Alt text](/images/colortable.png?raw=true =450x600 "HSV Gradient")
+<img src="/images/colortable.png?raw=true" alt="color table" style="width:450px;height:600px">
 
-To run ![Demo](/demo/Demo.hx), you need `nodejs` and the Canvas library (`npm install canvas`);
+To run [Demo](/demo/Demo.hx), you need `nodejs` and the Canvas library (`npm install canvas`);
 
 *Note: * API might still change before version 1.
