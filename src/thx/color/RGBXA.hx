@@ -24,6 +24,8 @@ abstract RGBXA(Array<Float>) {
 			return null;
 
 		return try switch info.name {
+			case 'rgb':
+				thx.color.RGBX.fromArray(ColorParser.getFloatChannels(info.channels, 3)).toRGBXA();
 			case 'rgba':
 				thx.color.RGBXA.fromArray(ColorParser.getFloatChannels(info.channels, 4));
 			case _:

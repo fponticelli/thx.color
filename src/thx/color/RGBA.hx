@@ -14,6 +14,8 @@ abstract RGBA(Int) {
 			return null;
 
 		return try switch info.name {
+			case 'rgb':
+				thx.color.RGB.fromArray(ColorParser.getInt8Channels(info.channels, 3)).toRGBA();
 			case 'rgba':
 				thx.color.RGBA.fromArray([
 					ColorParser.getInt8Channel(info.channels[0]),

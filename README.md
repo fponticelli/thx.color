@@ -1,4 +1,4 @@
 thx.color
 =========
 
-General purpose color library for Haxe
+General purpose color library for Haxe.

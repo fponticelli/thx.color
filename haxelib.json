@@ -5,10 +5,10 @@
   "classPath": "src",
   "tags": ["color", "thx", "cross"],
   "description": "Colors library",
-  "releasenote": "first formal release",
-  "version": "0.5.0",
+  "releasenote": "added more flexibility to Alpha color parsers",
+  "version": "0.5.1",
   "contributors": ["fponticelli"],
    "dependencies": {
-    "thx.core": "0.5.0"
+    "thx.core": "0.5.1"
   }
 }

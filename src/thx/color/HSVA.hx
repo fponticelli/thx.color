@@ -18,6 +18,8 @@ abstract HSVA(Array<Float>) {
 			return null;
 
 		return try switch info.name {
+			case 'hsv':
+				new thx.color.HSV(ColorParser.getFloatChannels(info.channels, 3)).toHSVA();
 			case 'hsva':
 				new thx.color.HSVA(ColorParser.getFloatChannels(info.channels, 4));
 			case _:
