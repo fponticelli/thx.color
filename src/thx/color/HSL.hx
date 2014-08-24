@@ -29,64 +29,64 @@ abstract HSL(Array<Float>) {
 		} catch(e : Dynamic) null;
 	}
 
-	inline public static function fromFloats(hue: Float, saturation: Float, lightness: Float)
+	inline public static function fromFloats(hue: Float, saturation: Float, lightness: Float) : HSL
 		return new HSL([
 			hue,
 			saturation,
 			lightness
 		]);
 
-	inline function new(channels : Array<Float>)
+	inline function new(channels : Array<Float>) : HSL
 		this = channels;
 
-	@:to inline public function toCMYK()
+	@:to inline public function toCMYK() : CMYK
 		return toRGBX().toCMYK();
 
-	@:to inline public function toGrey()
+	@:to inline public function toGrey() : Grey
 		return toRGBX().toGrey();
 
-	@:to inline public function toHSV()
+	@:to inline public function toHSV() : HSV
 		return toRGBX().toHSV();
 
-	@:to inline public function toRGBX()
+	@:to inline public function toRGBX() : RGBX
 		return new RGBX([
 			_c(hue + 120, saturation, lightness),
 			_c(hue, saturation, lightness),
 			_c(hue - 120, saturation, lightness)
 		]);
 
-	@:to inline public function toRGBXA()
+	@:to inline public function toRGBXA() : RGBXA
 		return toRGBX().toRGBXA();
 
-	@:to inline public function toHSLA()
+	@:to inline public function toHSLA() : HSLA
 		return withAlpha(1.0);
 
-	inline public function withAlpha(alpha : Float)
+	inline public function withAlpha(alpha : Float) : HSLA
 		return new HSLA(this.concat([alpha]));
 
-	inline public function toCSS3()
+	inline public function toCSS3() : String
 		return toString();
-	inline public function toString()
+	inline public function toString() : String
 		return 'hsl(${huef},${saturation*100}%,${lightness*100}%)';
 
-	@:op(A==B) public function equals(other : HSL)
+	@:op(A==B) public function equals(other : HSL) : Bool
 		return hue == other.hue && saturation == other.saturation && lightness == other.lightness;
 
-	public function darker(t : Float)
+	public function darker(t : Float) : HSL
 		return new HSL([
 			hue,
 			saturation,
 			t.interpolateBetween(lightness, 0)
 		]);
 
-	public function lighter(t : Float)
+	public function lighter(t : Float) : HSL
 		return new HSL([
 			hue,
 			saturation,
 			t.interpolateBetween(lightness, 1)
 		]);
 
-	public function interpolate(other : HSL, t : Float)
+	public function interpolate(other : HSL, t : Float) : HSL
 		return new HSL([
 			t.interpolateBetween(hue, other.hue),
 			t.interpolateBetween(saturation, other.saturation),
@@ -97,13 +97,13 @@ abstract HSL(Array<Float>) {
 		return this[0];
     inline function get_huef() : Float
 		return this[0];
-	inline function get_saturation()
+	inline function get_saturation() : Float
 		return this[1];
-	inline function get_lightness()
+	inline function get_lightness() : Float
 		return this[2];
 
 	// Based on D3.js by Michael Bostock
-	static function _c(d : Float, s : Float, l : Float) {
+	static function _c(d : Float, s : Float, l : Float) : Float {
 		var m2 = l <= 0.5 ? l * (1 + s) : l + s - l * s,
 			m1 = 2 * l - m2;
 

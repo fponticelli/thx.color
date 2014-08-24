@@ -23,7 +23,7 @@ class ColorParser {
 	var pattern_channel : EReg;
 	public function new() {
 		pattern_color   = ~/^\s*([^(]+)\s*\(([^)]*)\)\s*$/i;
-		pattern_channel = ~/^\s*(\d*.\d+|\d+)([%º]|deg)?\s*$/i;
+		pattern_channel = ~/^\s*(\d*.\d+|\d+)(%|º|deg)?\s*$/i;
 	}
 
 	static var isPureHex = ~/^([0-9a-f]{2}){3,4}$/i;

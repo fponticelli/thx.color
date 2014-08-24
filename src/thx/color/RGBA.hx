@@ -25,16 +25,16 @@ abstract RGBA(Int) {
 				null;
 		} catch(e : Dynamic) null;
 	}
-	inline public static function fromArray(arr : Array<Int>)
+	inline public static function fromArray(arr : Array<Int>) : RGBA
 		return fromInts(arr[0], arr[1], arr[2], arr[3]);
-	public static function fromFloats(red : Float, green : Float, blue : Float, alpha : Float)
+	public static function fromFloats(red : Float, green : Float, blue : Float, alpha : Float) : RGBA
 		return fromInts((red.normalize() * 255).round(), (green.normalize() * 255).round(), (blue.normalize() * 255).round(), (alpha.normalize() * 255).round());
-	inline public static function fromInts(red : Int, green : Int, blue : Int, alpha : Int)
+	inline public static function fromInts(red : Int, green : Int, blue : Int, alpha : Int) : RGBA
 		return new RGBA(((alpha & 0xFF) << 24) | ((red & 0xFF) << 16) | ((green & 0xFF) << 8) | ((blue & 0xFF) << 0));
-	inline public static function fromInt(rgba : Int)
+	inline public static function fromInt(rgba : Int) : RGBA
 		return new RGBA(rgba);
 
-	inline public function new(rgba : Int)
+	inline public function new(rgba : Int) : RGBA
 		this = rgba;
 
 	public var red(get, never)   : Int;
@@ -45,48 +45,48 @@ abstract RGBA(Int) {
 	@:to inline public function toInt() : Int
 		return this;
 
-	@:to inline public function toHSLA()
+	@:to inline public function toHSLA() : HSLA
 		return toRGBXA().toHSLA();
 
-	@:to inline public function toHSVA()
+	@:to inline public function toHSVA() : HSVA
 		return toRGBXA().toHSVA();
 
-	@:to public function toRGB()
+	@:to public function toRGB() : RGB
 		return RGB.fromInts(red, green, blue);
 
-	@:to public function toRGBX()
+	@:to public function toRGBX() : RGBX
 		return RGBX.fromInts(red, green, blue);
 
-	@:to public function toRGBXA()
+	@:to public function toRGBXA() : RGBXA
 		return RGBXA.fromInts(red, green, blue, alpha);
 
-	inline public function toCSS3()
+	inline public function toCSS3() : String
 		return toString();
-	@:to inline  public function toString()
+	@:to inline  public function toString() : String
 		return 'rgba($red,$green,$blue,${alpha/255})';
 	inline  public function toHex(prefix = "#")
 		return '$prefix${alpha.hex(2)}${red.hex(2)}${green.hex(2)}${blue.hex(2)}';
 
-	@:op(A==B) public function equals(other : RGBA)
+	@:op(A==B) public function equals(other : RGBA) : Bool
 		return red == other.red && alpha == other.alpha && green == other.green && blue == other.blue;
 
-	public function darker(t : Float)
+	public function darker(t : Float) : RGBA
 		return toRGBXA().darker(t).toRGBA();
-	public function lighter(t : Float)
+	public function lighter(t : Float) : RGBA
 		return toRGBXA().lighter(t).toRGBA();
-	public function transparent(t : Float)
+	public function transparent(t : Float) : RGBA
 		return toRGBXA().transparent(t).toRGBA();
-	public function opaque(t : Float)
+	public function opaque(t : Float) : RGBA
 		return toRGBXA().opaque(t).toRGBA();
-	public function interpolate(other : RGBA, t : Float)
+	public function interpolate(other : RGBA, t : Float) : RGBA
 		return toRGBXA().interpolate(other.toRGBXA(), t);
 
-	inline function get_alpha()
+	inline function get_alpha() : Int
 		return (this >> 24) & 0xFF;
-	inline function get_red()
+	inline function get_red() : Int
 		return (this >> 16) & 0xFF;
-	inline function get_green()
+	inline function get_green() : Int
 		return (this >> 8) & 0xFF;
-	inline function get_blue()
+	inline function get_blue() : Int
 		return this & 0xFF;
 }

@@ -32,13 +32,13 @@ abstract RGBX(Array<Float>) {
 				null;
 		} catch(e : Dynamic) null;
 	}
-	public static function fromArray(values : Array<Float>)
+	public static function fromArray(values : Array<Float>) : RGBX
 		return new RGBX(values.map(function(v) return v.normalize()).concat([0,0,0]).slice(0,3));
 
-	inline public static function fromInts(red : Int, green : Int, blue : Int)
+	inline public static function fromInts(red : Int, green : Int, blue : Int) : RGBX
 		return new RGBX([red / 255, green / 255, blue / 255]);
 
-	inline public static function fromFloats(red : Float, green : Float, blue : Float)
+	inline public static function fromFloats(red : Float, green : Float, blue : Float) : RGBX
 		return new RGBX([red,green,blue]);
 
 	public var red(get, never) : Int;
@@ -48,14 +48,14 @@ abstract RGBX(Array<Float>) {
 	public var greenf(get, never) : Float;
 	public var bluef(get, never) : Float;
 
-	inline function new(channels : Array<Float>)
+	inline function new(channels : Array<Float>) : RGBX
 		this = channels;
 
-	inline public function toCSS3()
+	inline public function toCSS3() : String
 		return toString();
-	@:to inline public function toString()
+	@:to inline public function toString() : String
 		return 'rgb(${redf*100}%,${greenf*100}%,${bluef*100}%)';
-	inline public function toHex(prefix = "#")
+	inline public function toHex(prefix = "#") : String
 		return '$prefix${red.hex(2)}${green.hex(2)}${blue.hex(2)}';
 
 	@:to public function toCMYK() : CMYK {
@@ -74,13 +74,13 @@ abstract RGBX(Array<Float>) {
 		return new CMYK([c, m, y, k]);
 	}
 
-	@:to public inline function toGrey()
+	@:to public inline function toGrey() : Grey
 		return new Grey(redf * .2126 + greenf * .7152 + bluef * .0722);
 
-	public inline function toPerceivedGrey()
+	public inline function toPerceivedGrey() : Grey
 		return new Grey(redf * .299 + greenf * .587 + bluef * .114);
 
-	public inline function toPerceivedAccurateGrey()
+	public inline function toPerceivedAccurateGrey() : Grey
 		return new Grey(Math.pow(redf, 2) * .241 + Math.pow(greenf, 2) * .691 + Math.pow(bluef, 2) * .068);
 
 	@:to public function toHSL() : HSL {
@@ -133,50 +133,50 @@ abstract RGBX(Array<Float>) {
 		return new HSV([h, s, v]);
 	}
 
-	@:to inline public function toRGBXA()
+	@:to inline public function toRGBXA() : RGBXA
 		return withAlpha(1.0);
 
-	inline public function withAlpha(alpha : Float)
+	inline public function withAlpha(alpha : Float) : RGBXA
 		return new RGBXA(this.concat([alpha]));
 
-	@:to inline public function toRGB()
+	@:to inline public function toRGB() : RGB
 		return RGB.fromFloats(redf, greenf, bluef);
 
 	@:op(A==B) public function equals(other : RGBX)
 		return redf == other.redf && greenf == other.greenf && bluef == other.bluef;
 
-	public function darker(t : Float)
+	public function darker(t : Float) : RGBX
 		return new RGBX([
 			t.interpolateBetween(redf, 0),
 			t.interpolateBetween(greenf, 0),
 			t.interpolateBetween(bluef, 0),
 		]);
 
-	public function lighter(t : Float)
+	public function lighter(t : Float) : RGBX
 		return new RGBX([
 			t.interpolateBetween(redf, 1),
 			t.interpolateBetween(greenf, 1),
 			t.interpolateBetween(bluef, 1),
 		]);
 
-	public function interpolate(other : RGBX, t : Float)
+	public function interpolate(other : RGBX, t : Float) : RGBX
 		return new RGBX([
 			t.interpolateBetween(redf, other.redf),
 			t.interpolateBetween(greenf, other.greenf),
 			t.interpolateBetween(bluef, other.bluef)
 		]);
 
-	inline function get_red()
+	inline function get_red() : Int
 		return (redf   * 255).round();
-	inline function get_green()
+	inline function get_green() : Int
 		return (greenf * 255).round();
-	inline function get_blue()
+	inline function get_blue() : Int
 		return (bluef  * 255).round();
 
-	inline function get_redf()
+	inline function get_redf() : Float
 		return this[0];
-	inline function get_greenf()
+	inline function get_greenf() : Float
 		return this[1];
-	inline function get_bluef()
+	inline function get_bluef() : Float
 		return this[2];
 }

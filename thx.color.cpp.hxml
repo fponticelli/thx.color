@@ -1,0 +1,10 @@
+-cp src
+-cp test
+-lib thx.core
+-lib thx.unit
+-lib utest
+-cpp bin/cpp
+-main TestAll
+-D thx_unit #this should not be needed once thx.unit set it correctly
+
+-cmd ./bin/cpp/TestAll

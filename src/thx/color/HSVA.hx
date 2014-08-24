@@ -25,7 +25,7 @@ abstract HSVA(Array<Float>) {
 		} catch(e : Dynamic) null;
 	}
 
-	inline public static function fromFloats(hue: Float, saturation: Float, value: Float, alpha: Float)
+	inline public static function fromFloats(hue: Float, saturation: Float, value: Float, alpha: Float) : HSVA
 		return new HSVA([
 			hue,
 			saturation,
@@ -33,16 +33,16 @@ abstract HSVA(Array<Float>) {
 			alpha
 		]);
 
-	inline function new(channels : Array<Float>)
+	inline function new(channels : Array<Float>) : HSVA
 		this = channels;
 
-	@:to inline public function toHSV()
+	@:to inline public function toHSV() : HSV
 		return new HSV(this.slice(0, 3));
 
-	@:to inline public function toHSLA()
+	@:to inline public function toHSLA() : HSLA
 		return toRGBXA().toHSLA();
 
-	@:to inline public function toRGBXA() {
+	@:to inline public function toRGBXA() : RGBXA {
 		if(saturation == 0)
 			return new RGBXA([value, value, value, alpha]);
 
@@ -67,13 +67,13 @@ abstract HSVA(Array<Float>) {
 		return new RGBXA([r, g, b, alpha]);
 	}
 
-	inline public function toString()
+	inline public function toString() : String
 		return 'hsva($huef,${saturation*100}%,${value*100}%,$alpha)';
 
-	@:op(A==B) public function equals(other : HSVA)
+	@:op(A==B) public function equals(other : HSVA) : Bool
 		return hue == other.hue && saturation == other.saturation && value == other.value && alpha == other.alpha;
 
-	public function darker(t : Float)
+	public function darker(t : Float) : HSVA
 		return new HSVA([
 			hue,
 			saturation,
@@ -81,7 +81,7 @@ abstract HSVA(Array<Float>) {
 			alpha
 		]);
 
-	public function lighter(t : Float)
+	public function lighter(t : Float) : HSVA
 		return new HSVA([
 			hue,
 			saturation,
@@ -89,7 +89,7 @@ abstract HSVA(Array<Float>) {
 			alpha
 		]);
 
-	public function transparent(t : Float)
+	public function transparent(t : Float) : HSVA
 		return new HSVA([
 			hue,
 			saturation,
@@ -97,7 +97,7 @@ abstract HSVA(Array<Float>) {
 			t.interpolateBetween(alpha, 0)
 		]);
 
-	public function opaque(t : Float)
+	public function opaque(t : Float) : HSVA
 		return new HSVA([
 			hue,
 			saturation,
@@ -105,7 +105,7 @@ abstract HSVA(Array<Float>) {
 			t.interpolateBetween(alpha, 1)
 		]);
 
-	public function interpolate(other : HSVA, t : Float)
+	public function interpolate(other : HSVA, t : Float) : HSVA
 		return new HSVA([
 			t.interpolateBetween(hue, other.hue),
 			t.interpolateBetween(saturation, other.saturation),
@@ -117,10 +117,10 @@ abstract HSVA(Array<Float>) {
 		return this[0];
 	inline function get_huef() : Float
 		return this[0];
-	inline function get_saturation()
+	inline function get_saturation() : Float
 		return this[1];
-	inline function get_value()
+	inline function get_value() : Float
 		return this[2];
-	inline function get_alpha()
+	inline function get_alpha() : Float
 		return this[3];
 }

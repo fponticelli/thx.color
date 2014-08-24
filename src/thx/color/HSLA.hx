@@ -30,7 +30,7 @@ abstract HSLA(Array<Float>) {
 		} catch(e : Dynamic) null;
 	}
 
-	inline public static function fromFloats(hue: Float, saturation: Float, lightness: Float, alpha : Float)
+	inline public static function fromFloats(hue: Float, saturation: Float, lightness: Float, alpha : Float) : HSLA
 		return new HSLA([
 			hue,
 			saturation,
@@ -38,16 +38,16 @@ abstract HSLA(Array<Float>) {
 			alpha
 		]);
 
-	inline function new(channels : Array<Float>)
+	inline function new(channels : Array<Float>) : HSLA
 		this = channels;
 
-	@:to inline public function toHSL()
+	@:to inline public function toHSL() : HSL
 		return new HSL(this.slice(0, 3));
 
-	@:to inline public function toHSVA()
+	@:to inline public function toHSVA() : HSVA
 		return toRGBXA().toHSVA();
 
-	@:to inline public function toRGBXA()
+	@:to inline public function toRGBXA() : RGBXA
 		return new RGBXA([
 			_c(hue + 120, saturation, lightness),
 			_c(hue, saturation, lightness),
@@ -55,15 +55,15 @@ abstract HSLA(Array<Float>) {
 			alpha
 		]);
 
-	inline public function toCSS3()
+	inline public function toCSS3() : String
 		return toString();
-	inline public function toString()
+	inline public function toString() : String
 		return 'hsla(${huef},${saturation*100}%,${lightness*100}%,$alpha)';
 
-	@:op(A==B) public function equals(other : HSLA)
+	@:op(A==B) public function equals(other : HSLA) : Bool
 		return hue == other.hue && saturation == other.saturation && lightness == other.lightness && alpha == other.alpha;
 
-	public function darker(t : Float)
+	public function darker(t : Float) : HSLA
 		return new HSLA([
 			hue,
 			saturation,
@@ -71,7 +71,7 @@ abstract HSLA(Array<Float>) {
 			alpha
 		]);
 
-	public function lighter(t : Float)
+	public function lighter(t : Float) : HSLA
 		return new HSLA([
 			hue,
 			saturation,
@@ -79,7 +79,7 @@ abstract HSLA(Array<Float>) {
 			alpha
 		]);
 
-	public function transparent(t : Float)
+	public function transparent(t : Float) : HSLA
 		return new HSLA([
 			hue,
 			saturation,
@@ -87,7 +87,7 @@ abstract HSLA(Array<Float>) {
 			t.interpolateBetween(alpha, 0)
 		]);
 
-	public function opaque(t : Float)
+	public function opaque(t : Float) : HSLA
 		return new HSLA([
 			hue,
 			saturation,
@@ -95,7 +95,7 @@ abstract HSLA(Array<Float>) {
 			t.interpolateBetween(alpha, 1)
 		]);
 
-	public function interpolate(other : HSLA, t : Float)
+	public function interpolate(other : HSLA, t : Float) : HSLA
 		return new HSLA([
 			t.interpolateBetween(hue, other.hue),
 			t.interpolateBetween(saturation, other.saturation),
@@ -107,15 +107,15 @@ abstract HSLA(Array<Float>) {
 		return this[0];
     inline function get_huef() : Float
 		return this[0];
-	inline function get_saturation()
+	inline function get_saturation() : Float
 		return this[1];
-	inline function get_lightness()
+	inline function get_lightness() : Float
 		return this[2];
 	inline function get_alpha() : Float
 		return this[3];
 
 	// Based on D3.js by Michael Bostock
-	static function _c(d : Float, s : Float, l : Float) {
+	static function _c(d : Float, s : Float, l : Float) : Float {
 		var m2 = l <= 0.5 ? l * (1 + s) : l + s - l * s,
 			m1 = 2 * l - m2;
 

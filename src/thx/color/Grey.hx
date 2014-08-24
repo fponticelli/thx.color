@@ -19,25 +19,25 @@ abstract Grey(Float) {
 	}
 
 	public var grey(get, never) : Float;
-	inline public function new(grey : Float)
+	inline public function new(grey : Float) : Grey
 		this = grey.normalize();
 
-	@:to inline public function toCMYK()
+	@:to inline public function toCMYK() : CMYK
 		return toRGBX().toCMYK();
 
-	@:to inline public function toHSL()
+	@:to inline public function toHSL() : HSL
 		return toRGBX().toHSL();
 
-	@:to inline public function toHSV()
+	@:to inline public function toHSV() : HSV
 		return toRGBX().toHSV();
 
-	@:to inline public function toRGBX()
+	@:to inline public function toRGBX() : RGBX
 		return new RGBX([grey, grey, grey]);
 
-	@:to inline public function toRGBXA()
+	@:to inline public function toRGBXA() : RGBXA
 		return toRGBX().toRGBXA();
 
-	@:op(A==B) public function equals(other : Grey)
+	@:op(A==B) public function equals(other : Grey) : Bool
 		return this == other.grey;
 
 	public static function darker(color : Grey, t : Float) : Grey
@@ -46,12 +46,12 @@ abstract Grey(Float) {
 	public static function lighter(color : Grey, t : Float) : Grey
 		return new Grey(t.interpolateBetween(color.grey, 1));
 
-	public static function interpolate(a : Grey, b : Grey, t : Float)
+	public static function interpolate(a : Grey, b : Grey, t : Float) : Grey
 		return new Grey(t.interpolateBetween(a.grey, b.grey));
 
-	inline function get_grey()
+	inline function get_grey() : Float
 		return this;
 
-	inline public function toString()
+	inline public function toString() : String
 		return 'grey(${grey*100}%)';
 }

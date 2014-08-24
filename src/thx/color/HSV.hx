@@ -24,26 +24,26 @@ abstract HSV(Array<Float>) {
 		} catch(e : Dynamic) null;
 	}
 
-	inline public static function fromFloats(hue: Float, saturation: Float, value: Float)
+	inline public static function fromFloats(hue: Float, saturation: Float, value: Float) : HSV
 		return new HSV([
 			hue,
 			saturation,
 			value
 		]);
 
-	inline function new(channels : Array<Float>)
+	inline function new(channels : Array<Float>) : HSV
 		this = channels;
 
-	@:to inline public function toCMYK()
+	@:to inline public function toCMYK() : CMYK
 		return toRGBX().toCMYK();
 
-	@:to inline public function toGrey()
+	@:to inline public function toGrey() : Grey
 		return toRGBX().toGrey();
 
-	@:to inline public function toHSL()
+	@:to inline public function toHSL() : HSL
 		return toRGBX().toHSL();
 
-	@:to inline public function toRGBX() {
+	@:to inline public function toRGBX() : RGBX {
 		if(saturation == 0)
 			return new RGBX([value, value, value]);
 
@@ -68,36 +68,36 @@ abstract HSV(Array<Float>) {
 		return new RGBX([r, g, b]);
 	}
 
-	@:to inline public function toRGBXA()
+	@:to inline public function toRGBXA() : RGBXA
 		return toRGBX().toRGBXA();
 
-	@:to inline public function toHSVA()
+	@:to inline public function toHSVA() : HSVA
 		return withAlpha(1.0);
 
-	inline public function withAlpha(alpha : Float)
+	inline public function withAlpha(alpha : Float) : HSVA
 		return new HSVA(this.concat([alpha]));
 
-	inline public function toString()
+	inline public function toString() : String
 		return 'hsv($huef,${saturation*100}%,${value*100}%)';
 
-	@:op(A==B) public function equals(other : HSV)
+	@:op(A==B) public function equals(other : HSV) : Bool
 		return hue == other.hue && saturation == other.saturation && value == other.value;
 
-	public function darker(t : Float)
+	public function darker(t : Float) : HSV
 		return new HSV([
 			hue,
 			saturation,
 			t.interpolateBetween(value, 0)
 		]);
 
-	public function lighter(t : Float)
+	public function lighter(t : Float) : HSV
 		return new HSV([
 			hue,
 			saturation,
 			t.interpolateBetween(value, 1)
 		]);
 
-	public function interpolate(other : HSV, t : Float)
+	public function interpolate(other : HSV, t : Float) : HSV
 		return new HSV([
 			t.interpolateBetween(hue, other.hue),
 			t.interpolateBetween(saturation, other.saturation),
@@ -108,8 +108,8 @@ abstract HSV(Array<Float>) {
 		return this[0];
 	inline function get_huef() : Float
 		return this[0];
-	inline function get_saturation()
+	inline function get_saturation() : Float
 		return this[1];
-	inline function get_value()
+	inline function get_value() : Float
 		return this[2];
 }
