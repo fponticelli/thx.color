@@ -83,4 +83,4 @@ colors.mapi(function(name, i) {
 
 To run [Demo](/demo/Demo.hx), you need `nodejs` and the Canvas library (`npm install canvas`);
 
-*Note: * API might still change before version 1.
+*Note:* API might still change before version 1.
