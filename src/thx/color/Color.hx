@@ -271,7 +271,7 @@ class Color {
 		names.set("deepskyblue", deepskyblue = RGB.fromInt(0x00bfff));
 		names.set("deep sky blue", deepskyblue);
 		names.set("dimgray", dimgray = dimgrey = RGB.fromInt(0x696969));
-		names.set("dim gray", dimgrey);
+		names.set("dim gray", dimgray);
 		names.set("dimgrey", dimgrey);
 		names.set("dim grey", dimgrey);
 		names.set("dodgerblue", dodgerblue = RGB.fromInt(0x1e90ff));
