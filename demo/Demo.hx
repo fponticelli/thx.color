@@ -53,7 +53,6 @@ class Demo {
 			colors  = Color.names.keys().toArray().filter(function(n) return n.indexOf(' ') < 0),
 			cellw   = w / columns,
 			cellh   = h / Math.ceil(colors.length / columns);
-		trace(colors.length);
 		ctx.textAlign = "center";
 		ctx.textBaseline = "middle";
 		ctx.font = '${Math.round(cellh*0.4)}px Verdana, sans-serif';
