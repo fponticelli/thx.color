@@ -79,7 +79,7 @@ colors.mapi(function(name, i) {
 });
 ```
 
-<img src="/images/colortable.png?raw=true" alt="color table" style="width:450px;height:600px">
+<img src="/images/colortable.png?raw=true" alt="color table" width="450" height="600"">
 
 To run [Demo](/demo/Demo.hx), you need `nodejs` and the Canvas library (`npm install canvas`);
 
