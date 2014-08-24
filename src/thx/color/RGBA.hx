@@ -6,7 +6,7 @@ using thx.core.Floats;
 import thx.color.parse.ColorParser;
 
 abstract RGBA(Int) {
-	@:from public static function fromString(color : String) : RGBA {
+	@:from public static function fromString(color : String) : Null<RGBA> {
 		var info = ColorParser.parseHex(color);
 		if(null == info)
 			info = ColorParser.parseColor(color);

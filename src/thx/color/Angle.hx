@@ -1,3 +1,3 @@
 package thx.color;
 
-typedef Angle = #if thxunit thx.unit.angle.Degree #else Float #end;
+typedef Angle = #if thx_unit thx.unit.angle.Degree #else Float #end;

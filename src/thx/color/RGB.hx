@@ -7,7 +7,7 @@ import thx.color.parse.ColorParser;
 
 @:access(thx.color.RGBX)
 abstract RGB(Int) {
-	@:from public static function fromString(color : String) : RGB {
+	@:from public static function fromString(color : String) : Null<RGB> {
 		var info = ColorParser.parseHex(color);
 		if(null == info)
 			info = ColorParser.parseColor(color);

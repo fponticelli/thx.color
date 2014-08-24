@@ -5,7 +5,7 @@ import thx.color.parse.ColorParser;
 
 @:access(thx.color.RGBX)
 abstract Grey(Float) {
-	@:from public static function fromString(color : String) : Grey {
+	@:from public static function fromString(color : String) : Null<Grey> {
 		var info = ColorParser.parseColor(color);
 		if(null == info)
 			return null;
