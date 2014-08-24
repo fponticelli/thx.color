@@ -1,0 +1,14 @@
+{
+  "name": "thx.color",
+  "url": "https://github.com/fponticelli/thx.color",
+  "license": "MIT",
+  "classPath": "src",
+  "tags": ["color", "thx", "cross"],
+  "description": "Colors library",
+  "releasenote": "first formal release",
+  "version": "0.5.0",
+  "contributors": ["fponticelli"],
+   "dependencies": {
+    "thx.core": "0.5.0"
+  }
+}
