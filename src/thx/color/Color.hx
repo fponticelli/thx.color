@@ -271,7 +271,7 @@ class Color {
 		names.set("deepskyblue", deepskyblue = RGB.fromInt(0x00bfff));
 		names.set("deep sky blue", deepskyblue);
 		names.set("dimgray", dimgray = dimgrey = RGB.fromInt(0x696969));
-		names.set("dim grey", dimgrey);
+		names.set("dim gray", dimgrey);
 		names.set("dimgrey", dimgrey);
 		names.set("dim grey", dimgrey);
 		names.set("dodgerblue", dodgerblue = RGB.fromInt(0x1e90ff));
@@ -381,7 +381,7 @@ class Color {
 		names.set("olive drab", olivedrab);
 		names.set("orange", orange = RGB.fromInt(0xffa500));
 		names.set("orangered", orangered = RGB.fromInt(0xff4500));
-		names.set("orangered", orangered);
+		names.set("orange red", orangered);
 		names.set("orchid", orchid = RGB.fromInt(0xda70d6));
 		names.set("palegoldenrod", palegoldenrod = RGB.fromInt(0xeee8aa));
 		names.set("pale golden rod", palegoldenrod);
