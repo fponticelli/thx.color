@@ -8,7 +8,7 @@
   "releasenote": "fixed color names",
   "version": "0.5.3",
   "contributors": ["fponticelli"],
-   "dependencies": {
-    "thx.core": "0.5.1"
+  "dependencies": {
+    "thx.core": "0.5.2"
   }
 }

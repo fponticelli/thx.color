@@ -1,4 +1,4 @@
 bin
 node_modules
 .DS_Store
-thx.color.sublime-project
+*.sublime-*
