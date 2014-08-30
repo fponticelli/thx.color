@@ -11,7 +11,7 @@ import thx.color.parse.ColorParser;
 @:access(thx.color.RGBXA)
 @:access(thx.color.HSL)
 abstract HSLA(Array<Float>) {
-	public var hue(get, never) : Angle;
+	public var hue(get, never) : Float;
     public var huef(get, never) : Float;
 	public var saturation(get, never) : Float;
 	public var lightness(get, never) : Float;
@@ -108,7 +108,7 @@ abstract HSLA(Array<Float>) {
 			t.interpolateBetween(alpha, other.alpha)
 		]);
 
-	inline function get_hue() : Angle
+	inline function get_hue() : Float
 		return this[0];
     inline function get_huef() : Float
 		return this[0];

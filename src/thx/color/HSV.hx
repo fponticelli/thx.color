@@ -6,7 +6,7 @@ import thx.color.parse.ColorParser;
 @:access(thx.color.RGBX)
 @:access(thx.color.HSVA)
 abstract HSV(Array<Float>) {
-	public var hue(get, never) : Angle;
+	public var hue(get, never) : Float;
     public var huef(get, never) : Float;
 	public var saturation(get, never) : Float;
 	public var value(get, never) : Float;
@@ -107,7 +107,7 @@ abstract HSV(Array<Float>) {
 			t.interpolateBetween(value, other.value)
 		]);
 
-	inline function get_hue() : Angle
+	inline function get_hue() : Float
 		return this[0];
 	inline function get_huef() : Float
 		return this[0];
