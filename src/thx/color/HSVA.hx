@@ -82,7 +82,7 @@ abstract HSVA(Array<Float>) {
 		return new HSVA([
 			hue,
 			saturation,
-			t.interpolateBetween(value, 0),
+			t.interpolate(value, 0),
 			alpha
 		]);
 
@@ -90,7 +90,7 @@ abstract HSVA(Array<Float>) {
 		return new HSVA([
 			hue,
 			saturation,
-			t.interpolateBetween(value, 1),
+			t.interpolate(value, 1),
 			alpha
 		]);
 
@@ -99,7 +99,7 @@ abstract HSVA(Array<Float>) {
 			hue,
 			saturation,
 			value,
-			t.interpolateBetween(alpha, 0)
+			t.interpolate(alpha, 0)
 		]);
 
 	public function opaque(t : Float) : HSVA
@@ -107,15 +107,15 @@ abstract HSVA(Array<Float>) {
 			hue,
 			saturation,
 			value,
-			t.interpolateBetween(alpha, 1)
+			t.interpolate(alpha, 1)
 		]);
 
 	public function interpolate(other : HSVA, t : Float) : HSVA
 		return new HSVA([
-			t.interpolateBetween(hue, other.hue),
-			t.interpolateBetween(saturation, other.saturation),
-			t.interpolateBetween(value, other.value),
-			t.interpolateBetween(alpha, other.alpha)
+			t.interpolate(hue, other.hue),
+			t.interpolate(saturation, other.saturation),
+			t.interpolate(value, other.value),
+			t.interpolate(alpha, other.alpha)
 		]);
 
 	inline function get_hue() : Float

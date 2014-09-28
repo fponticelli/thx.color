@@ -89,7 +89,7 @@ abstract RGBXA(Array<Float>) {
 			redf,
 			greenf,
 			bluef,
-			t.interpolateBetween(alphaf, 0)
+			t.interpolate(alphaf, 0)
 		]);
 
 	public function opaque(t : Float) : RGBXA
@@ -97,15 +97,15 @@ abstract RGBXA(Array<Float>) {
 			redf,
 			greenf,
 			bluef,
-			t.interpolateBetween(alphaf, 1)
+			t.interpolate(alphaf, 1)
 		]);
 
 	public function interpolate(other : RGBXA, t : Float) : RGBXA
 		return new RGBXA([
-			t.interpolateBetween(redf, other.redf),
-			t.interpolateBetween(greenf, other.greenf),
-			t.interpolateBetween(bluef, other.bluef),
-			t.interpolateBetween(alphaf, other.alphaf)
+			t.interpolate(redf, other.redf),
+			t.interpolate(greenf, other.greenf),
+			t.interpolate(bluef, other.bluef),
+			t.interpolate(alphaf, other.alphaf)
 		]);
 
 	inline function get_red() : Int

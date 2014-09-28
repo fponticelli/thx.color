@@ -72,7 +72,7 @@ abstract HSLA(Array<Float>) {
 		return new HSLA([
 			hue,
 			saturation,
-			t.interpolateBetween(lightness, 0),
+			t.interpolate(lightness, 0),
 			alpha
 		]);
 
@@ -80,7 +80,7 @@ abstract HSLA(Array<Float>) {
 		return new HSLA([
 			hue,
 			saturation,
-			t.interpolateBetween(lightness, 1),
+			t.interpolate(lightness, 1),
 			alpha
 		]);
 
@@ -89,7 +89,7 @@ abstract HSLA(Array<Float>) {
 			hue,
 			saturation,
 			lightness,
-			t.interpolateBetween(alpha, 0)
+			t.interpolate(alpha, 0)
 		]);
 
 	public function opaque(t : Float) : HSLA
@@ -97,15 +97,15 @@ abstract HSLA(Array<Float>) {
 			hue,
 			saturation,
 			lightness,
-			t.interpolateBetween(alpha, 1)
+			t.interpolate(alpha, 1)
 		]);
 
 	public function interpolate(other : HSLA, t : Float) : HSLA
 		return new HSLA([
-			t.interpolateBetween(hue, other.hue),
-			t.interpolateBetween(saturation, other.saturation),
-			t.interpolateBetween(lightness, other.lightness),
-			t.interpolateBetween(alpha, other.alpha)
+			t.interpolate(hue, other.hue),
+			t.interpolate(saturation, other.saturation),
+			t.interpolate(lightness, other.lightness),
+			t.interpolate(alpha, other.alpha)
 		]);
 
 	inline function get_hue() : Float

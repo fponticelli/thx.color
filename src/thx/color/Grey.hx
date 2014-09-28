@@ -50,13 +50,13 @@ abstract Grey(Float) {
 		return this > 0.5 ? black : white;
 
 	public static function darker(color : Grey, t : Float) : Grey
-		return new Grey(t.interpolateBetween(color.grey, 0));
+		return new Grey(t.interpolate(color.grey, 0));
 
 	public static function lighter(color : Grey, t : Float) : Grey
-		return new Grey(t.interpolateBetween(color.grey, 1));
+		return new Grey(t.interpolate(color.grey, 1));
 
 	public static function interpolate(a : Grey, b : Grey, t : Float) : Grey
-		return new Grey(t.interpolateBetween(a.grey, b.grey));
+		return new Grey(t.interpolate(a.grey, b.grey));
 
 	inline function get_grey() : Float
 		return this;

@@ -90,21 +90,21 @@ abstract HSV(Array<Float>) {
 		return new HSV([
 			hue,
 			saturation,
-			t.interpolateBetween(value, 0)
+			t.interpolate(value, 0)
 		]);
 
 	public function lighter(t : Float) : HSV
 		return new HSV([
 			hue,
 			saturation,
-			t.interpolateBetween(value, 1)
+			t.interpolate(value, 1)
 		]);
 
 	public function interpolate(other : HSV, t : Float) : HSV
 		return new HSV([
-			t.interpolateBetween(hue, other.hue),
-			t.interpolateBetween(saturation, other.saturation),
-			t.interpolateBetween(value, other.value)
+			t.interpolate(hue, other.hue),
+			t.interpolate(saturation, other.saturation),
+			t.interpolate(value, other.value)
 		]);
 
 	inline function get_hue() : Float

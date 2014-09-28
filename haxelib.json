@@ -5,8 +5,8 @@
   "classPath": "src",
   "tags": ["color", "thx", "cross"],
   "description": "Colors library",
-  "releasenote": "removed thx.units type",
-  "version": "0.5.4",
+  "releasenote": "adapted api to thx.core",
+  "version": "0.6.0",
   "contributors": ["fponticelli"],
   "dependencies": {
     "thx.core": ""

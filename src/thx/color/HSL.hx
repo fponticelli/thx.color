@@ -79,21 +79,21 @@ abstract HSL(Array<Float>) {
 		return new HSL([
 			hue,
 			saturation,
-			t.interpolateBetween(lightness, 0)
+			t.interpolate(lightness, 0)
 		]);
 
 	public function lighter(t : Float) : HSL
 		return new HSL([
 			hue,
 			saturation,
-			t.interpolateBetween(lightness, 1)
+			t.interpolate(lightness, 1)
 		]);
 
 	public function interpolate(other : HSL, t : Float) : HSL
 		return new HSL([
-			t.interpolateBetween(hue, other.hue),
-			t.interpolateBetween(saturation, other.saturation),
-			t.interpolateBetween(lightness, other.lightness)
+			t.interpolate(hue, other.hue),
+			t.interpolate(saturation, other.saturation),
+			t.interpolate(lightness, other.lightness)
 		]);
 
 	inline function get_hue() : Float

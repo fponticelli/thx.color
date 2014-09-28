@@ -147,23 +147,23 @@ abstract RGBX(Array<Float>) {
 
 	public function darker(t : Float) : RGBX
 		return new RGBX([
-			t.interpolateBetween(redf, 0),
-			t.interpolateBetween(greenf, 0),
-			t.interpolateBetween(bluef, 0),
+			t.interpolate(redf, 0),
+			t.interpolate(greenf, 0),
+			t.interpolate(bluef, 0),
 		]);
 
 	public function lighter(t : Float) : RGBX
 		return new RGBX([
-			t.interpolateBetween(redf, 1),
-			t.interpolateBetween(greenf, 1),
-			t.interpolateBetween(bluef, 1),
+			t.interpolate(redf, 1),
+			t.interpolate(greenf, 1),
+			t.interpolate(bluef, 1),
 		]);
 
 	public function interpolate(other : RGBX, t : Float) : RGBX
 		return new RGBX([
-			t.interpolateBetween(redf, other.redf),
-			t.interpolateBetween(greenf, other.greenf),
-			t.interpolateBetween(bluef, other.bluef)
+			t.interpolate(redf, other.redf),
+			t.interpolate(greenf, other.greenf),
+			t.interpolate(bluef, other.bluef)
 		]);
 
 	inline function get_red() : Int

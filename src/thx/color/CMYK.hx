@@ -67,17 +67,17 @@ abstract CMYK(Array<Float>) {
 		return cyan == other.cyan && magenta == other.magenta && yellow == other.yellow && black == other.black;
 
 	inline public function darker(t : Float) : CMYK
-		return new CMYK([cyan, magenta, yellow, t.interpolateBetween(black, 1)]);
+		return new CMYK([cyan, magenta, yellow, t.interpolate(black, 1)]);
 
 	inline public function lighter(t : Float) : CMYK
-		return new CMYK([cyan, magenta, yellow, t.interpolateBetween(black, 0)]);
+		return new CMYK([cyan, magenta, yellow, t.interpolate(black, 0)]);
 
 	public function interpolate(other : CMYK, t : Float) : CMYK
 		return new CMYK([
-			t.interpolateBetween(cyan,    other.cyan),
-			t.interpolateBetween(magenta, other.magenta),
-			t.interpolateBetween(yellow,  other.yellow),
-			t.interpolateBetween(black,   other.black)
+			t.interpolate(cyan,    other.cyan),
+			t.interpolate(magenta, other.magenta),
+			t.interpolate(yellow,  other.yellow),
+			t.interpolate(black,   other.black)
 		]);
 
 	inline function get_black() : Float
