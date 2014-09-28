@@ -1,5 +1,7 @@
 # thx.color
 
+[![Build Status](https://travis-ci.org/fponticelli/thx.color.svg)](https://travis-ci.org/fponticelli/thx.color)
+
 General purpose color library for Haxe.
 
 API uses abstracts to make it easy to use colors with strings and numbers.
