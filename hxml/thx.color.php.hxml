@@ -2,8 +2,7 @@
 -cp test
 -lib thx.core
 -lib utest
--js bin/test.js
+-php bin/php
 -main TestAll
--D nodejs
 
--cmd node ./bin/test.js
+-cmd php ./bin/php/index.php

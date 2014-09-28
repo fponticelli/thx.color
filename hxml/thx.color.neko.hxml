@@ -2,8 +2,7 @@
 -cp test
 -lib thx.core
 -lib utest
--js bin/test.js
+-neko bin/test.n
 -main TestAll
--D nodejs
 
--cmd node ./bin/test.js
+-cmd neko ./bin/test.n

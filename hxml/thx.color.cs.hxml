@@ -2,8 +2,7 @@
 -cp test
 -lib thx.core
 -lib utest
--js bin/test.js
+-cs bin/cs
 -main TestAll
--D nodejs
 
--cmd node ./bin/test.js
+#-cmd java -jar ./bin/java/TestAll.jar

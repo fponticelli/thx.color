@@ -143,7 +143,7 @@ abstract RGBX(Array<Float>) {
 		return RGB.fromFloats(redf, greenf, bluef);
 
 	@:op(A==B) public function equals(other : RGBX)
-		return redf == other.redf && greenf == other.greenf && bluef == other.bluef;
+		return redf.nearEquals(other.redf) && greenf.nearEquals(other.greenf) && bluef.nearEquals(other.bluef);
 
 	public function darker(t : Float) : RGBX
 		return new RGBX([
