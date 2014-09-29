@@ -1,4 +1,6 @@
 bin
+doc/pages
+doc/xml
 node_modules
 .DS_Store
 *.sublime-*
