@@ -23,7 +23,7 @@ class ColorParser {
 	var pattern_channel : EReg;
 	public function new() {
 		pattern_color   = ~/^\s*([^(]+)\s*\(([^)]*)\)\s*$/i;
-		pattern_channel = ~/^\s*(\d*.\d+|\d+)(%|º|deg)?\s*$/i;
+		pattern_channel = ~/^\s*(\d*.\d+|\d+)(%|deg|rad)?\s*$/i;
 	}
 
 	static var isPureHex = ~/^([0-9a-f]{2}){3,4}$/i;
@@ -82,8 +82,10 @@ class ColorParser {
 		return try switch unit {
 			case "%" if (Floats.canParse(value)) :
 				CIPercent(Floats.parse(value));
-			case ("deg" | "DEG" | "º") if (Floats.canParse(value)) :
+			case ("deg" | "DEG") if (Floats.canParse(value)) :
 				CIDegree(Floats.parse(value));
+			case ("rad" | "RAD") if (Floats.canParse(value)) :
+				CIDegree(Floats.parse(value) * 180 / Math.PI);
 			case "" if (Ints.canParse(value)) :
 				var i = Ints.parse(value);
 				if (i == 0)

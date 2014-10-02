@@ -28,11 +28,10 @@ class TestColorParser {
 			"rgba(2)");
 		assert(
 			"hsla",	[CIDegree(1), CIPercent(2), CIPercent(3), CIFloat(0.5)],
-			"hsla(1º,2%,3%,0.5)");
+			"hsla(1deg,2%,3%,0.5)");
 	}
 
 	public function testChannels() {
-		assertStringChannel(CIDegree(1),	"1º");
 		assertStringChannel(CIDegree(1),	"1deg");
 		assertStringChannel(CIPercent(1),	"1%");
 		assertStringChannel(CIFloat(0.1),	"0.1");

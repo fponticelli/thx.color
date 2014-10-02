@@ -16,8 +16,8 @@ API uses abstracts to make it easy to use colors with strings and numbers.
 ### HSL Rainbow
 
 ```haxe
-var left  : HSL = 'hsl(0º,100%,0%)',
-    right : HSL = 'hsl(359.99º,100%,0%)',
+var left  : HSL = 'hsl(0,100%,0%)',
+    right : HSL = 'hsl(359.99,100%,0%)',
     interpolate = left.interpolate.bind(right, _);
 Ints.range(0, w)
     .map(function(x) {
@@ -34,8 +34,8 @@ Ints.range(0, w)
 ### HSV Gradient
 
 ```haxe
-var left  : HSV = 'hsv(0º,100%,100%)',
-    right : HSV = 'hsv(359.99º,100%,100%)';
+var left  : HSV = 'hsv(0,100%,100%)',
+    right : HSV = 'hsv(359.99,100%,100%)';
 return function(t)
     return left.interpolate(right, t).toRGB();
 ```

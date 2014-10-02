@@ -5,7 +5,6 @@ import utest.Assert;
 
 class TestColor {
 	public function new() {}
-
 	public function testParseNamedColor() {
 		assertEquals(Color.red, Color.parse("red"));
 	}
@@ -32,7 +31,6 @@ class TestColor {
 
 	public function testParseHSL() {
 		assertEquals(Color.red, Color.parse("hsl(0,100%,50%)"));
-		assertEquals(Color.red, Color.parse("hsl(0º,100%,50%)"));
 		assertEquals(Color.red, Color.parse("hsl(0deg,100%,50%)"));
 		assertEquals(Color.red, Color.parse("hsla(0deg,100%,50%,1)"));
 		assertEquals(Color.red, Color.parse("hsla(0,100%,50%,100%)"));
@@ -40,7 +38,6 @@ class TestColor {
 
 	public function testParseHSV() {
 		assertEquals(Color.red, Color.parse("hsv(0,100%, 100%)"));
-		assertEquals(Color.red, Color.parse("hsv(0º,100%,100%)"));
 		assertEquals(Color.red, Color.parse("hsv(0deg,100%,100%)"));
 	}
 
