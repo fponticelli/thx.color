@@ -5,8 +5,8 @@
   "classPath": "src",
   "tags": ["color", "thx", "cross"],
   "description": "Colors library",
-  "releasenote": "adapted api to thx.core",
-  "version": "0.6.0",
+  "releasenote": "fixes for Java",
+  "version": "0.7.0",
   "contributors": ["fponticelli"],
   "dependencies": {
     "thx.core": ""
