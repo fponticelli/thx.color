@@ -1,9 +1,0 @@
--cp src
--cp test
--lib thx.core
--lib utest
--js bin/test.js
--main TestAll
--D nodejs
-
--cmd node ./bin/test.js

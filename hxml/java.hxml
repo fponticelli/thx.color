@@ -1,8 +1,9 @@
 -cp src
 -cp test
--lib thx.core
 -lib utest
+-lib thx.core
+-lib hxjava
 -java bin/java
 -main TestAll
-
--cmd java -jar ./bin/java/TestAll.jar
+-D thx-color
+-debug

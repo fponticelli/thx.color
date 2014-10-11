@@ -1,39 +1,33 @@
-language: php
+language: c
 
 env:
-    matrix:
+  global:
+    - TARGET_DIR=bin
+  matrix:
     - TARGET=cpp
     - TARGET=cs
+    - TARGET=flash
     - TARGET=java
-    - TARGET=js
+    - TARGET=js TOOLCHAIN="browser"
+    - TARGET=js TOOLCHAIN="nodejs"
     - TARGET=neko
     - TARGET=php
+    - TARGET=python
 
 matrix:
   fast_finish: true
 
-# Install Haxe and dependencies before running the test.
-before_script:
-  - git submodule update --init --recursive            # update utest
-  - sudo add-apt-repository ppa:eyecreate/haxe -y      # add the ubuntu ppa that contains haxe
-  - sudo apt-get update                                # pull info from ppa
-  - sudo apt-get install haxe -y                       # install haxe (and neko)
-  - mkdir ~/haxelib                                    # create a folder for installing haxelib
-  - haxelib setup ~/haxelib
-  - haxelib install utest                              # dependency
-  - haxelib install thx.core                           # dependency
-  - sh -c "if [ '$TARGET' = 'cpp' ]; then sudo apt-get install gcc-multilib g++-multilib -y; fi"
-  - sh -c "if [ '$TARGET' = 'cpp' ]; then haxelib install hxcpp; fi"
-  - sh -c "if [ '$TARGET' = 'cs' ]; then sudo apt-get install mono-gmcs; fi"
-  - sh -c "if [ '$TARGET' = 'cs' ]; then haxelib install hxcs; fi"
-  - sh -c "if [ '$TARGET' = 'java' ]; then haxelib install hxjava; fi"
-#  - sh -c "if [ '$TARGET' = 'node' ]; then haxelib install nodejs; fi"
-  - mkdir -p ./bin
+before_install: # clone travis-hx repo
+  - travis_retry git clone --depth=50 --branch=master git://github.com/fponticelli/travis-hx.git ~/travis-hx
 
-# Run the test!
+install: # setup the target
+  - ~/travis-hx/setup.sh
+  - haxelib install utest
+  - haxelib install thx.core
+
 script:
-  - haxe hxml/thx.color.${TARGET}.hxml
-
-branches:
-      only:
-          - master
+  - cd $TRAVIS_BUILD_DIR
+  # build the tests
+  - haxe hxml/$TARGET.hxml -D travis
+  # run the tests
+  - ~/travis-hx/runtests.sh $FILENAME

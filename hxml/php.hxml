@@ -1,8 +1,7 @@
 -cp src
 -cp test
--lib thx.core
 -lib utest
+-lib thx.core
 -php bin/php
 -main TestAll
-
--cmd php ./bin/php/index.php
+-D thx-color

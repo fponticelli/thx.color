@@ -1,9 +1,0 @@
--cp src
--cp test
--lib thx.core
--lib utest
--swf-version 11.4
--swf bin/test.swf
--main TestAll
-
--cmd open ./bin/test.swf

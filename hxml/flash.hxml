@@ -1,0 +1,9 @@
+-cp src
+-cp test
+-lib utest
+-lib thx.core
+-swf bin/flash.swf
+-main TestAll
+-D thx-color
+-debug
+-D fdb
