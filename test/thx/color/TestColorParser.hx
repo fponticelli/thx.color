@@ -59,16 +59,16 @@ class TestColorParser {
 			return;
 		}
 		var ec = Type.enumConstructor(expected),
-			tc = Type.enumConstructor(test),
-			ep = Type.enumParameters(expected)[0],
-			tp = Type.enumParameters(test)[0];
-		Assert.equals(ec, tc, 'expected $ec but is $tc', pos);
-		Assert.equals(ep, tp, 'expected $ep but is $tp', pos);
+				tc = Type.enumConstructor(test),
+				ep = Type.enumParameters(expected)[0],
+				tp = Type.enumParameters(test)[0];
+		Assert.equals(ec, tc, pos);
+		Assert.equals(ep, tp, pos);
 	}
 
 	public function assert(name : String, channels : Array<ChannelInfo>, test_string : String, ?pos : PosInfos) {
 		var expected = new ColorInfo(name, channels),
-			test = ColorParser.parseColor(test_string);
+				test = ColorParser.parseColor(test_string);
 		if (null == test) {
 			Assert.fail("test is null", pos);
 			return;
