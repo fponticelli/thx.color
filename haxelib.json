@@ -6,7 +6,7 @@
   "tags": ["color", "thx", "cross"],
   "description": "Colors library",
   "releasenote": "improved documentation",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "contributors": ["fponticelli"],
   "dependencies": {
     "thx.core": ""
