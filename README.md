@@ -4,6 +4,22 @@
 
 General purpose color library for Haxe.
 
+## install
+
+From the command line just type:
+
+```bash
+haxelib install thx.color
+```
+
+To use the `dev` version do:
+
+```bash
+haxelib git thx.core https://github.com/fponticelli/thx.color.git
+```
+
+## intro
+
 API uses abstracts to make it easy to use colors with strings and numbers.
 
 ```haxe
@@ -11,7 +27,7 @@ API uses abstracts to make it easy to use colors with strings and numbers.
     trace(rgb.green);
 ```
 
-## Some examples from [Demo](https://github.com/fponticelli/thx.color/raw/master/demo/Demo.hx)
+Some examples from [Demo](https://github.com/fponticelli/thx.color/raw/master/demo/Demo.hx).
 
 ### HSL Rainbow
 
