@@ -4,7 +4,7 @@
   "license": "MIT",
   "classPath": "src",
   "tags": ["color", "thx", "cross"],
-  "description": "Colors library",
+  "description": "Library for color maniupation. Contains definitions for CMYK, Grey, HSL, HSV, and RGB as well as alpha versions of the sames and color parsing.",
   "releasenote": "improved documentation",
   "version": "0.7.3",
   "contributors": ["fponticelli"],

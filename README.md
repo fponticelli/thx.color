@@ -4,20 +4,6 @@
 
 General purpose color library for Haxe.
 
-## install
-
-From the command line just type:
-
-```bash
-haxelib install thx.color
-```
-
-To use the `dev` version do:
-
-```bash
-haxelib git thx.core https://github.com/fponticelli/thx.color.git
-```
-
 ## intro
 
 API uses abstracts to make it easy to use colors with strings and numbers.
@@ -97,8 +83,22 @@ colors.mapi(function(name, i) {
 });
 ```
 
-<img src="https://github.com/fponticelli/thx.color/raw/master/images/colortable.png?raw=true" alt="color table" width="450" height="600"">
+<img src="https://github.com/fponticelli/thx.color/raw/master/images/colortable.png?raw=true" alt="color table" width="450" height="600">
 
 To run [Demo](/demo/Demo.hx), you need `nodejs` and the Canvas library (`npm install canvas`);
 
 *Note:* API might still change before version 1.
+
+## install
+
+From the command line just type:
+
+```bash
+haxelib install thx.color
+```
+
+To use the `dev` version do:
+
+```bash
+haxelib git thx.core https://github.com/fponticelli/thx.color.git
+```
