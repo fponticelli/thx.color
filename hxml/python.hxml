@@ -4,4 +4,4 @@
 -lib thx.core
 -python bin/python.py
 -main TestAll
--D thx-promise
+-D thx-color

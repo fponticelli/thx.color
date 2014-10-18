@@ -5,4 +5,4 @@
 -lib hxcpp
 -cpp bin/cpp
 -main TestAll
--D thx-promise
+-D thx-color
