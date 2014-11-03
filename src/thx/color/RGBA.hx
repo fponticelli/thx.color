@@ -30,7 +30,7 @@ abstract RGBA(Int) {
 	inline public static function fromArray(arr : Array<Int>) : RGBA
 		return fromInts(arr[0], arr[1], arr[2], arr[3]);
 	public static function fromFloats(red : Float, green : Float, blue : Float, alpha : Float) : RGBA
-		return fromInts((red.normalize() * 255).round(), (green.normalize() * 255).round(), (blue.normalize() * 255).round(), (alpha.normalize() * 255).round());
+		return fromInts(Math.round(red.normalize() * 255), Math.round(green.normalize() * 255), Math.round(blue.normalize() * 255), Math.round(alpha.normalize() * 255));
 	inline public static function fromInts(red : Int, green : Int, blue : Int, alpha : Int) : RGBA
 		return new RGBA(((alpha & 0xFF) << 24) | ((red & 0xFF) << 16) | ((green & 0xFF) << 8) | ((blue & 0xFF) << 0));
 	inline public static function fromInt(rgba : Int) : RGBA
