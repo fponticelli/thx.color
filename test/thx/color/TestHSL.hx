@@ -1,4 +1,3 @@
-
 package thx.color;
 
 import utest.Assert;

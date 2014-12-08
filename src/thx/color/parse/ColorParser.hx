@@ -1,9 +1,4 @@
-﻿/**
- * ...
- * @author Franco Ponticelli
- */
-
-package thx.color.parse;
+﻿package thx.color.parse;
 
 import thx.core.Floats;
 import thx.core.Ints;
