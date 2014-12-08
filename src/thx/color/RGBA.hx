@@ -5,7 +5,7 @@ using StringTools;
 using thx.core.Floats;
 import thx.color.parse.ColorParser;
 
-abstract RGBA(Int) {
+abstract RGBA(Int) from Int to Int {
 	@:from public static function fromString(color : String) : Null<RGBA> {
 		var info = ColorParser.parseHex(color);
 		if(null == info)
@@ -32,9 +32,9 @@ abstract RGBA(Int) {
 	public static function fromFloats(red : Float, green : Float, blue : Float, alpha : Float) : RGBA
 		return fromInts(Math.round(red.normalize() * 255), Math.round(green.normalize() * 255), Math.round(blue.normalize() * 255), Math.round(alpha.normalize() * 255));
 	inline public static function fromInts(red : Int, green : Int, blue : Int, alpha : Int) : RGBA
-		return new RGBA(((alpha & 0xFF) << 24) | ((red & 0xFF) << 16) | ((green & 0xFF) << 8) | ((blue & 0xFF) << 0));
+		return ((alpha & 0xFF) << 24) | ((red & 0xFF) << 16) | ((green & 0xFF) << 8) | ((blue & 0xFF) << 0);
 	inline public static function fromInt(rgba : Int) : RGBA
-		return new RGBA(rgba);
+		return rgba;
 
 	inline public function new(rgba : Int) : RGBA
 		this = rgba;
@@ -43,9 +43,6 @@ abstract RGBA(Int) {
 	public var green(get, never) : Int;
 	public var blue(get, never)  : Int;
 	public var alpha(get, never)  : Int;
-
-	@:to inline public function toInt() : Int
-		return this;
 
 	@:to inline public function toHSLA() : HSLA
 		return toRGBXA().toHSLA();

@@ -4,7 +4,7 @@ using thx.core.Floats;
 import thx.color.parse.ColorParser;
 
 @:access(thx.color.RGBX)
-abstract Grey(Float) {
+abstract Grey(Float) from Float to Float {
 	public static var black(default, null) : Grey = new Grey(0);
 	public static var white(default, null) : Grey = new Grey(1);
 

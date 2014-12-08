@@ -6,7 +6,7 @@ using Math;
 import thx.color.parse.ColorParser;
 
 @:access(thx.color.RGBX)
-abstract RGB(Int) {
+abstract RGB(Int) from Int to Int {
 	@:from public static function fromString(color : String) : Null<RGB> {
 		var info = ColorParser.parseHex(color);
 		if(null == info)
@@ -27,8 +27,6 @@ abstract RGB(Int) {
 		return fromInts(arr[0], arr[1], arr[2]);
 	inline public static function fromInts(red : Int, green : Int, blue : Int) : RGB
 		return new RGB(((red & 0xFF) << 16) | ((green & 0xFF) << 8) | ((blue & 0xFF) << 0));
-	inline public static function fromInt(rgb : Int) : RGB
-		return new RGB(rgb);
 
 	inline public function new(rgb : Int) : RGB
 		this = rgb;
@@ -36,9 +34,6 @@ abstract RGB(Int) {
 	public var red(get, never)   : Int;
 	public var green(get, never) : Int;
 	public var blue(get, never)  : Int;
-
-	@:to inline public function toInt() : Int
-		return this;
 
 	@:to public function toCMYK() : CMYK
 		return toRGBX().toCMYK();
