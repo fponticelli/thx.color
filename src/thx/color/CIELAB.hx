@@ -31,7 +31,7 @@ abstract CIELab(Array<Float>) {
     this = channels;
 
   @:to public function toCIELCh() : CIELCh {
-    var h = Floats.wrapCircular(Math.atan2(b, a) / Math.PI * 180, 360),
+    var h = Floats.wrapCircular(Math.atan2(b, a) * 180 / Math.PI, 360),
         c = Math.sqrt(a * a + b * b);
     return new CIELCh([l, c, h]);
   }
