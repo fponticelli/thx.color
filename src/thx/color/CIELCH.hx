@@ -3,39 +3,39 @@ package thx.color;
 using thx.core.Floats;
 import thx.color.parse.ColorParser;
 
-@:access(thx.color.CIELAB)
-@:access(thx.color.CIELCH)
+@:access(thx.color.CIELab)
+@:access(thx.color.CIELCh)
 @:access(thx.color.XYZ)
 @:access(thx.color.RGBX)
-abstract CIELCH(Array<Float>) {
+abstract CIELCh(Array<Float>) {
   public var l(get, never) : Float;
   public var c(get, never) : Float;
   public var h(get, never) : Float;
 
-  @:from public static function fromString(color : String) : CIELCH {
+  @:from public static function fromString(color : String) : CIELCh {
     var info = ColorParser.parseColor(color);
     if(null == info)
       return null;
 
     return try switch info.name {
       case 'cielch':
-        new thx.color.CIELCH(ColorParser.getFloatChannels(info.channels, 3));
+        new thx.color.CIELCh(ColorParser.getFloatChannels(info.channels, 3));
       case _:
         null;
     } catch(e : Dynamic) null;
   }
 
-  inline public static function fromFloats(l : Float, c : Float, h : Float) : CIELCH
-    return new CIELCH([l, c, h]);
+  inline public static function fromFloats(l : Float, c : Float, h : Float) : CIELCh
+    return new CIELCh([l, c, h]);
 
-  inline function new(channels : Array<Float>) : CIELCH
+  inline function new(channels : Array<Float>) : CIELCh
     this = channels;
 
-  @:to public function toCIELAB() : CIELAB {
+  @:to public function toCIELab() : CIELab {
     var hradi = h * (Math.PI / 180),
         a = Math.cos(hradi) * c,
         b = Math.sin(hradi) * c;
-    return new CIELAB([l, a, b]);
+    return new CIELab([l, a, b]);
   }
 
   @:to inline public function toCMYK() : CMYK
@@ -51,18 +51,18 @@ abstract CIELCH(Array<Float>) {
     return toRGBX().toRGB();
 
   @:to inline public function toRGBX() : RGBX
-    return toCIELAB().toRGBX();
+    return toCIELab().toRGBX();
 
   @:to inline public function toRGBXA() : RGBXA
     return toRGBX().toRGBXA();
 
   @:to inline public function toXYZ() : RGBX
-    return toCIELAB().toXYZ();
+    return toCIELab().toXYZ();
 
   inline public function toString() : String
-    return 'CIELCH($l,$c,$h)';
+    return 'CIELCh($l,$c,$h)';
 
-  @:op(A==B) public function equals(other : CIELCH) : Bool
+  @:op(A==B) public function equals(other : CIELCh) : Bool
     return l == other.l && c == other.c && h == other.h;
 
   inline function get_l() : Float

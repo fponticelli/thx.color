@@ -56,11 +56,11 @@ abstract RGBX(Array<Float>) {
   inline public function toHex(prefix = "#") : String
     return '$prefix${red.hex(2)}${green.hex(2)}${blue.hex(2)}';
 
-  @:to public function toCIELAB() : CIELAB
-    return toXYZ().toCIELAB();
+  @:to public function toCIELab() : CIELab
+    return toXYZ().toCIELab();
 
-  @:to public function toCIELCH() : CIELCH
-    return toCIELAB().toCIELCH();
+  @:to public function toCIELCh() : CIELCh
+    return toCIELab().toCIELCh();
 
   @:to public function toXYZ() : XYZ {
     var r = redf,

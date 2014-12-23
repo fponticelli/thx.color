@@ -3,37 +3,37 @@ package thx.color;
 using thx.core.Floats;
 import thx.color.parse.ColorParser;
 
-@:access(thx.color.CIELCH)
+@:access(thx.color.CIELCh)
 @:access(thx.color.XYZ)
 @:access(thx.color.RGBX)
-abstract CIELAB(Array<Float>) {
+abstract CIELab(Array<Float>) {
   public var l(get, never) : Float;
   public var a(get, never) : Float;
   public var b(get, never) : Float;
 
-  @:from public static function fromString(color : String) : CIELAB {
+  @:from public static function fromString(color : String) : CIELab {
     var info = ColorParser.parseColor(color);
     if(null == info)
       return null;
 
     return try switch info.name {
       case 'cielab':
-        new thx.color.CIELAB(ColorParser.getFloatChannels(info.channels, 3));
+        new thx.color.CIELab(ColorParser.getFloatChannels(info.channels, 3));
       case _:
         null;
     } catch(e : Dynamic) null;
   }
 
-  inline public static function fromFloats(l : Float, a : Float, b : Float) : CIELAB
-    return new CIELAB([l, a, b]);
+  inline public static function fromFloats(l : Float, a : Float, b : Float) : CIELab
+    return new CIELab([l, a, b]);
 
-  inline function new(channels : Array<Float>) : CIELAB
+  inline function new(channels : Array<Float>) : CIELab
     this = channels;
 
-  @:to public function toCIELCH() : CIELCH {
+  @:to public function toCIELCh() : CIELCh {
     var h = Floats.wrapCircular(Math.atan2(b, a) / Math.PI * 180, 360),
         c = Math.sqrt(a * a + b * b);
-    return new CIELCH([l, c, h]);
+    return new CIELCh([l, c, h]);
   }
 
   @:to inline public function toCMYK() : CMYK
@@ -73,9 +73,9 @@ abstract CIELAB(Array<Float>) {
     return toRGBX().toRGBXA();
 
   inline public function toString() : String
-    return 'CIELAB($l,$a,$b)';
+    return 'CIELab($l,$a,$b)';
 
-  @:op(A==B) public function equals(other : CIELAB) : Bool
+  @:op(A==B) public function equals(other : CIELab) : Bool
     return l == other.l && a == other.a && b == other.b;
 
   inline function get_l() : Float

@@ -4,7 +4,7 @@ using thx.core.Floats;
 import thx.color.parse.ColorParser;
 
 @:access(thx.color.RGBX)
-@:access(thx.color.CIELAB)
+@:access(thx.color.CIELab)
 abstract XYZ(Array<Float>) {
   public var x(get, never) : Float;
   public var y(get, never) : Float;
@@ -29,7 +29,7 @@ abstract XYZ(Array<Float>) {
   inline function new(channels : Array<Float>) : XYZ
     this = channels;
 
-  @:to public function toCIELAB() : CIELAB {
+  @:to public function toCIELab() : CIELab {
     var x = x * 0.0105211106,
         y = y * 0.01,
         z = z * 0.00918417016,
@@ -39,15 +39,15 @@ abstract XYZ(Array<Float>) {
     y = y > 0.008856 ? Math.pow(y, 1/3) : (7.787 * y) + 16/116;
     z = z > 0.008856 ? Math.pow(z, 1/3) : (7.787 * z) + 16/116;
 
-    return new CIELAB(
+    return new CIELab(
       y > 0.008856 ?
       [(116 * y) - 16, 500 * (x - y), 200 * (y - z)] :
       [903.3 * y, 500 * (x - y), 200 * (y - z)]
     );
   }
 
-  @:to inline public function toCIELCH() : CIELCH
-    return toCIELAB().toCIELCH();
+  @:to inline public function toCIELCh() : CIELCh
+    return toCIELab().toCIELCh();
 
   @:to inline public function toCMYK() : CMYK
     return toRGBX().toCMYK();
