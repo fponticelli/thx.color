@@ -7,7 +7,7 @@ import thx.color.parse.ColorParser;
 @:access(thx.color.HSL)
 abstract HSLA(Array<Float>) {
   public var hue(get, never) : Float;
-    public var huef(get, never) : Float;
+  public var huef(get, never) : Float;
   public var saturation(get, never) : Float;
   public var lightness(get, never) : Float;
   public var alpha(get, never) : Float;

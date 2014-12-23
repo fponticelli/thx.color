@@ -7,7 +7,7 @@ import thx.color.parse.ColorParser;
 @:access(thx.color.HSVA)
 abstract HSV(Array<Float>) {
   public var hue(get, never) : Float;
-    public var huef(get, never) : Float;
+  public var huef(get, never) : Float;
   public var saturation(get, never) : Float;
   public var value(get, never) : Float;
 
