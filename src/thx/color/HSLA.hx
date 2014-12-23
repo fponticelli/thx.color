@@ -105,7 +105,7 @@ abstract HSLA(Array<Float>) {
 
   inline function get_hue() : Float
     return this[0];
-    inline function get_huef() : Float
+  inline function get_huef() : Float
     return this[0];
   inline function get_saturation() : Float
     return this[1];

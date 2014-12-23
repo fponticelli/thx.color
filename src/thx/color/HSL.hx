@@ -7,7 +7,7 @@ import thx.color.parse.ColorParser;
 @:access(thx.color.HSLA)
 abstract HSL(Array<Float>) {
   public var hue(get, never) : Float;
-    public var huef(get, never) : Float;
+  public var huef(get, never) : Float;
   public var saturation(get, never) : Float;
   public var lightness(get, never) : Float;
 
@@ -93,7 +93,7 @@ abstract HSL(Array<Float>) {
 
   inline function get_hue() : Float
     return this[0];
-    inline function get_huef() : Float
+  inline function get_huef() : Float
     return this[0];
   inline function get_saturation() : Float
     return this[1];
