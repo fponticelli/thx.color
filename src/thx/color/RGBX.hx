@@ -12,6 +12,7 @@ import thx.color.parse.ColorParser;
 @:access(thx.color.RGB)
 @:access(thx.color.Grey)
 @:access(thx.color.RGBXA)
+@:access(thx.color.XYZ)
 abstract RGBX(Array<Float>) {
   @:from public static function fromString(color : String) : RGBX {
     var info = ColorParser.parseHex(color);
@@ -48,10 +49,28 @@ abstract RGBX(Array<Float>) {
 
   inline public function toCSS3() : String
     return toString();
+
   @:to inline public function toString() : String
     return 'rgb(${redf*100}%,${greenf*100}%,${bluef*100}%)';
+
   inline public function toHex(prefix = "#") : String
     return '$prefix${red.hex(2)}${green.hex(2)}${blue.hex(2)}';
+
+  @:to public function toXYZ() : XYZ {
+    var r = redf,
+        g = greenf,
+        b = bluef;
+
+    r = 100 * (r > 0.04045 ? Math.pow(((r + 0.055) / 1.055), 2.4) : r / 12.92);
+    g = 100 * (g > 0.04045 ? Math.pow(((g + 0.055) / 1.055), 2.4) : g / 12.92);
+    b = 100 * (b > 0.04045 ? Math.pow(((b + 0.055) / 1.055), 2.4) : b / 12.92);
+
+    return new XYZ([
+      r * 0.4124 + g * 0.3576 + b * 0.1805,
+      r * 0.2126 + g * 0.7152 + b * 0.0722,
+      r * 0.0193 + g * 0.1192 + b * 0.9505
+    ]);
+  }
 
   @:to public function toCMYK() : CMYK {
     var c = 0.0, y = 0.0, m = 0.0, k;
