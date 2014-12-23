@@ -16,7 +16,7 @@ abstract XYZ(Array<Float>) {
       return null;
 
     return try switch info.name {
-      case 'xyz':
+      case 'ciexyz', 'xyz':
         new thx.color.XYZ(ColorParser.getFloatChannels(info.channels, 3));
       case _:
         null;
@@ -28,6 +28,23 @@ abstract XYZ(Array<Float>) {
 
   inline function new(channels : Array<Float>) : XYZ
     this = channels;
+
+  @:to public function toCIELAB() : CIELAB {
+    var x = x * 0.0105211106,
+        y = y * 0.01,
+        z = z * 0.00918417016,
+        p;
+
+    x = x > 0.008856 ? Math.pow(x, 1/3) : (7.787 * x) + 16/116;
+    y = y > 0.008856 ? Math.pow(y, 1/3) : (7.787 * y) + 16/116;
+    z = z > 0.008856 ? Math.pow(z, 1/3) : (7.787 * z) + 16/116;
+
+    return new CIELAB(
+      y > 0.008856 ?
+      [(116 * y) - 16, 500 * (x - y), 200 * (y - z)] :
+      [903.3 * y, 500 * (x - y), 200 * (y - z)]
+    );
+  }
 
   @:to inline public function toCMYK() : CMYK
     return toRGBX().toCMYK();
@@ -54,23 +71,6 @@ abstract XYZ(Array<Float>) {
     b = b > 0.0031308 ? 1.055 * Math.pow(b,(1/2.4)) - 0.055 : 12.92 * b;
 
     return new RGBX([r,g,b]);
-  }
-
-  @:to public function toCIELAB() : CIELAB {
-    var x = x * 0.0105211106,
-        y = y * 0.01,
-        z = z * 0.00918417016,
-        p;
-
-    x = x > 0.008856 ? Math.pow(x, 1/3) : (7.787 * x) + 16/116;
-    y = y > 0.008856 ? Math.pow(y, 1/3) : (7.787 * y) + 16/116;
-    z = z > 0.008856 ? Math.pow(z, 1/3) : (7.787 * z) + 16/116;
-
-    return new CIELAB(
-      y > 0.008856 ?
-      [(116 * y) - 16, 500 * (x - y), 200 * (y - z)] :
-      [903.3 * y, 500 * (x - y), 200 * (y - z)]
-    );
   }
 
   @:to inline public function toRGBXA() : RGBXA
