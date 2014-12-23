@@ -59,6 +59,9 @@ abstract RGBX(Array<Float>) {
   @:to public function toCIELAB() : CIELAB
     return toXYZ().toCIELAB();
 
+  @:to public function toCIELCH() : CIELCH
+    return toCIELAB().toCIELCH();
+
   @:to public function toXYZ() : XYZ {
     var r = redf,
         g = greenf,

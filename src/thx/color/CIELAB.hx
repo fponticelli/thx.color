@@ -3,6 +3,7 @@ package thx.color;
 using thx.core.Floats;
 import thx.color.parse.ColorParser;
 
+@:access(thx.color.CIELCH)
 @:access(thx.color.XYZ)
 @:access(thx.color.RGBX)
 abstract CIELAB(Array<Float>) {
@@ -28,6 +29,12 @@ abstract CIELAB(Array<Float>) {
 
   inline function new(channels : Array<Float>) : CIELAB
     this = channels;
+
+  @:to public function toCIELCH() : CIELCH {
+    var h = Floats.wrapCircular(Math.atan2(b, a) / Math.PI * 180, 360),
+        c = Math.sqrt(a * a + b * b);
+    return new CIELCH([l, c, h]);
+  }
 
   @:to inline public function toCMYK() : CMYK
     return toRGBX().toCMYK();

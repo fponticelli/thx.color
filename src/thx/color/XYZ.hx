@@ -46,6 +46,9 @@ abstract XYZ(Array<Float>) {
     );
   }
 
+  @:to inline public function toCIELCH() : CIELCH
+    return toCIELAB().toCIELCH();
+
   @:to inline public function toCMYK() : CMYK
     return toRGBX().toCMYK();
 
