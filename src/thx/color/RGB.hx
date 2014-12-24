@@ -35,6 +35,12 @@ abstract RGB(Int) from Int to Int {
   public var green(get, never) : Int;
   public var blue(get, never)  : Int;
 
+  @:to inline public function toCIELab() : CIELab
+    return toRGBX().toCIELab();
+
+  @:to inline public function toCIELCh() : CIELCh
+    return toRGBX().toCIELCh();
+
   @:to public function toCMYK() : CMYK
     return toRGBX().toCMYK();
 
@@ -55,6 +61,9 @@ abstract RGB(Int) from Int to Int {
 
   @:to inline public function toRGBXA() : RGBXA
     return toRGBA().toRGBXA();
+
+  @:to public function toXYZ() : XYZ
+    return toRGBX().toXYZ();
 
   inline public function withAlpha(alpha : Int) : RGBXA
     return RGBA.fromInts(red, green, blue, alpha);
