@@ -89,12 +89,7 @@ abstract HSL(Array<Float>) {
     return toRGBX().toRGBXA();
 
   @:to inline public function toHSLA() : HSLA
-    return withAlpha(1.0);  public function darker(t : Float) : HSL
-    return new HSL([
-      hue,
-      saturation,
-      t.interpolate(lightness, 0)
-    ]);
+    return withAlpha(1.0);
 
   inline function get_hue() : Float
     return this[0];
