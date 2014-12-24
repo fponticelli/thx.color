@@ -83,13 +83,10 @@ abstract RGBX(Array<Float>) {
     if (redf + greenf + bluef == 0) {
       k = 1.0;
     } else {
-      c = 1 - redf;
-      m = 1 - greenf;
-      y = 1 - bluef;
-      k = c.min(m).min(y);
-      c = (c - k) / (1 - k);
-      m = (m - k) / (1 - k);
-      y = (y - k) / (1 - k);
+      k = 1 - redf.max(greenf).max(bluef);
+      c = (1 - redf - k) / (1 - k);
+      m = (1 - greenf - k) / (1 - k);
+      y = (1 - bluef - k) / (1 - k);
     }
     return new CMYK([c, m, y, k]);
   }
