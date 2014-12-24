@@ -5,6 +5,7 @@ import thx.color.parse.ColorParser;
 
 @:access(thx.color.RGBX)
 @:access(thx.color.CIELab)
+@:access(thx.color.Yxy)
 abstract XYZ(Array<Float>) {
   public var x(get, never) : Float;
   public var y(get, never) : Float;
@@ -61,7 +62,7 @@ abstract XYZ(Array<Float>) {
   @:to inline public function toRGB() : RGB
     return toRGBX().toRGB();
 
-  @:to inline public function toRGBX() : RGBX {
+  @:to public function toRGBX() : RGBX {
     var x = x / 100,
         y = y / 100,
         z = z / 100,
@@ -78,6 +79,13 @@ abstract XYZ(Array<Float>) {
 
   @:to inline public function toRGBXA() : RGBXA
     return toRGBX().toRGBXA();
+
+  @:to public function toYxy() : Yxy
+    return new Yxy([
+      y,
+      x / (x + y + z),
+      y / (x + y + z)
+    ]);
 
   inline public function toString() : String
     return 'XYZ($x,$y,$z)';
