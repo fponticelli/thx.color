@@ -30,6 +30,12 @@ abstract Yxy(Array<Float>) {
   inline function new(channels : Array<Float>) : Yxy
     this = channels;
 
+  inline public function toString() : String
+    return 'Yxy($y1,$x,$y2)';
+
+  @:op(A==B) public function equals(other : Yxy) : Bool
+    return y1 == other.y1 && x == other.x && y2 == other.y2;
+
   @:to inline public function toCIELab() : CIELab
     return toXYZ().toCIELab();
 
@@ -60,12 +66,6 @@ abstract Yxy(Array<Float>) {
       y1,
       (1 - x - y2) * (y1 / y2)
     ]);
-
-  inline public function toString() : String
-    return 'Yxy($y1,$x,$y2)';
-
-  @:op(A==B) public function equals(other : Yxy) : Bool
-    return y1 == other.y1 && x == other.x && y2 == other.y2;
 
   inline function get_y1() : Float
     return this[0];

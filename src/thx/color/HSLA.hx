@@ -38,31 +38,6 @@ abstract HSLA(Array<Float>) {
   inline function new(channels : Array<Float>) : HSLA
     this = channels;
 
-  @:to inline public function toHSL() : HSL
-    return new HSL(this.slice(0, 3));
-
-  @:to inline public function toHSVA() : HSVA
-    return toRGBXA().toHSVA();
-
-  @:to inline public function toRGB() : RGB
-    return toRGBXA().toRGB();
-
-  @:to inline public function toRGBXA() : RGBXA
-    return new RGBXA([
-      _c(hue + 120, saturation, lightness),
-      _c(hue, saturation, lightness),
-      _c(hue - 120, saturation, lightness),
-      alpha
-    ]);
-
-  inline public function toCSS3() : String
-    return toString();
-  inline public function toString() : String
-    return 'hsla(${huef},${saturation*100}%,${lightness*100}%,$alpha)';
-
-  @:op(A==B) public function equals(other : HSLA) : Bool
-    return hue == other.hue && saturation == other.saturation && lightness == other.lightness && alpha == other.alpha;
-
   public function darker(t : Float) : HSLA
     return new HSLA([
       hue,
@@ -101,6 +76,31 @@ abstract HSLA(Array<Float>) {
       t.interpolate(saturation, other.saturation),
       t.interpolate(lightness, other.lightness),
       t.interpolate(alpha, other.alpha)
+    ]);
+
+  inline public function toCSS3() : String
+    return toString();
+  inline public function toString() : String
+    return 'hsla(${huef},${saturation*100}%,${lightness*100}%,$alpha)';
+
+  @:op(A==B) public function equals(other : HSLA) : Bool
+    return hue == other.hue && saturation == other.saturation && lightness == other.lightness && alpha == other.alpha;
+
+  @:to inline public function toHSL() : HSL
+    return new HSL(this.slice(0, 3));
+
+  @:to inline public function toHSVA() : HSVA
+    return toRGBXA().toHSVA();
+
+  @:to inline public function toRGB() : RGB
+    return toRGBXA().toRGB();
+
+  @:to inline public function toRGBXA() : RGBXA
+    return new RGBXA([
+      _c(hue + 120, saturation, lightness),
+      _c(hue, saturation, lightness),
+      _c(hue - 120, saturation, lightness),
+      alpha
     ]);
 
   inline function get_hue() : Float

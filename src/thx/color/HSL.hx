@@ -34,6 +34,38 @@ abstract HSL(Array<Float>) {
   inline function new(channels : Array<Float>) : HSL
     this = channels;
 
+  public function darker(t : Float) : HSL
+    return new HSL([
+      hue,
+      saturation,
+      t.interpolate(lightness, 0)
+    ]);
+
+  public function lighter(t : Float) : HSL
+    return new HSL([
+      hue,
+      saturation,
+      t.interpolate(lightness, 1)
+    ]);
+
+  public function interpolate(other : HSL, t : Float) : HSL
+    return new HSL([
+      t.interpolate(hue, other.hue),
+      t.interpolate(saturation, other.saturation),
+      t.interpolate(lightness, other.lightness)
+    ]);
+
+  inline public function withAlpha(alpha : Float) : HSLA
+    return new HSLA(this.concat([alpha]));
+
+  inline public function toCSS3() : String
+    return toString();
+  inline public function toString() : String
+    return 'hsl(${huef},${saturation*100}%,${lightness*100}%)';
+
+  @:op(A==B) public function equals(other : HSL) : Bool
+    return hue == other.hue && saturation == other.saturation && lightness == other.lightness;
+
   @:to inline public function toCMYK() : CMYK
     return toRGBX().toCMYK();
 
@@ -57,38 +89,11 @@ abstract HSL(Array<Float>) {
     return toRGBX().toRGBXA();
 
   @:to inline public function toHSLA() : HSLA
-    return withAlpha(1.0);
-
-  inline public function withAlpha(alpha : Float) : HSLA
-    return new HSLA(this.concat([alpha]));
-
-  inline public function toCSS3() : String
-    return toString();
-  inline public function toString() : String
-    return 'hsl(${huef},${saturation*100}%,${lightness*100}%)';
-
-  @:op(A==B) public function equals(other : HSL) : Bool
-    return hue == other.hue && saturation == other.saturation && lightness == other.lightness;
-
-  public function darker(t : Float) : HSL
+    return withAlpha(1.0);  public function darker(t : Float) : HSL
     return new HSL([
       hue,
       saturation,
       t.interpolate(lightness, 0)
-    ]);
-
-  public function lighter(t : Float) : HSL
-    return new HSL([
-      hue,
-      saturation,
-      t.interpolate(lightness, 1)
-    ]);
-
-  public function interpolate(other : HSL, t : Float) : HSL
-    return new HSL([
-      t.interpolate(hue, other.hue),
-      t.interpolate(saturation, other.saturation),
-      t.interpolate(lightness, other.lightness)
     ]);
 
   inline function get_hue() : Float

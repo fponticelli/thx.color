@@ -30,6 +30,12 @@ abstract XYZ(Array<Float>) {
   inline function new(channels : Array<Float>) : XYZ
     this = channels;
 
+  inline public function toString() : String
+    return 'XYZ($x,$y,$z)';
+
+  @:op(A==B) public function equals(other : XYZ) : Bool
+    return x == other.x && y == other.y && z == other.z;
+
   @:to public function toCIELab() : CIELab {
     var x = x * 0.0105211106,
         y = y * 0.01,
@@ -88,12 +94,6 @@ abstract XYZ(Array<Float>) {
       sum == 0 ? 1 : y / sum
     ]);
   }
-
-  inline public function toString() : String
-    return 'XYZ($x,$y,$z)';
-
-  @:op(A==B) public function equals(other : XYZ) : Bool
-    return x == other.x && y == other.y && z == other.z;
 
   inline function get_x() : Float
     return this[0];

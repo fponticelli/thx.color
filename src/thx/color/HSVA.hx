@@ -38,46 +38,6 @@ abstract HSVA(Array<Float>) {
   inline function new(channels : Array<Float>) : HSVA
     this = channels;
 
-  @:to inline public function toHSV() : HSV
-    return new HSV(this.slice(0, 3));
-
-  @:to inline public function toHSLA() : HSLA
-    return toRGBXA().toHSLA();
-
-  @:to inline public function toRGB() : RGB
-    return toRGBXA().toRGB();
-
-  @:to inline public function toRGBXA() : RGBXA {
-    if(saturation == 0)
-      return new RGBXA([value, value, value, alpha]);
-
-    var r : Float, g : Float, b : Float, i : Int, f : Float, p : Float, q : Float, t : Float;
-    var h = hue / 60;
-
-    i = Math.floor(h);
-    f = h - i;
-    p = value * (1 - saturation);
-    q = value * (1 - f * saturation);
-    t = value * (1 - (1 - f) * saturation);
-
-    switch(i){
-      case 0: r = value; g = t; b = p;
-      case 1: r = q; g = value; b = p;
-      case 2: r = p; g = value; b = t;
-      case 3: r = p; g = q; b = value;
-      case 4: r = t; g = p; b = value;
-      default: r = value; g = p; b = q; // case 5
-    }
-
-    return new RGBXA([r, g, b, alpha]);
-  }
-
-  inline public function toString() : String
-    return 'hsva($huef,${saturation*100}%,${value*100}%,$alpha)';
-
-  @:op(A==B) public function equals(other : HSVA) : Bool
-    return hue == other.hue && saturation == other.saturation && value == other.value && alpha == other.alpha;
-
   public function darker(t : Float) : HSVA
     return new HSVA([
       hue,
@@ -117,6 +77,46 @@ abstract HSVA(Array<Float>) {
       t.interpolate(value, other.value),
       t.interpolate(alpha, other.alpha)
     ]);
+
+  inline public function toString() : String
+    return 'hsva($huef,${saturation*100}%,${value*100}%,$alpha)';
+
+  @:op(A==B) public function equals(other : HSVA) : Bool
+    return hue == other.hue && saturation == other.saturation && value == other.value && alpha == other.alpha;
+
+  @:to inline public function toHSV() : HSV
+    return new HSV(this.slice(0, 3));
+
+  @:to inline public function toHSLA() : HSLA
+    return toRGBXA().toHSLA();
+
+  @:to inline public function toRGB() : RGB
+    return toRGBXA().toRGB();
+
+  @:to inline public function toRGBXA() : RGBXA {
+    if(saturation == 0)
+      return new RGBXA([value, value, value, alpha]);
+
+    var r : Float, g : Float, b : Float, i : Int, f : Float, p : Float, q : Float, t : Float;
+    var h = hue / 60;
+
+    i = Math.floor(h);
+    f = h - i;
+    p = value * (1 - saturation);
+    q = value * (1 - f * saturation);
+    t = value * (1 - (1 - f) * saturation);
+
+    switch(i){
+      case 0: r = value; g = t; b = p;
+      case 1: r = q; g = value; b = p;
+      case 2: r = p; g = value; b = t;
+      case 3: r = p; g = q; b = value;
+      case 4: r = t; g = p; b = value;
+      default: r = value; g = p; b = q; // case 5
+    }
+
+    return new RGBXA([r, g, b, alpha]);
+  }
 
   inline function get_hue() : Float
     return this[0];

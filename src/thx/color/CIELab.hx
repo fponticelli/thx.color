@@ -30,6 +30,12 @@ abstract CIELab(Array<Float>) {
   inline function new(channels : Array<Float>) : CIELab
     this = channels;
 
+  inline public function toString() : String
+    return 'CIELab($l,$a,$b)';
+
+  @:op(A==B) public function equals(other : CIELab) : Bool
+    return l == other.l && a == other.a && b == other.b;
+
   @:to public function toCIELCh() : CIELCh {
     var h = Floats.wrapCircular(Math.atan2(b, a) * 180 / Math.PI, 360),
         c = Math.sqrt(a * a + b * b);
@@ -71,12 +77,6 @@ abstract CIELab(Array<Float>) {
 
   @:to inline public function toRGBXA() : RGBXA
     return toRGBX().toRGBXA();
-
-  inline public function toString() : String
-    return 'CIELab($l,$a,$b)';
-
-  @:op(A==B) public function equals(other : CIELab) : Bool
-    return l == other.l && a == other.a && b == other.b;
 
   inline function get_l() : Float
     return this[0];

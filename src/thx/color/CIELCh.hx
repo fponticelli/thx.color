@@ -31,6 +31,12 @@ abstract CIELCh(Array<Float>) {
   inline function new(channels : Array<Float>) : CIELCh
     this = channels;
 
+  inline public function toString() : String
+    return 'CIELCh($l,$c,$h)';
+
+  @:op(A==B) public function equals(other : CIELCh) : Bool
+    return l == other.l && c == other.c && h == other.h;
+
   @:to public function toCIELab() : CIELab {
     var hradi = h * (Math.PI / 180),
         a = Math.cos(hradi) * c,
@@ -58,12 +64,6 @@ abstract CIELCh(Array<Float>) {
 
   @:to inline public function toXYZ() : RGBX
     return toCIELab().toXYZ();
-
-  inline public function toString() : String
-    return 'CIELCh($l,$c,$h)';
-
-  @:op(A==B) public function equals(other : CIELCh) : Bool
-    return l == other.l && c == other.c && h == other.h;
 
   inline function get_l() : Float
     return this[0];

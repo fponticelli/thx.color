@@ -6,9 +6,9 @@ using thx.core.Ints;
 using Math;
 import thx.color.parse.ColorParser;
 
+@:access(thx.color.CMYK)
 @:access(thx.color.HSL)
 @:access(thx.color.HSV)
-@:access(thx.color.CMYK)
 @:access(thx.color.RGB)
 @:access(thx.color.Grey)
 @:access(thx.color.RGBXA)
@@ -47,6 +47,27 @@ abstract RGBX(Array<Float>) {
   inline function new(channels : Array<Float>) : RGBX
     this = channels;
 
+  public function darker(t : Float) : RGBX
+    return new RGBX([
+      t.interpolate(redf, 0),
+      t.interpolate(greenf, 0),
+      t.interpolate(bluef, 0),
+    ]);
+
+  public function lighter(t : Float) : RGBX
+    return new RGBX([
+      t.interpolate(redf, 1),
+      t.interpolate(greenf, 1),
+      t.interpolate(bluef, 1),
+    ]);
+
+  public function interpolate(other : RGBX, t : Float) : RGBX
+    return new RGBX([
+      t.interpolate(redf, other.redf),
+      t.interpolate(greenf, other.greenf),
+      t.interpolate(bluef, other.bluef)
+    ]);
+
   inline public function toCSS3() : String
     return toString();
 
@@ -55,6 +76,9 @@ abstract RGBX(Array<Float>) {
 
   inline public function toHex(prefix = "#") : String
     return '$prefix${red.hex(2)}${green.hex(2)}${blue.hex(2)}';
+
+  @:op(A==B) public function equals(other : RGBX)
+    return redf.nearEquals(other.redf) && greenf.nearEquals(other.greenf) && bluef.nearEquals(other.bluef);
 
   @:to public function toCIELab() : CIELab
     return toXYZ().toCIELab();
@@ -84,9 +108,9 @@ abstract RGBX(Array<Float>) {
       k = 1.0;
     } else {
       k = 1 - redf.max(greenf).max(bluef);
-      c = (1 - redf - k) / (1 - k);
+      c = (1 - redf - k)   / (1 - k);
       m = (1 - greenf - k) / (1 - k);
-      y = (1 - bluef - k) / (1 - k);
+      y = (1 - bluef - k)  / (1 - k);
     }
     return new CMYK([c, m, y, k]);
   }
@@ -162,30 +186,6 @@ abstract RGBX(Array<Float>) {
 
   @:to inline public function toRGB() : RGB
     return RGB.fromFloats(redf, greenf, bluef);
-
-  @:op(A==B) public function equals(other : RGBX)
-    return redf.nearEquals(other.redf) && greenf.nearEquals(other.greenf) && bluef.nearEquals(other.bluef);
-
-  public function darker(t : Float) : RGBX
-    return new RGBX([
-      t.interpolate(redf, 0),
-      t.interpolate(greenf, 0),
-      t.interpolate(bluef, 0),
-    ]);
-
-  public function lighter(t : Float) : RGBX
-    return new RGBX([
-      t.interpolate(redf, 1),
-      t.interpolate(greenf, 1),
-      t.interpolate(bluef, 1),
-    ]);
-
-  public function interpolate(other : RGBX, t : Float) : RGBX
-    return new RGBX([
-      t.interpolate(redf, other.redf),
-      t.interpolate(greenf, other.greenf),
-      t.interpolate(bluef, other.bluef)
-    ]);
 
   inline function get_red() : Int
     return (redf   * 255).round();

@@ -33,6 +33,26 @@ abstract CMYK(Array<Float>) {
   inline function new(channels : Array<Float>) : CMYK
     this = channels;
 
+  inline public function darker(t : Float) : CMYK
+    return new CMYK([cyan, magenta, yellow, t.interpolate(black, 1)]);
+
+  inline public function lighter(t : Float) : CMYK
+    return new CMYK([cyan, magenta, yellow, t.interpolate(black, 0)]);
+
+  public function interpolate(other : CMYK, t : Float) : CMYK
+    return new CMYK([
+      t.interpolate(cyan,    other.cyan),
+      t.interpolate(magenta, other.magenta),
+      t.interpolate(yellow,  other.yellow),
+      t.interpolate(black,   other.black)
+    ]);
+
+  @:to inline public function toString() : String
+    return 'cmyk($cyan,$magenta,$yellow,$black)';
+
+  @:op(A==B) public function equals(other : CMYK) : Bool
+    return cyan == other.cyan && magenta == other.magenta && yellow == other.yellow && black == other.black;
+
   @:to inline public function toGrey() : Grey
     return toRGBX().toGrey();
 
@@ -53,29 +73,7 @@ abstract CMYK(Array<Float>) {
     ]);
 
   @:to inline public function toRGBXA() : RGBXA
-    return toRGBX().toRGBXA();
-
-  @:to inline public function toString() : String
-    return 'cmyk($cyan,$magenta,$yellow,$black)';
-
-  @:op(A==B) public function equals(other : CMYK) : Bool
-    return cyan == other.cyan && magenta == other.magenta && yellow == other.yellow && black == other.black;
-
-  inline public function darker(t : Float) : CMYK
-    return new CMYK([cyan, magenta, yellow, t.interpolate(black, 1)]);
-
-  inline public function lighter(t : Float) : CMYK
-    return new CMYK([cyan, magenta, yellow, t.interpolate(black, 0)]);
-
-  public function interpolate(other : CMYK, t : Float) : CMYK
-    return new CMYK([
-      t.interpolate(cyan,    other.cyan),
-      t.interpolate(magenta, other.magenta),
-      t.interpolate(yellow,  other.yellow),
-      t.interpolate(black,   other.black)
-    ]);
-
-  inline function get_cyan() : Float
+    return toRGBX().toRGBXA();  inline function get_cyan() : Float
     return this[0];
   inline function get_magenta() : Float
     return this[1];

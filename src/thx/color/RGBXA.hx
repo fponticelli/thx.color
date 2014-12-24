@@ -36,43 +36,6 @@ abstract RGBXA(Array<Float>) {
   inline public static function fromFloats(red : Float, green : Float, blue : Float, alpha : Float) : RGBXA
     return new RGBXA([red,green,blue,alpha]);
 
-  public var red(get, never) : Int;
-  public var green(get, never) : Int;
-  public var blue(get, never) : Int;
-  public var alpha(get, never) : Int;
-  public var redf(get, never) : Float;
-  public var greenf(get, never) : Float;
-  public var bluef(get, never) : Float;
-  public var alphaf(get, never) : Float;
-
-  inline function new(channels : Array<Float>) : RGBXA
-    this = channels;
-
-  inline public function toCSS3() : String
-    return toString();
-  @:to inline public function toString() : String
-    return 'rgba(${redf*100}%,${greenf*100}%,${bluef*100}%,$alphaf)';
-  inline public function toHex(prefix = "#") : String
-    return '$prefix${alpha.hex(2)}${red.hex(2)}${green.hex(2)}${blue.hex(2)}';
-
-  @:to public function toHSLA() : HSLA
-    return toRGBX().toHSL().withAlpha(alpha);
-
-  @:to public function toHSVA() : HSVA
-    return toRGBX().toHSV().withAlpha(alpha);
-
-  @:to inline public function toRGB() : RGB
-    return toRGBX().toRGB();
-
-  @:to inline public function toRGBX() : RGBX
-    return new RGBX(this.slice(0,3));
-
-  @:to inline public function toRGBA() : RGBA
-    return RGBA.fromFloats(redf, greenf, bluef, alphaf);
-
-  @:op(A==B) public function equals(other : RGBXA) : Bool
-    return redf.nearEquals(other.redf) && greenf.nearEquals(other.greenf) && bluef.nearEquals(other.bluef) && alphaf.nearEquals(other.alphaf);
-
   public function darker(t : Float) : RGBXA
     return toRGBX().darker(t).withAlpha(alpha);
 
@@ -102,6 +65,43 @@ abstract RGBXA(Array<Float>) {
       t.interpolate(bluef, other.bluef),
       t.interpolate(alphaf, other.alphaf)
     ]);
+
+  public var red(get, never) : Int;
+  public var green(get, never) : Int;
+  public var blue(get, never) : Int;
+  public var alpha(get, never) : Int;
+  public var redf(get, never) : Float;
+  public var greenf(get, never) : Float;
+  public var bluef(get, never) : Float;
+  public var alphaf(get, never) : Float;
+
+  inline function new(channels : Array<Float>) : RGBXA
+    this = channels;
+
+  inline public function toCSS3() : String
+    return toString();
+  @:to inline public function toString() : String
+    return 'rgba(${redf*100}%,${greenf*100}%,${bluef*100}%,$alphaf)';
+  inline public function toHex(prefix = "#") : String
+    return '$prefix${alpha.hex(2)}${red.hex(2)}${green.hex(2)}${blue.hex(2)}';
+
+  @:op(A==B) public function equals(other : RGBXA) : Bool
+    return redf.nearEquals(other.redf) && greenf.nearEquals(other.greenf) && bluef.nearEquals(other.bluef) && alphaf.nearEquals(other.alphaf);
+
+  @:to public function toHSLA() : HSLA
+    return toRGBX().toHSL().withAlpha(alpha);
+
+  @:to public function toHSVA() : HSVA
+    return toRGBX().toHSV().withAlpha(alpha);
+
+  @:to inline public function toRGB() : RGB
+    return toRGBX().toRGB();
+
+  @:to inline public function toRGBX() : RGBX
+    return new RGBX(this.slice(0,3));
+
+  @:to inline public function toRGBA() : RGBA
+    return RGBA.fromFloats(redf, greenf, bluef, alphaf);
 
   inline function get_red() : Int
     return (redf   * 255).round();
