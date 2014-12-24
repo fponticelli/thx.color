@@ -69,4 +69,13 @@ class TestConversion {
       Assert.equals(expected.toString(), test.toString(), 'expected $expected but was $test for $name');
     });
   }
+
+  public function testXyx() {
+    Color.names.keys().map(function(name) {
+      var expected : RGB = Color.names.get(name),
+          color : Yxy = expected,
+          test : RGB = color;
+      Assert.equals(expected.toString(), test.toString(), 'expected $expected but was $test for $name');
+    });
+  }
 }

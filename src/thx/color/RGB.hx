@@ -62,6 +62,9 @@ abstract RGB(Int) from Int to Int {
   @:to inline public function toRGBXA() : RGBXA
     return toRGBA().toRGBXA();
 
+  @:to public function toYxy() : Yxy
+    return toRGBX().toXYZ();
+
   @:to public function toXYZ() : XYZ
     return toRGBX().toXYZ();
 
