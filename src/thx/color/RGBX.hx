@@ -87,22 +87,6 @@ abstract RGBX(Array<Float>) {
   @:to public function toCIELCh() : CIELCh
     return toCIELab().toCIELCh();
 
-  @:to public function toXYZ() : XYZ {
-    var r = redf,
-        g = greenf,
-        b = bluef;
-
-    r = 100 * (r > 0.04045 ? Math.pow(((r + 0.055) / 1.055), 2.4) : r / 12.92);
-    g = 100 * (g > 0.04045 ? Math.pow(((g + 0.055) / 1.055), 2.4) : g / 12.92);
-    b = 100 * (b > 0.04045 ? Math.pow(((b + 0.055) / 1.055), 2.4) : b / 12.92);
-
-    return new XYZ([
-      r * 0.4124 + g * 0.3576 + b * 0.1805,
-      r * 0.2126 + g * 0.7152 + b * 0.0722,
-      r * 0.0193 + g * 0.1192 + b * 0.9505
-    ]);
-  }
-
   @:to public function toCMY() : CMY
     return new CMY([
       1 - redf,
@@ -186,14 +170,33 @@ abstract RGBX(Array<Float>) {
     return new HSV([h, s, v]);
   }
 
+  @:to inline public function toRGB() : RGB
+    return RGB.fromFloats(redf, greenf, bluef);
+
   @:to inline public function toRGBXA() : RGBXA
     return withAlpha(1.0);
 
+  @:to public function toXYZ() : XYZ {
+    var r = redf,
+        g = greenf,
+        b = bluef;
+
+    r = 100 * (r > 0.04045 ? Math.pow(((r + 0.055) / 1.055), 2.4) : r / 12.92);
+    g = 100 * (g > 0.04045 ? Math.pow(((g + 0.055) / 1.055), 2.4) : g / 12.92);
+    b = 100 * (b > 0.04045 ? Math.pow(((b + 0.055) / 1.055), 2.4) : b / 12.92);
+
+    return new XYZ([
+      r * 0.4124 + g * 0.3576 + b * 0.1805,
+      r * 0.2126 + g * 0.7152 + b * 0.0722,
+      r * 0.0193 + g * 0.1192 + b * 0.9505
+    ]);
+  }
+
+  @:to inline public function toYxy() : Yxy
+    return toXYZ().toYxy();
+
   inline public function withAlpha(alpha : Float) : RGBXA
     return new RGBXA(this.concat([alpha]));
-
-  @:to inline public function toRGB() : RGB
-    return RGB.fromFloats(redf, greenf, bluef);
 
   inline function get_red() : Int
     return (redf   * 255).round();

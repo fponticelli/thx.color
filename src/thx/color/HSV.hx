@@ -61,6 +61,15 @@ abstract HSV(Array<Float>) {
   @:op(A==B) public function equals(other : HSV) : Bool
     return hue == other.hue && saturation == other.saturation && value == other.value;
 
+  @:to inline public function toCIELab() : CIELab
+    return toRGBX().toCIELab();
+
+  @:to inline public function toCIELCh() : CIELCh
+    return toRGBX().toCIELCh();
+
+  @:to inline public function toCMY() : CMY
+    return toRGBX().toCMY();
+
   @:to inline public function toCMYK() : CMYK
     return toRGBX().toCMYK();
 
@@ -69,6 +78,9 @@ abstract HSV(Array<Float>) {
 
   @:to inline public function toHSL() : HSL
     return toRGBX().toHSL();
+
+  @:to inline public function toHSVA() : HSVA
+    return withAlpha(1.0);
 
   @:to inline public function toRGB() : RGB
     return toRGBX().toRGB();
@@ -101,8 +113,11 @@ abstract HSV(Array<Float>) {
   @:to inline public function toRGBXA() : RGBXA
     return toRGBX().toRGBXA();
 
-  @:to inline public function toHSVA() : HSVA
-    return withAlpha(1.0);
+  @:to inline public function toXYZ() : RGBX
+    return toRGBX().toXYZ();
+
+  @:to inline public function toYxy() : RGBX
+    return toRGBX().toYxy();
 
   inline public function withAlpha(alpha : Float) : HSVA
     return new HSVA(this.concat([alpha]));

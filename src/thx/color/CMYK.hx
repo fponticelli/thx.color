@@ -54,6 +54,12 @@ abstract CMYK(Array<Float>) {
   @:op(A==B) public function equals(other : CMYK) : Bool
     return cyan == other.cyan && magenta == other.magenta && yellow == other.yellow && black == other.black;
 
+  @:to inline public function toCIELab() : CIELab
+    return toRGBX().toCIELab();
+
+  @:to inline public function toCIELCh() : CIELCh
+    return toRGBX().toCIELCh();
+
   @:to public function toCMY() : CMY
     return new CMY([
       black + (1 - black) * cyan,
@@ -89,4 +95,10 @@ abstract CMYK(Array<Float>) {
     return this[2];
   inline function get_black() : Float
     return this[3];
+
+  @:to inline public function toXYZ() : RGBX
+    return toRGBX().toXYZ();
+
+  @:to inline public function toYxy() : RGBX
+    return toRGBX().toYxy();
 }

@@ -44,11 +44,17 @@ abstract CIELCh(Array<Float>) {
     return new CIELab([l, a, b]);
   }
 
+  @:to inline public function toCMY() : CMY
+    return toRGBX().toCMY();
+
   @:to inline public function toCMYK() : CMYK
     return toRGBX().toCMYK();
 
   @:to inline public function toGrey() : Grey
     return toRGBX().toGrey();
+
+  @:to inline public function toHSL() : HSL
+    return toRGBX().toHSL();
 
   @:to inline public function toHSV() : HSV
     return toRGBX().toHSV();
@@ -59,11 +65,11 @@ abstract CIELCh(Array<Float>) {
   @:to inline public function toRGBX() : RGBX
     return toCIELab().toRGBX();
 
-  @:to inline public function toRGBXA() : RGBXA
-    return toRGBX().toRGBXA();
-
   @:to inline public function toXYZ() : RGBX
     return toCIELab().toXYZ();
+
+  @:to inline public function toYxy() : RGBX
+    return toCIELab().toYxy();
 
   inline function get_l() : Float
     return this[0];

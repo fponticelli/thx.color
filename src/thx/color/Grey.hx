@@ -44,6 +44,15 @@ abstract Grey(Float) from Float to Float {
     return this == other.grey;  inline function get_grey() : Float
     return this;
 
+  @:to inline public function toCIELab() : CIELab
+    return toRGBX().toCIELab();
+
+  @:to inline public function toCIELCh() : CIELCh
+    return toRGBX().toCIELCh();
+
+  @:to inline public function toCMY() : CMY
+    return toRGBX().toCMY();
+
   @:to inline public function toCMYK() : CMYK
     return toRGBX().toCMYK();
 
@@ -61,4 +70,10 @@ abstract Grey(Float) from Float to Float {
 
   @:to inline public function toRGBXA() : RGBXA
     return toRGBX().toRGBXA();
+
+  @:to inline public function toXYZ() : RGBX
+    return toRGBX().toXYZ();
+
+  @:to inline public function toYxy() : RGBX
+    return toRGBX().toYxy();
 }

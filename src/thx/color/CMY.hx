@@ -45,6 +45,12 @@ abstract CMY(Array<Float>) {
   @:op(A==B) public function equals(other : CMY) : Bool
     return cyan == other.cyan && magenta == other.magenta && yellow == other.yellow;
 
+  @:to inline public function toCIELab() : CIELab
+    return toRGBX().toCIELab();
+
+  @:to inline public function toCIELCh() : CIELCh
+    return toRGBX().toCIELCh();
+
   @:to public function toCMYK() : CMYK {
     var k = cyan.min(magenta).min(yellow);
     if(k == 1)
@@ -79,6 +85,12 @@ abstract CMY(Array<Float>) {
 
   @:to inline public function toRGBXA() : RGBXA
     return toRGBX().toRGBXA();
+
+  @:to inline public function toXYZ() : RGBX
+    return toRGBX().toXYZ();
+
+  @:to inline public function toYxy() : RGBX
+    return toRGBX().toYxy();
 
   inline function get_cyan() : Float
     return this[0];

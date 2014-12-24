@@ -42,11 +42,17 @@ abstract Yxy(Array<Float>) {
   @:to inline public function toCIELCh() : CIELCh
     return toCIELab().toCIELCh();
 
+  @:to inline public function toCMY() : CMY
+    return toRGBX().toCMY();
+
   @:to inline public function toCMYK() : CMYK
     return toRGBX().toCMYK();
 
   @:to inline public function toGrey() : Grey
     return toRGBX().toGrey();
+
+  @:to inline public function toHSL() : HSL
+    return toRGBX().toHSL();
 
   @:to inline public function toHSV() : HSV
     return toRGBX().toHSV();

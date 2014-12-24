@@ -66,6 +66,15 @@ abstract HSL(Array<Float>) {
   @:op(A==B) public function equals(other : HSL) : Bool
     return hue == other.hue && saturation == other.saturation && lightness == other.lightness;
 
+  @:to inline public function toCIELab() : CIELab
+    return toRGBX().toCIELab();
+
+  @:to inline public function toCIELCh() : CIELCh
+    return toRGBX().toCIELCh();
+
+  @:to inline public function toCMY() : CMY
+    return toRGBX().toCMY();
+
   @:to inline public function toCMYK() : CMYK
     return toRGBX().toCMYK();
 
@@ -90,6 +99,12 @@ abstract HSL(Array<Float>) {
 
   @:to inline public function toHSLA() : HSLA
     return withAlpha(1.0);
+
+  @:to inline public function toXYZ() : RGBX
+    return toRGBX().toXYZ();
+
+  @:to inline public function toYxy() : RGBX
+    return toRGBX().toYxy();
 
   inline function get_hue() : Float
     return this[0];
