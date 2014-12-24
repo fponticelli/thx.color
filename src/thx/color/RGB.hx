@@ -68,6 +68,9 @@ abstract RGB(Int) from Int to Int {
   @:to inline public function toCIELCh() : CIELCh
     return toRGBX().toCIELCh();
 
+  @:to public function toCMY() : CMY
+    return toRGBX().toCMY();
+
   @:to public function toCMYK() : CMYK
     return toRGBX().toCMYK();
 

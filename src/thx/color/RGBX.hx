@@ -6,6 +6,7 @@ using thx.core.Ints;
 using Math;
 import thx.color.parse.ColorParser;
 
+@:access(thx.color.CMY)
 @:access(thx.color.CMYK)
 @:access(thx.color.HSL)
 @:access(thx.color.HSV)
@@ -101,6 +102,13 @@ abstract RGBX(Array<Float>) {
       r * 0.0193 + g * 0.1192 + b * 0.9505
     ]);
   }
+
+  @:to public function toCMY() : CMY
+    return new CMY([
+      1 - redf,
+      1 - greenf,
+      1 - bluef
+    ]);
 
   @:to public function toCMYK() : CMYK {
     var c = 0.0, y = 0.0, m = 0.0, k;

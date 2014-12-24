@@ -3,6 +3,7 @@ package thx.color;
 using thx.core.Floats;
 import thx.color.parse.ColorParser;
 
+@:access(thx.color.CMY)
 @:access(thx.color.RGBX)
 abstract CMYK(Array<Float>) {
   public var black(get, never): Float;
@@ -52,6 +53,13 @@ abstract CMYK(Array<Float>) {
 
   @:op(A==B) public function equals(other : CMYK) : Bool
     return cyan == other.cyan && magenta == other.magenta && yellow == other.yellow && black == other.black;
+
+  @:to public function toCMY() : CMY
+    return new CMY([
+      black + (1 - black) * cyan,
+      black + (1 - black) * magenta,
+      black + (1 - black) * yellow
+    ]);
 
   @:to inline public function toGrey() : Grey
     return toRGBX().toGrey();
