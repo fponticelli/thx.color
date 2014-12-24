@@ -30,6 +30,13 @@ abstract CIELab(Array<Float>) {
   inline function new(channels : Array<Float>) : CIELab
     this = channels;
 
+  public function interpolate(other : CIELab, t : Float) : CIELab
+    return new CIELab([
+      t.interpolate(l, other.l),
+      t.interpolate(a, other.a),
+      t.interpolate(b, other.b)
+    ]);
+
   inline public function toString() : String
     return 'CIELab($l,$a,$b)';
 

@@ -30,6 +30,13 @@ abstract XYZ(Array<Float>) {
   inline function new(channels : Array<Float>) : XYZ
     this = channels;
 
+  public function interpolate(other : XYZ, t : Float) : XYZ
+    return new XYZ([
+      t.interpolate(x, other.x),
+      t.interpolate(y, other.y),
+      t.interpolate(z, other.z),
+    ]);
+
   inline public function toString() : String
     return 'XYZ($x,$y,$z)';
 

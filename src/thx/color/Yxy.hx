@@ -30,6 +30,13 @@ abstract Yxy(Array<Float>) {
   inline function new(channels : Array<Float>) : Yxy
     this = channels;
 
+  public function interpolate(other : Yxy, t : Float) : Yxy
+    return new Yxy([
+      t.interpolate(y1, other.y1),
+      t.interpolate(x,  other.x),
+      t.interpolate(y2, other.y2)
+    ]);
+
   inline public function toString() : String
     return 'Yxy($y1,$x,$y2)';
 

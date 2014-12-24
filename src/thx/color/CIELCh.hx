@@ -31,6 +31,13 @@ abstract CIELCh(Array<Float>) {
   inline function new(channels : Array<Float>) : CIELCh
     this = channels;
 
+  public function interpolate(other : CIELCh, t : Float) : CIELCh
+    return new CIELCh([
+      t.interpolate(l, other.l),
+      t.interpolate(c, other.c),
+      t.interpolate(h, other.h)
+    ]);
+
   inline public function toString() : String
     return 'CIELCh($l,$c,$h)';
 
