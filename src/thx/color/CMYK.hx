@@ -47,9 +47,9 @@ abstract CMYK(Array<Float>) {
 
   @:to inline public function toRGBX() : RGBX
     return new RGBX([
-      (1 - cyan    - black).normalize(),
-      (1 - magenta - black).normalize(),
-      (1 - yellow  - black).normalize()
+      (1 - black) * (1 - cyan),
+      (1 - black) * (1 - magenta),
+      (1 - black) * (1 - yellow)
     ]);
 
   @:to inline public function toRGBXA() : RGBXA
