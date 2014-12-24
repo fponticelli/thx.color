@@ -102,12 +102,16 @@ abstract RGBX(Array<Float>) {
 
   @:to public function toHSL() : HSL {
     var min = redf.min(greenf).min(bluef),
-      max = redf.max(greenf).max(bluef),
-      delta = max - min,
-      h,
-      s,
-      l = (max + min) / 2;
+        max = redf.max(greenf).max(bluef),
+        delta = max - min,
+        h,
+        s,
+        l = (max + min) / 2;
+#if php
+    if (delta.nearZero())
+#else
     if (delta == 0.0)
+#end
       s = h = 0.0;
     else {
       s = l < 0.5 ? delta / (max + min) : delta / (2 - max - min);
