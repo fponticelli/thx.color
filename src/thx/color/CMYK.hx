@@ -75,12 +75,12 @@ abstract CMYK(Array<Float>) {
       t.interpolate(black,   other.black)
     ]);
 
-  inline function get_black() : Float
-    return this[3];
   inline function get_cyan() : Float
     return this[0];
   inline function get_magenta() : Float
     return this[1];
   inline function get_yellow() : Float
     return this[2];
+  inline function get_black() : Float
+    return this[3];
 }
