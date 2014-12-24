@@ -80,12 +80,14 @@ abstract XYZ(Array<Float>) {
   @:to inline public function toRGBXA() : RGBXA
     return toRGBX().toRGBXA();
 
-  @:to public function toYxy() : Yxy
+  @:to public function toYxy() : Yxy {
+    var sum = x + y + z;
     return new Yxy([
       y,
-      x / (x + y + z),
-      y / (x + y + z)
+      sum == 0 ? 1 : x / sum,
+      sum == 0 ? 1 : y / sum
     ]);
+  }
 
   inline public function toString() : String
     return 'XYZ($x,$y,$z)';
