@@ -2,6 +2,7 @@ package thx.color;
 
 using thx.core.Floats;
 import thx.color.parse.ColorParser;
+import thx.core.error.NullArgument;
 
 @:access(thx.color.CIELCh)
 @:access(thx.color.XYZ)
@@ -43,6 +44,20 @@ abstract CIELab(Array<Float>) {
       t.interpolate(a, other.a),
       t.interpolate(b, other.b)
     ]);
+
+  public function match(palette : Iterable<CIELab>) : CIELab {
+    NullArgument.throwIfEmpty(palette);
+    var dist = Math.POSITIVE_INFINITY,
+        closest = null;
+    for(color in palette) {
+      var ndist = distance(color);
+      if(ndist < dist) {
+        dist = ndist;
+        closest = color;
+      }
+    }
+    return closest;
+  }
 
   inline public function toString() : String
     return 'CIELab($l,$a,$b)';
