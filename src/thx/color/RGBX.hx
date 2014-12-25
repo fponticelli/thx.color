@@ -1,8 +1,8 @@
 package thx.color;
 
 using StringTools;
-using thx.core.Floats;
 using thx.core.Ints;
+using thx.core.Floats;
 using Math;
 import thx.color.parse.ColorParser;
 
