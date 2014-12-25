@@ -4,3 +4,5 @@
 -js bin/demo.js
 -main Demo
 -D nodejs
+
+#-cmd node bin/demo.js

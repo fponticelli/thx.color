@@ -19,30 +19,24 @@ Some examples from [Demo](https://github.com/fponticelli/thx.color/raw/master/de
 
 ```haxe
 var left  : HSL = 'hsl(0,100%,0%)',
-    right : HSL = 'hsl(359.99,100%,0%)',
-    interpolate = left.interpolate.bind(right, _);
-Ints.range(0, w)
-    .map(function(x) {
-        var color = interpolate(x/w);
-        Ints.range(0, h).map(function(y) {
-            ctx.fillStyle = color.lighter(y/h).toRGB().toString();
-            ctx.fillRect(x, y, 1, 1);
-        });
-    });
+    right : HSL = 'hsl(359.99,100%,0%)';
+return function(x : Float, y : Float) : RGB {
+  return left.interpolate(right, x).lighter(y);
+};
 ```
 
-![Alt text](https://github.com/fponticelli/thx.color/raw/master/images/rainbow.png?raw=true "HSL Rainbow")
+![Alt text](https://github.com/fponticelli/thx.color/raw/master/images/rainbowhsl.png?raw=true "HSL Rainbow")
 
-### HSV Gradient
+### HSV Interpolation
 
 ```haxe
-var left  : HSV = 'hsv(0,100%,100%)',
-    right : HSV = 'hsv(359.99,100%,100%)';
-return function(t)
-    return left.interpolate(right, t).toRGB();
+var left  : HSV = 'hsv(160deg,100%,63%)',
+    right : HSV = 'hsv(345deg,88%,77%)';
+return function(t : Float) : RGB
+    return (left : HSV).interpolate(right, t));
 ```
 
-![Alt text](https://github.com/fponticelli/thx.color/raw/master/images/gradienthsv.png?raw=true "HSV Gradient")
+![Alt text](https://github.com/fponticelli/thx.color/raw/master/images/interpolatehsv.png?raw=true "HSV Interpolation")
 
 ### Lighter RGB
 
