@@ -96,9 +96,9 @@ abstract CMYK(Array<Float>) {
   inline function get_black() : Float
     return this[3];
 
-  @:to inline public function toXYZ() : RGBX
+  @:to inline public function toXYZ() : XYZ
     return toRGBX().toXYZ();
 
-  @:to inline public function toYxy() : RGBX
+  @:to inline public function toYxy() : Yxy
     return toRGBX().toYxy();
 }

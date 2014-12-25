@@ -72,10 +72,10 @@ abstract CIELCh(Array<Float>) {
   @:to inline public function toRGBX() : RGBX
     return toCIELab().toRGBX();
 
-  @:to inline public function toXYZ() : RGBX
+  @:to inline public function toXYZ() : XYZ
     return toCIELab().toXYZ();
 
-  @:to inline public function toYxy() : RGBX
+  @:to inline public function toYxy() : Yxy
     return toCIELab().toYxy();
 
   inline function get_l() : Float
