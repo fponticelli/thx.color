@@ -12,15 +12,27 @@ class MiniCanvas {
 		mini.save(name);
 	}
 
-	public static function gradient(name : String, width : Int, height : Int, handler : Float-> RGB) {
+	public static function gradient(name : String, width : Int = 400, height : Int = 20, handler : Float -> RGB) {
 		create(name, width, height, function(ctx, w, h) {
 			Ints.range(0, w)
-				.map(function(x) {
+				.map(function(x : Int) {
 					ctx.fillStyle = handler(x/w).toString();
 					ctx.fillRect(x, 0, 1, h);
 				});
 		});
 	}
+
+  public static function boxGradient(name : String, width : Int = 400, height : Int = 400, handler : Float -> Float -> RGB) {
+		create(name, width, height, function(ctx, w, h) {
+			Ints.range(0, w)
+				.map(function(x : Int) {
+					Ints.range(0, h).map(function(y : Int) {
+						ctx.fillStyle = handler(x/w, y/h).toCSS3();
+						ctx.fillRect(x, y, 1, 1);
+					});
+				});
+		});
+  }
 
 	public var width(default, null) : Int;
 	public var height(default, null) : Int;
@@ -35,8 +47,8 @@ class MiniCanvas {
 
 	public function save(name : String) untyped {
 		var fs = require('fs'),
-			out = fs.createWriteStream(__dirname + '/../images/$name.png'),
-			stream = canvas.pngStream();
+				out = fs.createWriteStream(__dirname + '/../images/$name.png'),
+				stream = canvas.pngStream();
 
 		stream.on('data', function(chunk) out.write(chunk));
 		stream.on('end', function(_) console.log('saved $name.png'));
