@@ -12,6 +12,14 @@ abstract HSLA(Array<Float>) {
   public var lightness(get, never) : Float;
   public var alpha(get, never) : Float;
 
+  public static function create(hue : Float, saturation : Float, lightness : Float, alpha : Float)
+    return new HSLA([
+      hue.wrapCircular(360),
+      saturation.clamp(0, 1),
+      lightness.clamp(0, 1),
+      alpha.clamp(0, 1)
+    ]);
+
   @:from public static function fromString(color : String) : HSLA {
     var info = ColorParser.parseColor(color);
     if(null == info)

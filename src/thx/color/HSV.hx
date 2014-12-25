@@ -11,6 +11,13 @@ abstract HSV(Array<Float>) {
   public var saturation(get, never) : Float;
   public var value(get, never) : Float;
 
+  public static function create(hue : Float, saturation : Float, lightness : Float)
+    return new HSV([
+      hue.wrapCircular(360),
+      saturation.clamp(0, 1),
+      lightness.clamp(0, 1)
+    ]);
+
   @:from public static function fromString(color : String) : HSV {
     var info = ColorParser.parseColor(color);
     if(null == info)

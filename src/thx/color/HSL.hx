@@ -11,6 +11,13 @@ abstract HSL(Array<Float>) {
   public var saturation(get, never) : Float;
   public var lightness(get, never) : Float;
 
+  public static function create(hue : Float, saturation : Float, lightness : Float)
+    return new HSL([
+      hue.wrapCircular(360),
+      saturation.clamp(0, 1),
+      lightness.clamp(0, 1)
+    ]);
+
   @:from public static function fromString(color : String) : HSL {
     var info = ColorParser.parseColor(color);
     if(null == info)
