@@ -1,6 +1,7 @@
 package thx.color;
 
 using thx.core.Floats;
+using thx.core.Tuple;
 import thx.color.parse.ColorParser;
 
 @:access(thx.color.RGBXA)
@@ -46,6 +47,9 @@ abstract HSLA(Array<Float>) {
   inline function new(channels : Array<Float>) : HSLA
     this = channels;
 
+  public function complement()
+    return rotate(180);
+
   public function darker(t : Float) : HSLA
     return new HSLA([
       hue,
@@ -86,8 +90,18 @@ abstract HSLA(Array<Float>) {
       t.interpolate(alpha, other.alpha)
     ]);
 
+  public function rotate(angle : Float)
+    return HSLA.create(hue + angle, saturation, lightness, alpha);
+
+  public function split(spread = 150.0)
+    return new Tuple2(
+      rotate(-spread),
+      rotate(spread)
+    );
+
   inline public function toCSS3() : String
     return toString();
+
   inline public function toString() : String
     return 'hsla(${huef},${saturation*100}%,${lightness*100}%,$alpha)';
 

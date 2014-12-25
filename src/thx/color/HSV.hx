@@ -1,6 +1,7 @@
 package thx.color;
 
 using thx.core.Floats;
+using thx.core.Tuple;
 import thx.color.parse.ColorParser;
 
 @:access(thx.color.RGBX)
@@ -41,6 +42,9 @@ abstract HSV(Array<Float>) {
   inline function new(channels : Array<Float>) : HSV
     this = channels;
 
+  public function complement()
+    return rotate(180);
+
   public function darker(t : Float) : HSV
     return new HSV([
       hue,
@@ -61,6 +65,15 @@ abstract HSV(Array<Float>) {
       t.interpolate(saturation, other.saturation),
       t.interpolate(value, other.value)
     ]);
+
+  public function rotate(angle : Float)
+    return HSV.create(hue + angle, saturation, value);
+
+  public function split(spread = 150.0)
+    return new Tuple2(
+      rotate(-spread),
+      rotate(spread)
+    );
 
   inline public function toString() : String
     return 'hsv($huef,${saturation*100}%,${value*100}%)';

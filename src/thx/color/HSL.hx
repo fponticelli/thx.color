@@ -1,5 +1,6 @@
 package thx.color;
 
+using thx.core.Tuple;
 using thx.core.Floats;
 import thx.color.parse.ColorParser;
 
@@ -41,6 +42,9 @@ abstract HSL(Array<Float>) {
   inline function new(channels : Array<Float>) : HSL
     this = channels;
 
+  public function complement()
+    return rotate(180);
+
   public function darker(t : Float) : HSL
     return new HSL([
       hue,
@@ -61,6 +65,15 @@ abstract HSL(Array<Float>) {
       t.interpolate(saturation, other.saturation),
       t.interpolate(lightness, other.lightness)
     ]);
+
+  public function rotate(angle : Float)
+    return HSL.create(hue + angle, saturation, lightness);
+
+  public function split(spread = 150.0)
+    return new Tuple2(
+      rotate(-spread),
+      rotate(spread)
+    );
 
   inline public function withAlpha(alpha : Float) : HSLA
     return new HSLA(this.concat([alpha]));
