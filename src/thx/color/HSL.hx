@@ -126,10 +126,10 @@ abstract HSL(Array<Float>) {
   @:to inline public function toHSLA() : HSLA
     return withAlpha(1.0);
 
-  @:to inline public function toXYZ() : RGBX
+  @:to inline public function toXYZ() : XYZ
     return toRGBX().toXYZ();
 
-  @:to inline public function toYxy() : RGBX
+  @:to inline public function toYxy() : Yxy
     return toRGBX().toYxy();
 
   inline function get_hue() : Float
