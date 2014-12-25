@@ -33,7 +33,7 @@ return function(x : Float, y : Float) : RGB {
 var left  : HSV = 'hsv(160deg,100%,63%)',
     right : HSV = 'hsv(345deg,88%,77%)';
 return function(t : Float) : RGB
-    return (left : HSV).interpolate(right, t));
+    return (left : HSV).interpolate(right, t);
 ```
 
 ![Alt text](https://github.com/fponticelli/thx.color/raw/master/images/interpolatehsv.png?raw=true "HSV Interpolation")
