@@ -56,22 +56,6 @@ abstract HSVA(Array<Float>) {
   public function complement()
     return rotate(180);
 
-  public function darker(t : Float) : HSVA
-    return new HSVA([
-      hue,
-      saturation,
-      t.interpolate(value, 0),
-      alpha
-    ]);
-
-  public function lighter(t : Float) : HSVA
-    return new HSVA([
-      hue,
-      saturation,
-      t.interpolate(value, 1),
-      alpha
-    ]);
-
   public function transparent(t : Float) : HSVA
     return new HSVA([
       hue,

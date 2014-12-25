@@ -51,20 +51,6 @@ abstract HSV(Array<Float>) {
   public function complement()
     return rotate(180);
 
-  public function darker(t : Float) : HSV
-    return new HSV([
-      hue,
-      saturation,
-      t.interpolate(value, 0)
-    ]);
-
-  public function lighter(t : Float) : HSV
-    return new HSV([
-      hue,
-      saturation,
-      t.interpolate(value, 1)
-    ]);
-
   public function interpolate(other : HSV, t : Float) : HSV
     return new HSV([
       t.interpolate(hue, other.hue),
@@ -139,10 +125,10 @@ abstract HSV(Array<Float>) {
   @:to inline public function toRGBXA() : RGBXA
     return toRGBX().toRGBXA();
 
-  @:to inline public function toXYZ() : RGBX
+  @:to inline public function toXYZ() : XYZ
     return toRGBX().toXYZ();
 
-  @:to inline public function toYxy() : RGBX
+  @:to inline public function toYxy() : Yxy
     return toRGBX().toYxy();
 
   inline public function withAlpha(alpha : Float) : HSVA
