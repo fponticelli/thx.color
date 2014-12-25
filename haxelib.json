@@ -5,8 +5,8 @@
   "classPath": "src",
   "tags": ["color", "thx", "cross"],
   "description": "Library for color manipulation. Contains definitions for CMYK, Grey, HSL, HSV, and RGB as well as alpha versions of the sames and color parsing.",
-  "releasenote": "Many fixes and tunes.",
-  "version": "0.8.1",
+  "releasenote": "Added color operations on HSL. Many fixes and tunes.",
+  "version": "0.9.0",
   "contributors": ["fponticelli"],
   "dependencies": {
     "thx.core": ""
