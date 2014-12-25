@@ -4,9 +4,9 @@
   "license": "MIT",
   "classPath": "src",
   "tags": ["color", "thx", "cross"],
-  "description": "Library for color maniupation. Contains definitions for CMYK, Grey, HSL, HSV, and RGB as well as alpha versions of the sames and color parsing.",
-  "releasenote": "improved documentation",
-  "version": "0.7.4",
+  "description": "Library for color manipulation. Contains definitions for CMYK, Grey, HSL, HSV, and RGB as well as alpha versions of the sames and color parsing.",
+  "releasenote": "Added several color spaces: XYZ, CIELab, CIELCh, Yxy and CMY.",
+  "version": "0.8.0",
   "contributors": ["fponticelli"],
   "dependencies": {
     "thx.core": ""
