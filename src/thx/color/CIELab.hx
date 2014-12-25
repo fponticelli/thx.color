@@ -19,7 +19,7 @@ abstract CIELab(Array<Float>) {
 
     return try switch info.name {
       case 'cielab':
-        new thx.color.CIELab(ColorParser.getFloatChannels(info.channels, 3));
+        new CIELab(ColorParser.getFloatChannels(info.channels, 3));
       case _:
         null;
     } catch(e : Dynamic) null;
@@ -45,6 +45,20 @@ abstract CIELab(Array<Float>) {
       t.interpolate(b, other.b)
     ]);
 
+  public function darker(t : Float) : CIELab
+    return new CIELab([
+      t.interpolate(l, 0),
+      a,
+      b
+    ]);
+
+  public function lighter(t : Float) : CIELab
+    return new CIELab([
+      t.interpolate(l, 100),
+      a,
+      b
+    ]);
+
   public function match(palette : Iterable<CIELab>) : CIELab {
     NullArgument.throwIfEmpty(palette);
     var dist = Math.POSITIVE_INFINITY,
@@ -58,6 +72,9 @@ abstract CIELab(Array<Float>) {
     }
     return closest;
   }
+
+  public function withLightness(lightness : Float) : CIELab
+    return new CIELab([lightness, a, b]);
 
   inline public function toString() : String
     return 'CIELab($l,$a,$b)';

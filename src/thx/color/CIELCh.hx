@@ -19,7 +19,7 @@ abstract CIELCh(Array<Float>) {
 
     return try switch info.name {
       case 'cielch':
-        new thx.color.CIELCh(ColorParser.getFloatChannels(info.channels, 3));
+        new CIELCh(ColorParser.getFloatChannels(info.channels, 3));
       case _:
         null;
     } catch(e : Dynamic) null;
