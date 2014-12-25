@@ -47,6 +47,12 @@ abstract HSVA(Array<Float>) {
   inline function new(channels : Array<Float>) : HSVA
     this = channels;
 
+  public function analogous(spread = 30.0)
+    return new Tuple2(
+      rotate(-spread),
+      rotate(spread)
+    );
+
   public function complement()
     return rotate(180);
 
