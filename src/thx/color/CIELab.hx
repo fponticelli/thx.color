@@ -30,6 +30,13 @@ abstract CIELab(Array<Float>) {
   inline function new(channels : Array<Float>) : CIELab
     this = channels;
 
+  public function distance(other : CIELab)
+    return Math.sqrt(
+      (l - other.l) * (l - other.l) +
+      (a - other.a) * (a - other.a) +
+      (b - other.b) * (b - other.b)
+    );
+
   public function interpolate(other : CIELab, t : Float) : CIELab
     return new CIELab([
       t.interpolate(l, other.l),
