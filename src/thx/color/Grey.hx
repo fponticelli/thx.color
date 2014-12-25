@@ -28,14 +28,14 @@ abstract Grey(Float) from Float to Float {
   public function contrast()
     return this > 0.5 ? black : white;
 
-  public static function darker(color : Grey, t : Float) : Grey
-    return new Grey(t.interpolate(color.grey, 0));
+  public function darker(t : Float) : Grey
+    return new Grey(t.interpolate(grey, 0));
 
-  public static function lighter(color : Grey, t : Float) : Grey
-    return new Grey(t.interpolate(color.grey, 1));
+  public function lighter(t : Float) : Grey
+    return new Grey(t.interpolate(grey, 1));
 
-  public static function interpolate(a : Grey, b : Grey, t : Float) : Grey
-    return new Grey(t.interpolate(a.grey, b.grey));
+  public function interpolate(other : Grey, t : Float) : Grey
+    return new Grey(t.interpolate(grey, other.grey));
 
   inline public function toString() : String
     return 'grey(${grey*100}%)';
