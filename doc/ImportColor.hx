@@ -1,3 +1,6 @@
+import thx.color.CIELab;
+import thx.color.CIELCh;
+import thx.color.CMY;
 import thx.color.CMYK;
 import thx.color.Color;
 import thx.color.Grey;
@@ -10,3 +13,5 @@ import thx.color.RGBA;
 import thx.color.RGBX;
 import thx.color.RGBXA;
 import thx.color.parse.ColorParser;
+import thx.color.XYZ;
+import thx.color.Yxy;
