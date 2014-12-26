@@ -96,10 +96,10 @@ class ColorParser {
     } catch(e : Dynamic) return null;
   }
 
-  public static function getFloatChannels(channels : Array<ChannelInfo>, length : Int) {
+  public static function getFloatChannels(channels : Array<ChannelInfo>, length : Int, useInt8 = true) {
     if(length != channels.length)
       throw 'invalid number of channels, expected $length but it is ${channels.length}';
-    return channels.map(getFloatChannel);
+    return channels.map(getFloatChannel.bind(_, useInt8));
   }
 
   public static function getInt8Channels(channels : Array<ChannelInfo>, length : Int) {
@@ -108,13 +108,14 @@ class ColorParser {
     return channels.map(getInt8Channel);
   }
 
-  public static function getFloatChannel(channel : ChannelInfo)
+  public static function getFloatChannel(channel : ChannelInfo, useInt8 = true)
     return switch(channel) {
       case CIBool(v): v ? 1 : 0;
       case CIFloat(v): v;
       case CIInt(v): v;
       case CIDegree(v): v;
-      case CIInt8(v): v / 255;
+      case CIInt8(v) if(useInt8): v / 255;
+      case CIInt8(v): v;
       case CIPercent(v): v / 100;
       default: throw 'can\'t get a float value from $channel';
     };
