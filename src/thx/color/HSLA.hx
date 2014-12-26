@@ -1,6 +1,7 @@
 package thx.color;
 
 using thx.core.Floats;
+using thx.core.Nulls;
 using thx.core.Tuple;
 import thx.color.parse.ColorParser;
 
@@ -36,13 +37,8 @@ abstract HSLA(Array<Float>) {
     } catch(e : Dynamic) null;
   }
 
-  inline public static function fromFloats(hue: Float, saturation: Float, lightness: Float, alpha : Float) : HSLA
-    return new HSLA([
-      hue,
-      saturation,
-      lightness,
-      alpha
-    ]);
+  inline public static function fromFloats(arr : Array<Float>) : HSLA
+    return HSLA.create(arr[0].or(0), arr[1].or(0), arr[2].or(0), arr[3].or(0));
 
   inline function new(channels : Array<Float>) : HSLA
     this = channels;
