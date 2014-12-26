@@ -40,11 +40,9 @@ abstract CIELab(Array<Float>) {
     this = channels;
 
   public function distance(other : CIELab)
-    return Math.sqrt(
-      (l - other.l) * (l - other.l) +
-      (a - other.a) * (a - other.a) +
-      (b - other.b) * (b - other.b)
-    );
+    return (l - other.l) * (l - other.l) +
+           (a - other.a) * (a - other.a) +
+           (b - other.b) * (b - other.b);
 
   public function interpolate(other : CIELab, t : Float) : CIELab
     return new CIELab([
