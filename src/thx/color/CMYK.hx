@@ -1,6 +1,7 @@
 package thx.color;
 
 using thx.core.Floats;
+using thx.core.Nulls;
 import thx.color.parse.ColorParser;
 
 @:access(thx.color.CMY)
@@ -23,13 +24,16 @@ abstract CMYK(Array<Float>) {
     } catch(e : Dynamic) null;
   }
 
-  inline public static function fromFloats(cyan: Float, magenta: Float, yellow: Float, black: Float) : CMYK
+  inline public static function create(cyan: Float, magenta: Float, yellow: Float, black: Float) : CMYK
     return new CMYK([
       cyan.normalize(),
       magenta.normalize(),
       yellow.normalize(),
       black.normalize()
     ]);
+
+  public static function fromFloats(arr : Array<Float>)
+    return CMYK.create(arr[0].or(0), arr[1].or(0), arr[2].or(0), arr[3].or(0));
 
   inline function new(channels : Array<Float>) : CMYK
     this = channels;
@@ -87,7 +91,9 @@ abstract CMYK(Array<Float>) {
     ]);
 
   @:to inline public function toRGBXA() : RGBXA
-    return toRGBX().toRGBXA();  inline function get_cyan() : Float
+    return toRGBX().toRGBXA();
+
+  inline function get_cyan() : Float
     return this[0];
   inline function get_magenta() : Float
     return this[1];
