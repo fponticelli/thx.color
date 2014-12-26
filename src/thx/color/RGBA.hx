@@ -1,7 +1,7 @@
 package thx.color;
 
+using thx.core.Arrays;
 using thx.core.Floats;
-using thx.core.Nulls;
 using thx.core.Strings;
 import thx.color.parse.ColorParser;
 
@@ -9,14 +9,18 @@ abstract RGBA(Int) from Int to Int {
   public static function create(red : Int, green : Int, blue : Int, alpha : Int) : RGBA
     return ((alpha & 0xFF) << 24) | ((red & 0xFF) << 16) | ((green & 0xFF) << 8) | ((blue & 0xFF) << 0);
 
-  @:from public static function fromFloats(arr : Array<Float>) : RGBA
-    return create(Math.round(arr[0].or(0) * 255), Math.round(arr[1].or(0) * 255), Math.round(arr[2].or(0) * 255), Math.round(arr[3].or(0) * 255));
+  @:from public static function fromFloats(arr : Array<Float>) : RGBA {
+    var ints = arr.resize(4).pluck((_ * 255).round());
+    return create(ints[0], ints[1], ints[2], ints[3]);
+  }
 
   @:from public static function fromInt(rgba : Int) : RGBA
     return rgba;
 
-  @:from public static function fromInts(arr : Array<Int>) : RGBA
+  @:from public static function fromInts(arr : Array<Int>) : RGBA {
+    arr.resize(4);
     return create(arr[0], arr[1], arr[2], arr[3]);
+  }
 
   @:from public static function fromString(color : String) : Null<RGBA> {
     var info = ColorParser.parseHex(color);

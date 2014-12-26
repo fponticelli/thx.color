@@ -1,8 +1,8 @@
 package thx.color;
 
+using thx.core.Arrays;
 using thx.core.Ints;
 using thx.core.Floats;
-using thx.core.Nulls;
 using thx.core.Strings;
 import thx.color.parse.ColorParser;
 
@@ -18,11 +18,15 @@ abstract RGBX(Array<Float>) {
   public static function create(red : Float, green : Float, blue : Float)
     return new RGBX([red.normalize(), green.normalize(), blue.normalize()]);
 
-  @:from public static function fromFloats(arr : Array<Float>) : RGBX
-    return RGBX.create(arr[0].or(0), arr[1].or(0), arr[2].or(0));
+  @:from public static function fromFloats(arr : Array<Float>) : RGBX {
+    arr.resize(3);
+    return RGBX.create(arr[0], arr[1], arr[2]);
+  }
 
-  @:from public static function fromInts(arr : Array<Int>) : RGBX
-    return RGBX.create(arr[0].or(0) / 255, arr[1].or(0) / 255, arr[2].or(0) / 255);
+  @:from public static function fromInts(arr : Array<Int>) : RGBX {
+    arr.resize(3);
+    return RGBX.create(arr[0] / 255, arr[1] / 255, arr[2] / 255);
+  }
 
   @:from public static function fromString(color : String) : RGBX {
     var info = ColorParser.parseHex(color);

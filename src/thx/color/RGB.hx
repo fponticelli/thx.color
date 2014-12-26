@@ -1,7 +1,7 @@
 package thx.color;
 
+using thx.core.Arrays;
 using thx.core.Floats;
-using thx.core.Nulls;
 using thx.core.Strings;
 import thx.color.parse.ColorParser;
 
@@ -28,8 +28,10 @@ abstract RGB(Int) from Int to Int {
     } catch(e : Dynamic) null;
   }
 
-  @:from public static function fromInts(arr : Array<Int>) : RGB
-    return create(arr[0].or(0), arr[1].or(0), arr[2].or(0));
+  @:from public static function fromInts(arr : Array<Int>) : RGB {
+    arr.resize(3);
+    return create(arr[0], arr[1], arr[2]);
+  }
 
   inline public function new(rgb : Int) : RGB
     this = rgb;

@@ -1,7 +1,7 @@
 package thx.color;
 
+using thx.core.Arrays;
 using thx.core.Floats;
-using thx.core.Nulls;
 import thx.color.parse.ColorParser;
 using thx.core.error.NullArgument;
 
@@ -20,8 +20,10 @@ abstract CIELab(Array<Float>) {
       b.clampSym(128)
     ]);
 
-  @:from public static function fromFloats(arr : Array<Float>) : CIELab
-    return CIELab.create(arr[0].or(0), arr[1].or(0), arr[2].or(0));
+  @:from public static function fromFloats(arr : Array<Float>) : CIELab {
+    arr.resize(3);
+    return CIELab.create(arr[0], arr[1], arr[2]);
+  }
 
   @:from public static function fromString(color : String) : CIELab {
     var info = ColorParser.parseColor(color);

@@ -1,8 +1,8 @@
 package thx.color;
 
-using thx.core.Tuple;
+using thx.core.Arrays;
 using thx.core.Floats;
-using thx.core.Nulls;
+using thx.core.Tuple;
 import thx.color.parse.ColorParser;
 
 @:access(thx.color.RGBX)
@@ -20,8 +20,10 @@ abstract HSL(Array<Float>) {
       lightness.clamp(0, 1)
     ]);
 
-  @:from public static function fromFloats(arr : Array<Float>) : HSL
-    return HSL.create(arr[0].or(0), arr[1].or(0), arr[2].or(0));
+  @:from public static function fromFloats(arr : Array<Float>) : HSL {
+    arr.resize(3);
+    return HSL.create(arr[0], arr[1], arr[2]);
+  }
 
   @:from public static function fromString(color : String) : HSL {
     var info = ColorParser.parseColor(color);

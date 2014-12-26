@@ -1,7 +1,7 @@
 package thx.color;
 
+using thx.core.Arrays;
 using thx.core.Floats;
-using thx.core.Nulls;
 using thx.core.Tuple;
 import thx.color.parse.ColorParser;
 
@@ -22,8 +22,10 @@ abstract HSVA(Array<Float>) {
       alpha.clamp(0, 1)
     ]);
 
-  @:from public static function fromFloats(arr : Array<Float>) : HSVA
-    return HSVA.create(arr[0].or(0), arr[1].or(0), arr[2].or(0), arr[3].or(0));
+  @:from public static function fromFloats(arr : Array<Float>) : HSVA {
+    arr.resize(4);
+    return HSVA.create(arr[0], arr[1], arr[2], arr[3]);
+  }
 
   @:from public static function fromString(color : String) : HSVA {
     var info = ColorParser.parseColor(color);

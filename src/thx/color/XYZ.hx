@@ -1,7 +1,7 @@
 package thx.color;
 
+using thx.core.Arrays;
 using thx.core.Floats;
-using thx.core.Nulls;
 import thx.color.parse.ColorParser;
 
 @:access(thx.color.RGBX)
@@ -15,8 +15,10 @@ abstract XYZ(Array<Float>) {
   public static function create(x : Float, y : Float, z : Float) : XYZ
     return new XYZ([x, y, z]);
 
-  @:from public static function fromFloats(arr : Array<Float>) : XYZ
-    return XYZ.create(arr[0].or(0), arr[1].or(0), arr[2].or(0));
+  @:from public static function fromFloats(arr : Array<Float>) : XYZ {
+    arr.resize(3);
+    return XYZ.create(arr[0], arr[1], arr[2]);
+  }
 
   @:from public static function fromString(color : String) : XYZ {
     var info = ColorParser.parseColor(color);

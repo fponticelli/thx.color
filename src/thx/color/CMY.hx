@@ -1,7 +1,7 @@
 package thx.color;
 
+using thx.core.Arrays;
 using thx.core.Floats;
-using thx.core.Nulls;
 import thx.color.parse.ColorParser;
 
 @:access(thx.color.RGBX)
@@ -18,8 +18,10 @@ abstract CMY(Array<Float>) {
       yellow.normalize()
     ]);
 
-  @:from public static function fromFloats(arr : Array<Float>)
-    return CMY.create(arr[0].or(0), arr[1].or(0), arr[2].or(0));
+  @:from public static function fromFloats(arr : Array<Float>) {
+    arr.resize(3);
+    return CMY.create(arr[0], arr[1], arr[2]);
+  }
 
   @:from public static function fromString(color : String) : CMY {
     var info = ColorParser.parseColor(color);

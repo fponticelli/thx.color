@@ -1,7 +1,7 @@
 package thx.color;
 
+using thx.core.Arrays;
 using thx.core.Floats;
-using thx.core.Nulls;
 using thx.core.Tuple;
 import thx.color.parse.ColorParser;
 
@@ -20,8 +20,10 @@ abstract HSV(Array<Float>) {
       lightness.clamp(0, 1)
     ]);
 
-  @:from public static function fromFloats(arr : Array<Float>) : HSV
-    return HSV.create(arr[0].or(0), arr[1].or(0), arr[2].or(0));
+  @:from public static function fromFloats(arr : Array<Float>) : HSV {
+    arr.resize(3);
+    return HSV.create(arr[0], arr[1], arr[2]);
+  }
 
   @:from public static function fromString(color : String) : HSV {
     var info = ColorParser.parseColor(color);

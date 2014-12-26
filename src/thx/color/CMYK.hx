@@ -1,7 +1,7 @@
 package thx.color;
 
+using thx.core.Arrays;
 using thx.core.Floats;
-using thx.core.Nulls;
 import thx.color.parse.ColorParser;
 
 @:access(thx.color.CMY)
@@ -20,8 +20,10 @@ abstract CMYK(Array<Float>) {
       black.normalize()
     ]);
 
-  @:from public static function fromFloats(arr : Array<Float>)
-    return CMYK.create(arr[0].or(0), arr[1].or(0), arr[2].or(0), arr[3].or(0));
+  @:from public static function fromFloats(arr : Array<Float>) {
+    arr.resize(4);
+    return CMYK.create(arr[0], arr[1], arr[2], arr[3]);
+  }
 
   @:from public static function fromString(color : String) : CMYK {
     var info = ColorParser.parseColor(color);
