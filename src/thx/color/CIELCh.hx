@@ -1,6 +1,7 @@
 package thx.color;
 
 using thx.core.Floats;
+using thx.core.Nulls;
 import thx.color.parse.ColorParser;
 
 @:access(thx.color.CIELab)
@@ -12,6 +13,13 @@ abstract CIELCh(Array<Float>) {
   public var c(get, never) : Float;
   public var h(get, never) : Float;
 
+  public static function create(l : Float, a : Float, b : Float)
+    return new CIELCh([
+      l.clamp(0, 100),
+      a,
+      b.wrapCircular(360)
+    ]);
+
   @:from public static function fromString(color : String) : CIELCh {
     var info = ColorParser.parseColor(color);
     if(null == info)
@@ -19,14 +27,14 @@ abstract CIELCh(Array<Float>) {
 
     return try switch info.name {
       case 'cielch':
-        new CIELCh(ColorParser.getFloatChannels(info.channels, 3));
+        CIELCh.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
       case _:
         null;
     } catch(e : Dynamic) null;
   }
 
-  inline public static function fromFloats(l : Float, c : Float, h : Float) : CIELCh
-    return new CIELCh([l, c, h]);
+  inline public static function fromFloats(arr : Array<Float>) : CIELCh
+    return CIELCh.create(arr[0].or(0), arr[1].or(0), arr[2].or(0));
 
   inline function new(channels : Array<Float>) : CIELCh
     this = channels;
@@ -71,6 +79,9 @@ abstract CIELCh(Array<Float>) {
 
   @:to inline public function toRGBX() : RGBX
     return toCIELab().toRGBX();
+
+  @:to inline public function toRGBXA() : RGBXA
+    return toRGBX().toRGBXA();
 
   @:to inline public function toXYZ() : XYZ
     return toCIELab().toXYZ();
