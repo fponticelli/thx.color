@@ -1,8 +1,8 @@
 package thx.color;
 
-using StringTools;
 using thx.core.Floats;
-using Math;
+using thx.core.Nulls;
+using thx.core.Strings;
 import thx.color.parse.ColorParser;
 
 @:access(thx.color.RGBX)
@@ -22,13 +22,13 @@ abstract RGB(Int) from Int to Int {
     } catch(e : Dynamic) null;
   }
 
-  public static function fromFloats(red : Float, green : Float, blue : Float) : RGB
-    return fromInts((red.normalize() * 255).round(), (green.normalize() * 255).round(), (blue.normalize() * 255).round());
+  public static function createf(red : Float, green : Float, blue : Float) : RGB
+    return create((red * 255).round(), (green * 255).round(), (blue * 255).round());
 
   inline public static function fromArray(arr : Array<Int>) : RGB
-    return fromInts(arr[0], arr[1], arr[2]);
+    return create(arr[0].or(0), arr[1].or(0), arr[2].or(0));
 
-  inline public static function fromInts(red : Int, green : Int, blue : Int) : RGB
+  inline public static function create(red : Int, green : Int, blue : Int) : RGB
     return new RGB(((red & 0xFF) << 16) | ((green & 0xFF) << 8) | ((blue & 0xFF) << 0));
 
   inline public function new(rgb : Int) : RGB
