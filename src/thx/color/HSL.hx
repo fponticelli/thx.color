@@ -2,6 +2,7 @@ package thx.color;
 
 using thx.core.Tuple;
 using thx.core.Floats;
+using thx.core.Nulls;
 import thx.color.parse.ColorParser;
 
 @:access(thx.color.RGBX)
@@ -32,12 +33,8 @@ abstract HSL(Array<Float>) {
     } catch(e : Dynamic) null;
   }
 
-  inline public static function fromFloats(hue: Float, saturation: Float, lightness: Float) : HSL
-    return new HSL([
-      hue,
-      saturation,
-      lightness
-    ]);
+  inline public static function fromFloats(arr : Array<Float>) : HSL
+    return HSL.create(arr[0].or(0), arr[1].or(0), arr[2].or(0));
 
   inline function new(channels : Array<Float>) : HSL
     this = channels;
