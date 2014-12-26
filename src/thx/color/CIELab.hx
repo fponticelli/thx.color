@@ -1,8 +1,9 @@
 package thx.color;
 
 using thx.core.Floats;
+using thx.core.Nulls;
 import thx.color.parse.ColorParser;
-import thx.core.error.NullArgument;
+using thx.core.error.NullArgument;
 
 @:access(thx.color.CIELCh)
 @:access(thx.color.XYZ)
@@ -12,6 +13,13 @@ abstract CIELab(Array<Float>) {
   public var a(get, never) : Float;
   public var b(get, never) : Float;
 
+  public static function create(l : Float, a : Float, b : Float)
+    return new CIELab([
+      l.clamp(0, 100),
+      a.clampSym(128),
+      b.clampSym(128)
+    ]);
+
   @:from public static function fromString(color : String) : CIELab {
     var info = ColorParser.parseColor(color);
     if(null == info)
@@ -19,14 +27,14 @@ abstract CIELab(Array<Float>) {
 
     return try switch info.name {
       case 'cielab':
-        new CIELab(ColorParser.getFloatChannels(info.channels, 3));
+        CIELab.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
       case _:
         null;
     } catch(e : Dynamic) null;
   }
 
-  inline public static function fromFloats(l : Float, a : Float, b : Float) : CIELab
-    return new CIELab([l, a, b]);
+  inline public static function fromFloats(arr : Array<Float>) : CIELab
+    return CIELab.create(arr[0].or(0), arr[1].or(0), arr[2].or(0));
 
   inline function new(channels : Array<Float>) : CIELab
     this = channels;
@@ -60,7 +68,7 @@ abstract CIELab(Array<Float>) {
     ]);
 
   public function match(palette : Iterable<CIELab>) : CIELab {
-    NullArgument.throwIfEmpty(palette);
+    palette.throwIfEmpty();
     var dist = Math.POSITIVE_INFINITY,
         closest = null;
     for(color in palette) {
@@ -108,6 +116,9 @@ abstract CIELab(Array<Float>) {
 
   @:to inline public function toRGBX() : RGBX
     return toXYZ().toRGBX();
+
+  @:to inline public function toRGBXA() : RGBXA
+    return toRGBX().toRGBXA();
 
   @:to public function toXYZ() : XYZ {
     var y = (l + 16) / 116,
