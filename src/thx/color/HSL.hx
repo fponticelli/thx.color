@@ -71,16 +71,43 @@ abstract HSL(Array<Float>) {
     ]);
 
   public function rotate(angle : Float)
-    return HSL.create(hue + angle, saturation, lightness);
+    return withHue(hue + angle);
 
-  public function split(spread = 150.0)
+  public function split(spread = 144.0)
     return new Tuple2(
       rotate(-spread),
       rotate(spread)
     );
 
+  public function square()
+    return tetrad(90);
+
+  public function tetrad(angle : Float)
+    return new Tuple4(
+      rotate(0),
+      rotate(angle),
+      rotate(180),
+      rotate(180 + angle)
+    );
+
+  public function triad()
+    return new Tuple3(
+      rotate(-120),
+      rotate(0),
+      rotate(120)
+    );
+
   inline public function withAlpha(alpha : Float) : HSLA
-    return new HSLA(this.concat([alpha]));
+    return new HSLA(this.concat([alpha.normalize()]));
+
+  inline public function withHue(newhue : Float) : HSL
+    return new HSL([newhue.normalize(), saturation, lightness]);
+
+  inline public function withLightness(newlightness : Float) : HSL
+    return new HSL([hue, saturation, newlightness.normalize()]);
+
+  inline public function withSaturation(newsaturation : Float) : HSL
+    return new HSL([hue, newsaturation.normalize(), lightness]);
 
   inline public function toCSS3() : String
     return toString();
