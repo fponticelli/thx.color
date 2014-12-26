@@ -21,9 +21,12 @@ abstract Grey(Float) from Float to Float {
     } catch(e : Dynamic) null;
   }
 
+  public static function create(v : Float)
+    return new Grey(v.normalize());
+
   public var grey(get, never) : Float;
   inline public function new(grey : Float) : Grey
-    this = grey.normalize();
+    this = grey;
 
   public function contrast()
     return this > 0.5 ? black : white;
