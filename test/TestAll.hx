@@ -3,6 +3,7 @@ import utest.ui.Report;
 
 class TestAll {
   public static function addTests(runner : Runner) {
+    runner.addCase(new thx.color.TestCIELab());
     runner.addCase(new thx.color.TestColor());
     runner.addCase(new thx.color.TestColorParser());
     runner.addCase(new thx.color.TestConversion());
