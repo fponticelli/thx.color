@@ -1,11 +1,23 @@
 package thx.color;
 
-using Math;
-using StringTools;
 using thx.core.Floats;
+using thx.core.Nulls;
+using thx.core.Strings;
 import thx.color.parse.ColorParser;
 
 abstract RGBA(Int) from Int to Int {
+  public static function create(red : Int, green : Int, blue : Int, alpha : Int) : RGBA
+    return ((alpha & 0xFF) << 24) | ((red & 0xFF) << 16) | ((green & 0xFF) << 8) | ((blue & 0xFF) << 0);
+
+  @:from public static function fromFloats(arr : Array<Float>) : RGBA
+    return create(Math.round(arr[0].or(0) * 255), Math.round(arr[1].or(0) * 255), Math.round(arr[2].or(0) * 255), Math.round(arr[3].or(0) * 255));
+
+  @:from public static function fromInt(rgba : Int) : RGBA
+    return rgba;
+
+  @:from public static function fromInts(arr : Array<Int>) : RGBA
+    return create(arr[0], arr[1], arr[2], arr[3]);
+
   @:from public static function fromString(color : String) : Null<RGBA> {
     var info = ColorParser.parseHex(color);
     if(null == info)
@@ -15,29 +27,18 @@ abstract RGBA(Int) from Int to Int {
 
     return try switch info.name {
       case 'rgb':
-        thx.color.RGB.fromArray(ColorParser.getInt8Channels(info.channels, 3)).toRGBA();
+        RGB.fromInts(ColorParser.getInt8Channels(info.channels, 3)).toRGBA();
       case 'rgba':
-        thx.color.RGBA.fromArray([
+        RGBA.create(
           ColorParser.getInt8Channel(info.channels[0]),
           ColorParser.getInt8Channel(info.channels[1]),
           ColorParser.getInt8Channel(info.channels[2]),
           Math.round(ColorParser.getFloatChannel(info.channels[3]) * 255)
-        ]);
+        );
       case _:
         null;
     } catch(e : Dynamic) null;
   }
-  inline public static function fromArray(arr : Array<Int>) : RGBA
-    return fromInts(arr[0], arr[1], arr[2], arr[3]);
-
-  public static function fromFloats(red : Float, green : Float, blue : Float, alpha : Float) : RGBA
-    return fromInts(Math.round(red.normalize() * 255), Math.round(green.normalize() * 255), Math.round(blue.normalize() * 255), Math.round(alpha.normalize() * 255));
-
-  inline public static function fromInts(red : Int, green : Int, blue : Int, alpha : Int) : RGBA
-    return ((alpha & 0xFF) << 24) | ((red & 0xFF) << 16) | ((green & 0xFF) << 8) | ((blue & 0xFF) << 0);
-
-  inline public static function fromInt(rgba : Int) : RGBA
-    return rgba;
 
   inline public function new(rgba : Int) : RGBA
     this = rgba;
@@ -69,13 +70,13 @@ abstract RGBA(Int) from Int to Int {
     return toRGBXA().toHSVA();
 
   @:to public function toRGB() : RGB
-    return RGB.fromInts(red, green, blue);
+    return RGB.create(red, green, blue);
 
   @:to public function toRGBX() : RGBX
-    return RGBX.fromInts(red, green, blue);
+    return RGBX.fromInts([red, green, blue]);
 
   @:to public function toRGBXA() : RGBXA
-    return RGBXA.fromInts(red, green, blue, alpha);
+    return RGBXA.fromInts([red, green, blue, alpha]);
 
   inline public function toCSS3() : String
     return toString();

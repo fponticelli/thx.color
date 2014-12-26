@@ -1,9 +1,9 @@
 package thx.color;
 
-using StringTools;
 using thx.core.Floats;
 using thx.core.Ints;
-using Math;
+using thx.core.Nulls;
+using thx.core.Strings;
 import thx.color.parse.ColorParser;
 
 @:access(thx.color.HSLA)
@@ -11,7 +11,16 @@ import thx.color.parse.ColorParser;
 @:access(thx.color.RGBA)
 @:access(thx.color.RGBX)
 abstract RGBXA(Array<Float>) {
-  @:from public static function parse(color : String) : RGBXA {
+  public static function create(red : Float, green : Float, blue : Float, alpha : Float) : RGBXA
+    return new RGBXA([red.normalize(),green.normalize(),blue.normalize(),alpha.normalize()]);
+
+  @:from public static function fromFloats(arr : Array<Float>) : RGBXA
+    return RGBXA.create(arr[0].or(0), arr[1].or(0), arr[2].or(0), arr[3].or(0));
+
+  @:from public static function fromInts(arr : Array<Int>) : RGBXA
+    return RGBXA.create(arr[0].or(0) / 255, arr[1].or(0) / 255, arr[2].or(0) / 255, arr[3].or(0) / 255);
+
+  @:from public static function fromString(color : String) : RGBXA {
     var info = ColorParser.parseHex(color);
     if(null == info)
       info = ColorParser.parseColor(color);
@@ -20,21 +29,25 @@ abstract RGBXA(Array<Float>) {
 
     return try switch info.name {
       case 'rgb':
-        thx.color.RGBX.fromArray(ColorParser.getFloatChannels(info.channels, 3)).toRGBXA();
+        thx.color.RGBX.fromFloats(ColorParser.getFloatChannels(info.channels, 3)).toRGBXA();
       case 'rgba':
-        thx.color.RGBXA.fromArray(ColorParser.getFloatChannels(info.channels, 4));
+        thx.color.RGBXA.fromFloats(ColorParser.getFloatChannels(info.channels, 4));
       case _:
         null;
     } catch(e : Dynamic) null;
   }
-  public static function fromArray(values : Array<Float>) : RGBXA
-    return new RGBXA(values.map(function(v) return v.normalize()).concat([0,0,0,0]).slice(0,4));
 
-  inline public static function fromInts(red : Int, green : Int, blue : Int, alpha : Int) : RGBXA
-    return new RGBXA([red / 255, green / 255, blue / 255, alpha / 255]);
+  inline function new(channels : Array<Float>) : RGBXA
+    this = channels;
 
-  inline public static function fromFloats(red : Float, green : Float, blue : Float, alpha : Float) : RGBXA
-    return new RGBXA([red,green,blue,alpha]);
+  public var red(get, never) : Int;
+  public var green(get, never) : Int;
+  public var blue(get, never) : Int;
+  public var alpha(get, never) : Int;
+  public var redf(get, never) : Float;
+  public var greenf(get, never) : Float;
+  public var bluef(get, never) : Float;
+  public var alphaf(get, never) : Float;
 
   public function darker(t : Float) : RGBXA
     return toRGBX().darker(t).withAlpha(alpha);
@@ -66,18 +79,6 @@ abstract RGBXA(Array<Float>) {
       t.interpolate(alphaf, other.alphaf)
     ]);
 
-  public var red(get, never) : Int;
-  public var green(get, never) : Int;
-  public var blue(get, never) : Int;
-  public var alpha(get, never) : Int;
-  public var redf(get, never) : Float;
-  public var greenf(get, never) : Float;
-  public var bluef(get, never) : Float;
-  public var alphaf(get, never) : Float;
-
-  inline function new(channels : Array<Float>) : RGBXA
-    this = channels;
-
   inline public function toCSS3() : String
     return toString();
   @:to inline public function toString() : String
@@ -101,7 +102,7 @@ abstract RGBXA(Array<Float>) {
     return new RGBX(this.slice(0,3));
 
   @:to inline public function toRGBA() : RGBA
-    return RGBA.fromFloats(redf, greenf, bluef, alphaf);
+    return RGBA.fromFloats([redf, greenf, bluef, alphaf]);
 
   inline function get_red() : Int
     return (redf   * 255).round();

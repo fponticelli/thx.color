@@ -7,6 +7,12 @@ import thx.color.parse.ColorParser;
 
 @:access(thx.color.RGBX)
 abstract RGB(Int) from Int to Int {
+  public static function create(red : Int, green : Int, blue : Int) : RGB
+    return new RGB(((red & 0xFF) << 16) | ((green & 0xFF) << 8) | ((blue & 0xFF) << 0));
+
+  public static function createf(red : Float, green : Float, blue : Float) : RGB
+    return create((red * 255).round(), (green * 255).round(), (blue * 255).round());
+
   @:from public static function fromString(color : String) : Null<RGB> {
     var info = ColorParser.parseHex(color);
     if(null == info)
@@ -16,20 +22,14 @@ abstract RGB(Int) from Int to Int {
 
     return try switch info.name {
       case 'rgb':
-        thx.color.RGB.fromArray(ColorParser.getInt8Channels(info.channels, 3));
+        RGB.fromInts(ColorParser.getInt8Channels(info.channels, 3));
       case _:
         null;
     } catch(e : Dynamic) null;
   }
 
-  public static function createf(red : Float, green : Float, blue : Float) : RGB
-    return create((red * 255).round(), (green * 255).round(), (blue * 255).round());
-
-  inline public static function fromArray(arr : Array<Int>) : RGB
+  @:from public static function fromInts(arr : Array<Int>) : RGB
     return create(arr[0].or(0), arr[1].or(0), arr[2].or(0));
-
-  inline public static function create(red : Int, green : Int, blue : Int) : RGB
-    return new RGB(((red & 0xFF) << 16) | ((green & 0xFF) << 8) | ((blue & 0xFF) << 0));
 
   inline public function new(rgb : Int) : RGB
     this = rgb;
@@ -48,7 +48,7 @@ abstract RGB(Int) from Int to Int {
     return toRGBX().interpolate(other.toRGBX(), t);
 
   inline public function withAlpha(alpha : Int) : RGBXA
-    return RGBA.fromInts(red, green, blue, alpha);
+    return RGBA.fromInts([red, green, blue, alpha]);
 
   inline public function toCSS3() : String
     return 'rgb($red,$green,$blue)';
@@ -84,7 +84,7 @@ abstract RGB(Int) from Int to Int {
     return toRGBX().toHSV();
 
   @:to inline public function toRGBX() : RGBX
-    return RGBX.fromInts(red, green, blue);
+    return RGBX.fromInts([red, green, blue]);
 
   @:to inline public function toRGBA() : RGBA
     return withAlpha(255);

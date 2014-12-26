@@ -1,9 +1,9 @@
 package thx.color;
 
-using StringTools;
 using thx.core.Ints;
 using thx.core.Floats;
-using Math;
+using thx.core.Nulls;
+using thx.core.Strings;
 import thx.color.parse.ColorParser;
 
 @:access(thx.color.CMY)
@@ -15,6 +15,15 @@ import thx.color.parse.ColorParser;
 @:access(thx.color.RGBXA)
 @:access(thx.color.XYZ)
 abstract RGBX(Array<Float>) {
+  public static function create(red : Float, green : Float, blue : Float)
+    return new RGBX([red.normalize(), green.normalize(), blue.normalize()]);
+
+  @:from public static function fromFloats(arr : Array<Float>) : RGBX
+    return RGBX.create(arr[0].or(0), arr[1].or(0), arr[2].or(0));
+
+  @:from public static function fromInts(arr : Array<Int>) : RGBX
+    return RGBX.create(arr[0].or(0) / 255, arr[1].or(0) / 255, arr[2].or(0) / 255);
+
   @:from public static function fromString(color : String) : RGBX {
     var info = ColorParser.parseHex(color);
     if(null == info)
@@ -24,19 +33,14 @@ abstract RGBX(Array<Float>) {
 
     return try switch info.name {
       case 'rgb':
-        thx.color.RGBX.fromArray(ColorParser.getFloatChannels(info.channels, 3));
+        RGBX.fromFloats(ColorParser.getFloatChannels(info.channels, 3));
       case _:
         null;
     } catch(e : Dynamic) null;
   }
-  public static function fromArray(values : Array<Float>) : RGBX
-    return new RGBX(values.map(function(v) return v.normalize()).concat([0,0,0]).slice(0,3));
 
-  inline public static function fromInts(red : Int, green : Int, blue : Int) : RGBX
-    return new RGBX([red / 255, green / 255, blue / 255]);
-
-  inline public static function fromFloats(red : Float, green : Float, blue : Float) : RGBX
-    return new RGBX([red,green,blue]);
+  inline function new(channels : Array<Float>) : RGBX
+    this = channels;
 
   public var red(get, never) : Int;
   public var green(get, never) : Int;
@@ -44,9 +48,6 @@ abstract RGBX(Array<Float>) {
   public var redf(get, never) : Float;
   public var greenf(get, never) : Float;
   public var bluef(get, never) : Float;
-
-  inline function new(channels : Array<Float>) : RGBX
-    this = channels;
 
   public function darker(t : Float) : RGBX
     return new RGBX([
@@ -171,7 +172,7 @@ abstract RGBX(Array<Float>) {
   }
 
   @:to inline public function toRGB() : RGB
-    return RGB.fromFloats(redf, greenf, bluef);
+    return RGB.createf(redf, greenf, bluef);
 
   @:to inline public function toRGBXA() : RGBXA
     return withAlpha(1.0);
