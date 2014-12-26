@@ -2,6 +2,7 @@ package thx.color;
 
 using thx.core.Floats;
 using thx.core.Nulls;
+using thx.core.Tuple;
 import thx.color.parse.ColorParser;
 
 @:access(thx.color.CIELab)
@@ -39,6 +40,15 @@ abstract CIELCh(Array<Float>) {
   inline function new(channels : Array<Float>) : CIELCh
     this = channels;
 
+  public function analogous(spread = 30.0)
+    return new Tuple2(
+      rotate(-spread),
+      rotate(spread)
+    );
+
+  public function complement()
+    return rotate(180);
+
   public function interpolate(other : CIELCh, t : Float) : CIELCh
     return new CIELCh([
       t.interpolate(l, other.l),
@@ -46,11 +56,47 @@ abstract CIELCh(Array<Float>) {
       t.interpolate(h, other.h)
     ]);
 
-  inline public function toString() : String
-    return 'CIELCh($l,$c,$h)';
+  public function rotate(angle : Float)
+    return withHue(h + angle);
+
+  public function split(spread = 144.0)
+    return new Tuple2(
+      rotate(-spread),
+      rotate(spread)
+    );
+
+  public function square()
+    return tetrad(90);
+
+  public function tetrad(angle : Float)
+    return new Tuple4(
+      rotate(0),
+      rotate(angle),
+      rotate(180),
+      rotate(180 + angle)
+    );
+
+  public function triad()
+    return new Tuple3(
+      rotate(-120),
+      rotate(0),
+      rotate(120)
+    );
+
+  public function withLightness(lightness : Float) : CIELCh
+    return new CIELCh([lightness.clamp(0, 100), c, h]);
+
+  public function withChroma(newchroma : Float) : CIELCh
+    return new CIELCh([l, newchroma, h]);
+
+  public function withHue(newhue : Float) : CIELCh
+    return new CIELCh([l, c, newhue.wrapCircular(360)]);
 
   @:op(A==B) public function equals(other : CIELCh) : Bool
     return l == other.l && c == other.c && h == other.h;
+
+  @:to inline public function toString() : String
+    return 'CIELCh($l,$c,$h)';
 
   @:to public function toCIELab() : CIELab {
     var hradi = h * (Math.PI / 180),
