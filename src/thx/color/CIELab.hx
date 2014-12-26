@@ -79,14 +79,20 @@ abstract CIELab(Array<Float>) {
     return closest;
   }
 
-  public function withLightness(lightness : Float) : CIELab
-    return new CIELab([lightness, a, b]);
-
-  inline public function toString() : String
-    return 'CIELab($l,$a,$b)';
-
   @:op(A==B) public function equals(other : CIELab) : Bool
     return l == other.l && a == other.a && b == other.b;
+
+  public function withLightness(lightness : Float) : CIELab
+    return new CIELab([lightness.clamp(0, 100), a, b]);
+
+  public function withA(newa : Float) : CIELab
+    return new CIELab([l, newa.clampSym(128), b]);
+
+  public function withB(newb : Float) : CIELab
+    return new CIELab([l, a, newb.clampSym(128)]);
+
+  @:to public function toString() : String
+    return 'CIELab($l,$a,$b)';
 
   @:to public function toCIELCh() : CIELCh {
     var h = Floats.wrapCircular(Math.atan2(b, a) * 180 / Math.PI, 360),
