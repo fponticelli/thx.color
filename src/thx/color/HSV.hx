@@ -1,6 +1,7 @@
 package thx.color;
 
 using thx.core.Floats;
+using thx.core.Nulls;
 using thx.core.Tuple;
 import thx.color.parse.ColorParser;
 
@@ -32,12 +33,8 @@ abstract HSV(Array<Float>) {
     } catch(e : Dynamic) null;
   }
 
-  inline public static function fromFloats(hue: Float, saturation: Float, value: Float) : HSV
-    return new HSV([
-      hue,
-      saturation,
-      value
-    ]);
+  inline public static function fromFloats(arr : Array<Float>) : HSV
+    return HSV.create(arr[0].or(0), arr[1].or(0), arr[2].or(0));
 
   inline function new(channels : Array<Float>) : HSV
     this = channels;
