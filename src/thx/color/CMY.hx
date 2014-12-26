@@ -1,6 +1,7 @@
 package thx.color;
 
 using thx.core.Floats;
+using thx.core.Nulls;
 import thx.color.parse.ColorParser;
 
 @:access(thx.color.RGBX)
@@ -22,12 +23,15 @@ abstract CMY(Array<Float>) {
     } catch(e : Dynamic) null;
   }
 
-  inline public static function fromFloats(cyan: Float, magenta: Float, yellow: Float) : CMY
+  public static function create(cyan: Float, magenta: Float, yellow: Float) : CMY
     return new CMY([
       cyan.normalize(),
       magenta.normalize(),
       yellow.normalize()
     ]);
+
+  public static function fromFloats(arr : Array<Float>)
+    return CMY.create(arr[0].or(0), arr[1].or(0), arr[2].or(0));
 
   inline function new(channels : Array<Float>) : CMY
     this = channels;
