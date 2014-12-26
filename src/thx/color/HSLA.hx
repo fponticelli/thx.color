@@ -22,6 +22,9 @@ abstract HSLA(Array<Float>) {
       alpha.clamp(0, 1)
     ]);
 
+  @:from  public static function fromFloats(arr : Array<Float>) : HSLA
+    return HSLA.create(arr[0].or(0), arr[1].or(0), arr[2].or(0), arr[3].or(0));
+
   @:from public static function fromString(color : String) : HSLA {
     var info = ColorParser.parseColor(color);
     if(null == info)
@@ -36,9 +39,6 @@ abstract HSLA(Array<Float>) {
         null;
     } catch(e : Dynamic) null;
   }
-
-  inline public static function fromFloats(arr : Array<Float>) : HSLA
-    return HSLA.create(arr[0].or(0), arr[1].or(0), arr[2].or(0), arr[3].or(0));
 
   inline function new(channels : Array<Float>) : HSLA
     this = channels;

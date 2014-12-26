@@ -11,6 +11,16 @@ abstract CMY(Array<Float>) {
   public var magenta(get, never): Float;
   public var yellow(get, never): Float;
 
+  public static function create(cyan: Float, magenta: Float, yellow: Float) : CMY
+    return new CMY([
+      cyan.normalize(),
+      magenta.normalize(),
+      yellow.normalize()
+    ]);
+
+  @:from public static function fromFloats(arr : Array<Float>)
+    return CMY.create(arr[0].or(0), arr[1].or(0), arr[2].or(0));
+
   @:from public static function fromString(color : String) : CMY {
     var info = ColorParser.parseColor(color);
     if(null == info)
@@ -22,16 +32,6 @@ abstract CMY(Array<Float>) {
         null;
     } catch(e : Dynamic) null;
   }
-
-  public static function create(cyan: Float, magenta: Float, yellow: Float) : CMY
-    return new CMY([
-      cyan.normalize(),
-      magenta.normalize(),
-      yellow.normalize()
-    ]);
-
-  public static function fromFloats(arr : Array<Float>)
-    return CMY.create(arr[0].or(0), arr[1].or(0), arr[2].or(0));
 
   inline function new(channels : Array<Float>) : CMY
     this = channels;

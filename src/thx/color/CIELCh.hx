@@ -20,6 +20,9 @@ abstract CIELCh(Array<Float>) {
       b.wrapCircular(360)
     ]);
 
+  @:from public static function fromFloats(arr : Array<Float>) : CIELCh
+    return CIELCh.create(arr[0].or(0), arr[1].or(0), arr[2].or(0));
+
   @:from public static function fromString(color : String) : CIELCh {
     var info = ColorParser.parseColor(color);
     if(null == info)
@@ -32,9 +35,6 @@ abstract CIELCh(Array<Float>) {
         null;
     } catch(e : Dynamic) null;
   }
-
-  inline public static function fromFloats(arr : Array<Float>) : CIELCh
-    return CIELCh.create(arr[0].or(0), arr[1].or(0), arr[2].or(0));
 
   inline function new(channels : Array<Float>) : CIELCh
     this = channels;

@@ -1,6 +1,7 @@
 package thx.color;
 
 using thx.core.Floats;
+using thx.core.Nulls;
 import thx.color.parse.ColorParser;
 
 @:access(thx.color.RGBX)
@@ -10,6 +11,12 @@ abstract Yxy(Array<Float>) {
   public var y1(get, never) : Float;
   public var x(get, never) : Float;
   public var y2(get, never) : Float;
+
+  public static function create(y1 : Float, x : Float, y2 : Float) : Yxy
+    return new Yxy([y1, x, y2]);
+
+  @:from public static function fromFloats(arr : Array<Float>) : Yxy
+    return Yxy.create(arr[0].or(0), arr[1].or(0), arr[2].or(0));
 
   @:from public static function fromString(color : String) : Yxy {
     var info = ColorParser.parseColor(color);
@@ -23,9 +30,6 @@ abstract Yxy(Array<Float>) {
         null;
     } catch(e : Dynamic) null;
   }
-
-  inline public static function fromFloats(y1 : Float, x : Float, y2 : Float) : Yxy
-    return new Yxy([y1, x, y2]);
 
   inline function new(channels : Array<Float>) : Yxy
     this = channels;

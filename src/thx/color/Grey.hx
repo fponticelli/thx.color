@@ -8,6 +8,9 @@ abstract Grey(Float) from Float to Float {
   public static var black(default, null) : Grey = new Grey(0);
   public static var white(default, null) : Grey = new Grey(1);
 
+  @:from public static function create(v : Float)
+    return new Grey(v.normalize());
+
   @:from public static function fromString(color : String) : Null<Grey> {
     var info = ColorParser.parseColor(color);
     if(null == info)
@@ -20,9 +23,6 @@ abstract Grey(Float) from Float to Float {
         null;
     } catch(e : Dynamic) null;
   }
-
-  public static function create(v : Float)
-    return new Grey(v.normalize());
 
   public var grey(get, never) : Float;
   inline public function new(grey : Float) : Grey
