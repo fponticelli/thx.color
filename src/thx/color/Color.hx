@@ -153,13 +153,6 @@ class Color {
 
   public static var names(default, null) : Map<String, RGB>;
 
-  @:access(thx.color.CMYK)
-  @:access(thx.color.HSL)
-  @:access(thx.color.HSLA)
-  @:access(thx.color.HSV)
-  @:access(thx.color.HSVA)
-  @:access(thx.color.RGBX)
-  @:access(thx.color.RGBXA)
   public static function parse(color : String) : RGBXA {
     if(names.exists(color))
       return names.get(color).toRGBXA();
@@ -170,22 +163,28 @@ class Color {
       return null;
 
     return try switch info.name {
+      case 'cielab':
+        CIELab.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
+      case 'cielch':
+        CIELCh.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
+      case 'cmy':
+        CMY.fromFloats(ColorParser.getFloatChannels(info.channels, 3));
       case 'cmyk':
-        new thx.color.CMYK(ColorParser.getFloatChannels(info.channels, 4));
+        CMYK.fromFloats(ColorParser.getFloatChannels(info.channels, 4));
       case 'grey', 'gray':
-        new thx.color.Grey(ColorParser.getFloatChannels(info.channels, 1)[0]);
+        Grey.create(ColorParser.getFloatChannels(info.channels, 1)[0]);
       case 'hsl':
-        new thx.color.HSL(ColorParser.getFloatChannels(info.channels, 3));
+        HSL.fromFloats(ColorParser.getFloatChannels(info.channels, 3));
       case 'hsla':
-        new thx.color.HSLA(ColorParser.getFloatChannels(info.channels, 4));
+        HSLA.fromFloats(ColorParser.getFloatChannels(info.channels, 4));
       case 'hsv':
-        new thx.color.HSV(ColorParser.getFloatChannels(info.channels, 3));
+        HSV.fromFloats(ColorParser.getFloatChannels(info.channels, 3));
       case 'hsva':
-        new thx.color.HSVA(ColorParser.getFloatChannels(info.channels, 4));
+        HSVA.fromFloats(ColorParser.getFloatChannels(info.channels, 4));
       case 'rgb':
-        thx.color.RGBX.fromArray(ColorParser.getFloatChannels(info.channels, 3));
+        RGBX.fromFloats(ColorParser.getFloatChannels(info.channels, 3));
       case 'rgba':
-        thx.color.RGBXA.fromArray(ColorParser.getFloatChannels(info.channels, 4));
+        RGBXA.fromFloats(ColorParser.getFloatChannels(info.channels, 4));
       case _:
         null;
     } catch(e : Dynamic) null;
