@@ -26,7 +26,7 @@ class TestColor {
   }
 
   public function testParseCMYK() {
-    assertEquals(CMYK.fromFloats(1,0.5,0.25,0.1), Color.parse("cmyk(100%,0.5,25%,0.1)"));
+    assertEquals(CMYK.create(1,0.5,0.25,0.1), Color.parse("cmyk(100%,0.5,25%,0.1)"));
   }
 
   public function testParseHSL() {
@@ -44,7 +44,7 @@ class TestColor {
   public function testParseRGB() {
     assertEquals(Color.red, Color.parse("rgb(255,0,0)"));
     assertEquals(Color.red, Color.parse("rgb(100%,0,0)"));
-    assertEquals(RGBX.fromFloats(0.5,0,0), Color.parse("rgb(0.5,0,0)"));
+    assertEquals(RGBX.create(0.5,0,0), Color.parse("rgb(0.5,0,0)"));
     assertEquals(new RGBA(0xFF00FF00), Color.parse("rgba(0,255,0,1)"));
     assertEquals(new RGBA(0xFF00FF00), Color.parse("rgba(0,100%,0,1)"));
   }
