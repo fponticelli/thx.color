@@ -56,6 +56,7 @@ abstract CIELCh(Array<Float>) {
     return new CIELCh([
       t.interpolate(l, other.l),
       t.interpolate(c, other.c),
+      // TODO interpolation should account for shortest path
       t.interpolate(h, other.h)
     ]);
 
