@@ -57,13 +57,43 @@ abstract HSV(Array<Float>) {
     ]);
 
   public function rotate(angle : Float)
-    return HSV.create(hue + angle, saturation, value);
+    return withHue(hue + angle);
 
-  public function split(spread = 150.0)
+  public function split(spread = 144.0)
     return new Tuple2(
       rotate(-spread),
       rotate(spread)
     );
+
+  public function square()
+    return tetrad(90);
+
+  public function tetrad(angle : Float)
+    return new Tuple4(
+      rotate(0),
+      rotate(angle),
+      rotate(180),
+      rotate(180 + angle)
+    );
+
+  public function triad()
+    return new Tuple3(
+      rotate(-120),
+      rotate(0),
+      rotate(120)
+    );
+
+  inline public function withAlpha(alpha : Float) : HSVA
+    return new HSVA(this.concat([alpha.normalize()]));
+
+  inline public function withHue(newhue : Float) : HSV
+    return new HSV([newhue.normalize(), saturation, value]);
+
+  inline public function withValue(newvalue : Float) : HSV
+    return new HSV([hue, saturation, newvalue.normalize()]);
+
+  inline public function withSaturation(newsaturation : Float) : HSV
+    return new HSV([hue, newsaturation.normalize(), value]);
 
   inline public function toString() : String
     return 'hsv($huef,${saturation*100}%,${value*100}%)';
@@ -128,9 +158,6 @@ abstract HSV(Array<Float>) {
 
   @:to inline public function toYxy() : Yxy
     return toRGBX().toYxy();
-
-  inline public function withAlpha(alpha : Float) : HSVA
-    return new HSVA(this.concat([alpha]));
 
   inline function get_hue() : Float
     return this[0];
