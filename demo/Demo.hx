@@ -23,7 +23,7 @@ class Demo {
       function(t : Float) : RGB return (left : Grey).interpolate(right, t));
 
     MiniCanvas.gradient('interpolatehsl',
-      function(t : Float) : RGB return left.interpolate(right, t));
+      function(t : Float) : RGB return (left : HSL).interpolate(right, t));
 
     MiniCanvas.gradient('interpolatehsv',
       function(t : Float) : RGB return (left : HSV).interpolate(right, t));
@@ -44,19 +44,16 @@ class Demo {
   public static function main() {
     interpolations();
 
-    MiniCanvas.boxGradient("rainbowhsl", (function() {
-      var left  : HSL = 'hsl(0,100%,0%)',
-          right : HSL = 'hsl(359.99,100%,0%)';
-      return function(x : Float, y : Float) : RGB {
-        return left.interpolate(right, x).lighter(y);
-      };
-    })());
+    MiniCanvas.boxGradient("rainbowhsl",
+      function(x : Float, y : Float) : RGB {
+        return HSL.create(x * 360, 1, y);
+      });
 
-    MiniCanvas.boxGradient("rainbowcielab", (function() {
-      var left  : HSL = 'hsl(0,100%,50%)',
-          right : HSL = 'hsl(90,100%,50%)';
+    MiniCanvas.boxGradient("rainbowcielch",
+      (function() {
+      var left : CIELCh = Color.red;
       return function(x : Float, y : Float) : RGB {
-        return (left : CIELab).interpolate(right, x).withLightness(y);
+        return left.withHue(x * 360).withLightness(y * 100);
       };
     })());
 
