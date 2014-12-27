@@ -10,11 +10,6 @@ class TestCIELab {
     Assert.equals(100, color.l);
     Assert.equals(10,  color.a);
     Assert.equals(-10, color.b);
-
-    color = CIELab.create(120, 150, -150);
-    Assert.equals(100, color.l);
-    Assert.equals(128,  color.a);
-    Assert.equals(-128, color.b);
   }
 
   public function testString() {

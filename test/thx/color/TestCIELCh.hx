@@ -10,11 +10,6 @@ class TestCIELCh {
     Assert.equals(100, color.l);
     Assert.equals(10,  color.c);
     Assert.equals(350, color.h);
-
-    color = CIELCh.create(120, 150, -150);
-    Assert.equals(100, color.l);
-    Assert.equals(150,  color.c);
-    Assert.equals(210, color.h);
   }
 
   public function testString() {
