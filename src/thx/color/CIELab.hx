@@ -14,11 +14,7 @@ abstract CIELab(Array<Float>) {
   public var b(get, never) : Float;
 
   public static function create(l : Float, a : Float, b : Float)
-    return new CIELab([
-      l.clamp(0, 100),
-      a.clampSym(128),
-      b.clampSym(128)
-    ]);
+    return new CIELab([l, a, b]);
 
   @:from public static function fromFloats(arr : Array<Float>) : CIELab {
     arr.resize(3);
