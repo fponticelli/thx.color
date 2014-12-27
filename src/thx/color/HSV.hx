@@ -100,7 +100,7 @@ abstract HSV(Array<Float>) {
     return 'hsv($huef,${saturation*100}%,${value*100}%)';
 
   @:op(A==B) public function equals(other : HSV) : Bool
-    return hue == other.hue && saturation == other.saturation && value == other.value;
+    return hue.nearEquals(other.hue) && saturation.nearEquals(other.saturation) && value.nearEquals(other.value);
 
   @:to inline public function toCIELab()
     return toRGBX().toCIELab();

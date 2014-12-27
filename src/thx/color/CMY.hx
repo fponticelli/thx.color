@@ -70,7 +70,7 @@ abstract CMY(Array<Float>) {
     return 'cmy($cyan,$magenta,$yellow)';
 
   @:op(A==B) public function equals(other : CMY) : Bool
-    return cyan == other.cyan && magenta == other.magenta && yellow == other.yellow;
+    return cyan.nearEquals(other.cyan) && magenta.nearEquals(other.magenta) && yellow.nearEquals(other.yellow);
 
   @:to inline public function toCIELab()
     return toRGBX().toCIELab();

@@ -78,7 +78,7 @@ abstract CIELab(Array<Float>) {
   }
 
   @:op(A==B) public function equals(other : CIELab) : Bool
-    return l == other.l && a == other.a && b == other.b;
+    return l.nearEquals(other.l) && a.nearEquals(other.a) && b.nearEquals(other.b);
 
   public function withLightness(lightness : Float)
     return new CIELab([lightness, a, b]);

@@ -90,7 +90,7 @@ abstract CMYK(Array<Float>) {
     return 'cmyk($cyan,$magenta,$yellow,$black)';
 
   @:op(A==B) public function equals(other : CMYK) : Bool
-    return cyan == other.cyan && magenta == other.magenta && yellow == other.yellow && black == other.black;
+    return cyan.nearEquals(other.cyan) && magenta.nearEquals(other.magenta) && yellow.nearEquals(other.yellow) && black.nearEquals(other.black);
 
   @:to inline public function toCIELab()
     return toRGBX().toCIELab();

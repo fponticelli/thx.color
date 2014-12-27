@@ -56,7 +56,7 @@ abstract Yxy(Array<Float>) {
     return 'Yxy($y1,$x,$y2)';
 
   @:op(A==B) public function equals(other : Yxy) : Bool
-    return y1 == other.y1 && x == other.x && y2 == other.y2;
+    return y1.nearEquals(other.y1) && x.nearEquals(other.x) && y2.nearEquals(other.y2);
 
   @:to inline public function toCIELab()
     return toXYZ().toCIELab();

@@ -44,7 +44,9 @@ abstract Grey(Float) from Float to Float {
     return 'grey(${grey*100}%)';
 
   @:op(A==B) public function equals(other : Grey) : Bool
-    return this == other.grey;  inline function get_grey() : Float
+    return this.nearEquals(other.grey);
+
+  inline function get_grey() : Float
     return this;
 
   @:to inline public function toCIELab()

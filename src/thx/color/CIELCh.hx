@@ -96,7 +96,7 @@ abstract CIELCh(Array<Float>) {
     return new CIELCh([lightness, chroma, newhue.wrapCircular(360)]);
 
   @:op(A==B) public function equals(other : CIELCh) : Bool
-    return lightness == other.lightness && chroma == other.chroma && hue == other.hue;
+    return lightness.nearEquals(other.lightness) && chroma.nearEquals(other.chroma) && hue.nearEquals(other.hue);
 
   @:to inline public function toString() : String
     return 'CIELCh($lightness,$chroma,$hue)';

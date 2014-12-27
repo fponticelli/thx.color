@@ -57,7 +57,7 @@ abstract XYZ(Array<Float>) {
     return 'XYZ($x,$y,$z)';
 
   @:op(A==B) public function equals(other : XYZ) : Bool
-    return x == other.x && y == other.y && z == other.z;
+    return x.nearEquals(other.x) && y.nearEquals(other.y) && z.nearEquals(other.z);
 
   @:to public function toCIELab() : CIELab {
     var x = x * 0.0105211106,

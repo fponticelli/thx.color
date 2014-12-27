@@ -122,7 +122,7 @@ abstract HSLA(Array<Float>) {
     return 'hsla(${huef},${saturation*100}%,${lightness*100}%,$alpha)';
 
   @:op(A==B) public function equals(other : HSLA) : Bool
-    return hue == other.hue && saturation == other.saturation && lightness == other.lightness && alpha == other.alpha;
+    return hue.nearEquals(other.hue) && saturation.nearEquals(other.saturation) && lightness.nearEquals(other.lightness) && alpha.nearEquals(other.alpha);
 
   @:to inline public function toHSL()
     return new HSL(this.slice(0, 3));
