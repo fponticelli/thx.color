@@ -81,13 +81,13 @@ abstract CIELab(Array<Float>) {
     return l == other.l && a == other.a && b == other.b;
 
   public function withLightness(lightness : Float) : CIELab
-    return new CIELab([lightness.clamp(0, 100), a, b]);
+    return new CIELab([lightness, a, b]);
 
   public function withA(newa : Float) : CIELab
-    return new CIELab([l, newa.clampSym(128), b]);
+    return new CIELab([l, newa, b]);
 
   public function withB(newb : Float) : CIELab
-    return new CIELab([l, a, newb.clampSym(128)]);
+    return new CIELab([l, a, newb]);
 
   @:to public function toString() : String
     return 'CIELab($l,$a,$b)';
