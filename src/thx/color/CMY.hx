@@ -29,7 +29,7 @@ abstract CMY(Array<Float>) {
       return null;
     return try switch info.name {
       case 'cmy':
-        new thx.color.CMY(ColorParser.getFloatChannels(info.channels, 4));
+        new thx.color.CMY(ColorParser.getFloatChannels(info.channels, 3));
       case _:
         null;
     } catch(e : Dynamic) null;
