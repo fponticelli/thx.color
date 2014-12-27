@@ -52,8 +52,7 @@ abstract HSV(Array<Float>) {
 
   public function interpolate(other : HSV, t : Float) : HSV
     return new HSV([
-      // TODO circular interpolation
-      t.interpolate(hue, other.hue),
+      t.interpolateAngle(hue, other.hue),
       t.interpolate(saturation, other.saturation),
       t.interpolate(value, other.value)
     ]);

@@ -14,11 +14,11 @@ abstract CIELCh(Array<Float>) {
   public var c(get, never) : Float;
   public var h(get, never) : Float;
 
-  public static function create(l : Float, a : Float, b : Float)
+  public static function create(l : Float, c : Float, h : Float)
     return new CIELCh([
-      l.clamp(0, 100),
-      a,
-      b.wrapCircular(360)
+      l,
+      c,
+      h.wrapCircular(360)
     ]);
 
   @:from public static function fromFloats(arr : Array<Float>) : CIELCh {
@@ -56,8 +56,7 @@ abstract CIELCh(Array<Float>) {
     return new CIELCh([
       t.interpolate(l, other.l),
       t.interpolate(c, other.c),
-      // TODO interpolation should account for shortest path
-      t.interpolate(h, other.h)
+      t.interpolateAngle(h, other.h, 360)
     ]);
 
   public function rotate(angle : Float)
@@ -88,7 +87,7 @@ abstract CIELCh(Array<Float>) {
     );
 
   public function withLightness(lightness : Float) : CIELCh
-    return new CIELCh([lightness.clamp(0, 100), c, h]);
+    return new CIELCh([lightness, c, h]);
 
   public function withChroma(newchroma : Float) : CIELCh
     return new CIELCh([l, newchroma, h]);

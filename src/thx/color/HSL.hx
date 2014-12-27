@@ -66,8 +66,7 @@ abstract HSL(Array<Float>) {
 
   public function interpolate(other : HSL, t : Float) : HSL
     return new HSL([
-      // TODO circular interpolation
-      t.interpolate(hue, other.hue),
+      t.interpolateAngle(hue, other.hue, 360),
       t.interpolate(saturation, other.saturation),
       t.interpolate(lightness, other.lightness)
     ]);

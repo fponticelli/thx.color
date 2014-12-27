@@ -88,8 +88,7 @@ abstract HSLA(Array<Float>) {
 
   public function interpolate(other : HSLA, t : Float) : HSLA
     return new HSLA([
-      // TODO circular interpolation
-      t.interpolate(hue, other.hue),
+      t.interpolateAngle(hue, other.hue),
       t.interpolate(saturation, other.saturation),
       t.interpolate(lightness, other.lightness),
       t.interpolate(alpha, other.alpha)
