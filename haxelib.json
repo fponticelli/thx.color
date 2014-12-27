@@ -5,8 +5,8 @@
   "classPath": "src",
   "tags": ["color", "thx", "cross"],
   "description": "Library for color manipulation. Contains definitions for CMYK, Grey, HSL, HSV, and RGB as well as alpha versions of the sames and color parsing.",
-  "releasenote": "Fixed issue in CMY.",
-  "version": "0.10.1",
+  "releasenote": "Use `nearEquals` for equality operator.",
+  "version": "0.10.2",
   "contributors": ["fponticelli"],
   "dependencies": {
     "thx.core": ""
