@@ -22,13 +22,23 @@ class TestCIELab {
     Assert.equals("CIELab(100,10,-10)", color.toString());
   }
 
-/*
-  public function testWhite() {
-    Assert.isTrue(Color.white.toCIELab().equals(CIELab.fromFloats(0,0,0,0)));
+  public function testFromFloat() {
+    var s : CIELab = "CIELab(50,10,-10)",
+        f : CIELab = [50.0,10.0,-10.0];
+    Assert.isTrue(s == f);
   }
 
-  public function testFromString() {
-    Assert.isTrue(CIELab.fromFloats(0.5, 0.2, 0.1, 0.3).equals("CIELab(50%,0.2,10%,0.3)"));
+  public function testDistance() {
+    var orange : CIELab = Color.orange,
+        red : CIELab = Color.red,
+        blue : CIELab = Color.blue,
+        distOrangeRed = orange.distance(red),
+        distOrangeBlue = orange.distance(blue);
+    Assert.isTrue(distOrangeRed < distOrangeBlue);
   }
-*/
+
+  public function testMatch() {
+    var arr : Array<CIELab> = [Color.red, Color.blue];
+    Assert.isTrue((Color.orange : CIELab).match(arr) == (Color.red : CIELab));
+  }
 }

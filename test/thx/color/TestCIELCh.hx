@@ -21,4 +21,10 @@ class TestCIELCh {
     var color : CIELCh = "CIELCh(100,10,-10)";
     Assert.equals("CIELCh(100,10,350)", color.toString());
   }
+
+  public function testFromFloat() {
+    var s : CIELCh = "CIELCh(100,10,-10)",
+        f : CIELCh = [100.0,10.0,-10.0];
+    Assert.isTrue(s == f);
+  }
 }

@@ -8,12 +8,15 @@ class TestAll {
     runner.addCase(new thx.color.TestColor());
     runner.addCase(new thx.color.TestColorParser());
     runner.addCase(new thx.color.TestConversion());
+    runner.addCase(new thx.color.TestCMY());
     runner.addCase(new thx.color.TestCMYK());
     runner.addCase(new thx.color.TestGrey());
     runner.addCase(new thx.color.TestHSL());
     runner.addCase(new thx.color.TestHSV());
     runner.addCase(new thx.color.TestRGB());
     runner.addCase(new thx.color.TestRGBX());
+    runner.addCase(new thx.color.TestXYZ());
+    runner.addCase(new thx.color.TestYxy());
   }
 
   public static function main() {
