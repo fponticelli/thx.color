@@ -83,6 +83,18 @@ abstract RGBXA(Array<Float>) {
       t.interpolate(alphaf, other.alphaf)
     ]);
 
+  inline public function withAlpha(newalpha : Float)
+    return new RGBXA([red, green, blue, newalpha.normalize()]);
+
+  inline public function withRed(newred : Int)
+    return new RGBXA([newred.normalize(), green, blue, alpha]);
+
+  inline public function withGreen(newgreen : Int)
+    return new RGBXA([red, newgreen.normalize(), blue, alpha]);
+
+  inline public function withBlue(newblue : Int)
+    return new RGBXA([red, green, newblue.normalize(), alpha]);
+
   inline public function toCSS3() : String
     return toString();
   @:to inline public function toString() : String

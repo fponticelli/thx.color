@@ -43,6 +43,15 @@ abstract Yxy(Array<Float>) {
       t.interpolate(y2, other.y2)
     ]);
 
+  public function withY1(newy1 : Float)
+    return new Yxy([newy1, x, y2]);
+
+  public function withY(newx : Float)
+    return new Yxy([y1, x, y2]);
+
+  public function withZ(newy2 : Float)
+    return new Yxy([y1, x, y2]);
+
   inline public function toString() : String
     return 'Yxy($y1,$x,$y2)';
 

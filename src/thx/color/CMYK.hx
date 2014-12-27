@@ -54,6 +54,38 @@ abstract CMYK(Array<Float>) {
       t.interpolate(black,   other.black)
     ]);
 
+  public function withCyan(newcyan : Float)
+    return new CMYK([
+      newcyan.normalize(),
+      magenta,
+      yellow,
+      black
+    ]);
+
+  public function withMagenta(newmagenta : Float)
+    return new CMYK([
+      cyan,
+      newmagenta.normalize(),
+      yellow,
+      black
+    ]);
+
+  public function withYellow(newyellow : Float)
+    return new CMYK([
+      cyan,
+      magenta,
+      newyellow.normalize(),
+      black
+    ]);
+
+  public function withBlack(newblack : Float)
+    return new CMYK([
+      cyan,
+      magenta,
+      yellow,
+      newblack.normalize()
+    ]);
+
   @:to inline public function toString() : String
     return 'cmyk($cyan,$magenta,$yellow,$black)';
 

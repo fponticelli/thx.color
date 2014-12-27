@@ -61,11 +61,23 @@ abstract RGBA(Int) from Int to Int {
   public function transparent(t : Float) : RGBA
     return toRGBXA().transparent(t).toRGBA();
 
-  public function opaque(t : Float) : RGBA
+  public function opaque(t : Float)
     return toRGBXA().opaque(t).toRGBA();
 
-  public function interpolate(other : RGBA, t : Float) : RGBA
-    return toRGBXA().interpolate(other.toRGBXA(), t);
+  public function interpolate(other : RGBA, t : Float)
+    return toRGBXA().interpolate(other.toRGBXA(), t).toRGBA();
+
+  inline public function withAlpha(newalpha : Int)
+    return RGBA.fromInts([red, green, blue, newalpha]);
+
+  inline public function withRed(newred : Int)
+    return RGBA.fromInts([newred, green, blue]);
+
+  inline public function withGreen(newgreen : Int)
+    return RGBA.fromInts([red, newgreen, blue]);
+
+  inline public function withBlue(newblue : Int)
+    return RGBA.fromInts([red, green, newblue]);
 
   @:to inline public function toHSLA() : HSLA
     return toRGBXA().toHSLA();

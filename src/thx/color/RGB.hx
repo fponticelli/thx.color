@@ -2,6 +2,7 @@ package thx.color;
 
 using thx.core.Arrays;
 using thx.core.Floats;
+using thx.core.Ints;
 using thx.core.Strings;
 import thx.color.parse.ColorParser;
 
@@ -43,14 +44,23 @@ abstract RGB(Int) from Int to Int {
   public function darker(t : Float) : RGB
     return toRGBX().darker(t).toRGB();
 
-  public function lighter(t : Float) : RGB
+  public function lighter(t : Float)
     return toRGBX().lighter(t).toRGB();
 
-  public function interpolate(other : RGB, t : Float) : RGB
-    return toRGBX().interpolate(other.toRGBX(), t);
+  public function interpolate(other : RGB, t : Float)
+    return toRGBX().interpolate(other.toRGBX(), t).toRGB();
 
-  inline public function withAlpha(alpha : Int) : RGBXA
+  inline public function withAlpha(alpha : Int)
     return RGBA.fromInts([red, green, blue, alpha]);
+
+  inline public function withRed(newred : Int)
+    return RGB.fromInts([newred, green, blue]);
+
+  inline public function withGreen(newgreen : Int)
+    return RGB.fromInts([red, newgreen, blue]);
+
+  inline public function withBlue(newblue : Int)
+    return RGB.fromInts([red, green, newblue]);
 
   inline public function toCSS3() : String
     return 'rgb($red,$green,$blue)';

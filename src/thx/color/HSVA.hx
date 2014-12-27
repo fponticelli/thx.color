@@ -87,6 +87,18 @@ abstract HSVA(Array<Float>) {
       rotate(spread)
     );
 
+  inline public function withAlpha(newalpha : Float) : HSVA
+    return new HSVA([hue, saturation, value, newalpha.normalize()]);
+
+  inline public function withHue(newhue : Float) : HSVA
+    return new HSVA([newhue.normalize(), saturation, value, alpha]);
+
+  inline public function withLightness(newvalue : Float) : HSVA
+    return new HSVA([hue, saturation, newvalue.normalize(), alpha]);
+
+  inline public function withSaturation(newsaturation : Float) : HSVA
+    return new HSVA([hue, newsaturation.normalize(), value, alpha]);
+
   inline public function toString() : String
     return 'hsva($huef,${saturation*100}%,${value*100}%,$alpha)';
 

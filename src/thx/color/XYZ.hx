@@ -44,6 +44,15 @@ abstract XYZ(Array<Float>) {
       t.interpolate(z, other.z),
     ]);
 
+  public function withX(newx : Float)
+    return new XYZ([newx, y, z]);
+
+  public function withY(newy : Float)
+    return new XYZ([x, newy, z]);
+
+  public function withZ(newz : Float)
+    return new XYZ([x, y, newz]);
+
   inline public function toString() : String
     return 'XYZ($x,$y,$z)';
 

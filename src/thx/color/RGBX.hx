@@ -86,6 +86,18 @@ abstract RGBX(Array<Float>) {
   @:op(A==B) public function equals(other : RGBX)
     return redf.nearEquals(other.redf) && greenf.nearEquals(other.greenf) && bluef.nearEquals(other.bluef);
 
+  inline public function withAlpha(alpha : Float)
+    return new RGBXA(this.concat([alpha.normalize()]));
+
+  inline public function withRed(newred : Int)
+    return new RGBX([newred.normalize(), green, blue]);
+
+  inline public function withGreen(newgreen : Int)
+    return new RGBX([red, newgreen.normalize(), blue]);
+
+  inline public function withBlue(newblue : Int)
+    return new RGBX([red, green, newblue.normalize()]);
+
   @:to public function toCIELab() : CIELab
     return toXYZ().toCIELab();
 
@@ -199,9 +211,6 @@ abstract RGBX(Array<Float>) {
 
   @:to inline public function toYxy() : Yxy
     return toXYZ().toYxy();
-
-  inline public function withAlpha(alpha : Float) : RGBXA
-    return new RGBXA(this.concat([alpha]));
 
   inline function get_red() : Int
     return (redf   * 255).round();

@@ -103,6 +103,18 @@ abstract HSLA(Array<Float>) {
       rotate(spread)
     );
 
+  inline public function withAlpha(newalpha : Float) : HSLA
+    return new HSLA([hue, saturation, lightness, newalpha.normalize()]);
+
+  inline public function withHue(newhue : Float) : HSLA
+    return new HSLA([newhue.normalize(), saturation, lightness, alpha]);
+
+  inline public function withLightness(newlightness : Float) : HSLA
+    return new HSLA([hue, saturation, newlightness.normalize(), alpha]);
+
+  inline public function withSaturation(newsaturation : Float) : HSLA
+    return new HSLA([hue, newsaturation.normalize(), lightness, alpha]);
+
   inline public function toCSS3() : String
     return toString();
 

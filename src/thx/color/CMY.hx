@@ -45,6 +45,27 @@ abstract CMY(Array<Float>) {
       t.interpolate(yellow,  other.yellow)
     ]);
 
+  public function withCyan(newcyan : Float)
+    return new CMY([
+      newcyan.normalize(),
+      magenta,
+      yellow
+    ]);
+
+  public function withMagenta(newmagenta : Float)
+    return new CMY([
+      cyan,
+      newmagenta.normalize(),
+      yellow
+    ]);
+
+  public function withYellow(newyellow : Float)
+    return new CMY([
+      cyan,
+      magenta,
+      newyellow.normalize()
+    ]);
+
   @:to inline public function toString() : String
     return 'cmy($cyan,$magenta,$yellow)';
 
