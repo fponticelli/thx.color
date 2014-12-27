@@ -10,15 +10,15 @@ import thx.color.parse.ColorParser;
 @:access(thx.color.XYZ)
 @:access(thx.color.RGBX)
 abstract CIELCh(Array<Float>) {
-  public var l(get, never) : Float;
-  public var c(get, never) : Float;
-  public var h(get, never) : Float;
+  public var lightness(get, never) : Float;
+  public var chroma(get, never) : Float;
+  public var hue(get, never) : Float;
 
-  public static function create(l : Float, c : Float, h : Float)
+  public static function create(lightness : Float, chroma : Float, hue : Float)
     return new CIELCh([
-      l,
-      c,
-      h.wrapCircular(360)
+      lightness,
+      chroma,
+      hue.wrapCircular(360)
     ]);
 
   @:from public static function fromFloats(arr : Array<Float>) {
@@ -54,13 +54,13 @@ abstract CIELCh(Array<Float>) {
 
   public function interpolate(other : CIELCh, t : Float)
     return new CIELCh([
-      t.interpolate(l, other.l),
-      t.interpolate(c, other.c),
-      t.interpolateAngle(h, other.h, 360)
+      t.interpolate(lightness, other.lightness),
+      t.interpolate(chroma, other.chroma),
+      t.interpolateAngle(hue, other.hue, 360)
     ]);
 
   public function rotate(angle : Float)
-    return withHue(h + angle);
+    return withHue(hue + angle);
 
   public function split(spread = 144.0)
     return new Tuple2(
@@ -86,26 +86,26 @@ abstract CIELCh(Array<Float>) {
       rotate(120)
     );
 
-  public function withLightness(lightness : Float)
-    return new CIELCh([lightness, c, h]);
+  public function withLightness(newlightness : Float)
+    return new CIELCh([newlightness, chroma, hue]);
 
   public function withChroma(newchroma : Float)
-    return new CIELCh([l, newchroma, h]);
+    return new CIELCh([lightness, newchroma, hue]);
 
   public function withHue(newhue : Float)
-    return new CIELCh([l, c, newhue.wrapCircular(360)]);
+    return new CIELCh([lightness, chroma, newhue.wrapCircular(360)]);
 
   @:op(A==B) public function equals(other : CIELCh) : Bool
-    return l == other.l && c == other.c && h == other.h;
+    return lightness == other.lightness && chroma == other.chroma && hue == other.hue;
 
   @:to inline public function toString() : String
-    return 'CIELCh($l,$c,$h)';
+    return 'CIELCh($lightness,$chroma,$hue)';
 
   @:to public function toCIELab() {
-    var hradi = h * (Math.PI / 180),
-        a = Math.cos(hradi) * c,
-        b = Math.sin(hradi) * c;
-    return new CIELab([l, a, b]);
+    var hradi = hue * (Math.PI / 180),
+        a = Math.cos(hradi) * chroma,
+        b = Math.sin(hradi) * chroma;
+    return new CIELab([lightness, a, b]);
   }
 
   @:to inline public function toCMY()
@@ -138,10 +138,10 @@ abstract CIELCh(Array<Float>) {
   @:to inline public function toYxy()
     return toCIELab().toYxy();
 
-  inline function get_l() : Float
+  inline function get_lightness() : Float
     return this[0];
-  inline function get_c() : Float
+  inline function get_chroma() : Float
     return this[1];
-  inline function get_h() : Float
+  inline function get_hue() : Float
     return this[2];
 }

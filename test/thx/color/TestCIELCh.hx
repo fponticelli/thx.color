@@ -7,9 +7,9 @@ class TestCIELCh {
 
   public function testBasics() {
     var color = CIELCh.create(100, 10, -10);
-    Assert.equals(100, color.l);
-    Assert.equals(10,  color.c);
-    Assert.equals(350, color.h);
+    Assert.equals(100, color.lightness);
+    Assert.equals(10,  color.chroma);
+    Assert.equals(350, color.hue);
   }
 
   public function testString() {
