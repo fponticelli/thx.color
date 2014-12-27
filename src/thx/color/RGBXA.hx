@@ -14,17 +14,17 @@ abstract RGBXA(Array<Float>) {
   public static function create(red : Float, green : Float, blue : Float, alpha : Float) : RGBXA
     return new RGBXA([red.normalize(),green.normalize(),blue.normalize(),alpha.normalize()]);
 
-  @:from public static function fromFloats(arr : Array<Float>) : RGBXA {
+  @:from public static function fromFloats(arr : Array<Float>) {
     arr.resize(4);
     return RGBXA.create(arr[0], arr[1], arr[2], arr[3]);
   }
 
-  @:from public static function fromInts(arr : Array<Int>) : RGBXA {
+  @:from public static function fromInts(arr : Array<Int>) {
     arr.resize(4);
     return RGBXA.create(arr[0] / 255, arr[1] / 255, arr[2] / 255, arr[3] / 255);
   }
 
-  @:from public static function fromString(color : String) : RGBXA {
+  @:from public static function fromString(color : String) {
     var info = ColorParser.parseHex(color);
     if(null == info)
       info = ColorParser.parseColor(color);
@@ -53,13 +53,13 @@ abstract RGBXA(Array<Float>) {
   public var bluef(get, never) : Float;
   public var alphaf(get, never) : Float;
 
-  public function darker(t : Float) : RGBXA
+  public function darker(t : Float)
     return toRGBX().darker(t).withAlpha(alpha);
 
-  public function lighter(t : Float) : RGBXA
+  public function lighter(t : Float)
     return toRGBX().lighter(t).withAlpha(alpha);
 
-  public function transparent(t : Float) : RGBXA
+  public function transparent(t : Float)
     return new RGBXA([
       redf,
       greenf,
@@ -67,7 +67,7 @@ abstract RGBXA(Array<Float>) {
       t.interpolate(alphaf, 0)
     ]);
 
-  public function opaque(t : Float) : RGBXA
+  public function opaque(t : Float)
     return new RGBXA([
       redf,
       greenf,
@@ -75,7 +75,7 @@ abstract RGBXA(Array<Float>) {
       t.interpolate(alphaf, 1)
     ]);
 
-  public function interpolate(other : RGBXA, t : Float) : RGBXA
+  public function interpolate(other : RGBXA, t : Float)
     return new RGBXA([
       t.interpolate(redf, other.redf),
       t.interpolate(greenf, other.greenf),
@@ -105,19 +105,19 @@ abstract RGBXA(Array<Float>) {
   @:op(A==B) public function equals(other : RGBXA) : Bool
     return redf.nearEquals(other.redf) && greenf.nearEquals(other.greenf) && bluef.nearEquals(other.bluef) && alphaf.nearEquals(other.alphaf);
 
-  @:to public function toHSLA() : HSLA
+  @:to public function toHSLA()
     return toRGBX().toHSL().withAlpha(alpha);
 
-  @:to public function toHSVA() : HSVA
+  @:to public function toHSVA()
     return toRGBX().toHSV().withAlpha(alpha);
 
-  @:to inline public function toRGB() : RGB
+  @:to inline public function toRGB()
     return toRGBX().toRGB();
 
-  @:to inline public function toRGBX() : RGBX
+  @:to inline public function toRGBX()
     return new RGBX(this.slice(0,3));
 
-  @:to inline public function toRGBA() : RGBA
+  @:to inline public function toRGBA()
     return RGBA.fromFloats([redf, greenf, bluef, alphaf]);
 
   inline function get_red() : Int

@@ -23,7 +23,7 @@ abstract CMY(Array<Float>) {
     return CMY.create(arr[0], arr[1], arr[2]);
   }
 
-  @:from public static function fromString(color : String) : CMY {
+  @:from public static function fromString(color : String) {
     var info = ColorParser.parseColor(color);
     if(null == info)
       return null;
@@ -38,7 +38,7 @@ abstract CMY(Array<Float>) {
   inline function new(channels : Array<Float>) : CMY
     this = channels;
 
-  public function interpolate(other : CMY, t : Float) : CMY
+  public function interpolate(other : CMY, t : Float)
     return new CMY([
       t.interpolate(cyan,    other.cyan),
       t.interpolate(magenta, other.magenta),
@@ -72,13 +72,13 @@ abstract CMY(Array<Float>) {
   @:op(A==B) public function equals(other : CMY) : Bool
     return cyan == other.cyan && magenta == other.magenta && yellow == other.yellow;
 
-  @:to inline public function toCIELab() : CIELab
+  @:to inline public function toCIELab()
     return toRGBX().toCIELab();
 
-  @:to inline public function toCIELCh() : CIELCh
+  @:to inline public function toCIELCh()
     return toRGBX().toCIELCh();
 
-  @:to public function toCMYK() : CMYK {
+  @:to public function toCMYK() {
     var k = cyan.min(magenta).min(yellow);
     if(k == 1)
       return new CMYK([0,0,0,1]);
@@ -91,19 +91,19 @@ abstract CMY(Array<Float>) {
       ]);
   }
 
-  @:to inline public function toGrey() : Grey
+  @:to inline public function toGrey()
     return toRGBX().toGrey();
 
-  @:to inline public function toHSL() : HSL
+  @:to inline public function toHSL()
     return toRGBX().toHSL();
 
-  @:to inline public function toHSV() : HSV
+  @:to inline public function toHSV()
     return toRGBX().toHSV();
 
-  @:to inline public function toRGB() : RGB
+  @:to inline public function toRGB()
     return toRGBX().toRGB();
 
-  @:to inline public function toRGBX() : RGBX
+  @:to inline public function toRGBX()
     return new RGBX([
       1 - cyan,
       1 - magenta,

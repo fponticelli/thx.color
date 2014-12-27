@@ -31,13 +31,13 @@ abstract Grey(Float) from Float to Float {
   public function contrast()
     return this > 0.5 ? black : white;
 
-  public function darker(t : Float) : Grey
+  public function darker(t : Float)
     return new Grey(t.interpolate(grey, 0));
 
-  public function lighter(t : Float) : Grey
+  public function lighter(t : Float)
     return new Grey(t.interpolate(grey, 1));
 
-  public function interpolate(other : Grey, t : Float) : Grey
+  public function interpolate(other : Grey, t : Float)
     return new Grey(t.interpolate(grey, other.grey));
 
   inline public function toString() : String
@@ -47,36 +47,36 @@ abstract Grey(Float) from Float to Float {
     return this == other.grey;  inline function get_grey() : Float
     return this;
 
-  @:to inline public function toCIELab() : CIELab
+  @:to inline public function toCIELab()
     return toRGBX().toCIELab();
 
-  @:to inline public function toCIELCh() : CIELCh
+  @:to inline public function toCIELCh()
     return toRGBX().toCIELCh();
 
-  @:to inline public function toCMY() : CMY
+  @:to inline public function toCMY()
     return toRGBX().toCMY();
 
-  @:to inline public function toCMYK() : CMYK
+  @:to inline public function toCMYK()
     return toRGBX().toCMYK();
 
-  @:to inline public function toHSL() : HSL
+  @:to inline public function toHSL()
     return toRGBX().toHSL();
 
-  @:to inline public function toHSV() : HSV
+  @:to inline public function toHSV()
     return toRGBX().toHSV();
 
-  @:to inline public function toRGB() : RGB
+  @:to inline public function toRGB()
     return toRGBX().toRGB();
 
-  @:to inline public function toRGBX() : RGBX
+  @:to inline public function toRGBX()
     return new RGBX([grey, grey, grey]);
 
-  @:to inline public function toRGBXA() : RGBXA
+  @:to inline public function toRGBXA()
     return toRGBX().toRGBXA();
 
-  @:to inline public function toXYZ() : XYZ
+  @:to inline public function toXYZ()
     return toRGBX().toXYZ();
 
-  @:to inline public function toYxy() : Yxy
+  @:to inline public function toYxy()
     return toRGBX().toYxy();
 }

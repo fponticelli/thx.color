@@ -22,12 +22,12 @@ abstract HSVA(Array<Float>) {
       alpha.clamp(0, 1)
     ]);
 
-  @:from public static function fromFloats(arr : Array<Float>) : HSVA {
+  @:from public static function fromFloats(arr : Array<Float>) {
     arr.resize(4);
     return HSVA.create(arr[0], arr[1], arr[2], arr[3]);
   }
 
-  @:from public static function fromString(color : String) : HSVA {
+  @:from public static function fromString(color : String) {
     var info = ColorParser.parseColor(color);
     if(null == info)
       return null;
@@ -54,7 +54,7 @@ abstract HSVA(Array<Float>) {
   public function complement()
     return rotate(180);
 
-  public function transparent(t : Float) : HSVA
+  public function transparent(t : Float)
     return new HSVA([
       hue,
       saturation,
@@ -62,7 +62,7 @@ abstract HSVA(Array<Float>) {
       t.interpolate(alpha, 0)
     ]);
 
-  public function opaque(t : Float) : HSVA
+  public function opaque(t : Float)
     return new HSVA([
       hue,
       saturation,
@@ -70,7 +70,7 @@ abstract HSVA(Array<Float>) {
       t.interpolate(alpha, 1)
     ]);
 
-  public function interpolate(other : HSVA, t : Float) : HSVA
+  public function interpolate(other : HSVA, t : Float)
     return new HSVA([
       t.interpolateAngle(hue, other.hue),
       t.interpolate(saturation, other.saturation),
@@ -87,16 +87,16 @@ abstract HSVA(Array<Float>) {
       rotate(spread)
     );
 
-  inline public function withAlpha(newalpha : Float) : HSVA
+  inline public function withAlpha(newalpha : Float)
     return new HSVA([hue, saturation, value, newalpha.normalize()]);
 
-  inline public function withHue(newhue : Float) : HSVA
+  inline public function withHue(newhue : Float)
     return new HSVA([newhue.normalize(), saturation, value, alpha]);
 
-  inline public function withLightness(newvalue : Float) : HSVA
+  inline public function withLightness(newvalue : Float)
     return new HSVA([hue, saturation, newvalue.normalize(), alpha]);
 
-  inline public function withSaturation(newsaturation : Float) : HSVA
+  inline public function withSaturation(newsaturation : Float)
     return new HSVA([hue, newsaturation.normalize(), value, alpha]);
 
   inline public function toString() : String
@@ -105,16 +105,16 @@ abstract HSVA(Array<Float>) {
   @:op(A==B) public function equals(other : HSVA) : Bool
     return hue == other.hue && saturation == other.saturation && value == other.value && alpha == other.alpha;
 
-  @:to inline public function toHSV() : HSV
+  @:to inline public function toHSV()
     return new HSV(this.slice(0, 3));
 
-  @:to inline public function toHSLA() : HSLA
+  @:to inline public function toHSLA()
     return toRGBXA().toHSLA();
 
-  @:to inline public function toRGB() : RGB
+  @:to inline public function toRGB()
     return toRGBXA().toRGB();
 
-  @:to inline public function toRGBXA() : RGBXA {
+  @:to inline public function toRGBXA() {
     if(saturation == 0)
       return new RGBXA([value, value, value, alpha]);
 

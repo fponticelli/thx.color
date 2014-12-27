@@ -22,12 +22,12 @@ abstract HSLA(Array<Float>) {
       alpha.clamp(0, 1)
     ]);
 
-  @:from  public static function fromFloats(arr : Array<Float>) : HSLA {
+  @:from  public static function fromFloats(arr : Array<Float>) {
     arr.resize(4);
     return HSLA.create(arr[0], arr[1], arr[2], arr[3]);
   }
 
-  @:from public static function fromString(color : String) : HSLA {
+  @:from public static function fromString(color : String) {
     var info = ColorParser.parseColor(color);
     if(null == info)
       return null;
@@ -54,7 +54,7 @@ abstract HSLA(Array<Float>) {
   public function complement()
     return rotate(180);
 
-  public function darker(t : Float) : HSLA
+  public function darker(t : Float)
     return new HSLA([
       hue,
       saturation,
@@ -62,7 +62,7 @@ abstract HSLA(Array<Float>) {
       alpha
     ]);
 
-  public function lighter(t : Float) : HSLA
+  public function lighter(t : Float)
     return new HSLA([
       hue,
       saturation,
@@ -70,7 +70,7 @@ abstract HSLA(Array<Float>) {
       alpha
     ]);
 
-  public function transparent(t : Float) : HSLA
+  public function transparent(t : Float)
     return new HSLA([
       hue,
       saturation,
@@ -78,7 +78,7 @@ abstract HSLA(Array<Float>) {
       t.interpolate(alpha, 0)
     ]);
 
-  public function opaque(t : Float) : HSLA
+  public function opaque(t : Float)
     return new HSLA([
       hue,
       saturation,
@@ -86,7 +86,7 @@ abstract HSLA(Array<Float>) {
       t.interpolate(alpha, 1)
     ]);
 
-  public function interpolate(other : HSLA, t : Float) : HSLA
+  public function interpolate(other : HSLA, t : Float)
     return new HSLA([
       t.interpolateAngle(hue, other.hue),
       t.interpolate(saturation, other.saturation),
@@ -103,16 +103,16 @@ abstract HSLA(Array<Float>) {
       rotate(spread)
     );
 
-  inline public function withAlpha(newalpha : Float) : HSLA
+  inline public function withAlpha(newalpha : Float)
     return new HSLA([hue, saturation, lightness, newalpha.normalize()]);
 
-  inline public function withHue(newhue : Float) : HSLA
+  inline public function withHue(newhue : Float)
     return new HSLA([newhue.normalize(), saturation, lightness, alpha]);
 
-  inline public function withLightness(newlightness : Float) : HSLA
+  inline public function withLightness(newlightness : Float)
     return new HSLA([hue, saturation, newlightness.normalize(), alpha]);
 
-  inline public function withSaturation(newsaturation : Float) : HSLA
+  inline public function withSaturation(newsaturation : Float)
     return new HSLA([hue, newsaturation.normalize(), lightness, alpha]);
 
   inline public function toCSS3() : String
@@ -124,16 +124,16 @@ abstract HSLA(Array<Float>) {
   @:op(A==B) public function equals(other : HSLA) : Bool
     return hue == other.hue && saturation == other.saturation && lightness == other.lightness && alpha == other.alpha;
 
-  @:to inline public function toHSL() : HSL
+  @:to inline public function toHSL()
     return new HSL(this.slice(0, 3));
 
-  @:to inline public function toHSVA() : HSVA
+  @:to inline public function toHSVA()
     return toRGBXA().toHSVA();
 
-  @:to inline public function toRGB() : RGB
+  @:to inline public function toRGB()
     return toRGBXA().toRGB();
 
-  @:to inline public function toRGBXA() : RGBXA
+  @:to inline public function toRGBXA()
     return new RGBXA([
       _c(hue + 120, saturation, lightness),
       _c(hue, saturation, lightness),

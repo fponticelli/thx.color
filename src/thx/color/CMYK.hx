@@ -12,7 +12,7 @@ abstract CMYK(Array<Float>) {
   public var magenta(get, never): Float;
   public var yellow(get, never): Float;
 
-  public static function create(cyan: Float, magenta: Float, yellow: Float, black: Float) : CMYK
+  public static function create(cyan: Float, magenta: Float, yellow: Float, black: Float)
     return new CMYK([
       cyan.normalize(),
       magenta.normalize(),
@@ -25,7 +25,7 @@ abstract CMYK(Array<Float>) {
     return CMYK.create(arr[0], arr[1], arr[2], arr[3]);
   }
 
-  @:from public static function fromString(color : String) : CMYK {
+  @:from public static function fromString(color : String) {
     var info = ColorParser.parseColor(color);
     if(null == info)
       return null;
@@ -40,13 +40,13 @@ abstract CMYK(Array<Float>) {
   inline function new(channels : Array<Float>) : CMYK
     this = channels;
 
-  inline public function darker(t : Float) : CMYK
+  inline public function darker(t : Float)
     return new CMYK([cyan, magenta, yellow, t.interpolate(black, 1)]);
 
-  inline public function lighter(t : Float) : CMYK
+  inline public function lighter(t : Float)
     return new CMYK([cyan, magenta, yellow, t.interpolate(black, 0)]);
 
-  public function interpolate(other : CMYK, t : Float) : CMYK
+  public function interpolate(other : CMYK, t : Float)
     return new CMYK([
       t.interpolate(cyan,    other.cyan),
       t.interpolate(magenta, other.magenta),
@@ -92,39 +92,39 @@ abstract CMYK(Array<Float>) {
   @:op(A==B) public function equals(other : CMYK) : Bool
     return cyan == other.cyan && magenta == other.magenta && yellow == other.yellow && black == other.black;
 
-  @:to inline public function toCIELab() : CIELab
+  @:to inline public function toCIELab()
     return toRGBX().toCIELab();
 
-  @:to inline public function toCIELCh() : CIELCh
+  @:to inline public function toCIELCh()
     return toRGBX().toCIELCh();
 
-  @:to public function toCMY() : CMY
+  @:to public function toCMY()
     return new CMY([
       black + (1 - black) * cyan,
       black + (1 - black) * magenta,
       black + (1 - black) * yellow
     ]);
 
-  @:to inline public function toGrey() : Grey
+  @:to inline public function toGrey()
     return toRGBX().toGrey();
 
-  @:to inline public function toHSL() : HSL
+  @:to inline public function toHSL()
     return toRGBX().toHSL();
 
-  @:to inline public function toHSV() : HSV
+  @:to inline public function toHSV()
     return toRGBX().toHSV();
 
-  @:to inline public function toRGB() : RGB
+  @:to inline public function toRGB()
     return toRGBX().toRGB();
 
-  @:to inline public function toRGBX() : RGBX
+  @:to inline public function toRGBX()
     return new RGBX([
       (1 - black) * (1 - cyan),
       (1 - black) * (1 - magenta),
       (1 - black) * (1 - yellow)
     ]);
 
-  @:to inline public function toRGBXA() : RGBXA
+  @:to inline public function toRGBXA()
     return toRGBX().toRGBXA();
 
   inline function get_cyan() : Float
@@ -136,9 +136,9 @@ abstract CMYK(Array<Float>) {
   inline function get_black() : Float
     return this[3];
 
-  @:to inline public function toXYZ() : XYZ
+  @:to inline public function toXYZ()
     return toRGBX().toXYZ();
 
-  @:to inline public function toYxy() : Yxy
+  @:to inline public function toYxy()
     return toRGBX().toYxy();
 }

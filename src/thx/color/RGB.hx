@@ -8,10 +8,10 @@ import thx.color.parse.ColorParser;
 
 @:access(thx.color.RGBX)
 abstract RGB(Int) from Int to Int {
-  public static function create(red : Int, green : Int, blue : Int) : RGB
+  public static function create(red : Int, green : Int, blue : Int)
     return new RGB(((red & 0xFF) << 16) | ((green & 0xFF) << 8) | ((blue & 0xFF) << 0));
 
-  public static function createf(red : Float, green : Float, blue : Float) : RGB
+  public static function createf(red : Float, green : Float, blue : Float)
     return create((red * 255).round(), (green * 255).round(), (blue * 255).round());
 
   @:from public static function fromString(color : String) : Null<RGB> {
@@ -29,7 +29,7 @@ abstract RGB(Int) from Int to Int {
     } catch(e : Dynamic) null;
   }
 
-  @:from public static function fromInts(arr : Array<Int>) : RGB {
+  @:from public static function fromInts(arr : Array<Int>) {
     arr.resize(3);
     return create(arr[0], arr[1], arr[2]);
   }
@@ -41,7 +41,7 @@ abstract RGB(Int) from Int to Int {
   public var green(get, never) : Int;
   public var blue(get, never)  : Int;
 
-  public function darker(t : Float) : RGB
+  public function darker(t : Float)
     return toRGBX().darker(t).toRGB();
 
   public function lighter(t : Float)
@@ -74,40 +74,40 @@ abstract RGB(Int) from Int to Int {
   @:op(A==B) public function equals(other : RGB) : Bool
     return red == other.red && green == other.green && blue == other.blue;
 
-  @:to inline public function toCIELab() : CIELab
+  @:to inline public function toCIELab()
     return toRGBX().toCIELab();
 
-  @:to inline public function toCIELCh() : CIELCh
+  @:to inline public function toCIELCh()
     return toRGBX().toCIELCh();
 
-  @:to public function toCMY() : CMY
+  @:to public function toCMY()
     return toRGBX().toCMY();
 
-  @:to public function toCMYK() : CMYK
+  @:to public function toCMYK()
     return toRGBX().toCMYK();
 
-  @:to inline public function toGrey() : Grey
+  @:to inline public function toGrey()
     return toRGBX().toGrey();
 
-  @:to inline public function toHSL() : HSL
+  @:to inline public function toHSL()
     return toRGBX().toHSL();
 
-  @:to inline public function toHSV() : HSV
+  @:to inline public function toHSV()
     return toRGBX().toHSV();
 
-  @:to inline public function toRGBX() : RGBX
+  @:to inline public function toRGBX()
     return RGBX.fromInts([red, green, blue]);
 
-  @:to inline public function toRGBA() : RGBA
+  @:to inline public function toRGBA()
     return withAlpha(255);
 
-  @:to inline public function toRGBXA() : RGBXA
+  @:to inline public function toRGBXA()
     return toRGBA().toRGBXA();
 
-  @:to public function toYxy() : Yxy
-    return toRGBX().toXYZ();
+  @:to public function toYxy()
+    return toRGBX().toYxy();
 
-  @:to public function toXYZ() : XYZ
+  @:to public function toXYZ()
     return toRGBX().toXYZ();
 
   inline function get_red() : Int

@@ -50,12 +50,14 @@ class Demo {
       });
 
     MiniCanvas.boxGradient("rainbowcielch",
-      (function() {
-      var left : CIELCh = Color.red;
-      return function(x : Float, y : Float) : RGB {
-        return left.withHue(x * 360).withLightness(y * 100);
-      };
-    })());
+      function(x : Float, y : Float) : RGB {
+        return CIELCh.create(65, y * 65, x * 360);
+      });
+
+    MiniCanvas.boxGradient("rainbowcielab",
+      function(x : Float, y : Float) : RGB {
+        return CIELab.create(40, x * 200 - 100, y * 200 - 100);
+      });
 
     MiniCanvas.gradient('darkerrgb',
       (function() {

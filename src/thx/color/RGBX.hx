@@ -18,17 +18,17 @@ abstract RGBX(Array<Float>) {
   public static function create(red : Float, green : Float, blue : Float)
     return new RGBX([red.normalize(), green.normalize(), blue.normalize()]);
 
-  @:from public static function fromFloats(arr : Array<Float>) : RGBX {
+  @:from public static function fromFloats(arr : Array<Float>) {
     arr.resize(3);
     return RGBX.create(arr[0], arr[1], arr[2]);
   }
 
-  @:from public static function fromInts(arr : Array<Int>) : RGBX {
+  @:from public static function fromInts(arr : Array<Int>) {
     arr.resize(3);
     return RGBX.create(arr[0] / 255, arr[1] / 255, arr[2] / 255);
   }
 
-  @:from public static function fromString(color : String) : RGBX {
+  @:from public static function fromString(color : String) {
     var info = ColorParser.parseHex(color);
     if(null == info)
       info = ColorParser.parseColor(color);
@@ -53,21 +53,21 @@ abstract RGBX(Array<Float>) {
   public var greenf(get, never) : Float;
   public var bluef(get, never) : Float;
 
-  public function darker(t : Float) : RGBX
+  public function darker(t : Float)
     return new RGBX([
       t.interpolate(redf, 0),
       t.interpolate(greenf, 0),
       t.interpolate(bluef, 0),
     ]);
 
-  public function lighter(t : Float) : RGBX
+  public function lighter(t : Float)
     return new RGBX([
       t.interpolate(redf, 1),
       t.interpolate(greenf, 1),
       t.interpolate(bluef, 1),
     ]);
 
-  public function interpolate(other : RGBX, t : Float) : RGBX
+  public function interpolate(other : RGBX, t : Float)
     return new RGBX([
       t.interpolate(redf, other.redf),
       t.interpolate(greenf, other.greenf),
@@ -98,10 +98,10 @@ abstract RGBX(Array<Float>) {
   inline public function withBlue(newblue : Int)
     return new RGBX([red, green, newblue.normalize()]);
 
-  @:to public function toCIELab() : CIELab
+  @:to public function toCIELab()
     return toXYZ().toCIELab();
 
-  @:to public function toCIELCh() : CIELCh
+  @:to public function toCIELCh()
     return toCIELab().toCIELCh();
 
   @:to public function toCMY() : CMY
@@ -111,7 +111,7 @@ abstract RGBX(Array<Float>) {
       1 - bluef
     ]);
 
-  @:to public function toCMYK() : CMYK {
+  @:to public function toCMYK() {
     var c = 0.0, y = 0.0, m = 0.0, k;
     if (redf + greenf + bluef == 0) {
       k = 1.0;
@@ -124,16 +124,16 @@ abstract RGBX(Array<Float>) {
     return new CMYK([c, m, y, k]);
   }
 
-  @:to public inline function toGrey() : Grey
+  @:to public inline function toGrey()
     return new Grey(redf * .2126 + greenf * .7152 + bluef * .0722);
 
-  public inline function toPerceivedGrey() : Grey
+  public inline function toPerceivedGrey()
     return new Grey(redf * .299 + greenf * .587 + bluef * .114);
 
-  public inline function toPerceivedAccurateGrey() : Grey
+  public inline function toPerceivedAccurateGrey()
     return new Grey(Math.pow(redf, 2) * .241 + Math.pow(greenf, 2) * .691 + Math.pow(bluef, 2) * .068);
 
-  @:to public function toHSL() : HSL {
+  @:to public function toHSL() {
     var min = redf.min(greenf).min(bluef),
         max = redf.max(greenf).max(bluef),
         delta = max - min,
@@ -159,7 +159,7 @@ abstract RGBX(Array<Float>) {
     return new HSL([h, s, l]);
   }
 
-  @:to public function toHSV() : HSV {
+  @:to public function toHSV() {
     var min = redf.min(greenf).min(bluef),
       max = redf.max(greenf).max(bluef),
       delta = max - min,
@@ -187,13 +187,13 @@ abstract RGBX(Array<Float>) {
     return new HSV([h, s, v]);
   }
 
-  @:to inline public function toRGB() : RGB
+  @:to inline public function toRGB()
     return RGB.createf(redf, greenf, bluef);
 
-  @:to inline public function toRGBXA() : RGBXA
+  @:to inline public function toRGBXA()
     return withAlpha(1.0);
 
-  @:to public function toXYZ() : XYZ {
+  @:to public function toXYZ() {
     var r = redf,
         g = greenf,
         b = bluef;
@@ -209,7 +209,7 @@ abstract RGBX(Array<Float>) {
     ]);
   }
 
-  @:to inline public function toYxy() : Yxy
+  @:to inline public function toYxy()
     return toXYZ().toYxy();
 
   inline function get_red() : Int

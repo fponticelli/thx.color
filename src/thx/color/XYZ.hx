@@ -12,15 +12,15 @@ abstract XYZ(Array<Float>) {
   public var y(get, never) : Float;
   public var z(get, never) : Float;
 
-  public static function create(x : Float, y : Float, z : Float) : XYZ
+  public static function create(x : Float, y : Float, z : Float)
     return new XYZ([x, y, z]);
 
-  @:from public static function fromFloats(arr : Array<Float>) : XYZ {
+  @:from public static function fromFloats(arr : Array<Float>) {
     arr.resize(3);
     return XYZ.create(arr[0], arr[1], arr[2]);
   }
 
-  @:from public static function fromString(color : String) : XYZ {
+  @:from public static function fromString(color : String) {
     var info = ColorParser.parseColor(color);
     if(null == info)
       return null;
@@ -37,7 +37,7 @@ abstract XYZ(Array<Float>) {
   inline function new(channels : Array<Float>) : XYZ
     this = channels;
 
-  public function interpolate(other : XYZ, t : Float) : XYZ
+  public function interpolate(other : XYZ, t : Float)
     return new XYZ([
       t.interpolate(x, other.x),
       t.interpolate(y, other.y),
@@ -76,28 +76,28 @@ abstract XYZ(Array<Float>) {
     );
   }
 
-  @:to inline public function toCIELCh() : CIELCh
+  @:to inline public function toCIELCh()
     return toCIELab().toCIELCh();
 
-  @:to inline public function toCMY() : CMY
+  @:to inline public function toCMY()
     return toRGBX().toCMY();
 
-  @:to inline public function toCMYK() : CMYK
+  @:to inline public function toCMYK()
     return toRGBX().toCMYK();
 
-  @:to inline public function toGrey() : Grey
+  @:to inline public function toGrey()
     return toRGBX().toGrey();
 
-  @:to inline public function toHSL() : HSL
+  @:to inline public function toHSL()
     return toRGBX().toHSL();
 
-  @:to inline public function toHSV() : HSV
+  @:to inline public function toHSV()
     return toRGBX().toHSV();
 
-  @:to inline public function toRGB() : RGB
+  @:to inline public function toRGB()
     return toRGBX().toRGB();
 
-  @:to public function toRGBX() : RGBX {
+  @:to public function toRGBX() {
     var x = x / 100,
         y = y / 100,
         z = z / 100,
@@ -112,10 +112,10 @@ abstract XYZ(Array<Float>) {
     return new RGBX([r,g,b]);
   }
 
-  @:to inline public function toRGBXA() : RGBXA
+  @:to inline public function toRGBXA()
     return toRGBX().toRGBXA();
 
-  @:to public function toYxy() : Yxy {
+  @:to public function toYxy() {
     var sum = x + y + z;
     return new Yxy([
       y,

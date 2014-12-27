@@ -21,13 +21,13 @@ abstract CIELCh(Array<Float>) {
       h.wrapCircular(360)
     ]);
 
-  @:from public static function fromFloats(arr : Array<Float>) : CIELCh {
+  @:from public static function fromFloats(arr : Array<Float>) {
     arr.resize(3);
     return CIELCh.create(arr[0], arr[1], arr[2]);
   }
 
 
-  @:from public static function fromString(color : String) : CIELCh {
+  @:from public static function fromString(color : String) {
     var info = ColorParser.parseColor(color);
     if(null == info)
       return null;
@@ -52,7 +52,7 @@ abstract CIELCh(Array<Float>) {
   public function complement()
     return rotate(180);
 
-  public function interpolate(other : CIELCh, t : Float) : CIELCh
+  public function interpolate(other : CIELCh, t : Float)
     return new CIELCh([
       t.interpolate(l, other.l),
       t.interpolate(c, other.c),
@@ -86,13 +86,13 @@ abstract CIELCh(Array<Float>) {
       rotate(120)
     );
 
-  public function withLightness(lightness : Float) : CIELCh
+  public function withLightness(lightness : Float)
     return new CIELCh([lightness, c, h]);
 
-  public function withChroma(newchroma : Float) : CIELCh
+  public function withChroma(newchroma : Float)
     return new CIELCh([l, newchroma, h]);
 
-  public function withHue(newhue : Float) : CIELCh
+  public function withHue(newhue : Float)
     return new CIELCh([l, c, newhue.wrapCircular(360)]);
 
   @:op(A==B) public function equals(other : CIELCh) : Bool
@@ -101,41 +101,41 @@ abstract CIELCh(Array<Float>) {
   @:to inline public function toString() : String
     return 'CIELCh($l,$c,$h)';
 
-  @:to public function toCIELab() : CIELab {
+  @:to public function toCIELab() {
     var hradi = h * (Math.PI / 180),
         a = Math.cos(hradi) * c,
         b = Math.sin(hradi) * c;
     return new CIELab([l, a, b]);
   }
 
-  @:to inline public function toCMY() : CMY
+  @:to inline public function toCMY()
     return toRGBX().toCMY();
 
-  @:to inline public function toCMYK() : CMYK
+  @:to inline public function toCMYK()
     return toRGBX().toCMYK();
 
-  @:to inline public function toGrey() : Grey
+  @:to inline public function toGrey()
     return toRGBX().toGrey();
 
-  @:to inline public function toHSL() : HSL
+  @:to inline public function toHSL()
     return toRGBX().toHSL();
 
-  @:to inline public function toHSV() : HSV
+  @:to inline public function toHSV()
     return toRGBX().toHSV();
 
-  @:to inline public function toRGB() : RGB
+  @:to inline public function toRGB()
     return toRGBX().toRGB();
 
-  @:to inline public function toRGBX() : RGBX
+  @:to inline public function toRGBX()
     return toCIELab().toRGBX();
 
-  @:to inline public function toRGBXA() : RGBXA
+  @:to inline public function toRGBXA()
     return toRGBX().toRGBXA();
 
-  @:to inline public function toXYZ() : XYZ
+  @:to inline public function toXYZ()
     return toCIELab().toXYZ();
 
-  @:to inline public function toYxy() : Yxy
+  @:to inline public function toYxy()
     return toCIELab().toYxy();
 
   inline function get_l() : Float

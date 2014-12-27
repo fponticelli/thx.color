@@ -12,15 +12,15 @@ abstract Yxy(Array<Float>) {
   public var x(get, never) : Float;
   public var y2(get, never) : Float;
 
-  public static function create(y1 : Float, x : Float, y2 : Float) : Yxy
+  public static function create(y1 : Float, x : Float, y2 : Float)
     return new Yxy([y1, x, y2]);
 
-  @:from public static function fromFloats(arr : Array<Float>) : Yxy {
+  @:from public static function fromFloats(arr : Array<Float>) {
     arr.resize(3);
     return Yxy.create(arr[0], arr[1], arr[2]);
   }
 
-  @:from public static function fromString(color : String) : Yxy {
+  @:from public static function fromString(color : String) {
     var info = ColorParser.parseColor(color);
     if(null == info)
       return null;
@@ -36,7 +36,7 @@ abstract Yxy(Array<Float>) {
   inline function new(channels : Array<Float>) : Yxy
     this = channels;
 
-  public function interpolate(other : Yxy, t : Float) : Yxy
+  public function interpolate(other : Yxy, t : Float)
     return new Yxy([
       t.interpolate(y1, other.y1),
       t.interpolate(x,  other.x),
@@ -58,37 +58,37 @@ abstract Yxy(Array<Float>) {
   @:op(A==B) public function equals(other : Yxy) : Bool
     return y1 == other.y1 && x == other.x && y2 == other.y2;
 
-  @:to inline public function toCIELab() : CIELab
+  @:to inline public function toCIELab()
     return toXYZ().toCIELab();
 
-  @:to inline public function toCIELCh() : CIELCh
+  @:to inline public function toCIELCh()
     return toCIELab().toCIELCh();
 
-  @:to inline public function toCMY() : CMY
+  @:to inline public function toCMY()
     return toRGBX().toCMY();
 
-  @:to inline public function toCMYK() : CMYK
+  @:to inline public function toCMYK()
     return toRGBX().toCMYK();
 
-  @:to inline public function toGrey() : Grey
+  @:to inline public function toGrey()
     return toRGBX().toGrey();
 
-  @:to inline public function toHSL() : HSL
+  @:to inline public function toHSL()
     return toRGBX().toHSL();
 
-  @:to inline public function toHSV() : HSV
+  @:to inline public function toHSV()
     return toRGBX().toHSV();
 
-  @:to inline public function toRGB() : RGB
+  @:to inline public function toRGB()
     return toRGBX().toRGB();
 
-  @:to inline public function toRGBX() : RGBX
+  @:to inline public function toRGBX()
     return toXYZ().toRGBX();
 
-  @:to inline public function toRGBXA() : RGBXA
+  @:to inline public function toRGBXA()
     return toRGBX().toRGBXA();
 
-  @:to public function toXYZ() : XYZ
+  @:to public function toXYZ()
     return new XYZ([
       x * (y1 / y2),
       y1,

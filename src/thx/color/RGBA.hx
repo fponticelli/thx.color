@@ -79,10 +79,10 @@ abstract RGBA(Int) from Int to Int {
   inline public function withBlue(newblue : Int)
     return RGBA.fromInts([red, green, newblue]);
 
-  @:to inline public function toHSLA() : HSLA
+  @:to inline public function toHSLA()
     return toRGBXA().toHSLA();
 
-  @:to inline public function toHSVA() : HSVA
+  @:to inline public function toHSVA()
     return toRGBXA().toHSVA();
 
   @:to public function toRGB() : RGB

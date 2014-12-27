@@ -20,12 +20,12 @@ abstract HSL(Array<Float>) {
       lightness.clamp(0, 1)
     ]);
 
-  @:from public static function fromFloats(arr : Array<Float>) : HSL {
+  @:from public static function fromFloats(arr : Array<Float>) {
     arr.resize(3);
     return HSL.create(arr[0], arr[1], arr[2]);
   }
 
-  @:from public static function fromString(color : String) : HSL {
+  @:from public static function fromString(color : String) {
     var info = ColorParser.parseColor(color);
     if(null == info)
       return null;
@@ -50,21 +50,21 @@ abstract HSL(Array<Float>) {
   public function complement()
     return rotate(180);
 
-  public function darker(t : Float) : HSL
+  public function darker(t : Float)
     return new HSL([
       hue,
       saturation,
       t.interpolate(lightness, 0)
     ]);
 
-  public function lighter(t : Float) : HSL
+  public function lighter(t : Float)
     return new HSL([
       hue,
       saturation,
       t.interpolate(lightness, 1)
     ]);
 
-  public function interpolate(other : HSL, t : Float) : HSL
+  public function interpolate(other : HSL, t : Float)
     return new HSL([
       t.interpolateAngle(hue, other.hue, 360),
       t.interpolate(saturation, other.saturation),
@@ -98,16 +98,16 @@ abstract HSL(Array<Float>) {
       rotate(120)
     );
 
-  inline public function withAlpha(alpha : Float) : HSLA
+  inline public function withAlpha(alpha : Float)
     return new HSLA(this.concat([alpha.normalize()]));
 
-  inline public function withHue(newhue : Float) : HSL
+  inline public function withHue(newhue : Float)
     return new HSL([newhue.normalize(), saturation, lightness]);
 
-  inline public function withLightness(newlightness : Float) : HSL
+  inline public function withLightness(newlightness : Float)
     return new HSL([hue, saturation, newlightness.normalize()]);
 
-  inline public function withSaturation(newsaturation : Float) : HSL
+  inline public function withSaturation(newsaturation : Float)
     return new HSL([hue, newsaturation.normalize(), lightness]);
 
   inline public function toCSS3() : String
@@ -118,44 +118,44 @@ abstract HSL(Array<Float>) {
   @:op(A==B) public function equals(other : HSL) : Bool
     return hue == other.hue && saturation == other.saturation && lightness == other.lightness;
 
-  @:to inline public function toCIELab() : CIELab
+  @:to inline public function toCIELab()
     return toRGBX().toCIELab();
 
-  @:to inline public function toCIELCh() : CIELCh
+  @:to inline public function toCIELCh()
     return toRGBX().toCIELCh();
 
-  @:to inline public function toCMY() : CMY
+  @:to inline public function toCMY()
     return toRGBX().toCMY();
 
-  @:to inline public function toCMYK() : CMYK
+  @:to inline public function toCMYK()
     return toRGBX().toCMYK();
 
-  @:to inline public function toGrey() : Grey
+  @:to inline public function toGrey()
     return toRGBX().toGrey();
 
-  @:to inline public function toHSV() : HSV
+  @:to inline public function toHSV()
     return toRGBX().toHSV();
 
-  @:to inline public function toRGB() : RGB
+  @:to inline public function toRGB()
     return toRGBX().toRGB();
 
-  @:to inline public function toRGBX() : RGBX
+  @:to inline public function toRGBX()
     return new RGBX([
       _c(hue + 120, saturation, lightness),
       _c(hue, saturation, lightness),
       _c(hue - 120, saturation, lightness)
     ]);
 
-  @:to inline public function toRGBXA() : RGBXA
+  @:to inline public function toRGBXA()
     return toRGBX().toRGBXA();
 
-  @:to inline public function toHSLA() : HSLA
+  @:to inline public function toHSLA()
     return withAlpha(1.0);
 
-  @:to inline public function toXYZ() : XYZ
+  @:to inline public function toXYZ()
     return toRGBX().toXYZ();
 
-  @:to inline public function toYxy() : Yxy
+  @:to inline public function toYxy()
     return toRGBX().toYxy();
 
   inline function get_hue() : Float
