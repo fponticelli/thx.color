@@ -1,6 +1,7 @@
 -cp src
 -cp demo
 -lib thx.core
+-lib minicanvas
 -js bin/demo.js
 -main Demo
 -D nodejs

@@ -10,68 +10,78 @@ class Demo {
     var left  : HSV = 'hsv(160deg,100%,63%)',
         right : HSV = 'hsv(345deg,88%,77%)';
 
-    MiniCanvas.gradient('interpolatergb',
-      function(t : Float) : RGB return (left : RGB).interpolate(right, t));
+    new MiniCanvas(400, 20).gradientHorizontal(
+      function(t : Float) : RGBA return (left : RGB).interpolate(right, t))
+      .display('interpolateRgb');
 
-    MiniCanvas.gradient('interpolatecmy',
-      function(t : Float) : RGB return (left : CMY).interpolate(right, t));
+    new MiniCanvas(400, 20).gradientHorizontal(
+      function(t : Float) : RGBA return (left : CMY).interpolate(right, t))
+      .display('interpolateCmy');
 
-    MiniCanvas.gradient('interpolatecmyk',
-      function(t : Float) : RGB return (left : CMYK).interpolate(right, t));
+    new MiniCanvas(400, 20).gradientHorizontal(
+      function(t : Float) : RGBA return (left : CMYK).interpolate(right, t))
+      .display('interpolateCmyk');
 
-    MiniCanvas.gradient('interpolategrey',
-      function(t : Float) : RGB return (left : Grey).interpolate(right, t));
+    new MiniCanvas(400, 20).gradientHorizontal(
+      function(t : Float) : RGBA return (left : Grey).interpolate(right, t))
+      .display('interpolateGrey');
 
-    MiniCanvas.gradient('interpolatehsl',
-      function(t : Float) : RGB return (left : HSL).interpolate(right, t));
+    new MiniCanvas(400, 20).gradientHorizontal(
+      function(t : Float) : RGBA return (left : HSL).interpolate(right, t))
+      .display('interpolateHsl');
 
-    MiniCanvas.gradient('interpolatehsv',
-      function(t : Float) : RGB return (left : HSV).interpolate(right, t));
+    new MiniCanvas(400, 20).gradientHorizontal(
+      function(t : Float) : RGBA return (left : HSV).interpolate(right, t))
+      .display('interpolateHsv');
 
-    MiniCanvas.gradient('interpolatecielab',
-      function(t : Float) : RGB return (left : CIELab).interpolate(right, t));
+    new MiniCanvas(400, 20).gradientHorizontal(
+      function(t : Float) : RGBA return (left : CIELab).interpolate(right, t))
+      .display('interpolateCielab');
 
-    MiniCanvas.gradient('interpolatecielch',
-      function(t : Float) : RGB return (left : CIELCh).interpolate(right, t));
+    new MiniCanvas(400, 20).gradientHorizontal(
+      function(t : Float) : RGBA return (left : CIELCh).interpolate(right, t))
+      .display('interpolateCielch');
 
-    MiniCanvas.gradient('interpolatexyz',
-      function(t : Float) : RGB return (left : XYZ).interpolate(right, t));
+    new MiniCanvas(400, 20).gradientHorizontal(
+      function(t : Float) : RGBA return (left : XYZ).interpolate(right, t))
+      .display('interpolateXyz');
 
-    MiniCanvas.gradient('interpolateyxy',
-      function(t : Float) : RGB return (left : Yxy).interpolate(right, t));
+    new MiniCanvas(400, 20).gradientHorizontal(
+      function(t : Float) : RGBA return (left : Yxy).interpolate(right, t))
+      .display('interpolateYxy');
   }
 
   public static function main() {
     interpolations();
 
-    MiniCanvas.boxGradient("rainbowhsl",
-      function(x : Float, y : Float) : RGB {
-        return HSL.create(x * 360, 1, y);
-      });
+    new MiniCanvas(200, 200).box(
+      function(x : Float, y : Float) : RGBA
+        return HSL.create(x * 360, 1, y))
+      .display("rainbowHsl");
 
-    MiniCanvas.boxGradient("rainbowcielch",
-      function(x : Float, y : Float) : RGB {
-        return CIELCh.create(65, y * 65, x * 360);
-      });
+    new MiniCanvas(200, 200).box(
+      function(x : Float, y : Float) : RGBA
+        return CIELCh.create(65, y * 65, x * 360))
+      .display("rainbowCielch");
 
-    MiniCanvas.boxGradient("rainbowcielab",
-      function(x : Float, y : Float) : RGB {
-        return CIELab.create(40, x * 200 - 100, y * 200 - 100);
-      });
+    new MiniCanvas(200, 200).box(
+      function(x : Float, y : Float) : RGBA
+        return CIELab.create(40, x * 200 - 100, y * 200 - 100))
+      .display("rainbowCielab");
 
-    MiniCanvas.gradient('darkerrgb',
-      (function() {
-        var left : RGB = '#ff0000';
-        return left.darker;
-      })());
+    new MiniCanvas(400, 20).gradientHorizontal(
+      function(t) : RGBA
+        return ('#ff0000' : RGB).darker(t))
+      .display('darkerRgb');
 
-    MiniCanvas.gradient('lighterrgb',
-      (function() {
-        var left : RGB = '#0000ff';
-        return left.lighter;
-      })());
+    new MiniCanvas(400, 20).gradientHorizontal(
+      function(t) : RGBA
+        return ('#0000ff' : RGB).lighter(t))
+      .display('lighterRgb');
 
-    MiniCanvas.create('colortable', 900, 1200, colorTable);
+    var c = new MiniCanvas(900, 1200);
+    colorTable(c.ctx, c.width, c.height);
+    c.display('colorTable');
   }
 
   public static function colorTable(ctx, w, h) {
