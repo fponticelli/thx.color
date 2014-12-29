@@ -70,6 +70,9 @@ abstract Grey(Float) from Float to Float {
   @:to inline public function toRGB()
     return toRGBX().toRGB();
 
+  @:to inline public function toRGBA()
+    return toRGBXA().toRGBA();
+
   @:to inline public function toRGBX()
     return new RGBX([grey, grey, grey]);
 

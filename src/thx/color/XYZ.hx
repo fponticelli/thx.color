@@ -97,6 +97,9 @@ abstract XYZ(Array<Float>) {
   @:to inline public function toRGB()
     return toRGBX().toRGB();
 
+  @:to inline public function toRGBA()
+    return toRGBXA().toRGBA();
+
   @:to public function toRGBX() {
     var x = x / 100,
         y = y / 100,

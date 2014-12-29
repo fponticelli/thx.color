@@ -126,6 +126,9 @@ abstract CIELCh(Array<Float>) {
   @:to inline public function toRGB()
     return toRGBX().toRGB();
 
+  @:to inline public function toRGBA()
+    return toRGBXA().toRGBA();
+
   @:to inline public function toRGBX()
     return toCIELab().toRGBX();
 

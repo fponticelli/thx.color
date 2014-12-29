@@ -117,6 +117,9 @@ abstract CMYK(Array<Float>) {
   @:to inline public function toRGB()
     return toRGBX().toRGB();
 
+  @:to inline public function toRGBA()
+    return toRGBXA().toRGBA();
+
   @:to inline public function toRGBX()
     return new RGBX([
       (1 - black) * (1 - cyan),

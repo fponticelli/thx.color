@@ -133,6 +133,9 @@ abstract HSLA(Array<Float>) {
   @:to inline public function toRGB()
     return toRGBXA().toRGB();
 
+  @:to inline public function toRGBA()
+    return toRGBXA().toRGBA();
+
   @:to inline public function toRGBXA()
     return new RGBXA([
       _c(hue + 120, saturation, lightness),
