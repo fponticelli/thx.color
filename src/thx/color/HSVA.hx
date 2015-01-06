@@ -91,7 +91,7 @@ abstract HSVA(Array<Float>) {
     return new HSVA([hue, saturation, value, newalpha.normalize()]);
 
   inline public function withHue(newhue : Float)
-    return new HSVA([newhue.normalize(), saturation, value, alpha]);
+    return new HSVA([newhue.wrapCircular(360), saturation, value, alpha]);
 
   inline public function withLightness(newvalue : Float)
     return new HSVA([hue, saturation, newvalue.normalize(), alpha]);

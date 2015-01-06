@@ -88,7 +88,7 @@ abstract HSV(Array<Float>) {
     return new HSVA(this.concat([alpha.normalize()]));
 
   inline public function withHue(newhue : Float)
-    return new HSV([newhue.normalize(), saturation, value]);
+    return new HSV([newhue.wrapCircular(360), saturation, value]);
 
   inline public function withValue(newvalue : Float)
     return new HSV([hue, saturation, newvalue.normalize()]);

@@ -102,7 +102,7 @@ abstract HSL(Array<Float>) {
     return new HSLA(this.concat([alpha.normalize()]));
 
   inline public function withHue(newhue : Float)
-    return new HSL([newhue.normalize(), saturation, lightness]);
+    return new HSL([newhue.wrapCircular(360), saturation, lightness]);
 
   inline public function withLightness(newlightness : Float)
     return new HSL([hue, saturation, newlightness.normalize()]);

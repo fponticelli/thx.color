@@ -107,7 +107,7 @@ abstract HSLA(Array<Float>) {
     return new HSLA([hue, saturation, lightness, newalpha.normalize()]);
 
   inline public function withHue(newhue : Float)
-    return new HSLA([newhue.normalize(), saturation, lightness, alpha]);
+    return new HSLA([newhue.wrapCircular(360), saturation, lightness, alpha]);
 
   inline public function withLightness(newlightness : Float)
     return new HSLA([hue, saturation, newlightness.normalize(), alpha]);
