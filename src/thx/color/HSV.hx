@@ -9,7 +9,6 @@ import thx.color.parse.ColorParser;
 @:access(thx.color.HSVA)
 abstract HSV(Array<Float>) {
   public var hue(get, never) : Float;
-  public var huef(get, never) : Float;
   public var saturation(get, never) : Float;
   public var value(get, never) : Float;
 
@@ -84,52 +83,52 @@ abstract HSV(Array<Float>) {
       rotate(120)
     );
 
-  inline public function withAlpha(alpha : Float)
+  public function withAlpha(alpha : Float)
     return new HSVA(this.concat([alpha.normalize()]));
 
-  inline public function withHue(newhue : Float)
+  public function withHue(newhue : Float)
     return new HSV([newhue.wrapCircular(360), saturation, value]);
 
-  inline public function withValue(newvalue : Float)
+  public function withValue(newvalue : Float)
     return new HSV([hue, saturation, newvalue.normalize()]);
 
-  inline public function withSaturation(newsaturation : Float)
+  public function withSaturation(newsaturation : Float)
     return new HSV([hue, newsaturation.normalize(), value]);
 
-  inline public function toString() : String
-    return 'hsv($huef,${saturation*100}%,${value*100}%)';
+  public function toString() : String
+    return 'hsv($hue,${saturation*100}%,${value*100}%)';
 
   @:op(A==B) public function equals(other : HSV) : Bool
     return hue.nearEquals(other.hue) && saturation.nearEquals(other.saturation) && value.nearEquals(other.value);
 
-  @:to inline public function toCIELab()
+  @:to public function toCIELab()
     return toRGBX().toCIELab();
 
-  @:to inline public function toCIELCh()
+  @:to public function toCIELCh()
     return toRGBX().toCIELCh();
 
-  @:to inline public function toCMY()
+  @:to public function toCMY()
     return toRGBX().toCMY();
 
-  @:to inline public function toCMYK()
+  @:to public function toCMYK()
     return toRGBX().toCMYK();
 
-  @:to inline public function toGrey()
+  @:to public function toGrey()
     return toRGBX().toGrey();
 
-  @:to inline public function toHSL()
+  @:to public function toHSL()
     return toRGBX().toHSL();
 
-  @:to inline public function toHSVA()
+  @:to public function toHSVA()
     return withAlpha(1.0);
 
-  @:to inline public function toRGB()
+  @:to public function toRGB()
     return toRGBX().toRGB();
 
-  @:to inline public function toRGBA()
+  @:to public function toRGBA()
     return toRGBXA().toRGBA();
 
-  @:to inline public function toRGBX() {
+  @:to public function toRGBX() {
     if(saturation == 0)
       return new RGBX([value, value, value]);
 
@@ -154,18 +153,16 @@ abstract HSV(Array<Float>) {
     return new RGBX([r, g, b]);
   }
 
-  @:to inline public function toRGBXA()
+  @:to public function toRGBXA()
     return toRGBX().toRGBXA();
 
-  @:to inline public function toXYZ()
+  @:to public function toXYZ()
     return toRGBX().toXYZ();
 
-  @:to inline public function toYxy()
+  @:to public function toYxy()
     return toRGBX().toYxy();
 
   inline function get_hue() : Float
-    return this[0];
-  inline function get_huef() : Float
     return this[0];
   inline function get_saturation() : Float
     return this[1];

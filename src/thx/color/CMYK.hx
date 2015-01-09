@@ -40,10 +40,10 @@ abstract CMYK(Array<Float>) {
   inline function new(channels : Array<Float>) : CMYK
     this = channels;
 
-  inline public function darker(t : Float)
+  public function darker(t : Float)
     return new CMYK([cyan, magenta, yellow, t.interpolate(black, 1)]);
 
-  inline public function lighter(t : Float)
+  public function lighter(t : Float)
     return new CMYK([cyan, magenta, yellow, t.interpolate(black, 0)]);
 
   public function interpolate(other : CMYK, t : Float)
@@ -86,16 +86,16 @@ abstract CMYK(Array<Float>) {
       newblack.normalize()
     ]);
 
-  @:to inline public function toString() : String
+  @:to public function toString() : String
     return 'cmyk($cyan,$magenta,$yellow,$black)';
 
   @:op(A==B) public function equals(other : CMYK) : Bool
     return cyan.nearEquals(other.cyan) && magenta.nearEquals(other.magenta) && yellow.nearEquals(other.yellow) && black.nearEquals(other.black);
 
-  @:to inline public function toCIELab()
+  @:to public function toCIELab()
     return toRGBX().toCIELab();
 
-  @:to inline public function toCIELCh()
+  @:to public function toCIELCh()
     return toRGBX().toCIELCh();
 
   @:to public function toCMY()
@@ -105,29 +105,29 @@ abstract CMYK(Array<Float>) {
       black + (1 - black) * yellow
     ]);
 
-  @:to inline public function toGrey()
+  @:to public function toGrey()
     return toRGBX().toGrey();
 
-  @:to inline public function toHSL()
+  @:to public function toHSL()
     return toRGBX().toHSL();
 
-  @:to inline public function toHSV()
+  @:to public function toHSV()
     return toRGBX().toHSV();
 
-  @:to inline public function toRGB()
+  @:to public function toRGB()
     return toRGBX().toRGB();
 
-  @:to inline public function toRGBA()
+  @:to public function toRGBA()
     return toRGBXA().toRGBA();
 
-  @:to inline public function toRGBX()
+  @:to public function toRGBX()
     return new RGBX([
       (1 - black) * (1 - cyan),
       (1 - black) * (1 - magenta),
       (1 - black) * (1 - yellow)
     ]);
 
-  @:to inline public function toRGBXA()
+  @:to public function toRGBXA()
     return toRGBX().toRGBXA();
 
   inline function get_cyan() : Float
@@ -139,9 +139,9 @@ abstract CMYK(Array<Float>) {
   inline function get_black() : Float
     return this[3];
 
-  @:to inline public function toXYZ()
+  @:to public function toXYZ()
     return toRGBX().toXYZ();
 
-  @:to inline public function toYxy()
+  @:to public function toYxy()
     return toRGBX().toYxy();
 }

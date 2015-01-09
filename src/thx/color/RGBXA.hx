@@ -83,23 +83,23 @@ abstract RGBXA(Array<Float>) {
       t.interpolate(alphaf, other.alphaf)
     ]);
 
-  inline public function withAlpha(newalpha : Float)
+  public function withAlpha(newalpha : Float)
     return new RGBXA([red, green, blue, newalpha.normalize()]);
 
-  inline public function withRed(newred : Int)
+  public function withRed(newred : Int)
     return new RGBXA([newred.normalize(), green, blue, alpha]);
 
-  inline public function withGreen(newgreen : Int)
+  public function withGreen(newgreen : Int)
     return new RGBXA([red, newgreen.normalize(), blue, alpha]);
 
-  inline public function withBlue(newblue : Int)
+  public function withBlue(newblue : Int)
     return new RGBXA([red, green, newblue.normalize(), alpha]);
 
-  inline public function toCSS3() : String
+  public function toCSS3() : String
     return toString();
-  @:to inline public function toString() : String
+  @:to public function toString() : String
     return 'rgba(${redf*100}%,${greenf*100}%,${bluef*100}%,$alphaf)';
-  inline public function toHex(prefix = "#") : String
+  public function toHex(prefix = "#") : String
     return '$prefix${alpha.hex(2)}${red.hex(2)}${green.hex(2)}${blue.hex(2)}';
 
   @:op(A==B) public function equals(other : RGBXA) : Bool
@@ -111,22 +111,22 @@ abstract RGBXA(Array<Float>) {
   @:to public function toHSVA()
     return toRGBX().toHSV().withAlpha(alpha);
 
-  @:to inline public function toRGB()
+  @:to public function toRGB()
     return toRGBX().toRGB();
 
-  @:to inline public function toRGBX()
+  @:to public function toRGBX()
     return new RGBX(this.slice(0,3));
 
-  @:to inline public function toRGBA()
+  @:to public function toRGBA()
     return RGBA.fromFloats([redf, greenf, bluef, alphaf]);
 
-  inline function get_red() : Int
+  function get_red() : Int
     return (redf   * 255).round();
-  inline function get_green() : Int
+  function get_green() : Int
     return (greenf * 255).round();
-  inline function get_blue() : Int
+  function get_blue() : Int
     return (bluef  * 255).round();
-  inline function get_alpha() : Int
+  function get_alpha() : Int
     return (alphaf  * 255).round();
 
   inline function get_redf() : Float

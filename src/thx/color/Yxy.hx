@@ -52,43 +52,43 @@ abstract Yxy(Array<Float>) {
   public function withZ(newy2 : Float)
     return new Yxy([y1, x, y2]);
 
-  inline public function toString() : String
+  public function toString() : String
     return 'Yxy($y1,$x,$y2)';
 
   @:op(A==B) public function equals(other : Yxy) : Bool
     return y1.nearEquals(other.y1) && x.nearEquals(other.x) && y2.nearEquals(other.y2);
 
-  @:to inline public function toCIELab()
+  @:to public function toCIELab()
     return toXYZ().toCIELab();
 
-  @:to inline public function toCIELCh()
+  @:to public function toCIELCh()
     return toCIELab().toCIELCh();
 
-  @:to inline public function toCMY()
+  @:to public function toCMY()
     return toRGBX().toCMY();
 
-  @:to inline public function toCMYK()
+  @:to public function toCMYK()
     return toRGBX().toCMYK();
 
-  @:to inline public function toGrey()
+  @:to public function toGrey()
     return toRGBX().toGrey();
 
-  @:to inline public function toHSL()
+  @:to public function toHSL()
     return toRGBX().toHSL();
 
-  @:to inline public function toHSV()
+  @:to public function toHSV()
     return toRGBX().toHSV();
 
-  @:to inline public function toRGB()
+  @:to public function toRGB()
     return toRGBX().toRGB();
 
-  @:to inline public function toRGBA()
+  @:to public function toRGBA()
     return toRGBXA().toRGBA();
 
-  @:to inline public function toRGBX()
+  @:to public function toRGBX()
     return toXYZ().toRGBX();
 
-  @:to inline public function toRGBXA()
+  @:to public function toRGBXA()
     return toRGBX().toRGBXA();
 
   @:to public function toXYZ()

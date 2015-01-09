@@ -50,22 +50,22 @@ abstract RGB(Int) from Int to Int {
   public function interpolate(other : RGB, t : Float)
     return toRGBX().interpolate(other.toRGBX(), t).toRGB();
 
-  inline public function withAlpha(alpha : Int)
+  public function withAlpha(alpha : Int)
     return RGBA.fromInts([red, green, blue, alpha]);
 
-  inline public function withRed(newred : Int)
+  public function withRed(newred : Int)
     return RGB.fromInts([newred, green, blue]);
 
-  inline public function withGreen(newgreen : Int)
+  public function withGreen(newgreen : Int)
     return RGB.fromInts([red, newgreen, blue]);
 
-  inline public function withBlue(newblue : Int)
+  public function withBlue(newblue : Int)
     return RGB.fromInts([red, green, newblue]);
 
-  inline public function toCSS3() : String
+  public function toCSS3() : String
     return 'rgb($red,$green,$blue)';
 
-  @:to inline public function toString() : String
+  @:to public function toString() : String
     return toHex();
 
   public function toHex(prefix = "#")
@@ -74,10 +74,10 @@ abstract RGB(Int) from Int to Int {
   @:op(A==B) public function equals(other : RGB) : Bool
     return red == other.red && green == other.green && blue == other.blue;
 
-  @:to inline public function toCIELab()
+  @:to public function toCIELab()
     return toRGBX().toCIELab();
 
-  @:to inline public function toCIELCh()
+  @:to public function toCIELCh()
     return toRGBX().toCIELCh();
 
   @:to public function toCMY()
@@ -86,22 +86,22 @@ abstract RGB(Int) from Int to Int {
   @:to public function toCMYK()
     return toRGBX().toCMYK();
 
-  @:to inline public function toGrey()
+  @:to public function toGrey()
     return toRGBX().toGrey();
 
-  @:to inline public function toHSL()
+  @:to public function toHSL()
     return toRGBX().toHSL();
 
-  @:to inline public function toHSV()
+  @:to public function toHSV()
     return toRGBX().toHSV();
 
-  @:to inline public function toRGBX()
+  @:to public function toRGBX()
     return RGBX.fromInts([red, green, blue]);
 
-  @:to inline public function toRGBA()
+  @:to public function toRGBA()
     return withAlpha(255);
 
-  @:to inline public function toRGBXA()
+  @:to public function toRGBXA()
     return toRGBA().toRGBXA();
 
   @:to public function toYxy()
@@ -110,10 +110,10 @@ abstract RGB(Int) from Int to Int {
   @:to public function toXYZ()
     return toRGBX().toXYZ();
 
-  inline function get_red() : Int
+  function get_red() : Int
     return (this >> 16) & 0xFF;
-  inline function get_green() : Int
+  function get_green() : Int
     return (this >> 8) & 0xFF;
-  inline function get_blue() : Int
+  function get_blue() : Int
     return this & 0xFF;
 }

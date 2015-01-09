@@ -9,7 +9,6 @@ import thx.color.parse.ColorParser;
 @:access(thx.color.HSL)
 abstract HSLA(Array<Float>) {
   public var hue(get, never) : Float;
-  public var huef(get, never) : Float;
   public var saturation(get, never) : Float;
   public var lightness(get, never) : Float;
   public var alpha(get, never) : Float;
@@ -103,40 +102,40 @@ abstract HSLA(Array<Float>) {
       rotate(spread)
     );
 
-  inline public function withAlpha(newalpha : Float)
+  public function withAlpha(newalpha : Float)
     return new HSLA([hue, saturation, lightness, newalpha.normalize()]);
 
-  inline public function withHue(newhue : Float)
+  public function withHue(newhue : Float)
     return new HSLA([newhue.wrapCircular(360), saturation, lightness, alpha]);
 
-  inline public function withLightness(newlightness : Float)
+  public function withLightness(newlightness : Float)
     return new HSLA([hue, saturation, newlightness.normalize(), alpha]);
 
-  inline public function withSaturation(newsaturation : Float)
+  public function withSaturation(newsaturation : Float)
     return new HSLA([hue, newsaturation.normalize(), lightness, alpha]);
 
-  inline public function toCSS3() : String
+  public function toCSS3() : String
     return toString();
 
-  inline public function toString() : String
-    return 'hsla(${huef},${saturation*100}%,${lightness*100}%,$alpha)';
+  public function toString() : String
+    return 'hsla(${hue},${saturation*100}%,${lightness*100}%,$alpha)';
 
   @:op(A==B) public function equals(other : HSLA) : Bool
     return hue.nearEquals(other.hue) && saturation.nearEquals(other.saturation) && lightness.nearEquals(other.lightness) && alpha.nearEquals(other.alpha);
 
-  @:to inline public function toHSL()
+  @:to public function toHSL()
     return new HSL(this.slice(0, 3));
 
-  @:to inline public function toHSVA()
+  @:to public function toHSVA()
     return toRGBXA().toHSVA();
 
-  @:to inline public function toRGB()
+  @:to public function toRGB()
     return toRGBXA().toRGB();
 
-  @:to inline public function toRGBA()
+  @:to public function toRGBA()
     return toRGBXA().toRGBA();
 
-  @:to inline public function toRGBXA()
+  @:to public function toRGBXA()
     return new RGBXA([
       _c(hue + 120, saturation, lightness),
       _c(hue, saturation, lightness),
@@ -145,8 +144,6 @@ abstract HSLA(Array<Float>) {
     ]);
 
   inline function get_hue() : Float
-    return this[0];
-  inline function get_huef() : Float
     return this[0];
   inline function get_saturation() : Float
     return this[1];

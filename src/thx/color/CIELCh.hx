@@ -98,7 +98,7 @@ abstract CIELCh(Array<Float>) {
   @:op(A==B) public function equals(other : CIELCh) : Bool
     return lightness.nearEquals(other.lightness) && chroma.nearEquals(other.chroma) && hue.nearEquals(other.hue);
 
-  @:to inline public function toString() : String
+  @:to public function toString() : String
     return 'CIELCh($lightness,$chroma,$hue)';
 
   @:to public function toCIELab() {
@@ -108,37 +108,37 @@ abstract CIELCh(Array<Float>) {
     return new CIELab([lightness, a, b]);
   }
 
-  @:to inline public function toCMY()
+  @:to public function toCMY()
     return toRGBX().toCMY();
 
-  @:to inline public function toCMYK()
+  @:to public function toCMYK()
     return toRGBX().toCMYK();
 
-  @:to inline public function toGrey()
+  @:to public function toGrey()
     return toRGBX().toGrey();
 
-  @:to inline public function toHSL()
+  @:to public function toHSL()
     return toRGBX().toHSL();
 
-  @:to inline public function toHSV()
+  @:to public function toHSV()
     return toRGBX().toHSV();
 
-  @:to inline public function toRGB()
+  @:to public function toRGB()
     return toRGBX().toRGB();
 
-  @:to inline public function toRGBA()
+  @:to public function toRGBA()
     return toRGBXA().toRGBA();
 
-  @:to inline public function toRGBX()
+  @:to public function toRGBX()
     return toCIELab().toRGBX();
 
-  @:to inline public function toRGBXA()
+  @:to public function toRGBXA()
     return toRGBX().toRGBXA();
 
-  @:to inline public function toXYZ()
+  @:to public function toXYZ()
     return toCIELab().toXYZ();
 
-  @:to inline public function toYxy()
+  @:to public function toYxy()
     return toCIELab().toYxy();
 
   inline function get_lightness() : Float

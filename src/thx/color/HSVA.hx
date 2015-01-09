@@ -9,7 +9,6 @@ import thx.color.parse.ColorParser;
 @:access(thx.color.HSV)
 abstract HSVA(Array<Float>) {
   public var hue(get, never) : Float;
-  public var huef(get, never) : Float;
   public var saturation(get, never) : Float;
   public var value(get, never) : Float;
   public var alpha(get, never) : Float;
@@ -87,37 +86,37 @@ abstract HSVA(Array<Float>) {
       rotate(spread)
     );
 
-  inline public function withAlpha(newalpha : Float)
+  public function withAlpha(newalpha : Float)
     return new HSVA([hue, saturation, value, newalpha.normalize()]);
 
-  inline public function withHue(newhue : Float)
+  public function withHue(newhue : Float)
     return new HSVA([newhue.wrapCircular(360), saturation, value, alpha]);
 
-  inline public function withLightness(newvalue : Float)
+  public function withLightness(newvalue : Float)
     return new HSVA([hue, saturation, newvalue.normalize(), alpha]);
 
-  inline public function withSaturation(newsaturation : Float)
+  public function withSaturation(newsaturation : Float)
     return new HSVA([hue, newsaturation.normalize(), value, alpha]);
 
-  inline public function toString() : String
-    return 'hsva($huef,${saturation*100}%,${value*100}%,$alpha)';
+  public function toString() : String
+    return 'hsva($hue,${saturation*100}%,${value*100}%,$alpha)';
 
   @:op(A==B) public function equals(other : HSVA) : Bool
     return hue.nearEquals(other.hue) && saturation.nearEquals(other.saturation) && value.nearEquals(other.value) && alpha.nearEquals(other.alpha);
 
-  @:to inline public function toHSV()
+  @:to public function toHSV()
     return new HSV(this.slice(0, 3));
 
-  @:to inline public function toHSLA()
+  @:to public function toHSLA()
     return toRGBXA().toHSLA();
 
-  @:to inline public function toRGB()
+  @:to public function toRGB()
     return toRGBXA().toRGB();
 
-  @:to inline public function toRGBA()
+  @:to public function toRGBA()
     return toRGBXA().toRGBA();
 
-  @:to inline public function toRGBXA() {
+  @:to public function toRGBXA() {
     if(saturation == 0)
       return new RGBXA([value, value, value, alpha]);
 
@@ -143,8 +142,6 @@ abstract HSVA(Array<Float>) {
   }
 
   inline function get_hue() : Float
-    return this[0];
-  inline function get_huef() : Float
     return this[0];
   inline function get_saturation() : Float
     return this[1];

@@ -67,22 +67,22 @@ abstract RGBA(Int) from Int to Int {
   public function interpolate(other : RGBA, t : Float)
     return toRGBXA().interpolate(other.toRGBXA(), t).toRGBA();
 
-  inline public function withAlpha(newalpha : Int)
+  public function withAlpha(newalpha : Int)
     return RGBA.fromInts([red, green, blue, newalpha]);
 
-  inline public function withRed(newred : Int)
+  public function withRed(newred : Int)
     return RGBA.fromInts([newred, green, blue]);
 
-  inline public function withGreen(newgreen : Int)
+  public function withGreen(newgreen : Int)
     return RGBA.fromInts([red, newgreen, blue]);
 
-  inline public function withBlue(newblue : Int)
+  public function withBlue(newblue : Int)
     return RGBA.fromInts([red, green, newblue]);
 
-  @:to inline public function toHSLA()
+  @:to public function toHSLA()
     return toRGBXA().toHSLA();
 
-  @:to inline public function toHSVA()
+  @:to public function toHSVA()
     return toRGBXA().toHSVA();
 
   @:to public function toRGB() : RGB
@@ -94,13 +94,13 @@ abstract RGBA(Int) from Int to Int {
   @:to public function toRGBXA() : RGBXA
     return RGBXA.fromInts([red, green, blue, alpha]);
 
-  inline public function toCSS3() : String
+  public function toCSS3() : String
     return toString();
 
-  @:to inline  public function toString() : String
+  @:to public function toString() : String
     return 'rgba($red,$green,$blue,${alpha/255})';
 
-  inline  public function toHex(prefix = "#")
+   public function toHex(prefix = "#")
     return '$prefix${alpha.hex(2)}${red.hex(2)}${green.hex(2)}${blue.hex(2)}';
 
   @:op(A==B) public function equals(other : RGBA) : Bool

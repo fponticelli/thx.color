@@ -9,7 +9,6 @@ import thx.color.parse.ColorParser;
 @:access(thx.color.HSLA)
 abstract HSL(Array<Float>) {
   public var hue(get, never) : Float;
-  public var huef(get, never) : Float;
   public var saturation(get, never) : Float;
   public var lightness(get, never) : Float;
 
@@ -98,72 +97,70 @@ abstract HSL(Array<Float>) {
       rotate(120)
     );
 
-  inline public function withAlpha(alpha : Float)
+  public function withAlpha(alpha : Float)
     return new HSLA(this.concat([alpha.normalize()]));
 
-  inline public function withHue(newhue : Float)
+  public function withHue(newhue : Float)
     return new HSL([newhue.wrapCircular(360), saturation, lightness]);
 
-  inline public function withLightness(newlightness : Float)
+  public function withLightness(newlightness : Float)
     return new HSL([hue, saturation, newlightness.normalize()]);
 
-  inline public function withSaturation(newsaturation : Float)
+  public function withSaturation(newsaturation : Float)
     return new HSL([hue, newsaturation.normalize(), lightness]);
 
-  inline public function toCSS3() : String
+  public function toCSS3() : String
     return toString();
-  inline public function toString() : String
-    return 'hsl(${huef},${saturation*100}%,${lightness*100}%)';
+  public function toString() : String
+    return 'hsl(${hue},${saturation*100}%,${lightness*100}%)';
 
   @:op(A==B) public function equals(other : HSL) : Bool
     return hue.nearEquals(other.hue) && saturation.nearEquals(other.saturation) && lightness.nearEquals(other.lightness);
 
-  @:to inline public function toCIELab()
+  @:to public function toCIELab()
     return toRGBX().toCIELab();
 
-  @:to inline public function toCIELCh()
+  @:to public function toCIELCh()
     return toRGBX().toCIELCh();
 
-  @:to inline public function toCMY()
+  @:to public function toCMY()
     return toRGBX().toCMY();
 
-  @:to inline public function toCMYK()
+  @:to public function toCMYK()
     return toRGBX().toCMYK();
 
-  @:to inline public function toGrey()
+  @:to public function toGrey()
     return toRGBX().toGrey();
 
-  @:to inline public function toHSV()
+  @:to public function toHSV()
     return toRGBX().toHSV();
 
-  @:to inline public function toRGB()
+  @:to public function toRGB()
     return toRGBX().toRGB();
 
-  @:to inline public function toRGBA()
+  @:to public function toRGBA()
     return toRGBXA().toRGBA();
 
-  @:to inline public function toRGBX()
+  @:to public function toRGBX()
     return new RGBX([
       _c(hue + 120, saturation, lightness),
       _c(hue, saturation, lightness),
       _c(hue - 120, saturation, lightness)
     ]);
 
-  @:to inline public function toRGBXA()
+  @:to public function toRGBXA()
     return toRGBX().toRGBXA();
 
-  @:to inline public function toHSLA()
+  @:to public function toHSLA()
     return withAlpha(1.0);
 
-  @:to inline public function toXYZ()
+  @:to public function toXYZ()
     return toRGBX().toXYZ();
 
-  @:to inline public function toYxy()
+  @:to public function toYxy()
     return toRGBX().toYxy();
 
   inline function get_hue() : Float
-    return this[0];
-  inline function get_huef() : Float
     return this[0];
   inline function get_saturation() : Float
     return this[1];

@@ -66,16 +66,16 @@ abstract CMY(Array<Float>) {
       newyellow.normalize()
     ]);
 
-  @:to inline public function toString() : String
+  @:to public function toString() : String
     return 'cmy($cyan,$magenta,$yellow)';
 
   @:op(A==B) public function equals(other : CMY) : Bool
     return cyan.nearEquals(other.cyan) && magenta.nearEquals(other.magenta) && yellow.nearEquals(other.yellow);
 
-  @:to inline public function toCIELab()
+  @:to public function toCIELab()
     return toRGBX().toCIELab();
 
-  @:to inline public function toCIELCh()
+  @:to public function toCIELCh()
     return toRGBX().toCIELCh();
 
   @:to public function toCMYK() {
@@ -91,35 +91,35 @@ abstract CMY(Array<Float>) {
       ]);
   }
 
-  @:to inline public function toGrey()
+  @:to public function toGrey()
     return toRGBX().toGrey();
 
-  @:to inline public function toHSL()
+  @:to public function toHSL()
     return toRGBX().toHSL();
 
-  @:to inline public function toHSV()
+  @:to public function toHSV()
     return toRGBX().toHSV();
 
-  @:to inline public function toRGB()
+  @:to public function toRGB()
     return toRGBX().toRGB();
 
-  @:to inline public function toRGBA()
+  @:to public function toRGBA()
     return toRGBXA().toRGBA();
 
-  @:to inline public function toRGBX()
+  @:to public function toRGBX()
     return new RGBX([
       1 - cyan,
       1 - magenta,
       1 - yellow
     ]);
 
-  @:to inline public function toRGBXA() : RGBXA
+  @:to public function toRGBXA() : RGBXA
     return toRGBX().toRGBXA();
 
-  @:to inline public function toXYZ() : XYZ
+  @:to public function toXYZ() : XYZ
     return toRGBX().toXYZ();
 
-  @:to inline public function toYxy() : Yxy
+  @:to public function toYxy() : Yxy
     return toRGBX().toYxy();
 
   inline function get_cyan() : Float

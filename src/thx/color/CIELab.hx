@@ -98,31 +98,31 @@ abstract CIELab(Array<Float>) {
     return new CIELCh([l, c, h]);
   }
 
-  @:to inline public function toCMY()
+  @:to public function toCMY()
     return toRGBX().toCMY();
 
-  @:to inline public function toCMYK()
+  @:to public function toCMYK()
     return toRGBX().toCMYK();
 
-  @:to inline public function toGrey()
+  @:to public function toGrey()
     return toRGBX().toGrey();
 
-  @:to inline public function toHSL()
+  @:to public function toHSL()
     return toRGBX().toHSL();
 
-  @:to inline public function toHSV()
+  @:to public function toHSV()
     return toRGBX().toHSV();
 
-  @:to inline public function toRGB()
+  @:to public function toRGB()
     return toRGBX().toRGB();
 
-  @:to inline public function toRGBA()
+  @:to public function toRGBA()
     return toRGBXA().toRGBA();
 
-  @:to inline public function toRGBX()
+  @:to public function toRGBX()
     return toXYZ().toRGBX();
 
-  @:to inline public function toRGBXA()
+  @:to public function toRGBXA()
     return toRGBX().toRGBXA();
 
   @:to public function toXYZ() {
@@ -143,7 +143,7 @@ abstract CIELab(Array<Float>) {
     return new XYZ([95.047 * x, 100 * y, 108.883 * z]);
   }
 
-  @:to inline public function toYxy()
+  @:to public function toYxy()
     return toXYZ().toYxy();
 
   inline function get_l() : Float
