@@ -7,7 +7,7 @@ import thx.color.parse.ColorParser;
 
 abstract RGBA(Int) from Int to Int {
   public static function create(red : Int, green : Int, blue : Int, alpha : Int) : RGBA
-    return ((alpha & 0xFF) << 24) | ((red & 0xFF) << 16) | ((green & 0xFF) << 8) | ((blue & 0xFF) << 0);
+    return ((red & 0xFF) << 24) | ((green & 0xFF) << 16) | ((blue & 0xFF) << 8) | ((alpha & 0xFF) << 0);
 
   @:from public static function fromFloats(arr : Array<Float>) : RGBA {
     var ints = arr.resize(4).pluck((_ * 255).round());
@@ -107,11 +107,11 @@ abstract RGBA(Int) from Int to Int {
     return red == other.red && alpha == other.alpha && green == other.green && blue == other.blue;
 
   inline function get_alpha() : Int
-    return (this >> 24) & 0xFF;
-  inline function get_red() : Int
-    return (this >> 16) & 0xFF;
-  inline function get_green() : Int
-    return (this >> 8) & 0xFF;
-  inline function get_blue() : Int
     return this & 0xFF;
+  inline function get_red() : Int
+    return (this >> 24) & 0xFF;
+  inline function get_green() : Int
+    return (this >> 16) & 0xFF;
+  inline function get_blue() : Int
+    return (this >> 8) & 0xFF;
 }

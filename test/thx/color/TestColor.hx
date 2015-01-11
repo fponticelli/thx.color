@@ -45,8 +45,8 @@ class TestColor {
     assertEquals(Color.red, Color.parse("rgb(255,0,0)"));
     assertEquals(Color.red, Color.parse("rgb(100%,0,0)"));
     assertEquals(RGBX.create(0.5,0,0), Color.parse("rgb(0.5,0,0)"));
-    assertEquals(new RGBA(0xFF00FF00), Color.parse("rgba(0,255,0,1)"));
-    assertEquals(new RGBA(0xFF00FF00), Color.parse("rgba(0,100%,0,1)"));
+    assertEquals(new RGBA(0x00FF00FF), Color.parse("rgba(0,255,0,1)"));
+    assertEquals(new RGBA(0x00FF00FF), Color.parse("rgba(0,100%,0,1)"));
   }
 
   public function assertEquals(a : RGBXA, b : RGBXA, ?pos : PosInfos)
