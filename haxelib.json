@@ -5,8 +5,8 @@
   "classPath": "src",
   "tags": ["color", "thx", "cross"],
   "description": "Library for color manipulation. Contains definitions for CIELab, CIELCh, CMY(K), Grey, HSL(A), HSV(A), RGB(A), XYZ and Yxy as well as alpha versions of the sames and color parsing.",
-  "releasenote": "Fixes to color rotation.",
-  "version": "0.10.4",
+  "releasenote": "removed inlines and swapped alpha channel in RGBA.",
+  "version": "0.11.0",
   "contributors": ["fponticelli"],
   "dependencies": {
     "thx.core": ""
