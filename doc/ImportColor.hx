@@ -15,3 +15,4 @@ import thx.color.RGBXA;
 import thx.color.parse.ColorParser;
 import thx.color.XYZ;
 import thx.color.Yxy;
+import thx.color.palettes.ColorBrewer;
