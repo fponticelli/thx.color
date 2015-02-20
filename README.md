@@ -94,5 +94,5 @@ haxelib install thx.color
 To use the `dev` version do:
 
 ```bash
-haxelib git thx.core https://github.com/fponticelli/thx.color.git
+haxelib git thx.color https://github.com/fponticelli/thx.color.git
 ```
