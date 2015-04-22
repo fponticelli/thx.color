@@ -1,7 +1,7 @@
 package thx.color;
 
 import haxe.PosInfos;
-import thx.core.Floats;
+import thx.Floats;
 import utest.Assert;
 import thx.color.parse.ColorParser;
 

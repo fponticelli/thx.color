@@ -1,9 +1,9 @@
 package thx.color;
 
-using thx.core.Arrays;
-using thx.core.Floats;
+using thx.Arrays;
+using thx.Floats;
 import thx.color.parse.ColorParser;
-using thx.core.error.NullArgument;
+using thx.error.NullArgument;
 
 @:access(thx.color.CIELCh)
 @:access(thx.color.XYZ)

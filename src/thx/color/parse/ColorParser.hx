@@ -1,7 +1,7 @@
 ﻿package thx.color.parse;
 
-import thx.core.Floats;
-import thx.core.Ints;
+import thx.Floats;
+import thx.Ints;
 
 class ColorParser {
   static var parser(default, null) = new ColorParser();

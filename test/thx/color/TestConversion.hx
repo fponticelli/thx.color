@@ -2,7 +2,7 @@ package thx.color;
 
 import thx.color.Color;
 import utest.Assert;
-using thx.core.Iterators;
+using thx.Iterators;
 
 class TestConversion {
   public function new() {}

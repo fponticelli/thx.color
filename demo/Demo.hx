@@ -1,9 +1,9 @@
 import MiniCanvas;
 
 import thx.color.*;
-using thx.core.Iterators;
-using thx.core.Arrays;
-import thx.core.Ints;
+using thx.Iterators;
+using thx.Arrays;
+import thx.Ints;
 
 class Demo {
   static function interpolations() {

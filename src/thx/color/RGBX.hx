@@ -1,9 +1,9 @@
 package thx.color;
 
-using thx.core.Arrays;
-using thx.core.Ints;
-using thx.core.Floats;
-using thx.core.Strings;
+using thx.Arrays;
+using thx.Ints;
+using thx.Floats;
+using thx.Strings;
 import thx.color.parse.ColorParser;
 
 @:access(thx.color.CMY)

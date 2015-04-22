@@ -1,8 +1,8 @@
 package thx.color;
 
-using thx.core.Arrays;
-using thx.core.Floats;
-using thx.core.Tuple;
+using thx.Arrays;
+using thx.Floats;
+using thx.Tuple;
 import thx.color.parse.ColorParser;
 
 @:access(thx.color.RGBXA)

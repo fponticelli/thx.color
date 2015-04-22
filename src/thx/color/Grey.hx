@@ -1,6 +1,6 @@
 package thx.color;
 
-using thx.core.Floats;
+using thx.Floats;
 import thx.color.parse.ColorParser;
 
 @:access(thx.color.RGBX)
