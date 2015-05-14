@@ -99,7 +99,7 @@ abstract HSVA(Array<Float>) {
     return new HSVA([hue, newsaturation.normalize(), value, alpha]);
 
   public function toString() : String
-    return 'hsva($hue,${saturation*100}%,${value*100}%,$alpha)';
+    return 'hsva(${hue.roundTo(6)},${(saturation*100).roundTo(6)}%,${(value*100).roundTo(6)}%,${alpha.roundTo(6)})';
 
   @:op(A==B) public function equals(other : HSVA) : Bool
     return hue.nearEquals(other.hue) && saturation.nearEquals(other.saturation) && value.nearEquals(other.value) && alpha.nearEquals(other.alpha);

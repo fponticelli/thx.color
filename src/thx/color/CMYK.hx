@@ -87,7 +87,7 @@ abstract CMYK(Array<Float>) {
     ]);
 
   @:to public function toString() : String
-    return 'cmyk($cyan,$magenta,$yellow,$black)';
+    return 'cmyk(${cyan.roundTo(6)},${magenta.roundTo(6)},${yellow.roundTo(6)},${black.roundTo(6)})';
 
   @:op(A==B) public function equals(other : CMYK) : Bool
     return cyan.nearEquals(other.cyan) && magenta.nearEquals(other.magenta) && yellow.nearEquals(other.yellow) && black.nearEquals(other.black);

@@ -67,7 +67,7 @@ abstract CMY(Array<Float>) {
     ]);
 
   @:to public function toString() : String
-    return 'cmy($cyan,$magenta,$yellow)';
+    return 'cmy(${cyan.roundTo(6)},${magenta.roundTo(6)},${yellow.roundTo(6)})';
 
   @:op(A==B) public function equals(other : CMY) : Bool
     return cyan.nearEquals(other.cyan) && magenta.nearEquals(other.magenta) && yellow.nearEquals(other.yellow);

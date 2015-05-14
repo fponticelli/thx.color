@@ -90,7 +90,7 @@ abstract CIELab(Array<Float>) {
     return new CIELab([l, a, newb]);
 
   @:to public function toString() : String
-    return 'CIELab($l,$a,$b)';
+    return 'CIELab(${l.roundTo(6)},${a.roundTo(6)},${b.roundTo(6)})';
 
   @:to public function toCIELCh() {
     var h = Floats.wrapCircular(Math.atan2(b, a) * 180 / Math.PI, 360),

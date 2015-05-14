@@ -53,7 +53,7 @@ abstract Yxy(Array<Float>) {
     return new Yxy([y1, x, y2]);
 
   public function toString() : String
-    return 'Yxy($y1,$x,$y2)';
+    return 'Yxy(${y1.roundTo(6)},${x.roundTo(6)},${y2.roundTo(6)})';
 
   @:op(A==B) public function equals(other : Yxy) : Bool
     return y1.nearEquals(other.y1) && x.nearEquals(other.x) && y2.nearEquals(other.y2);

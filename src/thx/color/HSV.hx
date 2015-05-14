@@ -96,7 +96,7 @@ abstract HSV(Array<Float>) {
     return new HSV([hue, newsaturation.normalize(), value]);
 
   public function toString() : String
-    return 'hsv($hue,${saturation*100}%,${value*100}%)';
+    return 'hsv(${hue.roundTo(6)},${(saturation*100).roundTo(6)}%,${(value*100).roundTo(6)}%)';
 
   @:op(A==B) public function equals(other : HSV) : Bool
     return hue.nearEquals(other.hue) && saturation.nearEquals(other.saturation) && value.nearEquals(other.value);

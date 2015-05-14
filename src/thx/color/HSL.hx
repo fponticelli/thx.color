@@ -112,7 +112,7 @@ abstract HSL(Array<Float>) {
   public function toCSS3() : String
     return toString();
   public function toString() : String
-    return 'hsl(${hue},${saturation*100}%,${lightness*100}%)';
+    return 'hsl(${hue.roundTo(6)},${(saturation*100).roundTo(6)}%,${(lightness*100).roundTo(6)}%)';
 
   @:op(A==B) public function equals(other : HSL) : Bool
     return hue.nearEquals(other.hue) && saturation.nearEquals(other.saturation) && lightness.nearEquals(other.lightness);

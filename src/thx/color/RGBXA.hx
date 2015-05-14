@@ -97,8 +97,10 @@ abstract RGBXA(Array<Float>) {
 
   public function toCSS3() : String
     return toString();
+
   @:to public function toString() : String
-    return 'rgba(${redf*100}%,${greenf*100}%,${bluef*100}%,$alphaf)';
+    return 'rgba(${(redf*100).roundTo(6)}%,${(greenf*100).roundTo(6)}%,${(bluef*100).roundTo(6)}%,${alphaf.roundTo(6)})';
+
   public function toHex(prefix = "#") : String
     return '$prefix${alpha.hex(2)}${red.hex(2)}${green.hex(2)}${blue.hex(2)}';
 

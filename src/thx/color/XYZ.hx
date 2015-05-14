@@ -54,7 +54,7 @@ abstract XYZ(Array<Float>) {
     return new XYZ([x, y, newz]);
 
   public function toString() : String
-    return 'XYZ($x,$y,$z)';
+    return 'XYZ(${x.roundTo(6)},${y.roundTo(6)},${z.roundTo(6)})';
 
   @:op(A==B) public function equals(other : XYZ) : Bool
     return x.nearEquals(other.x) && y.nearEquals(other.y) && z.nearEquals(other.z);

@@ -99,7 +99,7 @@ abstract CIELCh(Array<Float>) {
     return lightness.nearEquals(other.lightness) && chroma.nearEquals(other.chroma) && hue.nearEquals(other.hue);
 
   @:to public function toString() : String
-    return 'CIELCh($lightness,$chroma,$hue)';
+    return 'CIELCh(${lightness.roundTo(6)},${chroma.roundTo(6)},${hue.roundTo(6)})';
 
   @:to public function toCIELab() {
     var hradi = hue * (Math.PI / 180),

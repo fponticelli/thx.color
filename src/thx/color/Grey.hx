@@ -41,7 +41,7 @@ abstract Grey(Float) from Float to Float {
     return new Grey(t.interpolate(grey, other.grey));
 
   public function toString() : String
-    return 'grey(${grey*100}%)';
+    return 'grey(${(grey*100).roundTo(6)}%)';
 
   @:op(A==B) public function equals(other : Grey) : Bool
     return this.nearEquals(other.grey);

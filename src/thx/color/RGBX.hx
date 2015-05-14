@@ -78,7 +78,7 @@ abstract RGBX(Array<Float>) {
     return toString();
 
   @:to public function toString() : String
-    return 'rgb(${redf*100}%,${greenf*100}%,${bluef*100}%)';
+    return 'rgb(${(redf*100).roundTo(6)}%,${(greenf*100).roundTo(6)}%,${(bluef*100).roundTo(6)}%)';
 
   public function toHex(prefix = "#") : String
     return '$prefix${red.hex(2)}${green.hex(2)}${blue.hex(2)}';

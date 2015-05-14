@@ -118,7 +118,7 @@ abstract HSLA(Array<Float>) {
     return toString();
 
   public function toString() : String
-    return 'hsla(${hue},${saturation*100}%,${lightness*100}%,$alpha)';
+    return 'hsla(${hue.roundTo(6)},${(saturation*100).roundTo(6)}%,${(lightness*100).roundTo(6)}%,${alpha.roundTo(6)})';
 
   @:op(A==B) public function equals(other : HSLA) : Bool
     return hue.nearEquals(other.hue) && saturation.nearEquals(other.saturation) && lightness.nearEquals(other.lightness) && alpha.nearEquals(other.alpha);
