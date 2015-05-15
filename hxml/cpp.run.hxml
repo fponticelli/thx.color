@@ -2,8 +2,9 @@
 -cp test
 -lib utest
 -lib thx.core
--php bin/php
+-lib hxcpp
+-cpp bin/cpp
 -main TestAll
 -D thx-color
 
--cmd php bin/php/index.php
+-cmd ./bin/cpp/TestAll

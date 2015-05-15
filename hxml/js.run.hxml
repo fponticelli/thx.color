@@ -2,8 +2,9 @@
 -cp test
 -lib utest
 -lib thx.core
--php bin/php
+-js bin/js.js
 -main TestAll
 -D thx-color
 
--cmd php bin/php/index.php
+-cmd node bin/js.js
+-cmd phantomjs bin/js.js

@@ -2,8 +2,8 @@
 -cp test
 -lib utest
 -lib thx.core
--php bin/php
+-python bin/python.py
 -main TestAll
 -D thx-color
 
--cmd php bin/php/index.php
+-cmd python3 bin/python.py

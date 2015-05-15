@@ -2,8 +2,8 @@
 -cp test
 -lib utest
 -lib thx.core
--php bin/php
+-neko bin/neko.n
 -main TestAll
 -D thx-color
 
--cmd php bin/php/index.php
+-cmd neko bin/neko.n

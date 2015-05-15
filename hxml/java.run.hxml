@@ -2,8 +2,10 @@
 -cp test
 -lib utest
 -lib thx.core
--php bin/php
+-lib hxjava
+-java bin/java
 -main TestAll
 -D thx-color
+-debug
 
--cmd php bin/php/index.php
+-cmd java -jar bin/java/TestAll.jar
