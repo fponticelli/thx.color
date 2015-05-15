@@ -44,7 +44,7 @@ before_install:
   - source haxe_travis_scripts/scripts.sh
 
 install:
-  - haxelib install $TARGET.run.hxml
+  - haxelib install "$TARGET.run.hxml"
   - if [[ $TARGET == "cpp"  ]]; then install_hxcpp;  fi
   - if [[ $TARGET == "java" ]]; then install_hxjava; fi
   - if [[ $TARGET == "cs"   ]]; then install_hxcs;   fi
