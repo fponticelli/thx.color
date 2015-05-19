@@ -5,8 +5,8 @@
   "classPath": "src",
   "tags": ["color", "thx", "cross"],
   "description": "Library for color manipulation. Contains definitions for CieLab, CieLCh, Cmy(K), Grey, Hsl(A), Hsv(A), Rgb(A), Xyz and Yxy as well as alpha versions of the sames and color parsing.",
-  "releasenote": "Color brewer palettes and updated package for thx.core.",
-  "version": "0.12.0",
+  "releasenote": "Changed letter-casing of acronyms to match Haxe convention.",
+  "version": "0.13.0",
   "contributors": ["fponticelli"],
   "dependencies": {
     "thx.core": ""
