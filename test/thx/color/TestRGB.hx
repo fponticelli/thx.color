@@ -52,7 +52,7 @@ class TestRgb {
     var color = new Rgb(0x00AAFF);
     Assert.equals("#00AAFF", color.toHex());
     Assert.equals("#00AAFF", color.toString());
-    Assert.equals("rgb(0,170,255)", color.toCSS3());
+    Assert.equals("rgb(0,170,255)", color.toCss3());
   }
 
   public function testFromString() {

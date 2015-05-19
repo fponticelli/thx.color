@@ -109,7 +109,7 @@ abstract Hsl(Array<Float>) {
   public function withSaturation(newsaturation : Float)
     return new Hsl([hue, newsaturation.normalize(), lightness]);
 
-  public function toCSS3() : String
+  public function toCss3() : String
     return toString();
   public function toString() : String
     return 'hsl(${hue.roundTo(6)},${(saturation*100).roundTo(6)}%,${(lightness*100).roundTo(6)}%)';

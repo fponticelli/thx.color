@@ -74,7 +74,7 @@ abstract Rgbx(Array<Float>) {
       t.interpolate(bluef, other.bluef)
     ]);
 
-  public function toCSS3() : String
+  public function toCss3() : String
     return toString();
 
   @:to public function toString() : String

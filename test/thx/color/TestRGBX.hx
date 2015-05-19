@@ -15,7 +15,7 @@ class TestRgbx {
 
   public function testStrings() {
     var color = Rgbx.create(0, 0, 1);
-    Assert.equals("rgb(0%,0%,100%)", color.toCSS3());
+    Assert.equals("rgb(0%,0%,100%)", color.toCss3());
     Assert.equals("#0000FF", color.toHex());
     Assert.equals("rgb(0%,0%,100%)", color.toString());
   }

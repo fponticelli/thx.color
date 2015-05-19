@@ -16,7 +16,7 @@ class TestHsl {
   public function testStrings() {
     var hsl = Hsl.create(0, 0, 1);
     Assert.equals("hsl(0,0%,100%)", hsl.toString());
-    Assert.equals("hsl(0,0%,100%)", hsl.toCSS3());
+    Assert.equals("hsl(0,0%,100%)", hsl.toCss3());
   }
 
   public function testFromString() {

@@ -95,7 +95,7 @@ abstract Rgbxa(Array<Float>) {
   public function withBlue(newblue : Int)
     return new Rgbxa([red, green, newblue.normalize(), alpha]);
 
-  public function toCSS3() : String
+  public function toCss3() : String
     return toString();
 
   @:to public function toString() : String

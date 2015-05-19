@@ -94,7 +94,7 @@ abstract Rgba(Int) from Int to Int {
   @:to public function toRgbxa() : Rgbxa
     return Rgbxa.fromInts([red, green, blue, alpha]);
 
-  public function toCSS3() : String
+  public function toCss3() : String
     return toString();
 
   @:to public function toString() : String

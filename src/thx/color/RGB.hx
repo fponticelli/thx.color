@@ -62,7 +62,7 @@ abstract Rgb(Int) from Int to Int {
   public function withBlue(newblue : Int)
     return Rgb.fromInts([red, green, newblue]);
 
-  public function toCSS3() : String
+  public function toCss3() : String
     return 'rgb($red,$green,$blue)';
 
   @:to public function toString() : String

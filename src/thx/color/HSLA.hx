@@ -114,7 +114,7 @@ abstract Hsla(Array<Float>) {
   public function withSaturation(newsaturation : Float)
     return new Hsla([hue, newsaturation.normalize(), lightness, alpha]);
 
-  public function toCSS3() : String
+  public function toCss3() : String
     return toString();
 
   public function toString() : String
