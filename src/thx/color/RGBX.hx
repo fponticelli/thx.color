@@ -6,26 +6,26 @@ using thx.Floats;
 using thx.Strings;
 import thx.color.parse.ColorParser;
 
-@:access(thx.color.CMY)
-@:access(thx.color.CMYK)
-@:access(thx.color.HSL)
-@:access(thx.color.HSV)
-@:access(thx.color.RGB)
+@:access(thx.color.Cmy)
+@:access(thx.color.Cmyk)
+@:access(thx.color.Hsl)
+@:access(thx.color.Hsv)
+@:access(thx.color.Rgb)
 @:access(thx.color.Grey)
-@:access(thx.color.RGBXA)
-@:access(thx.color.XYZ)
-abstract RGBX(Array<Float>) {
+@:access(thx.color.Rgbxa)
+@:access(thx.color.Xyz)
+abstract Rgbx(Array<Float>) {
   public static function create(red : Float, green : Float, blue : Float)
-    return new RGBX([red.normalize(), green.normalize(), blue.normalize()]);
+    return new Rgbx([red.normalize(), green.normalize(), blue.normalize()]);
 
   @:from public static function fromFloats(arr : Array<Float>) {
     arr.resize(3);
-    return RGBX.create(arr[0], arr[1], arr[2]);
+    return Rgbx.create(arr[0], arr[1], arr[2]);
   }
 
   @:from public static function fromInts(arr : Array<Int>) {
     arr.resize(3);
-    return RGBX.create(arr[0] / 255, arr[1] / 255, arr[2] / 255);
+    return Rgbx.create(arr[0] / 255, arr[1] / 255, arr[2] / 255);
   }
 
   @:from public static function fromString(color : String) {
@@ -37,13 +37,13 @@ abstract RGBX(Array<Float>) {
 
     return try switch info.name {
       case 'rgb':
-        RGBX.fromFloats(ColorParser.getFloatChannels(info.channels, 3));
+        Rgbx.fromFloats(ColorParser.getFloatChannels(info.channels, 3));
       case _:
         null;
     } catch(e : Dynamic) null;
   }
 
-  inline function new(channels : Array<Float>) : RGBX
+  inline function new(channels : Array<Float>) : Rgbx
     this = channels;
 
   public var red(get, never) : Int;
@@ -54,21 +54,21 @@ abstract RGBX(Array<Float>) {
   public var bluef(get, never) : Float;
 
   public function darker(t : Float)
-    return new RGBX([
+    return new Rgbx([
       t.interpolate(redf, 0),
       t.interpolate(greenf, 0),
       t.interpolate(bluef, 0),
     ]);
 
   public function lighter(t : Float)
-    return new RGBX([
+    return new Rgbx([
       t.interpolate(redf, 1),
       t.interpolate(greenf, 1),
       t.interpolate(bluef, 1),
     ]);
 
-  public function interpolate(other : RGBX, t : Float)
-    return new RGBX([
+  public function interpolate(other : Rgbx, t : Float)
+    return new Rgbx([
       t.interpolate(redf, other.redf),
       t.interpolate(greenf, other.greenf),
       t.interpolate(bluef, other.bluef)
@@ -83,35 +83,35 @@ abstract RGBX(Array<Float>) {
   public function toHex(prefix = "#") : String
     return '$prefix${red.hex(2)}${green.hex(2)}${blue.hex(2)}';
 
-  @:op(A==B) public function equals(other : RGBX)
+  @:op(A==B) public function equals(other : Rgbx)
     return redf.nearEquals(other.redf) && greenf.nearEquals(other.greenf) && bluef.nearEquals(other.bluef);
 
   public function withAlpha(alpha : Float)
-    return new RGBXA(this.concat([alpha.normalize()]));
+    return new Rgbxa(this.concat([alpha.normalize()]));
 
   public function withRed(newred : Int)
-    return new RGBX([newred.normalize(), green, blue]);
+    return new Rgbx([newred.normalize(), green, blue]);
 
   public function withGreen(newgreen : Int)
-    return new RGBX([red, newgreen.normalize(), blue]);
+    return new Rgbx([red, newgreen.normalize(), blue]);
 
   public function withBlue(newblue : Int)
-    return new RGBX([red, green, newblue.normalize()]);
+    return new Rgbx([red, green, newblue.normalize()]);
 
-  @:to public function toCIELab()
-    return toXYZ().toCIELab();
+  @:to public function toCieLab()
+    return toXyz().toCieLab();
 
-  @:to public function toCIELCh()
-    return toCIELab().toCIELCh();
+  @:to public function toCieLCh()
+    return toCieLab().toCieLCh();
 
-  @:to public function toCMY() : CMY
-    return new CMY([
+  @:to public function toCmy() : Cmy
+    return new Cmy([
       1 - redf,
       1 - greenf,
       1 - bluef
     ]);
 
-  @:to public function toCMYK() {
+  @:to public function toCmyk() {
     var c = 0.0, y = 0.0, m = 0.0, k;
     if (redf + greenf + bluef == 0) {
       k = 1.0;
@@ -121,7 +121,7 @@ abstract RGBX(Array<Float>) {
       m = (1 - greenf - k) / (1 - k);
       y = (1 - bluef - k)  / (1 - k);
     }
-    return new CMYK([c, m, y, k]);
+    return new Cmyk([c, m, y, k]);
   }
 
   @:to public function toGrey()
@@ -133,7 +133,7 @@ abstract RGBX(Array<Float>) {
   public function toPerceivedAccurateGrey()
     return new Grey(Math.pow(redf, 2) * .241 + Math.pow(greenf, 2) * .691 + Math.pow(bluef, 2) * .068);
 
-  @:to public function toHSL() {
+  @:to public function toHsl() {
     var min = redf.min(greenf).min(bluef),
         max = redf.max(greenf).max(bluef),
         delta = max - min,
@@ -156,10 +156,10 @@ abstract RGBX(Array<Float>) {
         h = (redf - greenf) / delta + 4;
       h *= 60;
     }
-    return new HSL([h, s, l]);
+    return new Hsl([h, s, l]);
   }
 
-  @:to public function toHSV() {
+  @:to public function toHsv() {
     var min = redf.min(greenf).min(bluef),
       max = redf.max(greenf).max(bluef),
       delta = max - min,
@@ -171,7 +171,7 @@ abstract RGBX(Array<Float>) {
     else {
       s = 0;
       h = -1;
-      return new HSV([h, s, v]);
+      return new Hsv([h, s, v]);
     }
 
     if (redf == max)
@@ -184,16 +184,16 @@ abstract RGBX(Array<Float>) {
     h *= 60;
     if (h < 0)
       h += 360;
-    return new HSV([h, s, v]);
+    return new Hsv([h, s, v]);
   }
 
-  @:to public function toRGB()
-    return RGB.createf(redf, greenf, bluef);
+  @:to public function toRgb()
+    return Rgb.createf(redf, greenf, bluef);
 
-  @:to public function toRGBXA()
+  @:to public function toRgbxa()
     return withAlpha(1.0);
 
-  @:to public function toXYZ() {
+  @:to public function toXyz() {
     var r = redf,
         g = greenf,
         b = bluef;
@@ -202,7 +202,7 @@ abstract RGBX(Array<Float>) {
     g = 100 * (g > 0.04045 ? Math.pow(((g + 0.055) / 1.055), 2.4) : g / 12.92);
     b = 100 * (b > 0.04045 ? Math.pow(((b + 0.055) / 1.055), 2.4) : b / 12.92);
 
-    return new XYZ([
+    return new Xyz([
       r * 0.4124 + g * 0.3576 + b * 0.1805,
       r * 0.2126 + g * 0.7152 + b * 0.0722,
       r * 0.0193 + g * 0.1192 + b * 0.9505
@@ -210,7 +210,7 @@ abstract RGBX(Array<Float>) {
   }
 
   @:to public function toYxy()
-    return toXYZ().toYxy();
+    return toXyz().toYxy();
 
   function get_red() : Int
     return (redf   * 255).round();

@@ -5,24 +5,24 @@ using thx.Floats;
 using thx.Strings;
 import thx.color.parse.ColorParser;
 
-abstract RGBA(Int) from Int to Int {
-  public static function create(red : Int, green : Int, blue : Int, alpha : Int) : RGBA
+abstract Rgba(Int) from Int to Int {
+  public static function create(red : Int, green : Int, blue : Int, alpha : Int) : Rgba
     return ((red & 0xFF) << 24) | ((green & 0xFF) << 16) | ((blue & 0xFF) << 8) | ((alpha & 0xFF) << 0);
 
-  @:from public static function fromFloats(arr : Array<Float>) : RGBA {
+  @:from public static function fromFloats(arr : Array<Float>) : Rgba {
     var ints = arr.resize(4).pluck((_ * 255).round());
     return create(ints[0], ints[1], ints[2], ints[3]);
   }
 
-  @:from public static function fromInt(rgba : Int) : RGBA
+  @:from public static function fromInt(rgba : Int) : Rgba
     return rgba;
 
-  @:from public static function fromInts(arr : Array<Int>) : RGBA {
+  @:from public static function fromInts(arr : Array<Int>) : Rgba {
     arr.resize(4);
     return create(arr[0], arr[1], arr[2], arr[3]);
   }
 
-  @:from public static function fromString(color : String) : Null<RGBA> {
+  @:from public static function fromString(color : String) : Null<Rgba> {
     var info = ColorParser.parseHex(color);
     if(null == info)
       info = ColorParser.parseColor(color);
@@ -31,9 +31,9 @@ abstract RGBA(Int) from Int to Int {
 
     return try switch info.name {
       case 'rgb':
-        RGB.fromInts(ColorParser.getInt8Channels(info.channels, 3)).toRGBA();
+        Rgb.fromInts(ColorParser.getInt8Channels(info.channels, 3)).toRgba();
       case 'rgba':
-        RGBA.create(
+        Rgba.create(
           ColorParser.getInt8Channel(info.channels[0]),
           ColorParser.getInt8Channel(info.channels[1]),
           ColorParser.getInt8Channel(info.channels[2]),
@@ -44,7 +44,7 @@ abstract RGBA(Int) from Int to Int {
     } catch(e : Dynamic) null;
   }
 
-  inline public function new(rgba : Int) : RGBA
+  inline public function new(rgba : Int) : Rgba
     this = rgba;
 
   public var red(get, never)   : Int;
@@ -52,47 +52,47 @@ abstract RGBA(Int) from Int to Int {
   public var blue(get, never)  : Int;
   public var alpha(get, never)  : Int;
 
-  public function darker(t : Float) : RGBA
-    return toRGBXA().darker(t).toRGBA();
+  public function darker(t : Float) : Rgba
+    return toRgbxa().darker(t).toRgba();
 
-  public function lighter(t : Float) : RGBA
-    return toRGBXA().lighter(t).toRGBA();
+  public function lighter(t : Float) : Rgba
+    return toRgbxa().lighter(t).toRgba();
 
-  public function transparent(t : Float) : RGBA
-    return toRGBXA().transparent(t).toRGBA();
+  public function transparent(t : Float) : Rgba
+    return toRgbxa().transparent(t).toRgba();
 
   public function opaque(t : Float)
-    return toRGBXA().opaque(t).toRGBA();
+    return toRgbxa().opaque(t).toRgba();
 
-  public function interpolate(other : RGBA, t : Float)
-    return toRGBXA().interpolate(other.toRGBXA(), t).toRGBA();
+  public function interpolate(other : Rgba, t : Float)
+    return toRgbxa().interpolate(other.toRgbxa(), t).toRgba();
 
   public function withAlpha(newalpha : Int)
-    return RGBA.fromInts([red, green, blue, newalpha]);
+    return Rgba.fromInts([red, green, blue, newalpha]);
 
   public function withRed(newred : Int)
-    return RGBA.fromInts([newred, green, blue]);
+    return Rgba.fromInts([newred, green, blue]);
 
   public function withGreen(newgreen : Int)
-    return RGBA.fromInts([red, newgreen, blue]);
+    return Rgba.fromInts([red, newgreen, blue]);
 
   public function withBlue(newblue : Int)
-    return RGBA.fromInts([red, green, newblue]);
+    return Rgba.fromInts([red, green, newblue]);
 
-  @:to public function toHSLA()
-    return toRGBXA().toHSLA();
+  @:to public function toHsla()
+    return toRgbxa().toHsla();
 
-  @:to public function toHSVA()
-    return toRGBXA().toHSVA();
+  @:to public function toHsva()
+    return toRgbxa().toHsva();
 
-  @:to public function toRGB() : RGB
-    return RGB.create(red, green, blue);
+  @:to public function toRgb() : Rgb
+    return Rgb.create(red, green, blue);
 
-  @:to public function toRGBX() : RGBX
-    return RGBX.fromInts([red, green, blue]);
+  @:to public function toRgbx() : Rgbx
+    return Rgbx.fromInts([red, green, blue]);
 
-  @:to public function toRGBXA() : RGBXA
-    return RGBXA.fromInts([red, green, blue, alpha]);
+  @:to public function toRgbxa() : Rgbxa
+    return Rgbxa.fromInts([red, green, blue, alpha]);
 
   public function toCSS3() : String
     return toString();
@@ -103,7 +103,7 @@ abstract RGBA(Int) from Int to Int {
    public function toHex(prefix = "#")
     return '$prefix${alpha.hex(2)}${red.hex(2)}${green.hex(2)}${blue.hex(2)}';
 
-  @:op(A==B) public function equals(other : RGBA) : Bool
+  @:op(A==B) public function equals(other : Rgba) : Bool
     return red == other.red && alpha == other.alpha && green == other.green && blue == other.blue;
 
   inline function get_alpha() : Int

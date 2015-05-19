@@ -9,43 +9,43 @@ General purpose color library for Haxe.
 API uses abstracts to make it easy to use colors with strings and numbers.
 
 ```haxe
-    var rgb : RGB = "#cf8700";
+    var rgb : Rgb = "#cf8700";
     trace(rgb.green);
 ```
 
 Some examples from [Demo](https://github.com/fponticelli/thx.color/raw/master/demo/Demo.hx).
 
-### HSL Rainbow
+### Hsl Rainbow
 
 ```haxe
-var left  : HSL = 'hsl(0,100%,0%)',
-    right : HSL = 'hsl(359.99,100%,0%)';
-return function(x : Float, y : Float) : RGB {
+var left  : Hsl = 'hsl(0,100%,0%)',
+    right : Hsl = 'hsl(359.99,100%,0%)';
+return function(x : Float, y : Float) : Rgb {
   return left.interpolate(right, x).lighter(y);
 };
 ```
 
-![Alt text](https://github.com/fponticelli/thx.color/raw/master/images/rainbowhsl.png?raw=true "HSL Rainbow")
+![Alt text](https://github.com/fponticelli/thx.color/raw/master/images/rainbowhsl.png?raw=true "Hsl Rainbow")
 
-### HSV Interpolation
+### Hsv Interpolation
 
 ```haxe
-var left  : HSV = 'hsv(160deg,100%,63%)',
-    right : HSV = 'hsv(345deg,88%,77%)';
-return function(t : Float) : RGB
-    return (left : HSV).interpolate(right, t);
+var left  : Hsv = 'hsv(160deg,100%,63%)',
+    right : Hsv = 'hsv(345deg,88%,77%)';
+return function(t : Float) : Rgb
+    return (left : Hsv).interpolate(right, t);
 ```
 
-![Alt text](https://github.com/fponticelli/thx.color/raw/master/images/interpolatehsv.png?raw=true "HSV Interpolation")
+![Alt text](https://github.com/fponticelli/thx.color/raw/master/images/interpolatehsv.png?raw=true "Hsv Interpolation")
 
-### Lighter RGB
+### Lighter Rgb
 
 ```haxe
-var left : RGB = '#0000ff';
+var left : Rgb = '#0000ff';
 return left.lighter;
 ```
 
-![Alt text](https://github.com/fponticelli/thx.color/raw/master/images/lighterrgb.png?raw=true "Lighter RGB")
+![Alt text](https://github.com/fponticelli/thx.color/raw/master/images/lighterrgb.png?raw=true "Lighter Rgb")
 
 ### Named Colors Table
 
@@ -65,10 +65,10 @@ colors.mapi(function(name, i) {
     ctx.fillStyle = color.toString();
     ctx.fillRect(col * cellw, row * cellh, cellw, cellh);
 
-    ctx.fillStyle = color.toRGBX()
+    ctx.fillStyle = color.toRgbx()
         .toPerceivedGrey()
         .contrast()
-        .toRGB().toString();
+        .toRgb().toString();
     ctx.fillText(
         name,
         Math.round(col * cellw + cellw / 2) + 0.5,

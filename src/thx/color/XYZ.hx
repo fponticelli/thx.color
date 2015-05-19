@@ -4,20 +4,20 @@ using thx.Arrays;
 using thx.Floats;
 import thx.color.parse.ColorParser;
 
-@:access(thx.color.RGBX)
-@:access(thx.color.CIELab)
+@:access(thx.color.Rgbx)
+@:access(thx.color.CieLab)
 @:access(thx.color.Yxy)
-abstract XYZ(Array<Float>) {
+abstract Xyz(Array<Float>) {
   public var x(get, never) : Float;
   public var y(get, never) : Float;
   public var z(get, never) : Float;
 
   public static function create(x : Float, y : Float, z : Float)
-    return new XYZ([x, y, z]);
+    return new Xyz([x, y, z]);
 
   @:from public static function fromFloats(arr : Array<Float>) {
     arr.resize(3);
-    return XYZ.create(arr[0], arr[1], arr[2]);
+    return Xyz.create(arr[0], arr[1], arr[2]);
   }
 
   @:from public static function fromString(color : String) {
@@ -27,39 +27,39 @@ abstract XYZ(Array<Float>) {
 
     return try switch info.name {
       case 'ciexyz', 'xyz':
-        new thx.color.XYZ(ColorParser.getFloatChannels(info.channels, 3));
+        new thx.color.Xyz(ColorParser.getFloatChannels(info.channels, 3));
       case _:
         null;
     } catch(e : Dynamic) null;
   }
 
 
-  inline function new(channels : Array<Float>) : XYZ
+  inline function new(channels : Array<Float>) : Xyz
     this = channels;
 
-  public function interpolate(other : XYZ, t : Float)
-    return new XYZ([
+  public function interpolate(other : Xyz, t : Float)
+    return new Xyz([
       t.interpolate(x, other.x),
       t.interpolate(y, other.y),
       t.interpolate(z, other.z),
     ]);
 
   public function withX(newx : Float)
-    return new XYZ([newx, y, z]);
+    return new Xyz([newx, y, z]);
 
   public function withY(newy : Float)
-    return new XYZ([x, newy, z]);
+    return new Xyz([x, newy, z]);
 
   public function withZ(newz : Float)
-    return new XYZ([x, y, newz]);
+    return new Xyz([x, y, newz]);
 
   public function toString() : String
-    return 'XYZ(${x.roundTo(6)},${y.roundTo(6)},${z.roundTo(6)})';
+    return 'Xyz(${x.roundTo(6)},${y.roundTo(6)},${z.roundTo(6)})';
 
-  @:op(A==B) public function equals(other : XYZ) : Bool
+  @:op(A==B) public function equals(other : Xyz) : Bool
     return x.nearEquals(other.x) && y.nearEquals(other.y) && z.nearEquals(other.z);
 
-  @:to public function toCIELab() : CIELab {
+  @:to public function toCieLab() : CieLab {
     var x = x * 0.0105211106,
         y = y * 0.01,
         z = z * 0.00918417016,
@@ -69,38 +69,38 @@ abstract XYZ(Array<Float>) {
     y = y > 0.008856 ? Math.pow(y, 1/3) : (7.787 * y) + 16/116;
     z = z > 0.008856 ? Math.pow(z, 1/3) : (7.787 * z) + 16/116;
 
-    return new CIELab(
+    return new CieLab(
       y > 0.008856 ?
       [(116 * y) - 16, 500 * (x - y), 200 * (y - z)] :
       [903.3 * y, 500 * (x - y), 200 * (y - z)]
     );
   }
 
-  @:to public function toCIELCh()
-    return toCIELab().toCIELCh();
+  @:to public function toCieLCh()
+    return toCieLab().toCieLCh();
 
-  @:to public function toCMY()
-    return toRGBX().toCMY();
+  @:to public function toCmy()
+    return toRgbx().toCmy();
 
-  @:to public function toCMYK()
-    return toRGBX().toCMYK();
+  @:to public function toCmyk()
+    return toRgbx().toCmyk();
 
   @:to public function toGrey()
-    return toRGBX().toGrey();
+    return toRgbx().toGrey();
 
-  @:to public function toHSL()
-    return toRGBX().toHSL();
+  @:to public function toHsl()
+    return toRgbx().toHsl();
 
-  @:to public function toHSV()
-    return toRGBX().toHSV();
+  @:to public function toHsv()
+    return toRgbx().toHsv();
 
-  @:to public function toRGB()
-    return toRGBX().toRGB();
+  @:to public function toRgb()
+    return toRgbx().toRgb();
 
-  @:to public function toRGBA()
-    return toRGBXA().toRGBA();
+  @:to public function toRgba()
+    return toRgbxa().toRgba();
 
-  @:to public function toRGBX() {
+  @:to public function toRgbx() {
     var x = x / 100,
         y = y / 100,
         z = z / 100,
@@ -112,11 +112,11 @@ abstract XYZ(Array<Float>) {
     g = g > 0.0031308 ? 1.055 * Math.pow(g,(1/2.4)) - 0.055 : 12.92 * g;
     b = b > 0.0031308 ? 1.055 * Math.pow(b,(1/2.4)) - 0.055 : 12.92 * b;
 
-    return new RGBX([r,g,b]);
+    return new Rgbx([r,g,b]);
   }
 
-  @:to public function toRGBXA()
-    return toRGBX().toRGBXA();
+  @:to public function toRgbxa()
+    return toRgbx().toRgbxa();
 
   @:to public function toYxy() {
     var sum = x + y + z;

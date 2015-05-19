@@ -4,9 +4,9 @@ using thx.Arrays;
 using thx.Floats;
 import thx.color.parse.ColorParser;
 
-@:access(thx.color.RGBX)
-@:access(thx.color.CIELab)
-@:access(thx.color.XYZ)
+@:access(thx.color.Rgbx)
+@:access(thx.color.CieLab)
+@:access(thx.color.Xyz)
 abstract Yxy(Array<Float>) {
   public var y1(get, never) : Float;
   public var x(get, never) : Float;
@@ -58,41 +58,41 @@ abstract Yxy(Array<Float>) {
   @:op(A==B) public function equals(other : Yxy) : Bool
     return y1.nearEquals(other.y1) && x.nearEquals(other.x) && y2.nearEquals(other.y2);
 
-  @:to public function toCIELab()
-    return toXYZ().toCIELab();
+  @:to public function toCieLab()
+    return toXyz().toCieLab();
 
-  @:to public function toCIELCh()
-    return toCIELab().toCIELCh();
+  @:to public function toCieLCh()
+    return toCieLab().toCieLCh();
 
-  @:to public function toCMY()
-    return toRGBX().toCMY();
+  @:to public function toCmy()
+    return toRgbx().toCmy();
 
-  @:to public function toCMYK()
-    return toRGBX().toCMYK();
+  @:to public function toCmyk()
+    return toRgbx().toCmyk();
 
   @:to public function toGrey()
-    return toRGBX().toGrey();
+    return toRgbx().toGrey();
 
-  @:to public function toHSL()
-    return toRGBX().toHSL();
+  @:to public function toHsl()
+    return toRgbx().toHsl();
 
-  @:to public function toHSV()
-    return toRGBX().toHSV();
+  @:to public function toHsv()
+    return toRgbx().toHsv();
 
-  @:to public function toRGB()
-    return toRGBX().toRGB();
+  @:to public function toRgb()
+    return toRgbx().toRgb();
 
-  @:to public function toRGBA()
-    return toRGBXA().toRGBA();
+  @:to public function toRgba()
+    return toRgbxa().toRgba();
 
-  @:to public function toRGBX()
-    return toXYZ().toRGBX();
+  @:to public function toRgbx()
+    return toXyz().toRgbx();
 
-  @:to public function toRGBXA()
-    return toRGBX().toRGBXA();
+  @:to public function toRgbxa()
+    return toRgbx().toRgbxa();
 
-  @:to public function toXYZ()
-    return new XYZ([
+  @:to public function toXyz()
+    return new Xyz([
       x * (y1 / y2),
       y1,
       (1 - x - y2) * (y1 / y2)

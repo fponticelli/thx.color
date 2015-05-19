@@ -3,7 +3,7 @@ package thx.color;
 using thx.Floats;
 import thx.color.parse.ColorParser;
 
-@:access(thx.color.RGBX)
+@:access(thx.color.Rgbx)
 abstract Grey(Float) from Float to Float {
   public static var black(default, null) : Grey = new Grey(0);
   public static var white(default, null) : Grey = new Grey(1);
@@ -49,39 +49,39 @@ abstract Grey(Float) from Float to Float {
   inline function get_grey() : Float
     return this;
 
-  @:to public function toCIELab()
-    return toRGBX().toCIELab();
+  @:to public function toCieLab()
+    return toRgbx().toCieLab();
 
-  @:to public function toCIELCh()
-    return toRGBX().toCIELCh();
+  @:to public function toCieLCh()
+    return toRgbx().toCieLCh();
 
-  @:to public function toCMY()
-    return toRGBX().toCMY();
+  @:to public function toCmy()
+    return toRgbx().toCmy();
 
-  @:to public function toCMYK()
-    return toRGBX().toCMYK();
+  @:to public function toCmyk()
+    return toRgbx().toCmyk();
 
-  @:to public function toHSL()
-    return toRGBX().toHSL();
+  @:to public function toHsl()
+    return toRgbx().toHsl();
 
-  @:to public function toHSV()
-    return toRGBX().toHSV();
+  @:to public function toHsv()
+    return toRgbx().toHsv();
 
-  @:to public function toRGB()
-    return toRGBX().toRGB();
+  @:to public function toRgb()
+    return toRgbx().toRgb();
 
-  @:to public function toRGBA()
-    return toRGBXA().toRGBA();
+  @:to public function toRgba()
+    return toRgbxa().toRgba();
 
-  @:to public function toRGBX()
-    return new RGBX([grey, grey, grey]);
+  @:to public function toRgbx()
+    return new Rgbx([grey, grey, grey]);
 
-  @:to public function toRGBXA()
-    return toRGBX().toRGBXA();
+  @:to public function toRgbxa()
+    return toRgbx().toRgbxa();
 
-  @:to public function toXYZ()
-    return toRGBX().toXYZ();
+  @:to public function toXyz()
+    return toRgbx().toXyz();
 
   @:to public function toYxy()
-    return toRGBX().toYxy();
+    return toRgbx().toYxy();
 }

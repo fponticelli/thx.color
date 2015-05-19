@@ -5,15 +5,15 @@ using thx.Floats;
 using thx.Tuple;
 import thx.color.parse.ColorParser;
 
-@:access(thx.color.RGBX)
-@:access(thx.color.HSVA)
-abstract HSV(Array<Float>) {
+@:access(thx.color.Rgbx)
+@:access(thx.color.Hsva)
+abstract Hsv(Array<Float>) {
   public var hue(get, never) : Float;
   public var saturation(get, never) : Float;
   public var value(get, never) : Float;
 
   public static function create(hue : Float, saturation : Float, lightness : Float)
-    return new HSV([
+    return new Hsv([
       hue.wrapCircular(360),
       saturation.clamp(0, 1),
       lightness.clamp(0, 1)
@@ -21,7 +21,7 @@ abstract HSV(Array<Float>) {
 
   @:from public static function fromFloats(arr : Array<Float>) {
     arr.resize(3);
-    return HSV.create(arr[0], arr[1], arr[2]);
+    return Hsv.create(arr[0], arr[1], arr[2]);
   }
 
   @:from public static function fromString(color : String) {
@@ -31,13 +31,13 @@ abstract HSV(Array<Float>) {
 
     return try switch info.name {
       case 'hsv':
-        new thx.color.HSV(ColorParser.getFloatChannels(info.channels, 3));
+        new thx.color.Hsv(ColorParser.getFloatChannels(info.channels, 3));
       case _:
         null;
     } catch(e : Dynamic) null;
   }
 
-  inline function new(channels : Array<Float>) : HSV
+  inline function new(channels : Array<Float>) : Hsv
     this = channels;
 
   public function analogous(spread = 30.0)
@@ -49,8 +49,8 @@ abstract HSV(Array<Float>) {
   public function complement()
     return rotate(180);
 
-  public function interpolate(other : HSV, t : Float)
-    return new HSV([
+  public function interpolate(other : Hsv, t : Float)
+    return new Hsv([
       t.interpolateAngle(hue, other.hue),
       t.interpolate(saturation, other.saturation),
       t.interpolate(value, other.value)
@@ -84,53 +84,53 @@ abstract HSV(Array<Float>) {
     );
 
   public function withAlpha(alpha : Float)
-    return new HSVA(this.concat([alpha.normalize()]));
+    return new Hsva(this.concat([alpha.normalize()]));
 
   public function withHue(newhue : Float)
-    return new HSV([newhue.wrapCircular(360), saturation, value]);
+    return new Hsv([newhue.wrapCircular(360), saturation, value]);
 
   public function withValue(newvalue : Float)
-    return new HSV([hue, saturation, newvalue.normalize()]);
+    return new Hsv([hue, saturation, newvalue.normalize()]);
 
   public function withSaturation(newsaturation : Float)
-    return new HSV([hue, newsaturation.normalize(), value]);
+    return new Hsv([hue, newsaturation.normalize(), value]);
 
   public function toString() : String
     return 'hsv(${hue.roundTo(6)},${(saturation*100).roundTo(6)}%,${(value*100).roundTo(6)}%)';
 
-  @:op(A==B) public function equals(other : HSV) : Bool
+  @:op(A==B) public function equals(other : Hsv) : Bool
     return hue.nearEquals(other.hue) && saturation.nearEquals(other.saturation) && value.nearEquals(other.value);
 
-  @:to public function toCIELab()
-    return toRGBX().toCIELab();
+  @:to public function toCieLab()
+    return toRgbx().toCieLab();
 
-  @:to public function toCIELCh()
-    return toRGBX().toCIELCh();
+  @:to public function toCieLCh()
+    return toRgbx().toCieLCh();
 
-  @:to public function toCMY()
-    return toRGBX().toCMY();
+  @:to public function toCmy()
+    return toRgbx().toCmy();
 
-  @:to public function toCMYK()
-    return toRGBX().toCMYK();
+  @:to public function toCmyk()
+    return toRgbx().toCmyk();
 
   @:to public function toGrey()
-    return toRGBX().toGrey();
+    return toRgbx().toGrey();
 
-  @:to public function toHSL()
-    return toRGBX().toHSL();
+  @:to public function toHsl()
+    return toRgbx().toHsl();
 
-  @:to public function toHSVA()
+  @:to public function toHsva()
     return withAlpha(1.0);
 
-  @:to public function toRGB()
-    return toRGBX().toRGB();
+  @:to public function toRgb()
+    return toRgbx().toRgb();
 
-  @:to public function toRGBA()
-    return toRGBXA().toRGBA();
+  @:to public function toRgba()
+    return toRgbxa().toRgba();
 
-  @:to public function toRGBX() {
+  @:to public function toRgbx() {
     if(saturation == 0)
-      return new RGBX([value, value, value]);
+      return new Rgbx([value, value, value]);
 
     var r : Float, g : Float, b : Float, i : Int, f : Float, p : Float, q : Float, t : Float;
     var h = hue / 60;
@@ -150,17 +150,17 @@ abstract HSV(Array<Float>) {
       default: r = value; g = p; b = q; // case 5
     }
 
-    return new RGBX([r, g, b]);
+    return new Rgbx([r, g, b]);
   }
 
-  @:to public function toRGBXA()
-    return toRGBX().toRGBXA();
+  @:to public function toRgbxa()
+    return toRgbx().toRgbxa();
 
-  @:to public function toXYZ()
-    return toRGBX().toXYZ();
+  @:to public function toXyz()
+    return toRgbx().toXyz();
 
   @:to public function toYxy()
-    return toRGBX().toYxy();
+    return toRgbx().toYxy();
 
   inline function get_hue() : Float
     return this[0];

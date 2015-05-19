@@ -5,17 +5,17 @@ using thx.Floats;
 using thx.Tuple;
 import thx.color.parse.ColorParser;
 
-@:access(thx.color.CIELab)
-@:access(thx.color.CIELCh)
-@:access(thx.color.XYZ)
-@:access(thx.color.RGBX)
-abstract CIELCh(Array<Float>) {
+@:access(thx.color.CieLab)
+@:access(thx.color.CieLCh)
+@:access(thx.color.Xyz)
+@:access(thx.color.Rgbx)
+abstract CieLCh(Array<Float>) {
   public var lightness(get, never) : Float;
   public var chroma(get, never) : Float;
   public var hue(get, never) : Float;
 
   public static function create(lightness : Float, chroma : Float, hue : Float)
-    return new CIELCh([
+    return new CieLCh([
       lightness,
       chroma,
       hue.wrapCircular(360)
@@ -23,7 +23,7 @@ abstract CIELCh(Array<Float>) {
 
   @:from public static function fromFloats(arr : Array<Float>) {
     arr.resize(3);
-    return CIELCh.create(arr[0], arr[1], arr[2]);
+    return CieLCh.create(arr[0], arr[1], arr[2]);
   }
 
 
@@ -34,13 +34,13 @@ abstract CIELCh(Array<Float>) {
 
     return try switch info.name {
       case 'cielch':
-        CIELCh.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
+        CieLCh.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
       case _:
         null;
     } catch(e : Dynamic) null;
   }
 
-  inline function new(channels : Array<Float>) : CIELCh
+  inline function new(channels : Array<Float>) : CieLCh
     this = channels;
 
   public function analogous(spread = 30.0)
@@ -52,8 +52,8 @@ abstract CIELCh(Array<Float>) {
   public function complement()
     return rotate(180);
 
-  public function interpolate(other : CIELCh, t : Float)
-    return new CIELCh([
+  public function interpolate(other : CieLCh, t : Float)
+    return new CieLCh([
       t.interpolate(lightness, other.lightness),
       t.interpolate(chroma, other.chroma),
       t.interpolateAngle(hue, other.hue, 360)
@@ -87,59 +87,59 @@ abstract CIELCh(Array<Float>) {
     );
 
   public function withLightness(newlightness : Float)
-    return new CIELCh([newlightness, chroma, hue]);
+    return new CieLCh([newlightness, chroma, hue]);
 
   public function withChroma(newchroma : Float)
-    return new CIELCh([lightness, newchroma, hue]);
+    return new CieLCh([lightness, newchroma, hue]);
 
   public function withHue(newhue : Float)
-    return new CIELCh([lightness, chroma, newhue.wrapCircular(360)]);
+    return new CieLCh([lightness, chroma, newhue.wrapCircular(360)]);
 
-  @:op(A==B) public function equals(other : CIELCh) : Bool
+  @:op(A==B) public function equals(other : CieLCh) : Bool
     return lightness.nearEquals(other.lightness) && chroma.nearEquals(other.chroma) && hue.nearEquals(other.hue);
 
   @:to public function toString() : String
-    return 'CIELCh(${lightness.roundTo(6)},${chroma.roundTo(6)},${hue.roundTo(6)})';
+    return 'CieLCh(${lightness.roundTo(6)},${chroma.roundTo(6)},${hue.roundTo(6)})';
 
-  @:to public function toCIELab() {
+  @:to public function toCieLab() {
     var hradi = hue * (Math.PI / 180),
         a = Math.cos(hradi) * chroma,
         b = Math.sin(hradi) * chroma;
-    return new CIELab([lightness, a, b]);
+    return new CieLab([lightness, a, b]);
   }
 
-  @:to public function toCMY()
-    return toRGBX().toCMY();
+  @:to public function toCmy()
+    return toRgbx().toCmy();
 
-  @:to public function toCMYK()
-    return toRGBX().toCMYK();
+  @:to public function toCmyk()
+    return toRgbx().toCmyk();
 
   @:to public function toGrey()
-    return toRGBX().toGrey();
+    return toRgbx().toGrey();
 
-  @:to public function toHSL()
-    return toRGBX().toHSL();
+  @:to public function toHsl()
+    return toRgbx().toHsl();
 
-  @:to public function toHSV()
-    return toRGBX().toHSV();
+  @:to public function toHsv()
+    return toRgbx().toHsv();
 
-  @:to public function toRGB()
-    return toRGBX().toRGB();
+  @:to public function toRgb()
+    return toRgbx().toRgb();
 
-  @:to public function toRGBA()
-    return toRGBXA().toRGBA();
+  @:to public function toRgba()
+    return toRgbxa().toRgba();
 
-  @:to public function toRGBX()
-    return toCIELab().toRGBX();
+  @:to public function toRgbx()
+    return toCieLab().toRgbx();
 
-  @:to public function toRGBXA()
-    return toRGBX().toRGBXA();
+  @:to public function toRgbxa()
+    return toRgbx().toRgbxa();
 
-  @:to public function toXYZ()
-    return toCIELab().toXYZ();
+  @:to public function toXyz()
+    return toCieLab().toXyz();
 
   @:to public function toYxy()
-    return toCIELab().toYxy();
+    return toCieLab().toYxy();
 
   inline function get_lightness() : Float
     return this[0];

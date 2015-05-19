@@ -7,83 +7,83 @@ using thx.Iterators;
 class TestConversion {
   public function new() {}
 
-  public function testRGBX() {
+  public function testRgbx() {
     Color.names.keys().map(function(name) {
-      var expected : RGB = Color.names.get(name),
-          color : RGBX = expected,
-          test : RGB = color;
+      var expected : Rgb = Color.names.get(name),
+          color : Rgbx = expected,
+          test : Rgb = color;
       Assert.equals(expected.toString(), test.toString(), 'expected $expected but was $test for $name');
     });
   }
 
-  public function testCMY() {
+  public function testCmy() {
     Color.names.keys().map(function(name) {
-      var expected : RGB = Color.names.get(name),
-          color : CMY = expected,
-          test : RGB = color;
+      var expected : Rgb = Color.names.get(name),
+          color : Cmy = expected,
+          test : Rgb = color;
       Assert.equals(expected.toString(), test.toString(), 'expected $expected but was $test for $name');
     });
   }
 
-  public function testCMYK() {
+  public function testCmyk() {
     Color.names.keys().map(function(name) {
-      var expected : RGB = Color.names.get(name),
-          color : CMYK = expected,
-          test : RGB = color;
+      var expected : Rgb = Color.names.get(name),
+          color : Cmyk = expected,
+          test : Rgb = color;
       Assert.equals(expected.toString(), test.toString(), 'expected $expected but was $test for $name');
     });
   }
 
-  public function testHSL() {
+  public function testHsl() {
     Color.names.keys().map(function(name) {
-      var expected : RGB = Color.names.get(name),
-          color : HSL = expected,
-          test : RGB = color;
+      var expected : Rgb = Color.names.get(name),
+          color : Hsl = expected,
+          test : Rgb = color;
       Assert.equals(expected.toString(), test.toString(), 'expected $expected but was $test for $name');
     });
   }
 
-  public function testHSV() {
+  public function testHsv() {
     Color.names.keys().map(function(name) {
-      var expected : RGB = Color.names.get(name),
-          color : HSV = expected,
-          test : RGB = color;
+      var expected : Rgb = Color.names.get(name),
+          color : Hsv = expected,
+          test : Rgb = color;
       Assert.equals(expected.toString(), test.toString(), 'expected $expected but was $test for $name');
     });
   }
 
-  public function testXYZ() {
+  public function testXyz() {
     Color.names.keys().map(function(name) {
-      var expected : RGB = Color.names.get(name),
-          color : XYZ = expected,
-          test : RGB = color;
+      var expected : Rgb = Color.names.get(name),
+          color : Xyz = expected,
+          test : Rgb = color;
       Assert.equals(expected.toString(), test.toString(), 'expected $expected but was $test for $name');
     });
   }
 
-  public function testCIELab() {
+  public function testCieLab() {
     Color.names.keys().map(function(name) {
-      var expected : RGB = Color.names.get(name),
-          color : CIELab = expected,
-          test : RGB = color;
+      var expected : Rgb = Color.names.get(name),
+          color : CieLab = expected,
+          test : Rgb = color;
       Assert.equals(expected.toString(), test.toString(), 'expected $expected but was $test for $name');
     });
   }
 
-  public function testCIELCh() {
+  public function testCieLCh() {
     Color.names.keys().map(function(name) {
-      var expected : RGB = Color.names.get(name),
-          color : CIELCh = expected,
-          test : RGB = color;
+      var expected : Rgb = Color.names.get(name),
+          color : CieLCh = expected,
+          test : Rgb = color;
       Assert.equals(expected.toString(), test.toString(), 'expected $expected but was $test for $name');
     });
   }
 
   public function testXyx() {
     Color.names.keys().map(function(name) {
-      var expected : RGB = Color.names.get(name),
+      var expected : Rgb = Color.names.get(name),
           color : Yxy = expected,
-          test : RGB = color;
+          test : Rgb = color;
       Assert.equals(expected.toString(), test.toString(), 'expected $expected but was $test for $name');
     });
   }
