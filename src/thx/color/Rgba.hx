@@ -2,6 +2,7 @@ package thx.color;
 
 using thx.Arrays;
 using thx.Floats;
+using thx.Functions;
 using thx.Strings;
 import thx.color.parse.ColorParser;
 
@@ -10,7 +11,7 @@ abstract Rgba(Int) from Int to Int {
     return ((red & 0xFF) << 24) | ((green & 0xFF) << 16) | ((blue & 0xFF) << 8) | ((alpha & 0xFF) << 0);
 
   @:from public static function fromFloats(arr : Array<Float>) : Rgba {
-    var ints = arr.resize(4).pluck((_ * 255).round());
+    var ints = arr.resize(4).map.fn((_ * 255).round());
     return create(ints[0], ints[1], ints[2], ints[3]);
   }
 
