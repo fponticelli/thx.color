@@ -439,4 +439,8 @@ class Color {
     names.set("yellowgreen", yellowgreen = 0x9acd32);
     names.set("yellow green", yellowgreen);
   }
+
+  public static function sort() {
+    return "rainbow";
+  }
 }

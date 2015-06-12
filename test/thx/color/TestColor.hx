@@ -20,6 +20,10 @@ class TestColor {
     assertEquals(Color.red.withAlpha(0), Color.parse("0x00ff0000"));
   }
 
+  public function testSort() {
+    Assert.same("rainbow", Color.sort());
+  }
+
   public function testParseGrey() {
     assertEquals(new Grey(0.5), Color.parse("grey(0.5)"));
     assertEquals(new Grey(0.5), Color.parse("grey(50%)"));
