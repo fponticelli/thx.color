@@ -171,8 +171,12 @@ class Color {
         Cmy.fromFloats(ColorParser.getFloatChannels(info.channels, 3));
       case 'cmyk':
         Cmyk.fromFloats(ColorParser.getFloatChannels(info.channels, 4));
+      case 'cubehelix':
+        CubeHelix.fromFloats(ColorParser.getFloatChannels(info.channels, 3));
       case 'grey', 'gray':
         Grey.create(ColorParser.getFloatChannels(info.channels, 1)[0]);
+      case 'hcl':
+        Hcl.fromFloats(ColorParser.getFloatChannels(info.channels, 3));
       case 'hsl':
         Hsl.fromFloats(ColorParser.getFloatChannels(info.channels, 3));
       case 'hsla':
@@ -185,6 +189,10 @@ class Color {
         Rgbx.fromFloats(ColorParser.getFloatChannels(info.channels, 3));
       case 'rgba':
         Rgbxa.fromFloats(ColorParser.getFloatChannels(info.channels, 4));
+      case 'ciexyz', 'xyz':
+        Xyz.fromFloats(ColorParser.getFloatChannels(info.channels, 3));
+      case 'yxy':
+        Yxy.fromFloats(ColorParser.getFloatChannels(info.channels, 3));
       case _:
         null;
     } catch(e : Dynamic) null;
