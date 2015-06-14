@@ -117,6 +117,9 @@ abstract CieLCh(Array<Float>) {
   @:to public function toGrey()
     return toRgbx().toGrey();
 
+  @:to public function toHcl()
+    return toCieLab().toHcl();
+
   @:to public function toHsl()
     return toRgbx().toHsl();
 

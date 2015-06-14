@@ -89,6 +89,9 @@ abstract Rgb(Int) from Int to Int {
   @:to public function toGrey()
     return toRgbx().toGrey();
 
+  @:to public function toHcl()
+    return toCieLab().toHcl();
+
   @:to public function toHsl()
     return toRgbx().toHsl();
 
