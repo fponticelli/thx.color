@@ -11,6 +11,7 @@ class TestAll {
     runner.addCase(new thx.color.TestCmy());
     runner.addCase(new thx.color.TestCmyk());
     runner.addCase(new thx.color.TestGrey());
+    runner.addCase(new thx.color.TestHcl());
     runner.addCase(new thx.color.TestHsl());
     runner.addCase(new thx.color.TestHsv());
     runner.addCase(new thx.color.TestRgb());
