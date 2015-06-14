@@ -105,6 +105,9 @@ abstract Cmyk(Array<Float>) {
       black + (1 - black) * yellow
     ]);
 
+  @:to public function toCubeHelix()
+    return toRgbx().toCubeHelix();
+
   @:to public function toGrey()
     return toRgbx().toGrey();
 

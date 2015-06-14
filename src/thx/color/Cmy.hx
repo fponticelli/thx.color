@@ -91,6 +91,9 @@ abstract Cmy(Array<Float>) {
       ]);
   }
 
+  @:to public function toCubeHelix()
+    return toRgbx().toCubeHelix();
+
   @:to public function toGrey()
     return toRgbx().toGrey();
 

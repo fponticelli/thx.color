@@ -61,6 +61,9 @@ abstract Grey(Float) from Float to Float {
   @:to public function toCmyk()
     return toRgbx().toCmyk();
 
+  @:to public function toCubeHelix()
+    return toRgbx().toCubeHelix();
+
   @:to public function toHcl()
     return toCieLab().toHcl();
 

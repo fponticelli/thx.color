@@ -5,6 +5,7 @@ using thx.Ints;
 using thx.Floats;
 using thx.Strings;
 import thx.color.parse.ColorParser;
+import thx.color.CubeHelix.*;
 
 @:access(thx.color.Cmy)
 @:access(thx.color.Cmyk)
@@ -122,6 +123,15 @@ abstract Rgbx(Array<Float>) {
       y = (1 - bluef - k)  / (1 - k);
     }
     return new Cmyk([c, m, y, k]);
+  }
+
+  @:to public function toCubeHelix() {
+    var l = (BC_DA * bluef + ED * redf - EB * greenf) / (BC_DA + ED - EB),
+        bl = bluef - l, k = (E * (greenf - l) - C * bl) / D, lgamma = Math.pow(l, gamma),
+        s = Math.sqrt(k * k + bl * bl) / (E * lgamma * (1 - lgamma)), // NaN if lgamma=0 or lgamma=1
+        h = s != 0 ? Math.atan2(k, bl) / Math.PI * 180 - 120 : Math.NaN;
+    if (h < 0) h += 360;
+    return CubeHelix.create(h, s, l);
   }
 
   @:to public function toGrey()

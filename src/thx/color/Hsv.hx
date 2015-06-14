@@ -113,6 +113,9 @@ abstract Hsv(Array<Float>) {
   @:to public function toCmyk()
     return toRgbx().toCmyk();
 
+  @:to public function toCubeHelix()
+    return toRgbx().toCubeHelix();
+
   @:to public function toGrey()
     return toRgbx().toGrey();
 
