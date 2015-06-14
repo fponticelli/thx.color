@@ -176,7 +176,7 @@ abstract Hsl(Array<Float>) {
   // Based on D3.js by Michael Bostock
   static function _c(d : Float, s : Float, l : Float) : Float {
     var m2 = l <= 0.5 ? l * (1 + s) : l + s - l * s,
-      m1 = 2 * l - m2;
+        m1 = 2 * l - m2;
 
     d = d.wrapCircular(360);
     if (d < 60)
