@@ -69,6 +69,11 @@ class Demo {
         return CieLab.create(40, x * 200 - 100, y * 200 - 100))
       .display("rainbowCielab");
 
+    MiniCanvas.create(200, 200).box(
+      function(x : Float, y : Float) : Rgba
+        return Xyz.create(x * 800, y * 900, 1)
+    ).display("xyzChromaticityDiagram");
+
     MiniCanvas.create(400, 20).gradientHorizontal(
       function(t) : Rgba
         return ('#ff0000' : Rgb).darker(t))
