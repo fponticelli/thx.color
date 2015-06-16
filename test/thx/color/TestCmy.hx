@@ -11,7 +11,7 @@ class TestCmy {
     Assert.equals(0.5, color.magenta);
     Assert.equals(0.5, color.yellow);
 
-    color = Cmy.create(2,-2,2);
+    color = Cmy.create(2,-2,2).normalize();
     Assert.equals(1, color.cyan);
     Assert.equals(0, color.magenta);
     Assert.equals(1, color.yellow);

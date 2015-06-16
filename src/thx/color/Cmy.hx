@@ -12,11 +12,7 @@ abstract Cmy(Array<Float>) {
   public var yellow(get, never): Float;
 
   public static function create(cyan: Float, magenta: Float, yellow: Float) : Cmy
-    return new Cmy([
-      cyan.normalize(),
-      magenta.normalize(),
-      yellow.normalize()
-    ]);
+    return new Cmy([cyan, magenta, yellow]);
 
   @:from public static function fromFloats(arr : Array<Float>) {
     arr.resize(3);
@@ -44,6 +40,13 @@ abstract Cmy(Array<Float>) {
       t.interpolate(magenta, other.magenta),
       t.interpolate(yellow,  other.yellow)
     ]);
+
+  public function normalize()
+    return create(
+      cyan.normalize(),
+      magenta.normalize(),
+      yellow.normalize()
+    );
 
   public function withCyan(newcyan : Float)
     return new Cmy([

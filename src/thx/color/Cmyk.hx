@@ -13,12 +13,7 @@ abstract Cmyk(Array<Float>) {
   public var yellow(get, never): Float;
 
   public static function create(cyan: Float, magenta: Float, yellow: Float, black: Float)
-    return new Cmyk([
-      cyan.normalize(),
-      magenta.normalize(),
-      yellow.normalize(),
-      black.normalize()
-    ]);
+    return new Cmyk([cyan, magenta, yellow, black]);
 
   @:from public static function fromFloats(arr : Array<Float>) {
     arr.resize(4);
@@ -53,6 +48,14 @@ abstract Cmyk(Array<Float>) {
       t.interpolate(yellow,  other.yellow),
       t.interpolate(black,   other.black)
     ]);
+
+  public function normalize()
+    return create(
+      cyan.normalize(),
+      magenta.normalize(),
+      yellow.normalize(),
+      black.normalize()
+    );
 
   public function withCyan(newcyan : Float)
     return new Cmyk([
