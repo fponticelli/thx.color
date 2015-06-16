@@ -23,11 +23,7 @@ abstract CubeHelix(Array<Float>) {
   public var lightness(get, never) : Float;
 
   public static function create(hue : Float, saturation : Float, lightness : Float)
-    return new CubeHelix([
-      hue.wrapCircular(360),
-      saturation.clamp(0, 1),
-      lightness.clamp(0, 1)
-    ]);
+    return new CubeHelix([hue, saturation, lightness]);
 
   @:from public static function fromFloats(arr : Array<Float>) {
     arr.resize(3);
@@ -79,6 +75,13 @@ abstract CubeHelix(Array<Float>) {
       t.interpolate(saturation, other.saturation),
       t.interpolate(lightness, other.lightness)
     ]);
+
+  public function normalize()
+    return create(
+      hue.wrapCircular(360),
+      saturation.normalize(),
+      lightness.normalize()
+    );
 
   public function rotate(angle : Float)
     return withHue(hue + angle);
