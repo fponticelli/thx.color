@@ -14,12 +14,7 @@ abstract Hsva(Array<Float>) {
   public var alpha(get, never) : Float;
 
   public static function create(hue : Float, saturation : Float, value : Float, alpha : Float)
-    return new Hsva([
-      hue.wrapCircular(360),
-      saturation.clamp(0, 1),
-      value.clamp(0, 1),
-      alpha.clamp(0, 1)
-    ]);
+    return new Hsva([hue, saturation, value, alpha]);
 
   @:from public static function fromFloats(arr : Array<Float>) {
     arr.resize(4);
@@ -53,6 +48,14 @@ abstract Hsva(Array<Float>) {
   public function complement()
     return rotate(180);
 
+  public function normalize()
+    return create(
+      hue.wrapCircular(360),
+      saturation.normalize(),
+      value.normalize(),
+      alpha.normalize()
+    );
+
   public function transparent(t : Float)
     return new Hsva([
       hue,
@@ -78,7 +81,7 @@ abstract Hsva(Array<Float>) {
     ]);
 
   public function rotate(angle : Float)
-    return Hsva.create(hue + angle, saturation, value, alpha);
+    return Hsva.create(hue + angle, saturation, value, alpha).normalize();
 
   public function split(spread = 150.0)
     return new Tuple2(

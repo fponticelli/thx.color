@@ -12,12 +12,8 @@ abstract Hsv(Array<Float>) {
   public var saturation(get, never) : Float;
   public var value(get, never) : Float;
 
-  public static function create(hue : Float, saturation : Float, lightness : Float)
-    return new Hsv([
-      hue.wrapCircular(360),
-      saturation.clamp(0, 1),
-      lightness.clamp(0, 1)
-    ]);
+  public static function create(hue : Float, saturation : Float, value : Float)
+    return new Hsv([hue, saturation, value]);
 
   @:from public static function fromFloats(arr : Array<Float>) {
     arr.resize(3);
@@ -56,8 +52,15 @@ abstract Hsv(Array<Float>) {
       t.interpolate(value, other.value)
     ]);
 
+  public function normalize()
+    return create(
+      hue.wrapCircular(360),
+      saturation.normalize(),
+      value.normalize()
+    );
+
   public function rotate(angle : Float)
-    return withHue(hue + angle);
+    return withHue(hue + angle).normalize();
 
   public function split(spread = 144.0)
     return new Tuple2(
