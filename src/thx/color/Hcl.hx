@@ -13,11 +13,7 @@ abstract Hcl(Array<Float>) {
   public var luminance(get, never) : Float;
 
   public static function create(hue : Float, chroma : Float, luminance : Float)
-    return new Hcl([
-      hue.wrapCircular(360),
-      chroma.clamp(0, 1),
-      luminance.clamp(0, 1)
-    ]);
+    return new Hcl([hue, chroma, luminance]);
 
   @:from public static function fromFloats(arr : Array<Float>) {
     arr.resize(3);
@@ -56,8 +52,15 @@ abstract Hcl(Array<Float>) {
       t.interpolate(luminance, other.luminance)
     ]);
 
+  public function normalize()
+    return create(
+      hue.wrapCircular(360),
+      chroma.normalize(),
+      luminance.normalize()
+    );
+
   public function rotate(angle : Float)
-    return withHue(hue + angle);
+    return withHue(hue + angle).normalize();
 
   public function split(spread = 144.0)
     return new Tuple2(
