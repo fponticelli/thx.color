@@ -62,6 +62,12 @@ class Demo {
         return Hsl.create(x * 360, 1, y))
       .display("rainbowHsl");
 
+      MiniCanvas.create(200, 200)
+        .checkboard()
+        .box(function(x : Float, y : Float) : Rgbxa
+          return Hcl.create(x * 360, y * 100, 60))
+        .display("rainbowHcl");
+
     MiniCanvas.create(200, 200)
       .checkboard()
       .box(function(x : Float, y : Float) : Rgbxa
@@ -80,6 +86,13 @@ class Demo {
         function(x : Float, y : Float) : Rgbxa
           return Xyz.create(x * 8 + 4, y * 8 + 4, 10))
       .display("xyzChromaticityDiagram");
+
+    MiniCanvas.create(200, 200)
+      .checkboard()
+      .box(
+        function(x : Float, y : Float) : Rgbxa
+          return Yxy.create(15, y * 0.5, x * 0.5))
+      .display("yxyzChromaticityDiagram");
 
     MiniCanvas.create(400, 20).gradientHorizontal(
       function(t) : Rgbxa
