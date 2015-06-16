@@ -9,7 +9,7 @@ abstract Grey(Float) from Float to Float {
   public static var white(default, null) : Grey = new Grey(1);
 
   @:from public static function create(v : Float)
-    return new Grey(v.normalize());
+    return new Grey(v);
 
   @:from public static function fromString(color : String) : Null<Grey> {
     var info = ColorParser.parseColor(color);
@@ -39,6 +39,9 @@ abstract Grey(Float) from Float to Float {
 
   public function interpolate(other : Grey, t : Float)
     return new Grey(t.interpolate(grey, other.grey));
+
+  public function normalize()
+    return create(this.normalize());
 
   public function toString() : String
     return 'grey(${(grey*100).roundTo(6)}%)';
