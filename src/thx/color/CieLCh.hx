@@ -18,7 +18,7 @@ abstract CieLCh(Array<Float>) {
     return new CieLCh([
       lightness,
       chroma,
-      hue.wrapCircular(360)
+      hue
     ]);
 
   @:from public static function fromFloats(arr : Array<Float>) {
@@ -59,8 +59,11 @@ abstract CieLCh(Array<Float>) {
       t.interpolateAngle(hue, other.hue, 360)
     ]);
 
+  public function normalize()
+    return create(lightness, chroma, hue.wrapCircular(360));
+
   public function rotate(angle : Float)
-    return withHue(hue + angle);
+    return withHue(hue + angle).normalize();
 
   public function split(spread = 144.0)
     return new Tuple2(
