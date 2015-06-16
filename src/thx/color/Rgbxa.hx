@@ -24,6 +24,14 @@ abstract Rgbxa(Array<Float>) {
     return Rgbxa.create(arr[0] / 255, arr[1] / 255, arr[2] / 255, arr[3] / 255);
   }
 
+  @:from public static function fromInt(value : Int)
+    return Rgbxa.create(
+      ((red   & 0xFF) << 24) / 255,
+      ((green & 0xFF) << 16) / 255,
+      ((blue  & 0xFF) <<  8) / 255,
+      ((alpha & 0xFF) <<  0) / 255
+    );
+
   @:from public static function fromString(color : String) {
     var info = ColorParser.parseHex(color);
     if(null == info)
