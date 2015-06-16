@@ -19,14 +19,6 @@ class TestRoundtrip {
       Rgbx.create(0.2, 0.4, 0.5)
     ];
 
-    function assertRgbx(e : Rgbx, t : Rgbx, s : String) {
-      Assert.isTrue(
-        e.redf.roundTo(3) == t.redf.roundTo(3) &&
-        e.greenf.roundTo(3) == t.greenf.roundTo(3) &&
-        e.bluef.roundTo(3) == t.bluef.roundTo(3),
-        'expected $e but was $t for $s');
-    }
-
     colors
       .map.fn({
         rgbx: _,
@@ -57,20 +49,28 @@ class TestRoundtrip {
 
         return _;
       })
-      /*
       .map.fn({
         var t : CieLab = _.lab.toString();
         Assert.isTrue(_.lab == t, 'expected ${_.lab} but was $t');
+      /*
 
         var t : CieLCh = _.lch.toString();
         Assert.isTrue(_.lch == t, 'expected ${_.lch} but was $t');
 
         var t : Hsl = _.hsl.toString();
         Assert.isTrue(_.hsl == t, 'expected ${_.hsl} but was $t');
+      */
         return _;
       })
       .map.fn(trace(_))
-      */
      ;
+  }
+
+  static function assertRgbx(e : Rgbx, t : Rgbx, s : String) {
+    Assert.isTrue(
+      e.redf.roundTo(3) == t.redf.roundTo(3) &&
+      e.greenf.roundTo(3) == t.greenf.roundTo(3) &&
+      e.bluef.roundTo(3) == t.bluef.roundTo(3),
+      'expected $e but was $t for $s');
   }
 }
