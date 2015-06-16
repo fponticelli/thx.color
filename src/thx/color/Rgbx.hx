@@ -26,7 +26,12 @@ abstract Rgbx(Array<Float>) {
 
   @:from public static function fromInts(arr : Array<Int>) {
     arr.resize(3);
-    return Rgbx.create(arr[0] / 255, arr[1] / 255, arr[2] / 255);
+    return Rgbx.create(arr[0] / 255.0, arr[1] / 255.0, arr[2] / 255.0);
+  }
+
+  @:from public static function fromInt(value : Int) {
+    var rgb : Rgb = value;
+    return create(rgb.red / 255, rgb.green / 255, rgb.blue / 255);
   }
 
   @:from public static function fromString(color : String) {
