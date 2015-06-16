@@ -12,7 +12,7 @@ import thx.color.parse.ColorParser;
 @:access(thx.color.Rgbx)
 abstract Rgbxa(Array<Float>) {
   public static function create(red : Float, green : Float, blue : Float, alpha : Float) : Rgbxa
-    return new Rgbxa([red.normalize(),green.normalize(),blue.normalize(),alpha.normalize()]);
+    return new Rgbxa([red,green,blue,alpha]);
 
   @:from public static function fromFloats(arr : Array<Float>) {
     arr.resize(4);
@@ -81,6 +81,14 @@ abstract Rgbxa(Array<Float>) {
       t.interpolate(greenf, other.greenf),
       t.interpolate(bluef, other.bluef),
       t.interpolate(alphaf, other.alphaf)
+    ]);
+
+  public function normalize()
+    return new Rgbx([
+      redf.normalize(),
+      bluef.normalize(),
+      greenf.normalize(),
+      alphaf.normalize()
     ]);
 
   public function withAlpha(newalpha : Float)

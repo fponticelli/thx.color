@@ -17,7 +17,7 @@ import thx.color.CubeHelix.*;
 @:access(thx.color.Xyz)
 abstract Rgbx(Array<Float>) {
   public static function create(red : Float, green : Float, blue : Float)
-    return new Rgbx([red.normalize(), green.normalize(), blue.normalize()]);
+    return new Rgbx([red, green, blue]);
 
   @:from public static function fromFloats(arr : Array<Float>) {
     arr.resize(3);
@@ -73,6 +73,13 @@ abstract Rgbx(Array<Float>) {
       t.interpolate(redf, other.redf),
       t.interpolate(greenf, other.greenf),
       t.interpolate(bluef, other.bluef)
+    ]);
+
+  public function normalize()
+    return new Rgbx([
+      redf.normalize(),
+      bluef.normalize(),
+      greenf.normalize()
     ]);
 
   public function toCss3() : String
