@@ -14,12 +14,7 @@ abstract Hsla(Array<Float>) {
   public var alpha(get, never) : Float;
 
   public static function create(hue : Float, saturation : Float, lightness : Float, alpha : Float)
-    return new Hsla([
-      hue.wrapCircular(360),
-      saturation.clamp(0, 1),
-      lightness.clamp(0, 1),
-      alpha.clamp(0, 1)
-    ]);
+    return new Hsla([hue, saturation, lightness, alpha]);
 
   @:from  public static function fromFloats(arr : Array<Float>) {
     arr.resize(4);
@@ -68,6 +63,14 @@ abstract Hsla(Array<Float>) {
       t.interpolate(lightness, 1),
       alpha
     ]);
+
+  public function normalize()
+    return create(
+      hue.wrapCircular(360),
+      saturation.normalize(),
+      lightness.normalize(),
+      alpha.normalize()
+    );
 
   public function transparent(t : Float)
     return new Hsla([
