@@ -53,7 +53,7 @@ abstract Xyz(Array<Float>) {
   public function withZ(newz : Float)
     return new Xyz([x, y, newz]);
 
-  public function toString() : String
+  @:to public function toString() : String
     return 'Xyz(${x.roundTo(6)},${y.roundTo(6)},${z.roundTo(6)})';
 
   @:op(A==B) public function equals(other : Xyz) : Bool

@@ -43,7 +43,7 @@ abstract Grey(Float) from Float to Float {
   public function normalize()
     return create(this.normalize());
 
-  public function toString() : String
+  @:to public function toString() : String
     return 'grey(${(grey*100).roundTo(6)}%)';
 
   @:op(A==B) public function equals(other : Grey) : Bool

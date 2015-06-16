@@ -114,7 +114,7 @@ abstract Hsl(Array<Float>) {
 
   public function toCss3() : String
     return toString();
-  public function toString() : String
+  @:to public function toString() : String
     return 'hsl(${hue.roundTo(6)},${(saturation*100).roundTo(6)}%,${(lightness*100).roundTo(6)}%)';
 
   @:op(A==B) public function equals(other : Hsl) : Bool

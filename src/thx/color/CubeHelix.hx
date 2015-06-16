@@ -121,7 +121,7 @@ abstract CubeHelix(Array<Float>) {
 
   public function toCss3() : String
     return toString();
-  public function toString() : String
+  @:to public function toString() : String
     return 'cubehelix(${hue.roundTo(6)},${(saturation*100).roundTo(6)}%,${(lightness*100).roundTo(6)}%)';
 
   @:op(A==B) public function equals(other : CubeHelix) : Bool

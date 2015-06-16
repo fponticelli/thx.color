@@ -95,7 +95,7 @@ abstract Hcl(Array<Float>) {
   public function withChroma(newchroma : Float)
     return new Hcl([hue, newchroma.normalize(), luminance]);
 
-  public function toString() : String
+  @:to public function toString() : String
     return 'hcl(${hue.roundTo(6)},${(chroma*100).roundTo(6)}%,${(luminance*100).roundTo(6)}%)';
 
   @:op(A==B) public function equals(other : Hcl) : Bool
