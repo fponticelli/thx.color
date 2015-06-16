@@ -52,6 +52,7 @@ abstract Rgbxa(Array<Float>) {
   public var greenf(get, never) : Float;
   public var bluef(get, never) : Float;
   public var alphaf(get, never) : Float;
+  public var inSpace(get, never) : Bool;
 
   public function darker(t : Float)
     return toRgbx().darker(t).withAlpha(alpha);
@@ -147,4 +148,7 @@ abstract Rgbxa(Array<Float>) {
     return this[2];
   inline function get_alphaf() : Float
     return this[3];
+
+  function get_inSpace() : Bool
+    return redf >= 0 && redf <= 1 && greenf >= 0 && greenf <= 1 && bluef >= 0 && bluef <= 1 && alphaf >= 0 && alphaf <= 1;
 }
