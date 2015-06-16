@@ -20,7 +20,7 @@ class TestAll {
     runner.addCase(new thx.color.TestXyz());
     runner.addCase(new thx.color.TestYxy());
 
-    runner.addCase(new thx.color.TestRoundtrip());
+    runner.addCase(new thx.color.TestRoundTrip());
   }
 
   public static function main() {

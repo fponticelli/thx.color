@@ -6,7 +6,7 @@ using thx.Arrays;
 using thx.Functions;
 using thx.Floats;
 
-class TestRoundtrip {
+class TestRoundTrip {
   public function new() { }
 
   public function testRoundtrip() {
