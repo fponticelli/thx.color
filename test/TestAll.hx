@@ -19,6 +19,8 @@ class TestAll {
     runner.addCase(new thx.color.TestRgbx());
     runner.addCase(new thx.color.TestXyz());
     runner.addCase(new thx.color.TestYxy());
+
+    runner.addCase(new thx.color.TestRoundtrip());
   }
 
   public static function main() {
