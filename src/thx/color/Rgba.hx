@@ -7,7 +7,7 @@ using thx.Strings;
 import thx.color.parse.ColorParser;
 
 abstract Rgba(Int) from Int to Int {
-  public static function create(red : Int, green : Int, blue : Int, alpha : Int) : Rgba
+  inline public static function create(red : Int, green : Int, blue : Int, alpha : Int) : Rgba
     return ((red & 0xFF) << 24) | ((green & 0xFF) << 16) | ((blue & 0xFF) << 8) | ((alpha & 0xFF) << 0);
 
   @:from public static function fromFloats(arr : Array<Float>) : Rgba {

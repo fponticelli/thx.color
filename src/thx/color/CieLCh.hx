@@ -14,7 +14,7 @@ abstract CieLCh(Array<Float>) {
   public var chroma(get, never) : Float;
   public var hue(get, never) : Float;
 
-  public static function create(lightness : Float, chroma : Float, hue : Float)
+  inline public static function create(lightness : Float, chroma : Float, hue : Float)
     return new CieLCh([
       lightness,
       chroma,

@@ -8,10 +8,10 @@ import thx.color.parse.ColorParser;
 
 @:access(thx.color.Rgbx)
 abstract Rgb(Int) from Int to Int {
-  public static function create(red : Int, green : Int, blue : Int)
+  inline public static function create(red : Int, green : Int, blue : Int)
     return new Rgb(((red & 0xFF) << 16) | ((green & 0xFF) << 8) | ((blue & 0xFF) << 0));
 
-  public static function createf(red : Float, green : Float, blue : Float)
+    inline public static function createf(red : Float, green : Float, blue : Float)
     return create((red * 255).round(), (green * 255).round(), (blue * 255).round());
 
   @:from public static function fromString(color : String) : Null<Rgb> {

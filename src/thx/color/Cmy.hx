@@ -11,7 +11,7 @@ abstract Cmy(Array<Float>) {
   public var magenta(get, never): Float;
   public var yellow(get, never): Float;
 
-  public static function create(cyan: Float, magenta: Float, yellow: Float) : Cmy
+  inline public static function create(cyan: Float, magenta: Float, yellow: Float) : Cmy
     return new Cmy([cyan, magenta, yellow]);
 
   @:from public static function fromFloats(arr : Array<Float>) {

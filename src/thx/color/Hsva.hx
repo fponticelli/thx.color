@@ -13,7 +13,7 @@ abstract Hsva(Array<Float>) {
   public var value(get, never) : Float;
   public var alpha(get, never) : Float;
 
-  public static function create(hue : Float, saturation : Float, value : Float, alpha : Float)
+  inline public static function create(hue : Float, saturation : Float, value : Float, alpha : Float)
     return new Hsva([hue, saturation, value, alpha]);
 
   @:from public static function fromFloats(arr : Array<Float>) {

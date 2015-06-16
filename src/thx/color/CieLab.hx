@@ -15,7 +15,7 @@ Conventional limits are:
 @:access(thx.color.Xyz)
 @:access(thx.color.Rgbx)
 abstract CieLab(Array<Float>) {
-  public static function create(l : Float, a : Float, b : Float)
+  inline public static function create(l : Float, a : Float, b : Float)
     return new CieLab([l, a, b]);
 
   @:from public static function fromFloats(arr : Array<Float>) {

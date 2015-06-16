@@ -12,7 +12,7 @@ abstract Hsl(Array<Float>) {
   public var saturation(get, never) : Float;
   public var lightness(get, never) : Float;
 
-  public static function create(hue : Float, saturation : Float, lightness : Float)
+  inline public static function create(hue : Float, saturation : Float, lightness : Float)
     return new Hsl([
       hue.wrapCircular(360),
       saturation.normalize(),

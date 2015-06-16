@@ -12,7 +12,7 @@ abstract Cmyk(Array<Float>) {
   public var magenta(get, never): Float;
   public var yellow(get, never): Float;
 
-  public static function create(cyan: Float, magenta: Float, yellow: Float, black: Float)
+  inline public static function create(cyan: Float, magenta: Float, yellow: Float, black: Float)
     return new Cmyk([cyan, magenta, yellow, black]);
 
   @:from public static function fromFloats(arr : Array<Float>) {

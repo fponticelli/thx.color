@@ -12,7 +12,7 @@ abstract Hcl(Array<Float>) {
   public var chroma(get, never) : Float;
   public var luminance(get, never) : Float;
 
-  public static function create(hue : Float, chroma : Float, luminance : Float)
+  inline public static function create(hue : Float, chroma : Float, luminance : Float)
     return new Hcl([hue, chroma, luminance]);
 
   @:from public static function fromFloats(arr : Array<Float>) {

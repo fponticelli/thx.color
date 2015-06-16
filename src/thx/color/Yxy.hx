@@ -12,7 +12,7 @@ abstract Yxy(Array<Float>) {
   public var x(get, never) : Float;
   public var y2(get, never) : Float;
 
-  public static function create(y1 : Float, x : Float, y2 : Float)
+  inline public static function create(y1 : Float, x : Float, y2 : Float)
     return new Yxy([y1, x, y2]);
 
   @:from public static function fromFloats(arr : Array<Float>) {

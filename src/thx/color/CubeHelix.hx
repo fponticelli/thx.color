@@ -22,7 +22,7 @@ abstract CubeHelix(Array<Float>) {
   public var saturation(get, never) : Float;
   public var lightness(get, never) : Float;
 
-  public static function create(hue : Float, saturation : Float, lightness : Float)
+  inline public static function create(hue : Float, saturation : Float, lightness : Float)
     return new CubeHelix([hue, saturation, lightness]);
 
   @:from public static function fromFloats(arr : Array<Float>) {

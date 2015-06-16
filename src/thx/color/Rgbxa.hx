@@ -11,7 +11,7 @@ import thx.color.parse.ColorParser;
 @:access(thx.color.Rgba)
 @:access(thx.color.Rgbx)
 abstract Rgbxa(Array<Float>) {
-  public static function create(red : Float, green : Float, blue : Float, alpha : Float) : Rgbxa
+  inline public static function create(red : Float, green : Float, blue : Float, alpha : Float) : Rgbxa
     return new Rgbxa([red,green,blue,alpha]);
 
   @:from public static function fromFloats(arr : Array<Float>) {

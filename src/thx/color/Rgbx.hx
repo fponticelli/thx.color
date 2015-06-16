@@ -16,7 +16,7 @@ import thx.color.CubeHelix.*;
 @:access(thx.color.Rgbxa)
 @:access(thx.color.Xyz)
 abstract Rgbx(Array<Float>) {
-  public static function create(red : Float, green : Float, blue : Float)
+  inline public static function create(red : Float, green : Float, blue : Float)
     return new Rgbx([red, green, blue]);
 
   @:from public static function fromFloats(arr : Array<Float>) {

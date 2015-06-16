@@ -8,7 +8,7 @@ abstract Grey(Float) from Float to Float {
   public static var black(default, null) : Grey = new Grey(0);
   public static var white(default, null) : Grey = new Grey(1);
 
-  @:from public static function create(v : Float)
+  @:from inline public static function create(v : Float)
     return new Grey(v);
 
   @:from public static function fromString(color : String) : Null<Grey> {

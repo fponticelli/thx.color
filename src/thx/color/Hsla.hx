@@ -13,7 +13,7 @@ abstract Hsla(Array<Float>) {
   public var lightness(get, never) : Float;
   public var alpha(get, never) : Float;
 
-  public static function create(hue : Float, saturation : Float, lightness : Float, alpha : Float)
+  inline public static function create(hue : Float, saturation : Float, lightness : Float, alpha : Float)
     return new Hsla([hue, saturation, lightness, alpha]);
 
   @:from  public static function fromFloats(arr : Array<Float>) {

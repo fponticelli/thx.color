@@ -12,7 +12,7 @@ abstract Xyz(Array<Float>) {
   public var y(get, never) : Float;
   public var z(get, never) : Float;
 
-  public static function create(x : Float, y : Float, z : Float)
+  inline public static function create(x : Float, y : Float, z : Float)
     return new Xyz([x, y, z]);
 
   @:from public static function fromFloats(arr : Array<Float>) {
