@@ -21,16 +21,13 @@ abstract Rgbxa(Array<Float>) {
 
   @:from public static function fromInts(arr : Array<Int>) {
     arr.resize(4);
-    return Rgbxa.create(arr[0] / 255, arr[1] / 255, arr[2] / 255, arr[3] / 255);
+    return Rgbxa.create(arr[0] / 255.0, arr[1] / 255.0, arr[2] / 255.0, arr[3] / 255.0);
   }
 
-  @:from public static function fromInt(value : Int)
-    return Rgbxa.create(
-      ((red   & 0xFF) << 24) / 255,
-      ((green & 0xFF) << 16) / 255,
-      ((blue  & 0xFF) <<  8) / 255,
-      ((alpha & 0xFF) <<  0) / 255
-    );
+  @:from public static function fromInt(value : Int) {
+    var rgba : Rgba = value;
+    return create(rgba.red / 255, rgba.green / 255, rgba.blue / 255, rgba.alpha / 255);
+  }
 
   @:from public static function fromString(color : String) {
     var info = ColorParser.parseHex(color);
@@ -146,7 +143,7 @@ abstract Rgbxa(Array<Float>) {
   function get_blue() : Int
     return (bluef  * 255).round();
   function get_alpha() : Int
-    return (alphaf  * 255).round();
+    return (alphaf * 255).round();
 
   inline function get_redf() : Float
     return this[0];
