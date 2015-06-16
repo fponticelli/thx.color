@@ -15,8 +15,8 @@ abstract Hsl(Array<Float>) {
   public static function create(hue : Float, saturation : Float, lightness : Float)
     return new Hsl([
       hue.wrapCircular(360),
-      saturation.clamp(0, 1),
-      lightness.clamp(0, 1)
+      saturation.normalize(),
+      lightness.normalize()
     ]);
 
   @:from public static function fromFloats(arr : Array<Float>) {
@@ -69,6 +69,9 @@ abstract Hsl(Array<Float>) {
       t.interpolate(saturation, other.saturation),
       t.interpolate(lightness, other.lightness)
     ]);
+
+  public function normalize()
+    return create(hue, saturation, lightness);
 
   public function rotate(angle : Float)
     return withHue(hue + angle);
