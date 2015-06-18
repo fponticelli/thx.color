@@ -28,9 +28,9 @@ abstract Hsva(Array<Float>) {
 
     return try switch info.name {
       case 'hsv':
-        new thx.color.Hsv(ColorParser.getFloatChannels(info.channels, 3)).toHsva();
+        new thx.color.Hsv(ColorParser.getFloatChannels(info.channels, 3, false)).toHsva();
       case 'hsva':
-        new thx.color.Hsva(ColorParser.getFloatChannels(info.channels, 4));
+        new thx.color.Hsva(ColorParser.getFloatChannels(info.channels, 4, false));
       case _:
         null;
     } catch(e : Dynamic) null;

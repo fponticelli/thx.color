@@ -96,7 +96,7 @@ class ColorParser {
     } catch(e : Dynamic) return null;
   }
 
-  public static function getFloatChannels(channels : Array<ChannelInfo>, length : Int, useInt8 = true) {
+  public static function getFloatChannels(channels : Array<ChannelInfo>, length : Int, useInt8 : Bool) {
     if(length != channels.length)
       throw 'invalid number of channels, expected $length but it is ${channels.length}';
     return channels.map(getFloatChannel.bind(_, useInt8));

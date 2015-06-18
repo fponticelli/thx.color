@@ -37,7 +37,7 @@ abstract CubeHelix(Array<Float>) {
 
     return try switch info.name {
       case 'cubehelix':
-        new thx.color.CubeHelix(ColorParser.getFloatChannels(info.channels, 3));
+        new thx.color.CubeHelix(ColorParser.getFloatChannels(info.channels, 3, false));
       case _:
         null;
     } catch(e : Dynamic) null;

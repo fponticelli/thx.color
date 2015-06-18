@@ -27,7 +27,7 @@ abstract Hsv(Array<Float>) {
 
     return try switch info.name {
       case 'hsv':
-        new thx.color.Hsv(ColorParser.getFloatChannels(info.channels, 3));
+        new thx.color.Hsv(ColorParser.getFloatChannels(info.channels, 3, false));
       case _:
         null;
     } catch(e : Dynamic) null;

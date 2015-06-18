@@ -168,31 +168,31 @@ class Color {
       case 'cielch':
         CieLCh.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
       case 'cmy':
-        Cmy.fromFloats(ColorParser.getFloatChannels(info.channels, 3));
+        Cmy.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
       case 'cmyk':
-        Cmyk.fromFloats(ColorParser.getFloatChannels(info.channels, 4));
+        Cmyk.fromFloats(ColorParser.getFloatChannels(info.channels, 4, false));
       case 'cubehelix':
-        CubeHelix.fromFloats(ColorParser.getFloatChannels(info.channels, 3));
+        CubeHelix.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
       case 'grey', 'gray':
-        Grey.create(ColorParser.getFloatChannels(info.channels, 1)[0]);
+        Grey.create(ColorParser.getFloatChannels(info.channels, 1, false)[0]);
       case 'hcl':
-        Hcl.fromFloats(ColorParser.getFloatChannels(info.channels, 3));
+        Hcl.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
       case 'hsl':
-        Hsl.fromFloats(ColorParser.getFloatChannels(info.channels, 3));
+        Hsl.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
       case 'hsla':
-        Hsla.fromFloats(ColorParser.getFloatChannels(info.channels, 4));
+        Hsla.fromFloats(ColorParser.getFloatChannels(info.channels, 4, false));
       case 'hsv':
-        Hsv.fromFloats(ColorParser.getFloatChannels(info.channels, 3));
+        Hsv.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
       case 'hsva':
-        Hsva.fromFloats(ColorParser.getFloatChannels(info.channels, 4));
+        Hsva.fromFloats(ColorParser.getFloatChannels(info.channels, 4, false));
       case 'rgb':
-        Rgbx.fromFloats(ColorParser.getFloatChannels(info.channels, 3));
+        Rgbx.fromFloats(ColorParser.getFloatChannels(info.channels, 3, true));
       case 'rgba':
-        Rgbxa.fromFloats(ColorParser.getFloatChannels(info.channels, 4));
+        Rgbxa.fromFloats(ColorParser.getFloatChannels(info.channels, 4, true));
       case 'ciexyz', 'xyz':
-        Xyz.fromFloats(ColorParser.getFloatChannels(info.channels, 3));
+        Xyz.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
       case 'yxy':
-        Yxy.fromFloats(ColorParser.getFloatChannels(info.channels, 3));
+        Yxy.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
       case _:
         null;
     } catch(e : Dynamic) null;

@@ -27,7 +27,7 @@ abstract Hcl(Array<Float>) {
 
     return try switch info.name {
     case 'hcl':
-        new thx.color.Hcl(ColorParser.getFloatChannels(info.channels, 3));
+        new thx.color.Hcl(ColorParser.getFloatChannels(info.channels, 3, false));
       case _:
         null;
     } catch(e : Dynamic) null;
