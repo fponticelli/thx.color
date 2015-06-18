@@ -13,11 +13,7 @@ abstract Hsl(Array<Float>) {
   public var lightness(get, never) : Float;
 
   inline public static function create(hue : Float, saturation : Float, lightness : Float)
-    return new Hsl([
-      hue.wrapCircular(360),
-      saturation.normalize(),
-      lightness.normalize()
-    ]);
+    return new Hsl([hue, saturation, lightness]);
 
   @:from public static function fromFloats(arr : Array<Float>) {
     arr.resize(3);
