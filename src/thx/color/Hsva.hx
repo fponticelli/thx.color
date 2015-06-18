@@ -83,6 +83,9 @@ abstract Hsva(Array<Float>) {
   public function rotate(angle : Float)
     return Hsva.create(hue + angle, saturation, value, alpha).normalize();
 
+  public function roundTo(decimals : Int)
+    return create(hue.roundTo(decimals), saturation.roundTo(decimals), value.roundTo(decimals), alpha.roundTo(decimals));
+
   public function split(spread = 150.0)
     return new Tuple2(
       rotate(-spread),
@@ -102,7 +105,7 @@ abstract Hsva(Array<Float>) {
     return new Hsva([hue, newsaturation.normalize(), value, alpha]);
 
   public function toString() : String
-    return 'hsva(${hue.roundTo(6)},${(saturation*100).roundTo(6)}%,${(value*100).roundTo(6)}%,${alpha.roundTo(6)})';
+    return 'hsva(${hue},${(saturation*100)}%,${(value*100)}%,${alpha})';
 
   @:op(A==B) public function equals(other : Hsva) : Bool
     return hue.nearEquals(other.hue) && saturation.nearEquals(other.saturation) && value.nearEquals(other.value) && alpha.nearEquals(other.alpha);

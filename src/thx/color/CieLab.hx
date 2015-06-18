@@ -83,6 +83,9 @@ abstract CieLab(Array<Float>) {
     return closest;
   }
 
+  public function roundTo(decimals : Int)
+    return create(l.roundTo(decimals), a.roundTo(decimals), b.roundTo(decimals));
+
   @:op(A==B) public function equals(other : CieLab) : Bool
     return l.nearEquals(other.l) && a.nearEquals(other.a) && b.nearEquals(other.b);
 
@@ -96,7 +99,7 @@ abstract CieLab(Array<Float>) {
     return new CieLab([l, a, newb]);
 
   @:to public function toString() : String
-    return 'CieLab(${l.roundTo(6)},${a.roundTo(6)},${b.roundTo(6)})';
+    return 'CieLab(${l},${a},${b})';
 
   @:to public function toCieLCh() {
     var h = Floats.wrapCircular(Math.atan2(b, a) * 180 / Math.PI, 360),

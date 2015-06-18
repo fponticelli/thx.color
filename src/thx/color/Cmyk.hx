@@ -57,6 +57,9 @@ abstract Cmyk(Array<Float>) {
       black.normalize()
     );
 
+  public function roundTo(decimals : Int)
+    return create(cyan.roundTo(decimals), magenta.roundTo(decimals), yellow.roundTo(decimals), black.roundTo(decimals));
+
   public function withCyan(newcyan : Float)
     return new Cmyk([
       newcyan.normalize(),
@@ -90,7 +93,7 @@ abstract Cmyk(Array<Float>) {
     ]);
 
   @:to public function toString() : String
-    return 'cmyk(${cyan.roundTo(6)},${magenta.roundTo(6)},${yellow.roundTo(6)},${black.roundTo(6)})';
+    return 'cmyk(${cyan},${magenta},${yellow},${black})';
 
   @:op(A==B) public function equals(other : Cmyk) : Bool
     return cyan.nearEquals(other.cyan) && magenta.nearEquals(other.magenta) && yellow.nearEquals(other.yellow) && black.nearEquals(other.black);

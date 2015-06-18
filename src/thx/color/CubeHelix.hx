@@ -86,6 +86,9 @@ abstract CubeHelix(Array<Float>) {
   public function rotate(angle : Float)
     return withHue(hue + angle);
 
+  public function roundTo(decimals : Int)
+    return create(hue.roundTo(decimals), saturation.roundTo(decimals), lightness.roundTo(decimals));
+
   public function split(spread = 144.0)
     return new Tuple2(
       rotate(-spread),
@@ -122,7 +125,7 @@ abstract CubeHelix(Array<Float>) {
   public function toCss3() : String
     return toString();
   @:to public function toString() : String
-    return 'cubehelix(${hue.roundTo(6)},${(saturation*100).roundTo(6)}%,${(lightness*100).roundTo(6)}%)';
+    return 'cubehelix(${hue},${(saturation*100)}%,${(lightness*100)}%)';
 
   @:op(A==B) public function equals(other : CubeHelix) : Bool
     return hue.nearEquals(other.hue) && saturation.nearEquals(other.saturation) && lightness.nearEquals(other.lightness);

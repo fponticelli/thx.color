@@ -48,6 +48,9 @@ abstract Cmy(Array<Float>) {
       yellow.normalize()
     );
 
+  public function roundTo(decimals : Int)
+    return create(cyan.roundTo(decimals), magenta.roundTo(decimals), yellow.roundTo(decimals));
+
   public function withCyan(newcyan : Float)
     return new Cmy([
       newcyan.normalize(),
@@ -70,7 +73,7 @@ abstract Cmy(Array<Float>) {
     ]);
 
   @:to public function toString() : String
-    return 'cmy(${cyan.roundTo(6)},${magenta.roundTo(6)},${yellow.roundTo(6)})';
+    return 'cmy(${cyan},${magenta},${yellow})';
 
   @:op(A==B) public function equals(other : Cmy) : Bool
     return cyan.nearEquals(other.cyan) && magenta.nearEquals(other.magenta) && yellow.nearEquals(other.yellow);

@@ -44,6 +44,9 @@ abstract Xyz(Array<Float>) {
       t.interpolate(z, other.z),
     ]);
 
+  public function roundTo(decimals : Int)
+    return create(x.roundTo(decimals), y.roundTo(decimals), z.roundTo(decimals));
+
   public function withX(newx : Float)
     return new Xyz([newx, y, z]);
 
@@ -54,7 +57,7 @@ abstract Xyz(Array<Float>) {
     return new Xyz([x, y, newz]);
 
   @:to public function toString() : String
-    return 'Xyz(${x.roundTo(6)},${y.roundTo(6)},${z.roundTo(6)})';
+    return 'Xyz(${x},${y},${z})';
 
   @:op(A==B) public function equals(other : Xyz) : Bool
     return x.nearEquals(other.x) && y.nearEquals(other.y) && z.nearEquals(other.z);

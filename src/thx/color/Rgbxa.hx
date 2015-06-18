@@ -97,6 +97,9 @@ abstract Rgbxa(Array<Float>) {
       alphaf.normalize()
     ]);
 
+  public function roundTo(decimals : Int)
+    return create(redf.roundTo(decimals), greenf.roundTo(decimals), bluef.roundTo(decimals), alphaf.roundTo(decimals));
+
   public function withAlpha(newalpha : Float)
     return new Rgbxa([red, green, blue, newalpha.normalize()]);
 
@@ -113,7 +116,7 @@ abstract Rgbxa(Array<Float>) {
     return toString();
 
   @:to public function toString() : String
-    return 'rgba(${(redf*100).roundTo(6)}%,${(greenf*100).roundTo(6)}%,${(bluef*100).roundTo(6)}%,${alphaf.roundTo(6)})';
+    return 'rgba(${(redf*100)}%,${(greenf*100)}%,${(bluef*100)}%,${alphaf})';
 
   public function toHex(prefix = "#") : String
     return '$prefix${alpha.hex(2)}${red.hex(2)}${green.hex(2)}${blue.hex(2)}';

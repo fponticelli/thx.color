@@ -88,11 +88,14 @@ abstract Rgbx(Array<Float>) {
       greenf.normalize()
     ]);
 
+  public function roundTo(decimals : Int)
+    return create(redf.roundTo(decimals), greenf.roundTo(decimals), bluef.roundTo(decimals));
+
   public function toCss3() : String
     return toString();
 
   @:to public function toString() : String
-    return 'rgb(${(redf*100).roundTo(6)}%,${(greenf*100).roundTo(6)}%,${(bluef*100).roundTo(6)}%)';
+    return 'rgb(${(redf*100)}%,${(greenf*100)}%,${(bluef*100)}%)';
 
   public function toHex(prefix = "#") : String
     return '$prefix${red.hex(2)}${green.hex(2)}${blue.hex(2)}';

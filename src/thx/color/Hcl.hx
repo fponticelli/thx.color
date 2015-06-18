@@ -62,6 +62,9 @@ abstract Hcl(Array<Float>) {
   public function rotate(angle : Float)
     return withHue(hue + angle).normalize();
 
+  public function roundTo(decimals : Int)
+    return create(hue.roundTo(decimals), chroma.roundTo(decimals), luminance.roundTo(decimals));
+
   public function split(spread = 144.0)
     return new Tuple2(
       rotate(-spread),
@@ -96,7 +99,7 @@ abstract Hcl(Array<Float>) {
     return new Hcl([hue, newchroma.normalize(), luminance]);
 
   @:to public function toString() : String
-    return 'hcl(${hue.roundTo(6)},${(chroma*100).roundTo(6)}%,${(luminance*100).roundTo(6)}%)';
+    return 'hcl(${hue},${(chroma*100)}%,${(luminance*100)}%)';
 
   @:op(A==B) public function equals(other : Hcl) : Bool
     return hue.nearEquals(other.hue) && chroma.nearEquals(other.chroma) && luminance.nearEquals(other.luminance);

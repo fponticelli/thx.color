@@ -72,6 +72,9 @@ abstract Hsla(Array<Float>) {
       alpha.normalize()
     );
 
+  public function roundTo(decimals : Int)
+    return create(hue.roundTo(decimals), saturation.roundTo(decimals), lightness.roundTo(decimals), alpha.roundTo(decimals));
+
   public function transparent(t : Float)
     return new Hsla([
       hue,
@@ -121,7 +124,7 @@ abstract Hsla(Array<Float>) {
     return toString();
 
   public function toString() : String
-    return 'hsla(${hue.roundTo(6)},${(saturation*100).roundTo(6)}%,${(lightness*100).roundTo(6)}%,${alpha.roundTo(6)})';
+    return 'hsla(${hue},${(saturation*100)}%,${(lightness*100)}%,${alpha})';
 
   @:op(A==B) public function equals(other : Hsla) : Bool
     return hue.nearEquals(other.hue) && saturation.nearEquals(other.saturation) && lightness.nearEquals(other.lightness) && alpha.nearEquals(other.alpha);

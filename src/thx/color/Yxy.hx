@@ -43,6 +43,9 @@ abstract Yxy(Array<Float>) {
       t.interpolate(y2, other.y2)
     ]);
 
+  public function roundTo(decimals : Int)
+    return create(y1.roundTo(decimals), x.roundTo(decimals), y2.roundTo(decimals));
+
   public function withY1(newy1 : Float)
     return new Yxy([newy1, x, y2]);
 
@@ -53,7 +56,7 @@ abstract Yxy(Array<Float>) {
     return new Yxy([y1, x, y2]);
 
   @:to public function toString() : String
-    return 'Yxy(${y1.roundTo(6)},${x.roundTo(6)},${y2.roundTo(6)})';
+    return 'Yxy(${y1},${x},${y2})';
 
   @:op(A==B) public function equals(other : Yxy) : Bool
     return y1.nearEquals(other.y1) && x.nearEquals(other.x) && y2.nearEquals(other.y2);

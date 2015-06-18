@@ -65,6 +65,9 @@ abstract CieLCh(Array<Float>) {
   public function rotate(angle : Float)
     return withHue(hue + angle).normalize();
 
+  public function roundTo(decimals : Int)
+    return create(lightness.roundTo(decimals), chroma.roundTo(decimals), hue.roundTo(decimals));
+
   public function split(spread = 144.0)
     return new Tuple2(
       rotate(-spread),
@@ -102,7 +105,7 @@ abstract CieLCh(Array<Float>) {
     return lightness.nearEquals(other.lightness) && chroma.nearEquals(other.chroma) && hue.nearEquals(other.hue);
 
   @:to public function toString() : String
-    return 'CieLCh(${lightness.roundTo(6)},${chroma.roundTo(6)},${hue.roundTo(6)})';
+    return 'CieLCh(${lightness},${chroma},${hue})';
 
   @:to public function toCieLab() {
     var hradi = hue * (Math.PI / 180),
