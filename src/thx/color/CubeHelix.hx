@@ -7,8 +7,6 @@ import thx.color.parse.ColorParser;
 
 @:access(thx.color.Rgbx)
 abstract CubeHelix(Array<Float>) {
-  public static var gamma : Float = 1;
-
   inline public static var A  = -0.14861;
   inline public static var B  =  1.78277;
   inline public static var C  = -0.29227;
@@ -21,13 +19,17 @@ abstract CubeHelix(Array<Float>) {
   public var hue(get, never) : Float;
   public var saturation(get, never) : Float;
   public var lightness(get, never) : Float;
+  public var gamma(get, never) : Float;
 
-  inline public static function create(hue : Float, saturation : Float, lightness : Float)
-    return new CubeHelix([hue, saturation, lightness]);
+  inline public static function create(hue : Float, saturation : Float, lightness : Float, ?gamma = 1.0)
+    return new CubeHelix([hue, saturation, lightness, gamma]);
 
   @:from public static function fromFloats(arr : Array<Float>) {
-    arr.resize(3);
-    return CubeHelix.create(arr[0], arr[1], arr[2]);
+    if(arr.length < 4) {
+      arr.resize(3);
+      arr.push(1);
+    }
+    return CubeHelix.create(arr[0], arr[1], arr[2], arr[3]);
   }
 
   @:from public static function fromString(color : String) {
@@ -36,8 +38,10 @@ abstract CubeHelix(Array<Float>) {
       return null;
 
     return try switch info.name {
-      case 'cubehelix':
-        new thx.color.CubeHelix(ColorParser.getFloatChannels(info.channels, 3, false));
+    case 'cubehelix' if(info.channels.length >= 4):
+        new thx.color.CubeHelix(ColorParser.getFloatChannels(info.channels, 4, false));
+    case 'cubehelix':
+        new thx.color.CubeHelix(ColorParser.getFloatChannels(info.channels, 3, false).concat([1.0]));
       case _:
         null;
     } catch(e : Dynamic) null;
@@ -59,35 +63,39 @@ abstract CubeHelix(Array<Float>) {
     return new CubeHelix([
       hue,
       saturation,
-      t.interpolate(lightness, 0)
+      t.interpolate(lightness, 0),
+      gamma
     ]);
 
   public function lighter(t : Float)
     return new CubeHelix([
       hue,
       saturation,
-      t.interpolate(lightness, 1)
+      t.interpolate(lightness, 1),
+      gamma
     ]);
 
   public function interpolate(other : CubeHelix, t : Float)
     return new CubeHelix([
       t.interpolateAngle(hue, other.hue, 360),
       t.interpolate(saturation, other.saturation),
-      t.interpolate(lightness, other.lightness)
+      t.interpolate(lightness, other.lightness),
+      t.interpolate(gamma, other.gamma)
     ]);
 
   public function normalize()
     return create(
       hue.wrapCircular(360),
       saturation.normalize(),
-      lightness.normalize()
+      lightness.normalize(),
+      gamma.normalize()
     );
 
   public function rotate(angle : Float)
     return withHue(hue + angle);
 
   public function roundTo(decimals : Int)
-    return create(hue.roundTo(decimals), saturation.roundTo(decimals), lightness.roundTo(decimals));
+    return create(hue.roundTo(decimals), saturation.roundTo(decimals), lightness.roundTo(decimals), gamma.roundTo(decimals));
 
   public function split(spread = 144.0)
     return new Tuple2(
@@ -113,22 +121,29 @@ abstract CubeHelix(Array<Float>) {
       rotate(120)
     );
 
+  public function withGamma(newgamma : Float)
+    return new CubeHelix([hue, saturation, lightness, newgamma]);
+
   public function withHue(newhue : Float)
-    return new CubeHelix([newhue.wrapCircular(360), saturation, lightness]);
+    return new CubeHelix([newhue, saturation, lightness, gamma]);
 
   public function withLightness(newlightness : Float)
-    return new CubeHelix([hue, saturation, newlightness.normalize()]);
+    return new CubeHelix([hue, saturation, newlightness, gamma]);
 
   public function withSaturation(newsaturation : Float)
-    return new CubeHelix([hue, newsaturation.normalize(), lightness]);
+    return new CubeHelix([hue, newsaturation, lightness, gamma]);
 
   public function toCss3() : String
     return toString();
-  @:to public function toString() : String
-    return 'cubehelix(${hue},${(saturation*100)}%,${(lightness*100)}%)';
+  @:to public function toString() : String {
+    if(gamma != 1)
+      return 'cubehelix(${hue},${(saturation*100)}%,${(lightness*100)}%, ${gamma*100}%)';
+    else
+      return 'cubehelix(${hue},${(saturation*100)}%,${(lightness*100)}%)';
+  }
 
   @:op(A==B) public function equals(other : CubeHelix) : Bool
-    return hue.nearEquals(other.hue) && saturation.nearEquals(other.saturation) && lightness.nearEquals(other.lightness);
+    return hue.nearEquals(other.hue) && saturation.nearEquals(other.saturation) && lightness.nearEquals(other.lightness) && gamma.nearEquals(other.gamma);
 
   @:to public function toCieLab()
     return toRgbx().toCieLab();
@@ -185,4 +200,6 @@ abstract CubeHelix(Array<Float>) {
     return this[1];
   inline function get_lightness() : Float
     return this[2];
+  inline function get_gamma() : Float
+    return this[3];
 }

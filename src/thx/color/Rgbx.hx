@@ -141,7 +141,10 @@ abstract Rgbx(Array<Float>) {
     return new Cmyk([c, m, y, k]);
   }
 
-  @:to public function toCubeHelix() {
+  @:to inline public function toCubeHelix()
+    return toCubeHelixWithGamma(1);
+
+  public function toCubeHelixWithGamma(gamma : Float) {
     var l = (BC_DA * bluef + ED * redf - EB * greenf) / (BC_DA + ED - EB),
         bl = bluef - l,
         k = (E * (greenf - l) - C * bl) / D,
