@@ -15,7 +15,7 @@ class TestCubeHelix {
 
   public function testStrings() {
     var cubeHelix = CubeHelix.create(0, 0, 1);
-    Assert.equals("cubehelix(0,0%,100%)", cubeHelix.toString());
+    Assert.equals("cubehelix(0,0,1)", cubeHelix.toString());
   }
 
   public function testFromString() {

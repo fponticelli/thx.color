@@ -15,7 +15,7 @@ class TestHcl {
 
   public function testStrings() {
     var hcl = Hcl.create(0, 0, 1);
-    Assert.equals("hcl(0,0%,100%)", hcl.toString());
+    Assert.equals("hcl(0,0,1)", hcl.toString());
   }
 
   public function testFromString() {

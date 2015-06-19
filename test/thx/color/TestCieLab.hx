@@ -14,16 +14,16 @@ class TestCieLab {
 
   public function testString() {
     var color = CieLab.create(100, 10, -10);
-    Assert.equals("CieLab(100,10,-10)", color.toString());
+    Assert.equals("cielab(100,10,-10)", color.toString());
   }
 
   public function testParse() {
-    var color : CieLab = "CieLab(100,10,-10)";
-    Assert.equals("CieLab(100,10,-10)", color.toString());
+    var color : CieLab = "cielab(100,10,-10)";
+    Assert.equals("cielab(100,10,-10)", color.toString());
   }
 
   public function testFromFloat() {
-    var s : CieLab = "CieLab(50,10,-10)",
+    var s : CieLab = "cielab(50,10,-10)",
         f : CieLab = [50.0,10.0,-10.0];
     Assert.isTrue(s == f);
   }
