@@ -101,16 +101,16 @@ abstract Rgbxa(Array<Float>) {
     return create(redf.roundTo(decimals), greenf.roundTo(decimals), bluef.roundTo(decimals), alphaf.roundTo(decimals));
 
   public function withAlpha(newalpha : Float)
-    return new Rgbxa([red, green, blue, newalpha.normalize()]);
+    return new Rgbxa([red, green, blue, newalpha]);
 
   public function withRed(newred : Int)
-    return new Rgbxa([newred.normalize(), green, blue, alpha]);
+    return new Rgbxa([newred, green, blue, alpha]);
 
   public function withGreen(newgreen : Int)
-    return new Rgbxa([red, newgreen.normalize(), blue, alpha]);
+    return new Rgbxa([red, newgreen, blue, alpha]);
 
   public function withBlue(newblue : Int)
-    return new Rgbxa([red, green, newblue.normalize(), alpha]);
+    return new Rgbxa([red, green, newblue, alpha]);
 
   public function toCss3() : String
     return toString();
