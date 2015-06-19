@@ -123,6 +123,9 @@ abstract Hcl(Array<Float>) {
   @:to public function toGrey()
     return toCieLab().toGrey();
 
+  @:to public function toHsl()
+    return toCieLab().toHsl();
+
   @:to public function toHsv()
     return toCieLab().toHsv();
 
