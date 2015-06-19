@@ -61,36 +61,16 @@ abstract Cmyk(Array<Float>) {
     return create(cyan.roundTo(decimals), magenta.roundTo(decimals), yellow.roundTo(decimals), black.roundTo(decimals));
 
   public function withCyan(newcyan : Float)
-    return new Cmyk([
-      newcyan.normalize(),
-      magenta,
-      yellow,
-      black
-    ]);
+    return new Cmyk([newcyan, magenta, yellow, black]);
 
   public function withMagenta(newmagenta : Float)
-    return new Cmyk([
-      cyan,
-      newmagenta.normalize(),
-      yellow,
-      black
-    ]);
+    return new Cmyk([cyan, newmagenta, yellow, black]);
 
   public function withYellow(newyellow : Float)
-    return new Cmyk([
-      cyan,
-      magenta,
-      newyellow.normalize(),
-      black
-    ]);
+    return new Cmyk([cyan, magenta, newyellow, black]);
 
   public function withBlack(newblack : Float)
-    return new Cmyk([
-      cyan,
-      magenta,
-      yellow,
-      newblack.normalize()
-    ]);
+    return new Cmyk([cyan, magenta, yellow, newblack]);
 
   @:to public function toString() : String
     return 'cmyk(${cyan},${magenta},${yellow},${black})';

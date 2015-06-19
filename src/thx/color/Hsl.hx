@@ -67,7 +67,7 @@ abstract Hsl(Array<Float>) {
     ]);
 
   public function normalize()
-    return create(hue, saturation, lightness);
+    return create(hue.wrapCircular(360), saturation.normalize(), lightness.normalize());
 
   public function rotate(angle : Float)
     return withHue(hue + angle);
@@ -100,16 +100,16 @@ abstract Hsl(Array<Float>) {
     );
 
   public function withAlpha(alpha : Float)
-    return new Hsla(this.concat([alpha.normalize()]));
+    return new Hsla(this.concat([alpha]));
 
   public function withHue(newhue : Float)
-    return new Hsl([newhue.wrapCircular(360), saturation, lightness]);
+    return new Hsl([newhue, saturation, lightness]);
 
   public function withLightness(newlightness : Float)
-    return new Hsl([hue, saturation, newlightness.normalize()]);
+    return new Hsl([hue, saturation, newlightness]);
 
   public function withSaturation(newsaturation : Float)
-    return new Hsl([hue, newsaturation.normalize(), lightness]);
+    return new Hsl([hue, newsaturation, lightness]);
 
   public function toCss3() : String
     return toString();

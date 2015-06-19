@@ -49,12 +49,7 @@ abstract Hsva(Array<Float>) {
     return rotate(180);
 
   public function normalize()
-    return create(
-      hue.wrapCircular(360),
-      saturation.normalize(),
-      value.normalize(),
-      alpha.normalize()
-    );
+    return create(hue.wrapCircular(360), saturation.normalize(), value.normalize(), alpha.normalize());
 
   public function transparent(t : Float)
     return new Hsva([
@@ -93,16 +88,16 @@ abstract Hsva(Array<Float>) {
     );
 
   public function withAlpha(newalpha : Float)
-    return new Hsva([hue, saturation, value, newalpha.normalize()]);
+    return new Hsva([hue, saturation, value, newalpha]);
 
   public function withHue(newhue : Float)
-    return new Hsva([newhue.wrapCircular(360), saturation, value, alpha]);
+    return new Hsva([newhue, saturation, value, alpha]);
 
   public function withLightness(newvalue : Float)
-    return new Hsva([hue, saturation, newvalue.normalize(), alpha]);
+    return new Hsva([hue, saturation, newvalue, alpha]);
 
   public function withSaturation(newsaturation : Float)
-    return new Hsva([hue, newsaturation.normalize(), value, alpha]);
+    return new Hsva([hue, newsaturation, value, alpha]);
 
   public function toString() : String
     return 'hsva(${hue},${(saturation*100)}%,${(value*100)}%,${alpha})';

@@ -84,12 +84,7 @@ abstract CubeHelix(Array<Float>) {
     ]);
 
   public function normalize()
-    return create(
-      hue.wrapCircular(360),
-      saturation.normalize(),
-      lightness.normalize(),
-      gamma.normalize()
-    );
+    return create(hue.wrapCircular(360), saturation.normalize(), lightness.normalize(), gamma.normalize());
 
   public function rotate(angle : Float)
     return withHue(hue + angle);

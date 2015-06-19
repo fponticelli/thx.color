@@ -102,7 +102,7 @@ abstract CieLab(Array<Float>) {
     return 'CieLab(${l},${a},${b})';
 
   @:to public function toCieLCh() {
-    var h = Floats.wrapCircular(Math.atan2(b, a) * 180 / Math.PI, 360),
+    var h = Math.atan2(b, a) * 180 / Math.PI,
         c = Math.sqrt(a * a + b * b);
     return new CieLCh([l, c, h]);
   }

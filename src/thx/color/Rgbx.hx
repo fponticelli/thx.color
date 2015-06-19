@@ -104,16 +104,16 @@ abstract Rgbx(Array<Float>) {
     return redf.nearEquals(other.redf) && greenf.nearEquals(other.greenf) && bluef.nearEquals(other.bluef);
 
   public function withAlpha(alpha : Float)
-    return new Rgbxa(this.concat([alpha.normalize()]));
+    return new Rgbxa(this.concat([alpha]));
 
   public function withRed(newred : Int)
-    return new Rgbx([newred.normalize(), green, blue]);
+    return new Rgbx([newred, green, blue]);
 
   public function withGreen(newgreen : Int)
-    return new Rgbx([red, newgreen.normalize(), blue]);
+    return new Rgbx([red, newgreen, blue]);
 
   public function withBlue(newblue : Int)
-    return new Rgbx([red, green, newblue.normalize()]);
+    return new Rgbx([red, green, newblue]);
 
   @:to public function toCieLab()
     return toXyz().toCieLab();

@@ -65,12 +65,7 @@ abstract Hsla(Array<Float>) {
     ]);
 
   public function normalize()
-    return create(
-      hue.wrapCircular(360),
-      saturation.normalize(),
-      lightness.normalize(),
-      alpha.normalize()
-    );
+    return create(hue.wrapCircular(360), saturation.normalize(), lightness.normalize(), alpha.normalize());
 
   public function roundTo(decimals : Int)
     return create(hue.roundTo(decimals), saturation.roundTo(decimals), lightness.roundTo(decimals), alpha.roundTo(decimals));
@@ -109,16 +104,16 @@ abstract Hsla(Array<Float>) {
     );
 
   public function withAlpha(newalpha : Float)
-    return new Hsla([hue, saturation, lightness, newalpha.normalize()]);
+    return new Hsla([hue, saturation, lightness, newalpha]);
 
   public function withHue(newhue : Float)
-    return new Hsla([newhue.wrapCircular(360), saturation, lightness, alpha]);
+    return new Hsla([newhue, saturation, lightness, alpha]);
 
   public function withLightness(newlightness : Float)
-    return new Hsla([hue, saturation, newlightness.normalize(), alpha]);
+    return new Hsla([hue, saturation, newlightness, alpha]);
 
   public function withSaturation(newsaturation : Float)
-    return new Hsla([hue, newsaturation.normalize(), lightness, alpha]);
+    return new Hsla([hue, newsaturation, lightness, alpha]);
 
   public function toCss3() : String
     return toString();

@@ -60,7 +60,7 @@ abstract CieLCh(Array<Float>) {
     ]);
 
   public function normalize()
-    return create(lightness, chroma, hue.wrapCircular(360));
+    return create(lightness.normalize(), chroma.normalize(), hue.wrapCircular(360));
 
   public function rotate(angle : Float)
     return withHue(hue + angle).normalize();
@@ -99,10 +99,10 @@ abstract CieLCh(Array<Float>) {
     return new CieLCh([lightness, newchroma, hue]);
 
   public function withHue(newhue : Float)
-    return new CieLCh([lightness, chroma, newhue.wrapCircular(360)]);
+    return new CieLCh([lightness, chroma, newhue]);
 
   @:op(A==B) public function equals(other : CieLCh) : Bool
-    return lightness.nearEquals(other.lightness) && chroma.nearEquals(other.chroma) && hue.nearEquals(other.hue);
+    return lightness.nearEqualAngles(other.lightness) && chroma.nearEquals(other.chroma) && hue.nearEquals(other.hue);
 
   @:to public function toString() : String
     return 'CieLCh(${lightness},${chroma},${hue})';

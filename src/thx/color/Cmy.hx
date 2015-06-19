@@ -42,35 +42,19 @@ abstract Cmy(Array<Float>) {
     ]);
 
   public function normalize()
-    return create(
-      cyan.normalize(),
-      magenta.normalize(),
-      yellow.normalize()
-    );
+    return create(cyan.normalize(), magenta.normalize(), yellow.normalize());
 
   public function roundTo(decimals : Int)
     return create(cyan.roundTo(decimals), magenta.roundTo(decimals), yellow.roundTo(decimals));
 
   public function withCyan(newcyan : Float)
-    return new Cmy([
-      newcyan.normalize(),
-      magenta,
-      yellow
-    ]);
+    return new Cmy([newcyan, magenta, yellow]);
 
   public function withMagenta(newmagenta : Float)
-    return new Cmy([
-      cyan,
-      newmagenta.normalize(),
-      yellow
-    ]);
+    return new Cmy([cyan, newmagenta, yellow]);
 
   public function withYellow(newyellow : Float)
-    return new Cmy([
-      cyan,
-      magenta,
-      newyellow.normalize()
-    ]);
+    return new Cmy([cyan, magenta, newyellow]);
 
   @:to public function toString() : String
     return 'cmy(${cyan},${magenta},${yellow})';

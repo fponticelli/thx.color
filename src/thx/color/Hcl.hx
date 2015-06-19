@@ -53,11 +53,7 @@ abstract Hcl(Array<Float>) {
     ]);
 
   public function normalize()
-    return create(
-      hue.wrapCircular(360),
-      chroma.normalize(),
-      luminance.normalize()
-    );
+    return create(hue.wrapCircular(360), chroma.normalize(), luminance.normalize());
 
   public function rotate(angle : Float)
     return withHue(hue + angle).normalize();
@@ -90,13 +86,13 @@ abstract Hcl(Array<Float>) {
     );
 
   public function withHue(newhue : Float)
-    return new Hcl([newhue.wrapCircular(360), chroma, luminance]);
+    return new Hcl([newhue, chroma, luminance]);
 
   public function withLuminance(newluminance : Float)
-    return new Hcl([hue, chroma, newluminance.normalize()]);
+    return new Hcl([hue, chroma, newluminance]);
 
   public function withChroma(newchroma : Float)
-    return new Hcl([hue, newchroma.normalize(), luminance]);
+    return new Hcl([hue, newchroma, luminance]);
 
   @:to public function toString() : String
     return 'hcl(${hue},${(chroma*100)}%,${(luminance*100)}%)';

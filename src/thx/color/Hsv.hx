@@ -53,11 +53,7 @@ abstract Hsv(Array<Float>) {
     ]);
 
   public function normalize()
-    return create(
-      hue.wrapCircular(360),
-      saturation.normalize(),
-      value.normalize()
-    );
+    return create(hue.wrapCircular(360), saturation.normalize(), value.normalize());
 
   public function rotate(angle : Float)
     return withHue(hue + angle).normalize();
@@ -90,16 +86,16 @@ abstract Hsv(Array<Float>) {
     );
 
   public function withAlpha(alpha : Float)
-    return new Hsva(this.concat([alpha.normalize()]));
+    return new Hsva(this.concat([alpha]));
 
   public function withHue(newhue : Float)
-    return new Hsv([newhue.wrapCircular(360), saturation, value]);
+    return new Hsv([newhue, saturation, value]);
 
   public function withValue(newvalue : Float)
-    return new Hsv([hue, saturation, newvalue.normalize()]);
+    return new Hsv([hue, saturation, newvalue]);
 
   public function withSaturation(newsaturation : Float)
-    return new Hsv([hue, newsaturation.normalize(), value]);
+    return new Hsv([hue, newsaturation, value]);
 
   @:to public function toString() : String
     return 'hsv(${hue},${(saturation*100)}%,${(value*100)}%)';
