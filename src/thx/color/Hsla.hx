@@ -136,11 +136,12 @@ abstract Hsla(Array<Float>) {
   @:to public function toRgba()
     return toRgbxa().toRgba();
 
+  @:access(thx.color.Hsl._c)
   @:to public function toRgbxa()
     return new Rgbxa([
-      _c(hue + 120, saturation, lightness),
-      _c(hue, saturation, lightness),
-      _c(hue - 120, saturation, lightness),
+      Hsl._c(hue + 120, saturation, lightness),
+      Hsl._c(hue, saturation, lightness),
+      Hsl._c(hue - 120, saturation, lightness),
       alpha
     ]);
 
@@ -152,20 +153,4 @@ abstract Hsla(Array<Float>) {
     return this[2];
   inline function get_alpha() : Float
     return this[3];
-
-  // Based on D3.js by Michael Bostock
-  static function _c(d : Float, s : Float, l : Float) : Float {
-    var m2 = l <= 0.5 ? l * (1 + s) : l + s - l * s,
-      m1 = 2 * l - m2;
-
-    d = d.wrapCircular(360);
-    if (d < 60)
-      return m1 + (m2 - m1) * d / 60;
-    else if (d < 180)
-      return m2;
-    else if (d < 240)
-      return m1 + (m2 - m1) * (240 - d) / 60;
-    else
-      return m1;
-  }
 }
