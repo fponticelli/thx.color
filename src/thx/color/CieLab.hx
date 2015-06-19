@@ -105,7 +105,7 @@ abstract CieLab(Array<Float>) {
     return new CieLab([l, a, newb]);
 
   @:to public function toString() : String
-    return 'CieLab(${l},${a},${b})';
+    return 'cielab(${l},${a},${b})';
 
   @:to public function toCieLCh() {
     var h = Math.atan2(b, a) * 180 / Math.PI,
