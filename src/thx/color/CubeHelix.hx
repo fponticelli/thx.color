@@ -158,6 +158,9 @@ abstract CubeHelix(Array<Float>) {
   @:to public function toHcl()
     return toCieLab().toHcl();
 
+  @:to public function toHsl()
+    return toRgbx().toHsl();
+
   @:to public function toHsv()
     return toRgbx().toHsv();
 
