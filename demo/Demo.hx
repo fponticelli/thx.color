@@ -107,6 +107,8 @@ class Demo {
     var c = MiniCanvas.create(900, 1200);
     colorTable(c.ctx, c.width, c.height);
     c.display('colorTable');
+
+    colorBoundaries();
   }
 
   public static function colorTable(ctx, w, h) {
@@ -121,7 +123,6 @@ class Demo {
       var col   = i % columns,
           row   = Math.floor(i / columns),
           color = Color.names.get(name);
-      trace(color);
       ctx.fillStyle = color.toString();
       ctx.fillRect(col * cellw, row * cellh, cellw, cellh);
 
@@ -135,5 +136,85 @@ class Demo {
         Math.round(row * cellh + cellh / 2) + 0.5,
         cellw);
     });
+  }
+
+  public static function colorBoundaries() {
+    var colors  = Color.names.keys().toArray().filter(function(n) return n.indexOf(' ') < 0),
+        color   = Color.grey,
+        min = {
+          rgbx: (color : Rgbx),
+          rgb:  (color : Rgb),
+          lab:  (color : CieLab),
+          lch:  (color : CieLCh),
+          cmy:  (color : Cmy),
+          cmyk: (color : Cmyk),
+          ch:   (color : CubeHelix),
+          g:    (color : Grey),
+          hcl:  (color : Hcl),
+          hsl:  (color : Hsl),
+          hsv:  (color : Hsv),
+          xyz:  (color : Xyz),
+          yxy:  (color : Yxy)
+        },
+        max = {
+          rgbx: (color : Rgbx),
+          rgb:  (color : Rgb),
+          lab:  (color : CieLab),
+          lch:  (color : CieLCh),
+          cmy:  (color : Cmy),
+          cmyk: (color : Cmyk),
+          ch:   (color : CubeHelix),
+          g:    (color : Grey),
+          hcl:  (color : Hcl),
+          hsl:  (color : Hsl),
+          hsv:  (color : Hsv),
+          xyz:  (color : Xyz),
+          yxy:  (color : Yxy)
+        };
+    colors.map(function(name) {
+      var color = Color.names.get(name);
+
+      min.rgbx = (color : Rgbx).min(min.rgbx);
+      min.rgb =  (color : Rgb).min(min.rgb);
+      min.lab =  (color : CieLab).min(min.lab);
+      min.lch =  (color : CieLCh).min(min.lch);
+      min.cmy =  (color : Cmy).min(min.cmy);
+      min.cmyk = (color : Cmyk).min(min.cmyk);
+      min.ch =   (color : CubeHelix).min(min.ch);
+      min.g =    (color : Grey).min(min.g);
+      min.hcl =  (color : Hcl).min(min.hcl);
+      min.hsl =  (color : Hsl).min(min.hsl);
+      min.hsv =  (color : Hsv).min(min.hsv);
+      min.xyz =  (color : Xyz).min(min.xyz);
+      min.yxy =  (color : Yxy).min(min.yxy);
+
+      max.rgbx = (color : Rgbx).max(max.rgbx);
+      max.rgb =  (color : Rgb).max(max.rgb);
+      max.lab =  (color : CieLab).max(max.lab);
+      max.lch =  (color : CieLCh).max(max.lch);
+      max.cmy =  (color : Cmy).max(max.cmy);
+      max.cmyk = (color : Cmyk).max(max.cmyk);
+      max.ch =   (color : CubeHelix).max(max.ch);
+      max.g =    (color : Grey).max(max.g);
+      max.hcl =  (color : Hcl).max(max.hcl);
+      max.hsl =  (color : Hsl).max(max.hsl);
+      max.hsv =  (color : Hsv).max(max.hsv);
+      max.xyz =  (color : Xyz).max(max.xyz);
+      max.yxy =  (color : Yxy).max(max.yxy);
+    });
+
+    trace('range: ${min.rgbx.roundTo(2)} -> ${max.rgbx.roundTo(2)}');
+    trace('range: ${min.rgb} -> ${max.rgb}');
+    trace('range: ${min.lab.roundTo(2)} -> ${max.lab.roundTo(2)}');
+    trace('range: ${min.lch.roundTo(2)} -> ${max.lch.roundTo(2)}');
+    trace('range: ${min.cmy.roundTo(2)} -> ${max.cmy.roundTo(2)}');
+    trace('range: ${min.cmyk.roundTo(2)} -> ${max.cmyk.roundTo(2)}');
+    trace('range: ${min.ch.roundTo(2)} -> ${max.ch.roundTo(2)}');
+    trace('range: ${min.g.roundTo(2)} -> ${max.g.roundTo(2)}');
+    trace('range: ${min.hcl.roundTo(2)} -> ${max.hcl.roundTo(2)}');
+    trace('range: ${min.hsl.roundTo(2)} -> ${max.hsl.roundTo(2)}');
+    trace('range: ${min.hsv.roundTo(2)} -> ${max.hsv.roundTo(2)}');
+    trace('range: ${min.xyz.roundTo(2)} -> ${max.xyz.roundTo(2)}');
+    trace('range: ${min.yxy.roundTo(2)} -> ${max.yxy.roundTo(2)}');
   }
 }
