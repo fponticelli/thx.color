@@ -59,7 +59,7 @@ abstract Hcl(Array<Float>) {
     return create(hue.max(other.hue), chroma.max(other.chroma), luminance.max(other.luminance));
 
   public function normalize()
-    return create(hue.wrapCircular(360), chroma.normalize(), luminance.normalize());
+    return create(hue.wrapCircular(360), chroma, luminance);
 
   public function rotate(angle : Float)
     return withHue(hue + angle).normalize();
