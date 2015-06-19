@@ -101,7 +101,7 @@ abstract Hcl(Array<Float>) {
     return new Hcl([hue, newchroma, luminance]);
 
   @:to public function toString() : String
-    return 'hcl(${hue},${(chroma*100)}%,${(luminance*100)}%)';
+    return 'hcl(${hue},${chroma},${luminance})';
 
   @:op(A==B) public function equals(other : Hcl) : Bool
     return hue.nearEqualAngles(other.hue) && chroma.nearEquals(other.chroma) && luminance.nearEquals(other.luminance);

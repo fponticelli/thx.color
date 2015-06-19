@@ -138,9 +138,9 @@ abstract CubeHelix(Array<Float>) {
     return toString();
   @:to public function toString() : String {
     if(gamma != 1)
-      return 'cubehelix(${hue},${(saturation*100)}%,${(lightness*100)}%, ${gamma*100}%)';
+      return 'cubehelix(${hue},${saturation},${lightness}, ${gamma})';
     else
-      return 'cubehelix(${hue},${(saturation*100)}%,${(lightness*100)}%)';
+      return 'cubehelix(${hue},${saturation},${lightness})';
   }
 
   @:op(A==B) public function equals(other : CubeHelix) : Bool
