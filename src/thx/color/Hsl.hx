@@ -117,7 +117,7 @@ abstract Hsl(Array<Float>) {
     return 'hsl(${hue},${(saturation*100)}%,${(lightness*100)}%)';
 
   @:op(A==B) public function equals(other : Hsl) : Bool
-    return hue.nearEquals(other.hue) && saturation.nearEquals(other.saturation) && lightness.nearEquals(other.lightness);
+    return hue.nearEqualAngles(other.hue) && saturation.nearEquals(other.saturation) && lightness.nearEquals(other.lightness);
 
   @:to public function toCieLab()
     return toRgbx().toCieLab();

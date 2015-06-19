@@ -103,7 +103,7 @@ abstract Hsva(Array<Float>) {
     return 'hsva(${hue},${(saturation*100)}%,${(value*100)}%,${alpha})';
 
   @:op(A==B) public function equals(other : Hsva) : Bool
-    return hue.nearEquals(other.hue) && saturation.nearEquals(other.saturation) && value.nearEquals(other.value) && alpha.nearEquals(other.alpha);
+    return hue.nearEqualAngles(other.hue) && saturation.nearEquals(other.saturation) && value.nearEquals(other.value) && alpha.nearEquals(other.alpha);
 
   @:to public function toHsv()
     return new Hsv(this.slice(0, 3));

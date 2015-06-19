@@ -98,7 +98,7 @@ abstract Hcl(Array<Float>) {
     return 'hcl(${hue},${(chroma*100)}%,${(luminance*100)}%)';
 
   @:op(A==B) public function equals(other : Hcl) : Bool
-    return hue.nearEquals(other.hue) && chroma.nearEquals(other.chroma) && luminance.nearEquals(other.luminance);
+    return hue.nearEqualAngles(other.hue) && chroma.nearEquals(other.chroma) && luminance.nearEquals(other.luminance);
 
   @:to public function toCieLab() {
     var h = hue / 180 * Math.PI,

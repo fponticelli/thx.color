@@ -138,7 +138,7 @@ abstract CubeHelix(Array<Float>) {
   }
 
   @:op(A==B) public function equals(other : CubeHelix) : Bool
-    return hue.nearEquals(other.hue) && saturation.nearEquals(other.saturation) && lightness.nearEquals(other.lightness) && gamma.nearEquals(other.gamma);
+    return hue.nearEqualAngles(other.hue) && saturation.nearEquals(other.saturation) && lightness.nearEquals(other.lightness) && gamma.nearEquals(other.gamma);
 
   @:to public function toCieLab()
     return toRgbx().toCieLab();
