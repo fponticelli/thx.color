@@ -59,6 +59,12 @@ abstract CieLCh(Array<Float>) {
       t.interpolateAngle(hue, other.hue, 360)
     ]);
 
+  public function min(other : CieLCh)
+    return create(lightness.min(other.lightness), chroma.min(other.chroma), hue.min(other.hue));
+
+  public function max(other : CieLCh)
+    return create(lightness.max(other.lightness), chroma.max(other.chroma), hue.max(other.hue));
+
   public function normalize()
     return create(lightness.clamp(0, 100), chroma.clamp(0, 100), hue.wrapCircular(360));
 

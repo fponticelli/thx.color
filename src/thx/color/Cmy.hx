@@ -41,6 +41,12 @@ abstract Cmy(Array<Float>) {
       t.interpolate(yellow,  other.yellow)
     ]);
 
+  public function min(other : Cmy)
+    return create(cyan.min(other.cyan), magenta.min(other.magenta), yellow.min(other.yellow));
+
+  public function max(other : Cmy)
+    return create(cyan.max(other.cyan), magenta.max(other.magenta), yellow.max(other.yellow));
+
   public function normalize()
     return create(cyan.normalize(), magenta.normalize(), yellow.normalize());
 

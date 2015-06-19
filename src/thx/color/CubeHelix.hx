@@ -83,6 +83,12 @@ abstract CubeHelix(Array<Float>) {
       t.interpolate(gamma, other.gamma)
     ]);
 
+  public function min(other : CubeHelix)
+    return create(hue.min(other.hue), saturation.min(other.saturation), lightness.min(other.lightness), gamma.min(other.gamma));
+
+  public function max(other : CubeHelix)
+    return create(hue.max(other.hue), saturation.max(other.saturation), lightness.max(other.lightness), gamma.max(other.gamma));
+
   public function normalize()
     return create(hue.wrapCircular(360), saturation.normalize(), lightness.normalize(), gamma.normalize());
 

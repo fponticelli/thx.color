@@ -83,6 +83,12 @@ abstract CieLab(Array<Float>) {
     return closest;
   }
 
+  public function min(other : CieLab)
+    return create(l.min(other.l), a.min(other.a), b.min(other.b));
+
+  public function max(other : CieLab)
+    return create(l.max(other.l), a.max(other.a), b.max(other.b));
+
   public function roundTo(decimals : Int)
     return create(l.roundTo(decimals), a.roundTo(decimals), b.roundTo(decimals));
 

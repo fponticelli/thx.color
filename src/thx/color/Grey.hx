@@ -40,6 +40,12 @@ abstract Grey(Float) from Float to Float {
   public function interpolate(other : Grey, t : Float)
     return new Grey(t.interpolate(grey, other.grey));
 
+  public function min(other : Grey)
+    return create(grey.min(other.grey));
+
+  public function max(other : Grey)
+    return create(grey.max(other.grey));
+
   public function normalize()
     return create(this.normalize());
 

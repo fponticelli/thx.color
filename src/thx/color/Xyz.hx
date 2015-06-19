@@ -33,7 +33,6 @@ abstract Xyz(Array<Float>) {
     } catch(e : Dynamic) null;
   }
 
-
   inline function new(channels : Array<Float>) : Xyz
     this = channels;
 
@@ -43,6 +42,12 @@ abstract Xyz(Array<Float>) {
       t.interpolate(y, other.y),
       t.interpolate(z, other.z),
     ]);
+
+  public function min(other : Xyz)
+    return create(x.min(other.x), y.min(other.y), z.min(other.z));
+
+  public function max(other : Xyz)
+    return create(x.max(other.x), y.max(other.y), z.max(other.z));
 
   public function roundTo(decimals : Int)
     return create(x.roundTo(decimals), y.roundTo(decimals), z.roundTo(decimals));

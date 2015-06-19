@@ -52,6 +52,12 @@ abstract Hcl(Array<Float>) {
       t.interpolate(luminance, other.luminance)
     ]);
 
+  public function min(other : Hcl)
+    return create(hue.min(other.hue), chroma.min(other.chroma), luminance.min(other.luminance));
+
+  public function max(other : Hcl)
+    return create(hue.max(other.hue), chroma.max(other.chroma), luminance.max(other.luminance));
+
   public function normalize()
     return create(hue.wrapCircular(360), chroma.normalize(), luminance.normalize());
 

@@ -81,6 +81,12 @@ abstract Rgbx(Array<Float>) {
       t.interpolate(bluef, other.bluef)
     ]);
 
+  public function min(other : Rgbx)
+    return create(redf.min(other.redf), greenf.min(other.greenf), bluef.min(other.bluef));
+
+  public function max(other : Rgbx)
+    return create(redf.max(other.redf), greenf.max(other.greenf), bluef.max(other.bluef));
+
   public function normalize()
     return new Rgbx([
       redf.normalize(),

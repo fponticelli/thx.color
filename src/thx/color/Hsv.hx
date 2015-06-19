@@ -52,6 +52,12 @@ abstract Hsv(Array<Float>) {
       t.interpolate(value, other.value)
     ]);
 
+  public function min(other : Hsv)
+    return create(hue.min(other.hue), saturation.min(other.saturation), value.min(other.value));
+
+  public function max(other : Hsv)
+    return create(hue.max(other.hue), saturation.max(other.saturation), value.max(other.value));
+
   public function normalize()
     return create(hue.wrapCircular(360), saturation.normalize(), value.normalize());
 

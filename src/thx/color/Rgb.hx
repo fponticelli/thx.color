@@ -50,6 +50,12 @@ abstract Rgb(Int) from Int to Int {
   public function interpolate(other : Rgb, t : Float)
     return toRgbx().interpolate(other.toRgbx(), t).toRgb();
 
+  public function min(other : Rgb)
+    return create(red.min(other.red), green.min(other.green), blue.min(other.blue));
+
+  public function max(other : Rgb)
+    return create(red.max(other.red), green.max(other.green), blue.max(other.blue));
+
   public function withAlpha(alpha : Int)
     return Rgba.fromInts([red, green, blue, alpha]);
 

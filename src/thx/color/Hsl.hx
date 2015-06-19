@@ -66,6 +66,12 @@ abstract Hsl(Array<Float>) {
       t.interpolate(lightness, other.lightness)
     ]);
 
+  public function min(other : Hsl)
+    return create(hue.min(other.hue), saturation.min(other.saturation), lightness.min(other.lightness));
+
+  public function max(other : Hsl)
+    return create(hue.max(other.hue), saturation.max(other.saturation), lightness.max(other.lightness));
+
   public function normalize()
     return create(hue.wrapCircular(360), saturation.normalize(), lightness.normalize());
 

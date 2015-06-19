@@ -43,6 +43,12 @@ abstract Yxy(Array<Float>) {
       t.interpolate(y2, other.y2)
     ]);
 
+  public function min(other : Yxy)
+    return create(y1.min(other.y1), x.min(other.x), y2.min(other.y2));
+
+  public function max(other : Yxy)
+    return create(y1.max(other.y1), x.max(other.x), y2.max(other.y2));
+
   public function roundTo(decimals : Int)
     return create(y1.roundTo(decimals), x.roundTo(decimals), y2.roundTo(decimals));
 
