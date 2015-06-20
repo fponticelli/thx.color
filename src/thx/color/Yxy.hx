@@ -4,8 +4,6 @@ using thx.Arrays;
 using thx.Floats;
 import thx.color.parse.ColorParser;
 
-@:access(thx.color.Rgbx)
-@:access(thx.color.CieLab)
 @:access(thx.color.Xyz)
 abstract Yxy(Array<Float>) {
   public var y1(get, never) : Float;

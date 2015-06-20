@@ -6,9 +6,6 @@ using thx.Ints;
 using thx.Strings;
 import thx.color.parse.ColorParser;
 
-@:access(thx.color.Hsla)
-@:access(thx.color.Hsva)
-@:access(thx.color.Rgba)
 @:access(thx.color.Rgbx)
 abstract Rgbxa(Array<Float>) {
   inline public static function create(red : Float, green : Float, blue : Float, alpha : Float) : Rgbxa

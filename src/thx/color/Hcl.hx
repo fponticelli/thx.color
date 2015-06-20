@@ -5,8 +5,7 @@ using thx.Floats;
 using thx.Tuple;
 import thx.color.parse.ColorParser;
 
-@:access(thx.color.Rgbx)
-@:access(thx.color.Hsla)
+@:access(thx.color.CieLab)
 abstract Hcl(Array<Float>) {
   public var hue(get, never) : Float;
   public var chroma(get, never) : Float;
@@ -111,7 +110,7 @@ abstract Hcl(Array<Float>) {
         l = luminance,
         a = Math.cos(h) * chroma,
         b = Math.sin(h) * chroma;
-    return CieLab.create(l, a, b);
+    return new CieLab([l, a, b]);
   }
 
   @:to public function toCieLCh()

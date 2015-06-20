@@ -95,7 +95,7 @@ abstract Hsla(Array<Float>) {
     ]);
 
   public function rotate(angle : Float)
-    return Hsla.create(hue + angle, saturation, lightness, alpha);
+    return new Hsla([hue + angle, saturation, lightness, alpha]);
 
   public function split(spread = 150.0)
     return new Tuple2(

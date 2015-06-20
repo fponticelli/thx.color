@@ -9,10 +9,9 @@ import thx.color.CubeHelix.*;
 
 @:access(thx.color.Cmy)
 @:access(thx.color.Cmyk)
+@:access(thx.color.CubeHelix)
 @:access(thx.color.Hsl)
 @:access(thx.color.Hsv)
-@:access(thx.color.Rgb)
-@:access(thx.color.Grey)
 @:access(thx.color.Rgbxa)
 @:access(thx.color.Xyz)
 abstract Rgbx(Array<Float>) {
@@ -160,7 +159,7 @@ abstract Rgbx(Array<Float>) {
     if(Math.isNaN(s)) s = 0;
     if(Math.isNaN(h)) h = 0;
     if (h < 0) h += 360;
-    return CubeHelix.create(h, s, l);
+    return new CubeHelix([h, s, l, 1]);
   }
 
   @:to public function toGrey()

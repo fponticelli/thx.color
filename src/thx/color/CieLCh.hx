@@ -6,9 +6,6 @@ using thx.Tuple;
 import thx.color.parse.ColorParser;
 
 @:access(thx.color.CieLab)
-@:access(thx.color.CieLCh)
-@:access(thx.color.Xyz)
-@:access(thx.color.Rgbx)
 abstract CieLCh(Array<Float>) {
   public var lightness(get, never) : Float;
   public var chroma(get, never) : Float;

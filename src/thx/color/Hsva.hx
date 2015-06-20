@@ -76,7 +76,7 @@ abstract Hsva(Array<Float>) {
     ]);
 
   public function rotate(angle : Float)
-    return Hsva.create(hue + angle, saturation, value, alpha).normalize();
+    return create(hue + angle, saturation, value, alpha).normalize();
 
   public function roundTo(decimals : Int)
     return create(hue.roundTo(decimals), saturation.roundTo(decimals), value.roundTo(decimals), alpha.roundTo(decimals));

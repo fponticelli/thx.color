@@ -12,8 +12,8 @@ Conventional limits are:
   B: -128/128
 */
 @:access(thx.color.CieLCh)
+@:access(thx.color.Hcl)
 @:access(thx.color.Xyz)
-@:access(thx.color.Rgbx)
 abstract CieLab(Array<Float>) {
   inline public static function create(l : Float, a : Float, b : Float)
     return new CieLab([l, a, b]);
@@ -129,7 +129,7 @@ abstract CieLab(Array<Float>) {
     var chroma = Math.sqrt(a * a + b * b),
         hue = Math.atan2(b, a) / Math.PI * 180;
     if(hue < 0) hue += 360;
-    return Hcl.create(hue, chroma, l);
+    return new Hcl([hue, chroma, l]);
   }
 
   @:to public function toHsl()

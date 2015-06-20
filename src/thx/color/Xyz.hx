@@ -17,7 +17,7 @@ abstract Xyz(Array<Float>) {
 
   @:from public static function fromFloats(arr : Array<Float>) {
     arr.resize(3);
-    return Xyz.create(arr[0], arr[1], arr[2]);
+    return create(arr[0], arr[1], arr[2]);
   }
 
   @:from public static function fromString(color : String) {

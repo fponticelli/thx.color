@@ -182,11 +182,11 @@ abstract CubeHelix(Array<Float>) {
         a = Math.isNaN(saturation) ? 0 : saturation * l * (1 - l),
         cosh = Math.cos(h),
         sinh = Math.sin(h);
-    return Rgbx.create(
+    return new Rgbx([
       l + a * (A * cosh + B * sinh),
       l + a * (C * cosh + D * sinh),
       l + a * (E * cosh)
-    );
+    ]);
   }
 
   @:to public function toRgbxa()
