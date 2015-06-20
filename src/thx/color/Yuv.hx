@@ -1,0 +1,122 @@
+package thx.color;
+
+using thx.Arrays;
+using thx.Floats;
+import thx.color.parse.ColorParser;
+
+@:access(thx.color.Rgbx)
+@:access(thx.color.CieLab)
+@:access(thx.color.Xyz)
+abstract Yuv(Array<Float>) {
+  public var y(get, never) : Float;
+  public var u(get, never) : Float;
+  public var v(get, never) : Float;
+
+  inline public static function create(y : Float, u : Float, v : Float)
+    return new Yuv([y, u, v]);
+
+  @:from public static function fromFloats(arr : Array<Float>) {
+    arr.resize(3);
+    return Yuv.create(arr[0], arr[1], arr[2]);
+  }
+
+  @:from public static function fromString(color : String) {
+    var info = ColorParser.parseColor(color);
+    if(null == info)
+      return null;
+
+    return try switch info.name {
+    case 'yuv':
+        new thx.color.Yuv(ColorParser.getFloatChannels(info.channels, 3, false));
+      case _:
+        null;
+    } catch(e : Dynamic) null;
+  }
+
+  inline function new(channels : Array<Float>) : Yuv
+    this = channels;
+
+  public function interpolate(other : Yuv, t : Float)
+    return new Yuv([
+      t.interpolate(y, other.y),
+      t.interpolate(u,  other.u),
+      t.interpolate(v, other.v)
+    ]);
+
+  public function min(other : Yuv)
+    return create(y.min(other.y), u.min(other.u), v.min(other.v));
+
+  public function max(other : Yuv)
+    return create(y.max(other.y), u.max(other.u), v.max(other.v));
+
+  public function roundTo(decimals : Int)
+    return create(y.roundTo(decimals), u.roundTo(decimals), v.roundTo(decimals));
+
+  public function withY(newy : Float)
+    return new Yuv([newy, u, v]);
+
+  public function withU(newu : Float)
+    return new Yuv([y, u, v]);
+
+  public function withV(newv : Float)
+    return new Yuv([y, u, v]);
+
+  @:to public function toString() : String
+    return 'yuv(${y},${u},${v})';
+
+  @:op(A==B) public function equals(other : Yuv) : Bool
+    return y.nearEquals(other.y) && u.nearEquals(other.u) && v.nearEquals(other.v);
+
+  @:to public function toCieLab()
+    return toRgbx().toCieLab();
+
+  @:to public function toCieLCh()
+    return toRgbx().toCieLCh();
+
+  @:to public function toCmy()
+    return toRgbx().toCmy();
+
+  @:to public function toCmyk()
+    return toRgbx().toCmyk();
+
+  @:to public function toCubeHelix()
+    return toRgbx().toCubeHelix();
+
+  @:to public function toGrey()
+    return toRgbx().toGrey();
+
+  @:to public function toHcl()
+    return toRgbx().toHcl();
+
+  @:to public function toHsl()
+    return toRgbx().toHsl();
+
+  @:to public function toHsv()
+    return toRgbx().toHsv();
+
+  @:to public function toRgb()
+    return toRgbx().toRgb();
+
+  @:to public function toRgba()
+    return toRgbxa().toRgba();
+
+  @:to public function toRgbx() : Rgbx {
+    return null;
+  }
+
+  @:to public function toRgbxa()
+    return toRgbx().toRgbxa();
+
+  @:to public function toYxy()
+    return toRgbx().toYxy();
+
+  @:to public function toXyz()
+    return toRgbx().toXyz();
+
+  inline function get_y() : Float
+    return this[0];
+  inline function get_u() : Float
+    return this[1];
+  inline function get_v() : Float
+    return this[2];
+}
