@@ -69,31 +69,31 @@ abstract Yxy(Array<Float>) {
     return toXyz().toCieLab();
 
   @:to public function toCieLCh()
-    return toCieLab().toCieLCh();
+    return toXyz().toCieLCh();
 
   @:to public function toCmy()
-    return toRgbx().toCmy();
+    return toXyz().toCmy();
 
   @:to public function toCmyk()
-    return toRgbx().toCmyk();
+    return toXyz().toCmyk();
 
   @:to public function toCubeHelix()
-    return toRgbx().toCubeHelix();
+    return toXyz().toCubeHelix();
 
   @:to public function toGrey()
-    return toRgbx().toGrey();
+    return toXyz().toGrey();
 
   @:to public function toHcl()
-    return toCieLab().toHcl();
+    return toXyz().toHcl();
 
   @:to public function toHsl()
     return toRgbx().toHsl();
 
   @:to public function toHsv()
-    return toRgbx().toHsv();
+    return toXyz().toHsv();
 
   @:to public function toRgb()
-    return toRgbx().toRgb();
+    return toXyz().toRgb();
 
   @:to public function toRgba()
     return toRgbxa().toRgba();
@@ -102,7 +102,7 @@ abstract Yxy(Array<Float>) {
     return toXyz().toRgbx();
 
   @:to public function toRgbxa()
-    return toRgbx().toRgbxa();
+    return toXyz().toRgbxa();
 
   @:to public function toXyz()
     return new Xyz([
