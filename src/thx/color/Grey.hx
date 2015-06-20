@@ -97,6 +97,9 @@ abstract Grey(Float) from Float to Float {
   @:to public function toRgbxa()
     return toRgbx().toRgbxa();
 
+  @:to public function toYuv()
+    return toRgbx().toYuv();
+
   @:to public function toXyz()
     return toRgbx().toXyz();
 

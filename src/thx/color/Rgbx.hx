@@ -250,6 +250,9 @@ abstract Rgbx(Array<Float>) {
     ]);
   }
 
+  @:to public function toYuv() : Yuv
+    return null;
+
   @:to public function toYxy()
     return toXyz().toYxy();
 

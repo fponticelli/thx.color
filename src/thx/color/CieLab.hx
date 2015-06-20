@@ -168,6 +168,9 @@ abstract CieLab(Array<Float>) {
     return new Xyz([95.047 * x, 100 * y, 108.883 * z]);
   }
 
+  @:to public function toYuv()
+    return toRgbx().toYuv();
+
   @:to public function toYxy()
     return toXyz().toYxy();
 

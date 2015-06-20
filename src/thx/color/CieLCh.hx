@@ -153,6 +153,9 @@ abstract CieLCh(Array<Float>) {
   @:to public function toXyz()
     return toCieLab().toXyz();
 
+  @:to public function toYuv()
+    return toRgbx().toYuv();
+
   @:to public function toYxy()
     return toCieLab().toYxy();
 

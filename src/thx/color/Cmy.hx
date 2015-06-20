@@ -121,6 +121,9 @@ abstract Cmy(Array<Float>) {
   @:to public function toXyz() : Xyz
     return toRgbx().toXyz();
 
+  @:to public function toYuv()
+    return toRgbx().toYuv();
+
   @:to public function toYxy() : Yxy
     return toRgbx().toYxy();
 

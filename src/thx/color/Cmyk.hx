@@ -128,6 +128,15 @@ abstract Cmyk(Array<Float>) {
   @:to public function toRgbxa()
     return toRgbx().toRgbxa();
 
+  @:to public function toXyz()
+    return toRgbx().toXyz();
+
+  @:to public function toYuv()
+    return toRgbx().toYuv();
+
+  @:to public function toYxy()
+    return toRgbx().toYxy();
+
   inline function get_cyan() : Float
     return this[0];
   inline function get_magenta() : Float
@@ -136,10 +145,4 @@ abstract Cmyk(Array<Float>) {
     return this[2];
   inline function get_black() : Float
     return this[3];
-
-  @:to public function toXyz()
-    return toRgbx().toXyz();
-
-  @:to public function toYxy()
-    return toRgbx().toYxy();
 }

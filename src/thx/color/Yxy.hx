@@ -104,6 +104,8 @@ abstract Yxy(Array<Float>) {
   @:to public function toRgbxa()
     return toXyz().toRgbxa();
 
+  @:to public function toYuv()
+    return toRgbx().toYuv();
   @:to public function toXyz()
     return new Xyz([
       x * (y1 / y2),
