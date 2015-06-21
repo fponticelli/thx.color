@@ -14,16 +14,16 @@ class TestYxy {
 
   public function testString() {
     var color = Yxy.create(0.5, 0.4, 0.3);
-    Assert.equals("Yxy(0.5,0.4,0.3)", color.toString());
+    Assert.equals("yxy(0.5,0.4,0.3)", color.toString());
   }
 
   public function testParse() {
-    var color : Yxy = "Yxy(0.5,0.4,0.3)";
-    Assert.equals("Yxy(0.5,0.4,0.3)", color.toString());
+    var color : Yxy = "yxy(0.5,0.4,0.3)";
+    Assert.equals("yxy(0.5,0.4,0.3)", color.toString());
   }
 
   public function testFromFloat() {
-    var s : Yxy = "Yxy(0.5,0.4,0.3)",
+    var s : Yxy = "yxy(0.5,0.4,0.3)",
         f : Yxy = [0.5,0.4,0.3];
     Assert.isTrue(s == f);
   }

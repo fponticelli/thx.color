@@ -6,11 +6,8 @@ import thx.color.parse.ColorParser;
 using thx.error.NullArgument;
 
 /**
-Conventional limits are:
-  L: 0/100
-  A: -128/128
-  B: -128/128
-*/
+
+**/
 @:access(thx.color.CieLCh)
 @:access(thx.color.Hcl)
 @:access(thx.color.Xyz)

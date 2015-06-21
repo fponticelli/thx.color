@@ -65,34 +65,34 @@ class Demo {
       MiniCanvas.create(200, 200)
         .checkboard()
         .box(function(x : Float, y : Float) : Rgbxa
-          return Hcl.create(x * 360, y * 100, 60))
+          return Hcl.create(x * 360, y * 16, 3))
         .display("rainbowHcl");
 
     MiniCanvas.create(200, 200)
       .checkboard()
       .box(function(x : Float, y : Float) : Rgbxa
-        return CieLCh.create(75, y * 65, x * 360))
+        return CieLCh.create(4, y * 16.22, x * 360))
       .display("rainbowCielch");
 
     MiniCanvas.create(200, 200)
       .checkboard()
       .box(function(x : Float, y : Float) : Rgbxa
-        return CieLab.create(75, x * 256 - 128, y * 256 - 128))
+        return CieLab.create(6, x * 26.4 - 13.2, y * 25.84 - 12.92))
       .display("rainbowCielab");
 
     MiniCanvas.create(200, 200)
       .checkboard()
       .box(
         function(x : Float, y : Float) : Rgbxa
-          return Xyz.create(x * 8 + 4, y * 8 + 4, 10))
+          return Xyz.create(0.4, x, 1.09 * y))
       .display("xyzChromaticityDiagram");
 
     MiniCanvas.create(200, 200)
       .checkboard()
       .box(
         function(x : Float, y : Float) : Rgbxa
-          return Yxy.create(15, y * 0.5, x * 0.5))
-      .display("yxyzChromaticityDiagram");
+          return Yxy.create(0.2, 0.15 + 0.85 * x, 0.06 + 0.94 * y))
+      .display("yxyChromaticityDiagram");
 
     MiniCanvas.create(400, 20).gradientHorizontal(
       function(t) : Rgbxa

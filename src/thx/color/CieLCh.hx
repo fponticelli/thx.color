@@ -63,7 +63,7 @@ abstract CieLCh(Array<Float>) {
     return create(lightness.max(other.lightness), chroma.max(other.chroma), hue.max(other.hue));
 
   public function normalize()
-    return create(lightness.clamp(0, 100), chroma.clamp(0, 100), hue.wrapCircular(360));
+    return create(lightness.clamp(0, 1), chroma.clamp(0, 1), hue.wrapCircular(360));
 
   public function rotate(angle : Float)
     return withHue(hue + angle).normalize();
