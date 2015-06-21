@@ -158,8 +158,9 @@ abstract Rgbx(Array<Float>) {
         bl = bluef - l,
         k = (E * (greenf - l) - C * bl) / D,
         lgamma = Math.pow(l, gamma),
-        s = Math.sqrt(k * k + bl * bl) / (E * lgamma * (1 - lgamma)), // NaN if lgamma=0 or lgamma=1
-        h = s != 0 ? Math.atan2(k, bl) / Math.PI * 180 - 120 : Math.NaN;
+        // try/catch is for PHP
+        s = try Math.sqrt(k * k + bl * bl) / (E * lgamma * (1 - lgamma)) catch(e : Dynamic) 0.0, // NaN if lgamma=0 or lgamma=1
+        h = try s != 0 ? Math.atan2(k, bl) / Math.PI * 180 - 120 : Math.NaN catch(e : Dynamic) 0.0;
     if(Math.isNaN(s)) s = 0;
     if(Math.isNaN(h)) h = 0;
     if (h < 0) h += 360;
