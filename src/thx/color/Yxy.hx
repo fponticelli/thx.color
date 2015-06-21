@@ -63,7 +63,10 @@ abstract Yxy(Array<Float>) {
     return 'Yxy(${y1},${x},${y2})';
 
   @:op(A==B) public function equals(other : Yxy) : Bool
-    return y1.nearEquals(other.y1) && x.nearEquals(other.x) && y2.nearEquals(other.y2);
+    return nearEquals(other);
+
+  public function nearEquals(other : Yxy, ?tolerance = Floats.EPSILON) : Bool
+    return y1.nearEquals(other.y1, tolerance) && x.nearEquals(other.x, tolerance) && y2.nearEquals(other.y2, tolerance);
 
   @:to public function toCieLab()
     return toXyz().toCieLab();

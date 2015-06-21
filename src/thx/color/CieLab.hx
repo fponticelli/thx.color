@@ -93,7 +93,10 @@ abstract CieLab(Array<Float>) {
     return create(l.roundTo(decimals), a.roundTo(decimals), b.roundTo(decimals));
 
   @:op(A==B) public function equals(other : CieLab) : Bool
-    return l.nearEquals(other.l) && a.nearEquals(other.a) && b.nearEquals(other.b);
+    return nearEquals(other);
+
+  public function nearEquals(other : CieLab, ?tolerance = Floats.EPSILON) : Bool
+    return l.nearEquals(other.l, tolerance) && a.nearEquals(other.a, tolerance) && b.nearEquals(other.b, tolerance);
 
   public function withLightness(lightness : Float)
     return new CieLab([lightness, a, b]);

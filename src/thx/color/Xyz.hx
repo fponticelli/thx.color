@@ -65,7 +65,10 @@ abstract Xyz(Array<Float>) {
     return 'Xyz(${x},${y},${z})';
 
   @:op(A==B) public function equals(other : Xyz) : Bool
-    return x.nearEquals(other.x) && y.nearEquals(other.y) && z.nearEquals(other.z);
+    return nearEquals(other);
+
+  public function nearEquals(other : Xyz, ?tolerance = Floats.EPSILON) : Bool
+    return x.nearEquals(other.x, tolerance) && y.nearEquals(other.y, tolerance) && z.nearEquals(other.z, tolerance);
 
   @:to public function toCieLab() : CieLab {
     var x = x * 0.0105211106,

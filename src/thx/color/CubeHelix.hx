@@ -144,7 +144,11 @@ abstract CubeHelix(Array<Float>) {
   }
 
   @:op(A==B) public function equals(other : CubeHelix) : Bool
-    return hue.nearEqualAngles(other.hue) && saturation.nearEquals(other.saturation) && lightness.nearEquals(other.lightness) && gamma.nearEquals(other.gamma);
+    return nearEquals(other);
+
+  public function nearEquals(other : CubeHelix, ?tolerance = Floats.EPSILON) : Bool {
+    return hue.nearEqualAngles(other.hue, null, tolerance) && saturation.nearEquals(other.saturation, tolerance) && lightness.nearEquals(other.lightness, tolerance) && gamma.nearEquals(other.gamma, tolerance);
+  }
 
   @:to public function toCieLab()
     return toRgbx().toCieLab();

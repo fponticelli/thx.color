@@ -122,7 +122,10 @@ abstract Hsla(Array<Float>) {
     return 'hsla(${hue},${(saturation*100)}%,${(lightness*100)}%,${alpha})';
 
   @:op(A==B) public function equals(other : Hsla) : Bool
-    return hue.nearEqualAngles(other.hue) && saturation.nearEquals(other.saturation) && lightness.nearEquals(other.lightness) && alpha.nearEquals(other.alpha);
+    return nearEquals(other);
+
+  public function nearEquals(other : Hsla, ?tolerance = Floats.EPSILON) : Bool
+    return hue.nearEqualAngles(other.hue, null, tolerance) && saturation.nearEquals(other.saturation, tolerance) && lightness.nearEquals(other.lightness, tolerance) && alpha.nearEquals(other.alpha, tolerance);
 
   @:to public function toHsl()
     return new Hsl(this.slice(0, 3));

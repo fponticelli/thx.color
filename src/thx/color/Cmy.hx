@@ -66,7 +66,10 @@ abstract Cmy(Array<Float>) {
     return 'cmy(${cyan},${magenta},${yellow})';
 
   @:op(A==B) public function equals(other : Cmy) : Bool
-    return cyan.nearEquals(other.cyan) && magenta.nearEquals(other.magenta) && yellow.nearEquals(other.yellow);
+    return nearEquals(other);
+
+  public function nearEquals(other : Cmy, ?tolerance = Floats.EPSILON) : Bool
+    return cyan.nearEquals(other.cyan, tolerance) && magenta.nearEquals(other.magenta, tolerance) && yellow.nearEquals(other.yellow, tolerance);
 
   @:to public function toCieLab()
     return toRgbx().toCieLab();

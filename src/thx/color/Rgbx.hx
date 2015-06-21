@@ -105,8 +105,11 @@ abstract Rgbx(Array<Float>) {
   public function toHex(prefix = "#") : String
     return '$prefix${red.hex(2)}${green.hex(2)}${blue.hex(2)}';
 
-  @:op(A==B) public function equals(other : Rgbx)
-    return redf.nearEquals(other.redf) && greenf.nearEquals(other.greenf) && bluef.nearEquals(other.bluef);
+  @:op(A==B) public function equals(other : Rgbx) : Bool
+    return nearEquals(other);
+
+  public function nearEquals(other : Rgbx, ?tolerance = Floats.EPSILON)
+    return redf.nearEquals(other.redf, tolerance) && greenf.nearEquals(other.greenf, tolerance) && bluef.nearEquals(other.bluef, tolerance);
 
   public function withAlpha(alpha : Float)
     return new Rgbxa(this.concat([alpha]));

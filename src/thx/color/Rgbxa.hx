@@ -119,7 +119,10 @@ abstract Rgbxa(Array<Float>) {
     return '$prefix${alpha.hex(2)}${red.hex(2)}${green.hex(2)}${blue.hex(2)}';
 
   @:op(A==B) public function equals(other : Rgbxa) : Bool
-    return redf.nearEquals(other.redf) && greenf.nearEquals(other.greenf) && bluef.nearEquals(other.bluef) && alphaf.nearEquals(other.alphaf);
+    return nearEquals(other);
+
+  public function nearEquals(other : Rgbxa, ?tolerance = Floats.EPSILON) : Bool
+    return redf.nearEquals(other.redf, tolerance) && greenf.nearEquals(other.greenf, tolerance) && bluef.nearEquals(other.bluef, tolerance) && alphaf.nearEquals(other.alphaf, tolerance);
 
   @:to public function toHsla()
     return toRgbx().toHsl().withAlpha(alpha);

@@ -107,7 +107,10 @@ abstract Hsv(Array<Float>) {
     return 'hsv(${hue},${(saturation*100)}%,${(value*100)}%)';
 
   @:op(A==B) public function equals(other : Hsv) : Bool
-    return hue.nearEqualAngles(other.hue) && saturation.nearEquals(other.saturation) && value.nearEquals(other.value);
+    return nearEquals(other);
+
+  public function nearEquals(other : Hsv, ?tolerance = Floats.EPSILON) : Bool
+    return hue.nearEqualAngles(other.hue, null, tolerance) && saturation.nearEquals(other.saturation, tolerance) && value.nearEquals(other.value, tolerance);
 
   @:to public function toCieLab()
     return toRgbx().toCieLab();

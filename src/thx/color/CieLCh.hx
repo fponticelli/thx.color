@@ -105,7 +105,10 @@ abstract CieLCh(Array<Float>) {
     return new CieLCh([lightness, chroma, newhue]);
 
   @:op(A==B) public function equals(other : CieLCh) : Bool
-    return lightness.nearEqualAngles(other.lightness) && chroma.nearEquals(other.chroma) && hue.nearEquals(other.hue);
+    return nearEquals(other);
+
+  public function nearEquals(other : CieLCh, ?tolerance = Floats.EPSILON) : Bool
+    return lightness.nearEqualAngles(other.lightness, null, tolerance) && chroma.nearEquals(other.chroma, tolerance) && hue.nearEquals(other.hue, tolerance);
 
   @:to public function toString() : String
     return 'cielch(${lightness},${chroma},${hue})';

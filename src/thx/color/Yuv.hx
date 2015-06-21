@@ -65,7 +65,10 @@ abstract Yuv(Array<Float>) {
     return 'yuv(${y},${u},${v})';
 
   @:op(A==B) public function equals(other : Yuv) : Bool
-    return y.nearEquals(other.y) && u.nearEquals(other.u) && v.nearEquals(other.v);
+    return nearEquals(other);
+
+  public function nearEquals(other : Yuv, ?tolerance = Floats.EPSILON) : Bool
+    return y.nearEquals(other.y, tolerance) && u.nearEquals(other.u, tolerance) && v.nearEquals(other.v, tolerance);
 
   @:to public function toCieLab()
     return toRgbx().toCieLab();
