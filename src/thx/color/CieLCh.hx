@@ -120,6 +120,9 @@ abstract CieLCh(Array<Float>) {
     return new CieLab([lightness, a, b]);
   }
 
+  @:to public function toCieLuv()
+    return toRgbx().toCieLuv();
+
   @:to public function toCmy()
     return toRgbx().toCmy();
 

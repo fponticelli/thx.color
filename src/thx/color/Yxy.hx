@@ -74,6 +74,9 @@ abstract Yxy(Array<Float>) {
   @:to public function toCieLCh()
     return toXyz().toCieLCh();
 
+  @:to public function toCieLuv()
+    return toRgbx().toCieLuv();
+
   @:to public function toCmy()
     return toXyz().toCmy();
 

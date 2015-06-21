@@ -119,6 +119,9 @@ abstract Hcl(Array<Float>) {
   @:to public function toCieLCh()
     return toCieLab().toCieLCh();
 
+  @:to public function toCieLuv()
+    return toRgbx().toCieLuv();
+
   @:to public function toCmy()
     return toCieLab().toCmy();
 

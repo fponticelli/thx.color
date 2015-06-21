@@ -77,6 +77,9 @@ abstract Cmy(Array<Float>) {
   @:to public function toCieLCh()
     return toRgbx().toCieLCh();
 
+  @:to public function toCieLuv()
+    return toRgbx().toCieLuv();
+
   @:to public function toCmyk() {
     var k = cyan.min(magenta).min(yellow);
     if(k == 1)

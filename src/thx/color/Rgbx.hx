@@ -130,6 +130,9 @@ abstract Rgbx(Array<Float>) {
   @:to public function toCieLCh()
     return toCieLab().toCieLCh();
 
+  @:to public function toCieLuv()
+    return toXyz().toCieLuv();
+
   @:to public function toCmy() : Cmy
     return new Cmy([
       1 - redf,
