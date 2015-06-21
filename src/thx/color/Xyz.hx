@@ -13,6 +13,9 @@ abstract Xyz(Array<Float>) {
   public var y(get, never) : Float;
   public var z(get, never) : Float;
 
+  public var u(get, never) : Float;
+  public var v(get, never) : Float;
+
   inline public static function create(x : Float, y : Float, z : Float)
     return new Xyz([x, y, z]);
 
@@ -161,4 +164,8 @@ abstract Xyz(Array<Float>) {
     return this[1];
   inline function get_z() : Float
     return this[2];
+  function get_u() : Float
+    return (4 * x) / (x + (15 * y) + (3 * z));
+  function get_v() : Float
+    return (9 * y) / (x + (15 * y) + (3 * z));
 }
