@@ -9,6 +9,7 @@ import thx.color.parse.ColorParser;
 @:access(thx.color.HunterLab)
 @:access(thx.color.Yxy)
 abstract Xyz(Array<Float>) {
+  public static var whiteReference(default, null) = new Xyz([0.95047, 1, 1.08883]);
   public var x(get, never) : Float;
   public var y(get, never) : Float;
   public var z(get, never) : Float;
