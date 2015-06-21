@@ -25,6 +25,15 @@ class TestConversion {
     });
   }
 
+  public function testCieLuv() {
+    Color.names.keys().map(function(name) {
+      var expected : Rgb = Color.names.get(name),
+          color : CieLuv = expected,
+          test : Rgb = color;
+      Assert.equals(expected.toString(), test.toString(), 'expected $expected but was $test for $name');
+    });
+  }
+
   public function testCmy() {
     Color.names.keys().map(function(name) {
       var expected : Rgb = Color.names.get(name),

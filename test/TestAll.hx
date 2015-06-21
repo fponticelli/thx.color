@@ -5,6 +5,7 @@ class TestAll {
   public static function addTests(runner : Runner) {
     runner.addCase(new thx.color.TestCieLab());
     runner.addCase(new thx.color.TestCieLCh());
+    runner.addCase(new thx.color.TestCieLuv());
     runner.addCase(new thx.color.TestColor());
     runner.addCase(new thx.color.TestColorParser());
     runner.addCase(new thx.color.TestConversion());
