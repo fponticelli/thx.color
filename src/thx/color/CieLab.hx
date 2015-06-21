@@ -52,20 +52,6 @@ abstract CieLab(Array<Float>) {
       t.interpolate(b, other.b)
     ]);
 
-  public function darker(t : Float)
-    return new CieLab([
-      t.interpolate(l, 0),
-      a,
-      b
-    ]);
-
-  public function lighter(t : Float)
-    return new CieLab([
-      t.interpolate(l, 100),
-      a,
-      b
-    ]);
-
   public function match(palette : Iterable<CieLab>) {
     palette.throwIfEmpty();
     var dist = Math.POSITIVE_INFINITY,
