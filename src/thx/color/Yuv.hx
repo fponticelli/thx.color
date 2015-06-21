@@ -106,8 +106,12 @@ abstract Yuv(Array<Float>) {
   @:to public function toRgba()
     return toRgbxa().toRgba();
 
-  @:to public function toRgbx() : Rgbx {
-    return null;
+  @:to public function toRgbx() {
+    var r = y + 1.139837398373983740  * v,
+        g = y - 0.3946517043589703515 * u - 0.5805986066674976801 * v,
+        b = y + 2.032110091743119266  * u;
+
+    return new Rgbx([r, g, b]);
   }
 
   @:to public function toRgbxa()
