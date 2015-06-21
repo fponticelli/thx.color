@@ -7,10 +7,19 @@ using thx.Iterators;
 class TestConversion {
   public function new() {}
 
-  public function testRgbx() {
+  public function testCieLab() {
     Color.names.keys().map(function(name) {
       var expected : Rgb = Color.names.get(name),
-          color : Rgbx = expected,
+          color : CieLab = expected,
+          test : Rgb = color;
+      Assert.equals(expected.toString(), test.toString(), 'expected $expected but was $test for $name');
+    });
+  }
+
+  public function testCieLCh() {
+    Color.names.keys().map(function(name) {
+      var expected : Rgb = Color.names.get(name),
+          color : CieLCh = expected,
           test : Rgb = color;
       Assert.equals(expected.toString(), test.toString(), 'expected $expected but was $test for $name');
     });
@@ -34,6 +43,24 @@ class TestConversion {
     });
   }
 
+  public function testCubehelix() {
+    Color.names.keys().map(function(name) {
+      var expected : Rgb = Color.names.get(name),
+          color : CubeHelix = expected,
+          test : Rgb = color;
+      Assert.equals(expected.toString(), test.toString(), 'expected $expected but was $test for $name');
+    });
+  }
+
+  public function testHcl() {
+    Color.names.keys().map(function(name) {
+      var expected : Rgb = Color.names.get(name),
+          color : Hcl = expected,
+          test : Rgb = color;
+      Assert.equals(expected.toString(), test.toString(), 'expected $expected but was $test for $name');
+    });
+  }
+
   public function testHsl() {
     Color.names.keys().map(function(name) {
       var expected : Rgb = Color.names.get(name),
@@ -52,6 +79,15 @@ class TestConversion {
     });
   }
 
+  public function testRgbx() {
+    Color.names.keys().map(function(name) {
+      var expected : Rgb = Color.names.get(name),
+          color : Rgbx = expected,
+          test : Rgb = color;
+      Assert.equals(expected.toString(), test.toString(), 'expected $expected but was $test for $name');
+    });
+  }
+
   public function testXyz() {
     Color.names.keys().map(function(name) {
       var expected : Rgb = Color.names.get(name),
@@ -61,25 +97,16 @@ class TestConversion {
     });
   }
 
-  public function testCieLab() {
+  public function testYuv() {
     Color.names.keys().map(function(name) {
       var expected : Rgb = Color.names.get(name),
-          color : CieLab = expected,
+          color : Yuv = expected,
           test : Rgb = color;
       Assert.equals(expected.toString(), test.toString(), 'expected $expected but was $test for $name');
     });
   }
 
-  public function testCieLCh() {
-    Color.names.keys().map(function(name) {
-      var expected : Rgb = Color.names.get(name),
-          color : CieLCh = expected,
-          test : Rgb = color;
-      Assert.equals(expected.toString(), test.toString(), 'expected $expected but was $test for $name');
-    });
-  }
-
-  public function testXyx() {
+  public function testYxy() {
     Color.names.keys().map(function(name) {
       var expected : Rgb = Color.names.get(name),
           color : Yxy = expected,

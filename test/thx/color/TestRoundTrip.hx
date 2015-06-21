@@ -287,66 +287,68 @@ class TestRoundTrip {
         Assert.isTrue(_.xyz == t, 'expected ${_.xyz} but was $t');
         var t : Yxy = _.yxy.toString();
         Assert.isTrue(_.yxy == t, 'expected ${_.yxy} but was $t');
+        var t : Yuv = _.yuv.toString();
+        Assert.isTrue(_.yuv == t, 'expected ${_.yuv} but was $t');
       });
   }
 
   static function assertRgbx(e : Rgbx, t : Rgbx, s : String, ?pos : haxe.PosInfos) {
-    Assert.isTrue(e.roundTo(3).normalize() == t.roundTo(3).normalize(),
+    Assert.isTrue(e.nearEquals(t, 0.01),
       '\n      $e expected, but was\n      $t for\n      $s', pos);
   }
 
   static function assertCieLab(e : CieLab, t : CieLab, s : String, ?pos : haxe.PosInfos) {
-    Assert.isTrue(e.roundTo(3).normalize() == t.roundTo(3).normalize(),
+    Assert.isTrue(e.nearEquals(t, 0.01),
       '\n      $e expected, but was\n      $t for\n      $s', pos);
   }
 
   static function assertCieLCh(e : CieLCh, t : CieLCh, s : String, ?pos : haxe.PosInfos) {
-    Assert.isTrue(e.roundTo(3).normalize() == t.roundTo(3).normalize(),
+    Assert.isTrue(e.nearEquals(t, 0.01),
       '\n      $e expected, but was\n      $t for\n      $s', pos);
   }
 
   static function assertCmy(e : Cmy, t : Cmy, s : String, ?pos : haxe.PosInfos) {
-    Assert.isTrue(e.roundTo(3).normalize() == t.roundTo(3).normalize(),
+    Assert.isTrue(e.nearEquals(t, 0.01),
       '\n      $e expected, but was\n      $t for\n      $s', pos);
   }
 
   static function assertCmyk(e : Cmyk, t : Cmyk, s : String, ?pos : haxe.PosInfos) {
-    Assert.isTrue(e.roundTo(3).normalize() == t.roundTo(3).normalize(),
+    Assert.isTrue(e.nearEquals(t, 0.01),
       '\n      $e expected, but was\n      $t for\n      $s', pos);
   }
 
   static function assertCubeHelix(e : CubeHelix, t : CubeHelix, s : String, ?pos : haxe.PosInfos) {
-    Assert.isTrue(e.roundTo(1).normalize() == t.roundTo(1).normalize(),
+    Assert.isTrue(e.nearEquals(t, 0.1),
       '\n      $e expected, but was\n      $t for\n      $s', pos);
   }
 
   static function assertHcl(e : Hcl, t : Hcl, s : String, ?pos : haxe.PosInfos) {
-    Assert.isTrue(e.roundTo(3).normalize() == t.roundTo(3).normalize(),
+    Assert.isTrue(e.nearEquals(t, 0.01),
       '\n      $e expected, but was\n      $t for\n      $s', pos);
   }
 
   static function assertHsl(e : Hsl, t : Hsl, s : String, ?pos : haxe.PosInfos) {
-    Assert.isTrue(e.roundTo(1).normalize() == t.roundTo(1).normalize(),
+    Assert.isTrue(e.nearEquals(t, 0.1),
       '\n      $e expected, but was\n      $t for\n      $s', pos);
   }
 
   static function assertHsv(e : Hsv, t : Hsv, s : String, ?pos : haxe.PosInfos) {
-    Assert.isTrue(e.roundTo(1).normalize() == t.roundTo(1).normalize(),
+    Assert.isTrue(e.nearEquals(t, 0.1),
       '\n      $e expected, but was\n      $t for\n      $s', pos);
   }
 
   static function assertXyz(e : Xyz, t : Xyz, s : String, ?pos : haxe.PosInfos) {
-    Assert.isTrue(e.roundTo(3).normalize() == t.roundTo(3).normalize(),
+    Assert.isTrue(e.nearEquals(t, 0.01),
       '\n      $e expected, but was\n      $t for\n      $s', pos);
   }
 
   static function assertYuv(e : Yuv, t : Yuv, s : String, ?pos : haxe.PosInfos) {
-    Assert.isTrue(e.roundTo(3).normalize() == t.roundTo(3).normalize(),
+    Assert.isTrue(e.nearEquals(t, 0.01),
       '\n      $e expected, but was\n      $t for\n      $s', pos);
   }
 
   static function assertYxy(e : Yxy, t : Yxy, s : String, ?pos : haxe.PosInfos) {
-    Assert.isTrue(e.roundTo(3).normalize() == t.roundTo(3).normalize(),
+    Assert.isTrue(e.nearEquals(t, 0.01),
       '\n      $e expected, but was\n      $t for\n      $s', pos);
   }
 }
