@@ -89,8 +89,8 @@ abstract Rgbxa(Array<Float>) {
   public function normalize()
     return new Rgbx([
       redf.normalize(),
-      bluef.normalize(),
       greenf.normalize(),
+      bluef.normalize(),
       alphaf.normalize()
     ]);
 

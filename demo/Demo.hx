@@ -23,6 +23,10 @@ class Demo {
       .display('interpolateCmyk');
 
     MiniCanvas.create(400, 20).gradientHorizontal(
+      function(t : Float) : Rgbxa return ((left : CubeHelix).interpolate(right, t) : Rgbxa).normalize())
+      .display('interpolateCubeHelix');
+
+    MiniCanvas.create(400, 20).gradientHorizontal(
       function(t : Float) : Rgbxa return (left : Grey).interpolate(right, t))
       .display('interpolateGrey');
 
@@ -38,9 +42,8 @@ class Demo {
       function(t : Float) : Rgbxa return (left : CieLab).interpolate(right, t))
       .display('interpolateCielab');
 
-    MiniCanvas.create(400, 20)
-      .checkboard()
-      .gradientHorizontal(function(t : Float) : Rgbxa return (left : CieLCh).interpolate(right, t))
+    MiniCanvas.create(400, 20).gradientHorizontal(
+      function(t : Float) : Rgbxa return ((left : CieLCh).interpolate(right, t) : Rgbxa).normalize())
       .display('interpolateCielch');
 
     MiniCanvas.create(400, 20).gradientHorizontal(
@@ -84,14 +87,14 @@ class Demo {
       .checkboard()
       .box(
         function(x : Float, y : Float) : Rgbxa
-          return Xyz.create(0.4, x, 1.09 * y))
+          return Xyz.create(0.5, x, 1.09 * y))
       .display("xyzChromaticityDiagram");
 
     MiniCanvas.create(200, 200)
       .checkboard()
       .box(
         function(x : Float, y : Float) : Rgbxa
-          return Yxy.create(0.2, 0.15 + 0.85 * x, 0.06 + 0.94 * y))
+          return Yxy.create(0.075, 0.15 + 0.85 * x, 0.06 + 0.94 * y))
       .display("yxyChromaticityDiagram");
 
     MiniCanvas.create(400, 20).gradientHorizontal(
