@@ -6,10 +6,14 @@ import thx.color.parse.ColorParser;
 
 @:access(thx.color.Rgbx)
 @:access(thx.color.CieLab)
+@:access(thx.color.CieLuv)
 @:access(thx.color.HunterLab)
 @:access(thx.color.Yxy)
 abstract Xyz(Array<Float>) {
   public static var whiteReference(default, null) = new Xyz([0.95047, 1, 1.08883]);
+  public static var epsilon(default, null) = 216.0/24389.0; // 0.008856
+  public static var kappa(default, null) = 24389.0/27.0; // 903.3
+
   public var x(get, never) : Float;
   public var y(get, never) : Float;
   public var z(get, never) : Float;
@@ -95,6 +99,20 @@ abstract Xyz(Array<Float>) {
   @:to public function toCieLCh()
     return toCieLab().toCieLCh();
 
+  @:to public function toCieLuv() {
+    var x = x * 100,
+        y = y * 100,
+        z = z * 100,
+        f = y / (whiteReference.y * 100),
+        r = Math.pow(6/29, 3),
+        l = f > r ?
+              116 * Math.pow(f, 1.0/3.0) - 16 :
+              Math.pow(29/3, 3) * f,
+        u = 13 * l * (u - whiteReference.u * 100),
+        v = 13 * l * (v - whiteReference.v * 100);
+    return new CieLuv([l / 100, u / 100, v / 100]);
+  }
+
   @:to public function toCmy()
     return toRgbx().toCmy();
 
@@ -166,7 +184,7 @@ abstract Xyz(Array<Float>) {
   inline function get_z() : Float
     return this[2];
   function get_u() : Float
-    return (4 * x) / (x + (15 * y) + (3 * z));
+    return (4 * x) / (x + 15 * y + 3 * z);
   function get_v() : Float
-    return (9 * y) / (x + (15 * y) + (3 * z));
+    return (9 * y) / (x + 15 * y + 3 * z);
 }
