@@ -29,11 +29,30 @@ class TestRoundTrip {
         hcl:  (_ : Hcl),
         hsl:  (_ : Hsl),
         hsv:  (_ : Hsv),
+        hl:   (_ : HunterLab),
         xyz:  (_ : Xyz),
         yuv:  (_ : Yuv),
         yxy:  (_ : Yxy)
       });
   }
+
+  var tests : Array<{
+    rgbx : Rgbx,
+    rgb  : Rgb,
+    lab  : CieLab,
+    lch  : CieLCh,
+    cmy  : Cmy,
+    cmyk : Cmyk,
+    ch   : CubeHelix,
+    g    : Grey,
+    hcl  : Hcl,
+    hsl  : Hsl,
+    hsv  : Hsv,
+    hl   : HunterLab,
+    xyz  : Xyz,
+    yuv  : Yuv,
+    yxy  : Yxy
+  }>;
 
   public function testRgbxRoundtrip() {
     tests
@@ -47,6 +66,7 @@ class TestRoundTrip {
         assertRgbx(_.rgbx, _.hcl, _.hcl);
         assertRgbx(_.rgbx, _.hsl, _.hsl);
         assertRgbx(_.rgbx, _.hsv, _.hsv);
+        assertRgbx(_.rgbx, _.hl, _.hl);
         assertRgbx(_.rgbx, _.xyz, _.xyz);
         assertRgbx(_.rgbx, _.yuv, _.yuv);
         assertRgbx(_.rgbx, _.yxy, _.yxy);
@@ -64,6 +84,7 @@ class TestRoundTrip {
         assertCieLab(_.lab, _.hcl, _.hcl);
         assertCieLab(_.lab, _.hsl, _.hsl);
         assertCieLab(_.lab, _.hsv, _.hsv);
+        assertCieLab(_.lab, _.hl, _.hl);
         assertCieLab(_.lab, _.xyz, _.xyz);
         assertCieLab(_.lab, _.yuv, _.yuv);
         assertCieLab(_.lab, _.yxy, _.yxy);
@@ -81,6 +102,7 @@ class TestRoundTrip {
         assertCieLCh(_.lch, _.hcl, _.hcl);
         assertCieLCh(_.lch, _.hsl, _.hsl);
         assertCieLCh(_.lch, _.hsv, _.hsv);
+        assertCieLCh(_.lch, _.hl, _.hl);
         assertCieLCh(_.lch, _.xyz, _.xyz);
         assertCieLCh(_.lch, _.yuv, _.yuv);
         assertCieLCh(_.lch, _.yxy, _.yxy);
@@ -98,6 +120,7 @@ class TestRoundTrip {
         assertCmy(_.cmy, _.hcl, _.hcl);
         assertCmy(_.cmy, _.hsl, _.hsl);
         assertCmy(_.cmy, _.hsv, _.hsv);
+        assertCmy(_.cmy, _.hl, _.hl);
         assertCmy(_.cmy, _.xyz, _.xyz);
         assertCmy(_.cmy, _.yuv, _.yuv);
         assertCmy(_.cmy, _.yxy, _.yxy);
@@ -115,6 +138,7 @@ class TestRoundTrip {
         assertCmyk(_.cmyk, _.hcl, _.hcl);
         assertCmyk(_.cmyk, _.hsl, _.hsl);
         assertCmyk(_.cmyk, _.hsv, _.hsv);
+        assertCmyk(_.cmyk, _.hl, _.hl);
         assertCmyk(_.cmyk, _.xyz, _.xyz);
         assertCmyk(_.cmyk, _.yuv, _.yuv);
         assertCmyk(_.cmyk, _.yxy, _.yxy);
@@ -132,6 +156,7 @@ class TestRoundTrip {
         assertCubeHelix(_.ch, _.hcl, _.hcl);
         assertCubeHelix(_.ch, _.hsl, _.hsl);
         assertCubeHelix(_.ch, _.hsv, _.hsv);
+        assertCubeHelix(_.ch, _.hl, _.hl);
         assertCubeHelix(_.ch, _.xyz, _.xyz);
         assertCubeHelix(_.ch, _.yuv, _.yuv);
         assertCubeHelix(_.ch, _.yxy, _.yxy);
@@ -149,6 +174,7 @@ class TestRoundTrip {
         assertHcl(_.hcl, _.rgbx, _.rgbx);
         assertHcl(_.hcl, _.hsl, _.hsl);
         assertHcl(_.hcl, _.hsv, _.hsv);
+        assertHcl(_.hcl, _.hl, _.hl);
         assertHcl(_.hcl, _.xyz, _.xyz);
         assertHcl(_.hcl, _.yuv, _.yuv);
         assertHcl(_.hcl, _.yxy, _.yxy);
@@ -166,6 +192,7 @@ class TestRoundTrip {
         assertHsl(_.hsl, _.hcl, _.hcl);
         assertHsl(_.hsl, _.rgbx, _.rgbx);
         assertHsl(_.hsl, _.hsv, _.hsv);
+        assertHsl(_.hsl, _.hl, _.hl);
         assertHsl(_.hsl, _.xyz, _.xyz);
         assertHsl(_.hsl, _.yuv, _.yuv);
         assertHsl(_.hsl, _.yxy, _.yxy);
@@ -182,6 +209,7 @@ class TestRoundTrip {
         assertHsv(_.hsv, _.ch, _.ch);
         assertHsv(_.hsv, _.hcl, _.hcl);
         assertHsv(_.hsv, _.hsl, _.hsl);
+        assertHsv(_.hsv, _.hl, _.hl);
         assertHsv(_.hsv, _.rgbx, _.rgbx);
         assertHsv(_.hsv, _.xyz, _.xyz);
         assertHsv(_.hsv, _.yuv, _.yuv);
@@ -200,6 +228,7 @@ class TestRoundTrip {
         assertXyz(_.xyz, _.hcl, _.hcl);
         assertXyz(_.xyz, _.hsl, _.hsl);
         assertXyz(_.xyz, _.hsv, _.hsv);
+        assertXyz(_.xyz, _.hl, _.hl);
         assertXyz(_.xyz, _.rgbx, _.rgbx);
         assertXyz(_.xyz, _.yuv, _.yuv);
         assertXyz(_.xyz, _.yxy, _.yxy);
@@ -217,6 +246,7 @@ class TestRoundTrip {
         assertYuv(_.xyz, _.hcl, _.hcl);
         assertYuv(_.xyz, _.hsl, _.hsl);
         assertYuv(_.xyz, _.hsv, _.hsv);
+        assertYuv(_.xyz, _.hl, _.hl);
         assertYuv(_.xyz, _.rgbx, _.rgbx);
         assertYuv(_.xyz, _.xyz, _.xyz);
         assertYuv(_.xyz, _.yxy, _.yxy);
@@ -234,6 +264,7 @@ class TestRoundTrip {
         assertYxy(_.yxy, _.hcl, _.hcl);
         assertYxy(_.yxy, _.hsl, _.hsl);
         assertYxy(_.yxy, _.hsv, _.hsv);
+        assertYxy(_.yxy, _.hl, _.hl);
         assertYxy(_.yxy, _.xyz, _.xyz);
         assertYxy(_.yxy, _.rgbx, _.rgbx);
         assertYxy(_.yxy, _.yuv, _.yuv);

@@ -233,6 +233,9 @@ abstract Rgbx(Array<Float>) {
     return new Hsv([h, s, v]);
   }
 
+  @:to public function toHunterLab()
+    return toXyz().toHunterLab();
+
   @:to public function toRgb()
     return Rgb.createf(redf, greenf, bluef);
 

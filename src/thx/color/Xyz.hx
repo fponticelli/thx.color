@@ -6,6 +6,7 @@ import thx.color.parse.ColorParser;
 
 @:access(thx.color.Rgbx)
 @:access(thx.color.CieLab)
+@:access(thx.color.HunterLab)
 @:access(thx.color.Yxy)
 abstract Xyz(Array<Float>) {
   public var x(get, never) : Float;
@@ -110,6 +111,13 @@ abstract Xyz(Array<Float>) {
 
   @:to public function toHsv()
     return toRgbx().toHsv();
+
+  @:to public function toHunterLab() {
+    var l = 10.0 * Math.sqrt(y),
+        a = y != 0 ? 17.5 * (((1.02 * x) - y) / Math.sqrt(y)) : 0,
+        b = y != 0 ? 7.0 * ((y - (.847 * z)) / Math.sqrt(y)) : 0;
+    return new HunterLab([l, a, b]);
+  }
 
   @:to public function toRgb()
     return toRgbx().toRgb();

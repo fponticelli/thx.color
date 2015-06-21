@@ -139,6 +139,9 @@ abstract Hsv(Array<Float>) {
   @:to public function toHsva()
     return withAlpha(1.0);
 
+  @:to public function toHunterLab()
+    return toXyz().toHunterLab();
+
   @:to public function toRgb()
     return toRgbx().toRgb();
 

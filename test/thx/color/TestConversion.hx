@@ -79,6 +79,15 @@ class TestConversion {
     });
   }
 
+  public function testHunterLab() {
+    Color.names.keys().map(function(name) {
+      var expected : Rgb = Color.names.get(name),
+          color : HunterLab = expected,
+          test : Rgb = color;
+      Assert.equals(expected.toString(), test.toString(), 'expected $expected but was $test for $name');
+    });
+  }
+
   public function testRgbx() {
     Color.names.keys().map(function(name) {
       var expected : Rgb = Color.names.get(name),

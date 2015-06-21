@@ -107,6 +107,9 @@ abstract Rgb(Int) from Int to Int {
   @:to public function toHsv()
     return toRgbx().toHsv();
 
+  @:to public function toHunterLab()
+    return toXyz().toHunterLab();
+
   @:to public function toRgbx()
     return Rgbx.fromInts([red, green, blue]);
 

@@ -171,6 +171,9 @@ abstract Hsl(Array<Float>) {
   @:to public function toHsla()
     return withAlpha(1.0);
 
+  @:to public function toHunterLab()
+    return toXyz().toHunterLab();
+
   @:to public function toXyz()
     return toRgbx().toXyz();
 

@@ -11,13 +11,13 @@ using thx.error.NullArgument;
 @:access(thx.color.CieLCh)
 @:access(thx.color.Hcl)
 @:access(thx.color.Xyz)
-abstract CieLab(Array<Float>) {
+abstract HunterLab(Array<Float>) {
   inline public static function create(l : Float, a : Float, b : Float)
-    return new CieLab([l, a, b]);
+    return new HunterLab([l, a, b]);
 
   @:from public static function fromFloats(arr : Array<Float>) {
     arr.resize(3);
-    return CieLab.create(arr[0], arr[1], arr[2]);
+    return HunterLab.create(arr[0], arr[1], arr[2]);
   }
 
   @:from public static function fromString(color : String) {
@@ -26,33 +26,33 @@ abstract CieLab(Array<Float>) {
       return null;
 
     return try switch info.name {
-      case 'cielab':
-        CieLab.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
+    case 'hunterlab':
+        HunterLab.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
       case _:
         null;
     } catch(e : Dynamic) null;
   }
 
-  inline function new(channels : Array<Float>) : CieLab
+  inline function new(channels : Array<Float>) : HunterLab
     this = channels;
 
   public var l(get, never) : Float;
   public var a(get, never) : Float;
   public var b(get, never) : Float;
 
-  public function distance(other : CieLab)
+  public function distance(other : HunterLab)
     return (l - other.l) * (l - other.l) +
            (a - other.a) * (a - other.a) +
            (b - other.b) * (b - other.b);
 
-  public function interpolate(other : CieLab, t : Float)
-    return new CieLab([
+  public function interpolate(other : HunterLab, t : Float)
+    return new HunterLab([
       t.interpolate(l, other.l),
       t.interpolate(a, other.a),
       t.interpolate(b, other.b)
     ]);
 
-  public function match(palette : Iterable<CieLab>) {
+  public function match(palette : Iterable<HunterLab>) {
     palette.throwIfEmpty();
     var dist = Math.POSITIVE_INFINITY,
         closest = null;
@@ -66,38 +66,38 @@ abstract CieLab(Array<Float>) {
     return closest;
   }
 
-  public function min(other : CieLab)
+  public function min(other : HunterLab)
     return create(l.min(other.l), a.min(other.a), b.min(other.b));
 
-  public function max(other : CieLab)
+  public function max(other : HunterLab)
     return create(l.max(other.l), a.max(other.a), b.max(other.b));
 
   public function roundTo(decimals : Int)
     return create(l.roundTo(decimals), a.roundTo(decimals), b.roundTo(decimals));
 
-  @:op(A==B) public function equals(other : CieLab) : Bool
+  @:op(A==B) public function equals(other : HunterLab) : Bool
     return nearEquals(other);
 
-  public function nearEquals(other : CieLab, ?tolerance = Floats.EPSILON) : Bool
+  public function nearEquals(other : HunterLab, ?tolerance = Floats.EPSILON) : Bool
     return l.nearEquals(other.l, tolerance) && a.nearEquals(other.a, tolerance) && b.nearEquals(other.b, tolerance);
 
   public function withLightness(lightness : Float)
-    return new CieLab([lightness, a, b]);
+    return new HunterLab([lightness, a, b]);
 
   public function withA(newa : Float)
-    return new CieLab([l, newa, b]);
+    return new HunterLab([l, newa, b]);
 
   public function withB(newb : Float)
-    return new CieLab([l, a, newb]);
+    return new HunterLab([l, a, newb]);
 
   @:to public function toString() : String
-    return 'cielab(${l},${a},${b})';
+    return 'hunterlab(${l},${a},${b})';
 
-  @:to public function toCieLCh() {
-    var h = Math.atan2(b, a) * 180 / Math.PI,
-        c = Math.sqrt(a * a + b * b);
-    return new CieLCh([l, c, h]);
-  }
+  @:to public function toCieLab()
+    return toXyz().toCieLab();
+
+  @:to public function toCieLCh()
+    return toXyz().toCieLCh();
 
   @:to public function toCmy()
     return toRgbx().toCmy();
@@ -111,21 +111,14 @@ abstract CieLab(Array<Float>) {
   @:to public function toGrey()
     return toRgbx().toGrey();
 
-  @:to public function toHcl() {
-    var chroma = Math.sqrt(a * a + b * b),
-        hue = Math.atan2(b, a) / Math.PI * 180;
-    if(hue < 0) hue += 360;
-    return new Hcl([hue, chroma, l]);
-  }
+  @:to public function toHcl()
+    return toRgbx().toHcl();
 
   @:to public function toHsl()
     return toRgbx().toHsl();
 
   @:to public function toHsv()
     return toRgbx().toHsv();
-
-  @:to public function toHunterLab()
-    return toXyz().toHunterLab();
 
   @:to public function toRgb()
     return toRgbx().toRgb();
@@ -140,21 +133,12 @@ abstract CieLab(Array<Float>) {
     return toRgbx().toRgbxa();
 
   @:to public function toXyz() {
-    var y = (l + 16) / 116,
-        x = a / 500 + y,
-        z = y - b / 200,
-        p;
+    var x = (a / 17.5) * (l / 10.0),
+        l10 = l / 10.0,
+        y = l10 * l10,
+        z = (b / 7.0) * (l / 10.0);
 
-    p = Math.pow(y, 3);
-    y = p > 0.008856 ? p : (y - 16 / 116) / 7.787;
-
-    p = Math.pow(x, 3);
-    x = p > 0.008856 ? p : (x - 16 / 116) / 7.787;
-
-    p = Math.pow(z, 3);
-    z = p > 0.008856 ? p : (z - 16 / 116) / 7.787;
-
-    return new Xyz([95.047 * x, 100 * y, 108.883 * z]);
+    return new Xyz([(x + y) / 1.02, y, -(z - y) / 0.847]);
   }
 
   @:to public function toYuv()
