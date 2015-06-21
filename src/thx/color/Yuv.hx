@@ -49,6 +49,9 @@ abstract Yuv(Array<Float>) {
   public function max(other : Yuv)
     return create(y.max(other.y), u.max(other.u), v.max(other.v));
 
+  public function normalize()
+    return create(y.normalize(), u.clampSym(0.436), v.clampSym(0.615));
+
   public function roundTo(decimals : Int)
     return create(y.roundTo(decimals), u.roundTo(decimals), v.roundTo(decimals));
 
