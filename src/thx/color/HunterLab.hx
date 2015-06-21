@@ -81,8 +81,8 @@ abstract HunterLab(Array<Float>) {
   public function nearEquals(other : HunterLab, ?tolerance = Floats.EPSILON) : Bool
     return l.nearEquals(other.l, tolerance) && a.nearEquals(other.a, tolerance) && b.nearEquals(other.b, tolerance);
 
-  public function withLightness(lightness : Float)
-    return new HunterLab([lightness, a, b]);
+  public function withL(newl : Float)
+    return new HunterLab([newl, a, b]);
 
   public function withA(newa : Float)
     return new HunterLab([l, newa, b]);

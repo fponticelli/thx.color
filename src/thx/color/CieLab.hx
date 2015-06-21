@@ -81,8 +81,8 @@ abstract CieLab(Array<Float>) {
   public function nearEquals(other : CieLab, ?tolerance = Floats.EPSILON) : Bool
     return l.nearEquals(other.l, tolerance) && a.nearEquals(other.a, tolerance) && b.nearEquals(other.b, tolerance);
 
-  public function withLightness(lightness : Float)
-    return new CieLab([lightness, a, b]);
+  public function withL(newl : Float)
+    return new CieLab([newl, a, b]);
 
   public function withA(newa : Float)
     return new CieLab([l, newa, b]);
