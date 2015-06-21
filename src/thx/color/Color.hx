@@ -163,10 +163,12 @@ class Color {
       return null;
 
     return try switch info.name {
-      case 'cielab':
+      case 'cielab', 'lab':
         CieLab.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
-      case 'cielch':
+      case 'cielch', 'lch':
         CieLCh.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
+      case 'cieluv', 'luv':
+        CieLuv.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
       case 'cmy':
         Cmy.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
       case 'cmyk':
@@ -181,16 +183,20 @@ class Color {
         Hsl.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
       case 'hsla':
         Hsla.fromFloats(ColorParser.getFloatChannels(info.channels, 4, false));
-      case 'hsv':
+      case 'hsv', 'hsb':
         Hsv.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
       case 'hsva':
         Hsva.fromFloats(ColorParser.getFloatChannels(info.channels, 4, false));
+      case 'hunterlab':
+        HunterLab.fromFloats(ColorParser.getFloatChannels(info.channels, 4, false));
       case 'rgb':
         Rgbx.fromFloats(ColorParser.getFloatChannels(info.channels, 3, true));
       case 'rgba':
         Rgbxa.fromFloats(ColorParser.getFloatChannels(info.channels, 4, true));
       case 'ciexyz', 'xyz':
         Xyz.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
+      case 'yuv':
+        Yuv.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
       case 'yxy':
         Yxy.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
       case _:
