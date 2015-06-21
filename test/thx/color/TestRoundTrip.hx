@@ -3,40 +3,20 @@ package thx.color;
 import utest.Assert;
 import thx.color.*;
 using thx.Arrays;
+using thx.Iterators;
 using thx.Functions;
 using thx.Floats;
 
 class TestRoundTrip {
-  public function new() { }
-
-  var tests : Array<{
-    rgbx : Rgbx,
-    rgb  : Rgb,
-    lab  : CieLab,
-    lch  : CieLCh,
-    cmy  : Cmy,
-    cmyk : Cmyk,
-    ch   : CubeHelix,
-    g    : Grey,
-    hcl  : Hcl,
-    hsl  : Hsl,
-    hsv  : Hsv,
-    xyz  : Xyz,
-    yuv  : Yuv,
-    yxy  : Yxy
-  }>;
-
-  public function setup() {
-    var colors : Array<Rgbx> = [
-      Rgbx.create(0.05, 0.10, 0.15), // pure black is not guaranteed to make a clean roundtrip
-      Rgbx.create(1, 0, 0),
-      Rgbx.create(0, 1, 0),
-      Rgbx.create(0.2, 0.2, 1),
-      Rgbx.create(0.9, 0.9, 1), // pure white is not guaranteed to make a clean roundtrip
-      Rgbx.create(0.2, 0.4, 0.52)
-    ];
-
-    tests = colors
+  public function new() {
+    tests = [
+        Rgbx.create(0.05, 0.10, 0.15), // pure black is not guaranteed to make a clean roundtrip
+        Rgbx.create(1, 0, 0),
+        Rgbx.create(0, 1, 0),
+        Rgbx.create(0.2, 0.2, 1),
+        Rgbx.create(0.9, 0.9, 1), // pure white is not guaranteed to make a clean roundtrip
+        Rgbx.create(0.2, 0.4, 0.52)
+      ]
       .map.fn({
         rgbx: (_ : Rgbx),
         rgb:  (_ : Rgb),
