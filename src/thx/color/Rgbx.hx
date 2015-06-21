@@ -206,11 +206,11 @@ abstract Rgbx(Array<Float>) {
 
   @:to public function toHsv() {
     var min = redf.min(greenf).min(bluef),
-      max = redf.max(greenf).max(bluef),
-      delta = max - min,
-      h : Float,
-      s : Float,
-      v : Float = max;
+        max = redf.max(greenf).max(bluef),
+        delta = max - min,
+        h : Float,
+        s : Float,
+        v : Float = max;
     if (delta != 0)
       s = delta / max;
     else {
