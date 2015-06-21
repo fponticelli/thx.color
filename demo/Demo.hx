@@ -154,6 +154,7 @@ class Demo {
           hsl:  (color : Hsl),
           hsv:  (color : Hsv),
           xyz:  (color : Xyz),
+          yuv:  (color : Yuv),
           yxy:  (color : Yxy)
         },
         max = {
@@ -169,6 +170,7 @@ class Demo {
           hsl:  (color : Hsl),
           hsv:  (color : Hsv),
           xyz:  (color : Xyz),
+          yuv:  (color : Yuv),
           yxy:  (color : Yxy)
         };
     colors.map(function(name) {
@@ -186,6 +188,7 @@ class Demo {
       min.hsl =  (color : Hsl).min(min.hsl);
       min.hsv =  (color : Hsv).min(min.hsv);
       min.xyz =  (color : Xyz).min(min.xyz);
+      min.yuv =  (color : Yuv).min(min.yuv);
       min.yxy =  (color : Yxy).min(min.yxy);
 
       max.rgbx = (color : Rgbx).max(max.rgbx);
@@ -200,6 +203,7 @@ class Demo {
       max.hsl =  (color : Hsl).max(max.hsl);
       max.hsv =  (color : Hsv).max(max.hsv);
       max.xyz =  (color : Xyz).max(max.xyz);
+      max.yuv =  (color : Yuv).max(max.yuv);
       max.yxy =  (color : Yxy).max(max.yxy);
     });
 
@@ -215,6 +219,7 @@ class Demo {
     trace('range: ${min.hsl.roundTo(2)} -> ${max.hsl.roundTo(2)}');
     trace('range: ${min.hsv.roundTo(2)} -> ${max.hsv.roundTo(2)}');
     trace('range: ${min.xyz.roundTo(2)} -> ${max.xyz.roundTo(2)}');
+    trace('range: ${min.yuv.roundTo(2)} -> ${max.yuv.roundTo(2)}');
     trace('range: ${min.yxy.roundTo(2)} -> ${max.yxy.roundTo(2)}');
   }
 }
