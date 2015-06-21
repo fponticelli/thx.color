@@ -14,6 +14,7 @@ import thx.color.CubeHelix.*;
 @:access(thx.color.Hsv)
 @:access(thx.color.Rgbxa)
 @:access(thx.color.Xyz)
+@:access(thx.color.Yuv)
 abstract Rgbx(Array<Float>) {
   inline public static function create(red : Float, green : Float, blue : Float)
     return new Rgbx([red, green, blue]);
@@ -253,8 +254,15 @@ abstract Rgbx(Array<Float>) {
     ]);
   }
 
-  @:to public function toYuv() : Yuv
-    return null;
+  @:to public function toYuv() {
+    var r = redf,
+        g = greenf,
+        b = bluef,
+        y =  0.299   * r + 0.587   * g + 0.114   * b,
+        u = -0.14713 * r - 0.28886 * g + 0.436   * b,
+        v =  0.615   * r - 0.51499 * g - 0.10001 * b;
+    return new Yuv([y, u, v]);
+  }
 
   @:to public function toYxy()
     return toXyz().toYxy();
