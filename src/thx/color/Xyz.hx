@@ -62,7 +62,7 @@ abstract Xyz(Array<Float>) {
     return new Xyz([x, y, newz]);
 
   @:to public function toString() : String
-    return 'Xyz(${x},${y},${z})';
+    return 'xyz(${x},${y},${z})';
 
   @:op(A==B) public function equals(other : Xyz) : Bool
     return nearEquals(other);

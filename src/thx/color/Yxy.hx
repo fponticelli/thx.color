@@ -60,7 +60,7 @@ abstract Yxy(Array<Float>) {
     return new Yxy([y1, x, y2]);
 
   @:to public function toString() : String
-    return 'Yxy(${y1},${x},${y2})';
+    return 'yxy(${y1},${x},${y2})';
 
   @:op(A==B) public function equals(other : Yxy) : Bool
     return nearEquals(other);
