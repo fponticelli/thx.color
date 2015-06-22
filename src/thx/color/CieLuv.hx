@@ -115,6 +115,9 @@ abstract CieLuv(Array<Float>) {
   @:to public function toRgbxa()
     return toRgbx().toRgbxa();
 
+  @:to public function toTemperature()
+    return toRgbx().toTemperature();
+
   @:to public function toYxy()
     return toRgbx().toYxy();
 

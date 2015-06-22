@@ -135,6 +135,9 @@ abstract HunterLab(Array<Float>) {
   @:to public function toRgbxa()
     return toRgbx().toRgbxa();
 
+  @:to public function toTemperature()
+    return toRgbx().toTemperature();
+
   @:to public function toXyz() {
     var x = (a / 17.5) * (l / 10.0),
         l10 = l / 10.0,

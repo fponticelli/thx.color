@@ -155,6 +155,9 @@ abstract Hcl(Array<Float>) {
   @:to public function toRgbxa()
     return toCieLab().toRgbxa();
 
+  @:to public function toTemperature()
+    return toRgbx().toTemperature();
+
   @:to public function toXyz()
     return toCieLab().toXyz();
 

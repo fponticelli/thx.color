@@ -165,6 +165,9 @@ abstract Xyz(Array<Float>) {
   @:to public function toRgbxa()
     return toRgbx().toRgbxa();
 
+  @:to public function toTemperature()
+    return toRgbx().toTemperature();
+
   @:to public function toYuv()
     return toRgbx().toYuv();
 

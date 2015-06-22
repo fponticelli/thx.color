@@ -122,6 +122,9 @@ abstract Rgb(Int) from Int to Int {
   @:to public function toRgbxa()
     return toRgba().toRgbxa();
 
+  @:to public function toTemperature()
+    return toRgbx().toTemperature();
+
   @:to public function toYuv()
     return toRgbx().toYuv();
 

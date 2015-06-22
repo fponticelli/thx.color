@@ -177,6 +177,9 @@ abstract Hsl(Array<Float>) {
   @:to public function toHunterLab()
     return toXyz().toHunterLab();
 
+  @:to public function toTemperature()
+    return toRgbx().toTemperature();
+
   @:to public function toXyz()
     return toRgbx().toXyz();
 
