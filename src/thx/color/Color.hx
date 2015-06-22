@@ -204,8 +204,7 @@ class Color {
     } catch(e : Dynamic) null;
   }
 
-  static function __init__()
-  {
+  static function __init__() {
     names = new Map();
     names.set("aliceblue", aliceblue = 0xf0f8ff);
     names.set("alice blue", aliceblue);
