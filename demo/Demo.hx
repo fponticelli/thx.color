@@ -60,6 +60,12 @@ class Demo {
 
     var t = Rgbxa.create(0, 0, 0, 0);
 
+    MiniCanvas.create(400, 20)
+      .checkboard()
+      .gradientHorizontal(function(t) : Rgbxa
+        return Temperature.create(1000 + t * 15000))
+      .display("temperature");
+
     MiniCanvas.create(200, 200).box(
       function(x : Float, y : Float) : Rgbxa
         return Hsl.create(x * 360, 1, y))
