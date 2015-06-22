@@ -81,10 +81,10 @@ abstract Rgb(Int) from Int to Int {
     return red == other.red && green == other.green && blue == other.blue;
 
   @:to public function toCieLab()
-    return toRgbx().toCieLab();
+    return toXyz().toCieLab();
 
   @:to public function toCieLCh()
-    return toRgbx().toCieLCh();
+    return toCieLab().toCieLCh();
 
   @:to public function toCieLuv()
     return toRgbx().toCieLuv();

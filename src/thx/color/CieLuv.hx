@@ -74,10 +74,10 @@ abstract CieLuv(Array<Float>) {
     return l.nearEquals(other.l, tolerance) && u.nearEquals(other.u, tolerance) && v.nearEquals(other.v, tolerance);
 
   @:to public function toCieLab()
-    return toRgbx().toCieLab();
+    return toXyz().toCieLab();
 
   @:to public function toCieLCh()
-    return toRgbx().toCieLCh();
+    return toCieLab().toCieLCh();
 
   @:to public function toCmy()
     return toRgbx().toCmy();
@@ -92,7 +92,7 @@ abstract CieLuv(Array<Float>) {
     return toRgbx().toGrey();
 
   @:to public function toHcl()
-    return toRgbx().toHcl();
+    return toCieLab().toHcl();
 
   @:to public function toHsl()
     return toRgbx().toHsl();

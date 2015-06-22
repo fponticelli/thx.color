@@ -129,10 +129,10 @@ abstract Hsl(Array<Float>) {
     return hue.nearEqualAngles(other.hue, null, tolerance) && saturation.nearEquals(other.saturation, tolerance) && lightness.nearEquals(other.lightness, tolerance);
 
   @:to public function toCieLab()
-    return toRgbx().toCieLab();
+    return toXyz().toCieLab();
 
   @:to public function toCieLCh()
-    return toRgbx().toCieLCh();
+    return toCieLab().toCieLCh();
 
   @:to public function toCieLuv()
     return toRgbx().toCieLuv();

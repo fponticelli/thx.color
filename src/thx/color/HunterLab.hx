@@ -97,7 +97,7 @@ abstract HunterLab(Array<Float>) {
     return toXyz().toCieLab();
 
   @:to public function toCieLCh()
-    return toXyz().toCieLCh();
+    return toCieLab().toCieLCh();
 
   @:to public function toCieLuv()
     return toRgbx().toCieLuv();
@@ -115,7 +115,7 @@ abstract HunterLab(Array<Float>) {
     return toRgbx().toGrey();
 
   @:to public function toHcl()
-    return toRgbx().toHcl();
+    return toCieLab().toHcl();
 
   @:to public function toHsl()
     return toRgbx().toHsl();

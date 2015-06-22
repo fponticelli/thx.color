@@ -72,7 +72,7 @@ abstract Yxy(Array<Float>) {
     return toXyz().toCieLab();
 
   @:to public function toCieLCh()
-    return toXyz().toCieLCh();
+    return toCieLab().toCieLCh();
 
   @:to public function toCieLuv()
     return toRgbx().toCieLuv();
@@ -90,7 +90,7 @@ abstract Yxy(Array<Float>) {
     return toXyz().toGrey();
 
   @:to public function toHcl()
-    return toXyz().toHcl();
+    return toCieLab().toHcl();
 
   @:to public function toHsl()
     return toRgbx().toHsl();

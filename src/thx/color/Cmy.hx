@@ -72,10 +72,10 @@ abstract Cmy(Array<Float>) {
     return cyan.nearEquals(other.cyan, tolerance) && magenta.nearEquals(other.magenta, tolerance) && yellow.nearEquals(other.yellow, tolerance);
 
   @:to public function toCieLab()
-    return toRgbx().toCieLab();
+    return toXyz().toCieLab();
 
   @:to public function toCieLCh()
-    return toRgbx().toCieLCh();
+    return toCieLab().toCieLCh();
 
   @:to public function toCieLuv()
     return toRgbx().toCieLuv();

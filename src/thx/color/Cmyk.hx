@@ -88,10 +88,10 @@ abstract Cmyk(Array<Float>) {
     return cyan.nearEquals(other.cyan, tolerance) && magenta.nearEquals(other.magenta, tolerance) && yellow.nearEquals(other.yellow, tolerance) && black.nearEquals(other.black, tolerance);
 
   @:to public function toCieLab()
-    return toRgbx().toCieLab();
+    return toXyz().toCieLab();
 
   @:to public function toCieLCh()
-    return toRgbx().toCieLCh();
+    return toCieLab().toCieLCh();
 
   @:to public function toCieLuv()
     return toRgbx().toCieLuv();
@@ -110,7 +110,7 @@ abstract Cmyk(Array<Float>) {
     return toRgbx().toGrey();
 
   @:to public function toHcl()
-    return toCieLab().toHcl();
+    return toXyz().toHcl();
 
   @:to public function toHsl()
     return toRgbx().toHsl();
