@@ -106,8 +106,8 @@ abstract Xyz(Array<Float>) {
         f = y / (whiteReference.y * 100),
         r = Math.pow(6/29, 3),
         l = f > r ?
-              116 * Math.pow(f, 1.0/3.0) - 16 :
-              Math.pow(29/3, 3) * f,
+              116 * Math.pow(f, 1.0 / 3.0) - 16 :
+              Math.pow(29 / 3, 3) * f,
         u = 13 * l * (u - whiteReference.u * 100),
         v = 13 * l * (v - whiteReference.v * 100);
     return new CieLuv([l / 100, u / 100, v / 100]);
@@ -187,7 +187,7 @@ abstract Xyz(Array<Float>) {
   inline function get_z() : Float
     return this[2];
   function get_u() : Float
-    return (4 * x) / (x + 15 * y + 3 * z);
+    return try (4 * x) / (x + 15 * y + 3 * z) catch(e : Dynamic) 0;
   function get_v() : Float
-    return (9 * y) / (x + 15 * y + 3 * z);
+    return try (9 * y) / (x + 15 * y + 3 * z) catch(e : Dynamic) 0;
 }
