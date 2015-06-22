@@ -18,6 +18,7 @@ class TestAll {
     runner.addCase(new thx.color.TestHsv());
     runner.addCase(new thx.color.TestRgb());
     runner.addCase(new thx.color.TestRgbx());
+    runner.addCase(new thx.color.TestTemperature());
     runner.addCase(new thx.color.TestXyz());
     runner.addCase(new thx.color.TestYxy());
 

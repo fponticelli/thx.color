@@ -245,6 +245,28 @@ abstract Rgbx(Array<Float>) {
   @:to public function toRgbxa()
     return withAlpha(1.0);
 
+  @:to public function toTemperature() {
+    var t : Float = 0,
+        rgb,
+        epsilon = 0.4,
+        minT : Float = 1000,
+        maxT : Float = 40000;
+    while (maxT - minT > epsilon) {
+      t = (maxT + minT) / 2;
+      rgb = Temperature.temperatureToRgbx(t);
+      if ((rgb.bluef / rgb.redf) >= (bluef / redf)) {
+        maxT = t;
+      } else {
+        minT = t;
+      }
+    }
+    return new Temperature(t);
+  }
+
+  static function temperatureToRgb(t : Float) {
+
+  }
+
   @:to public function toXyz() {
     var r = redf,
         g = greenf,
