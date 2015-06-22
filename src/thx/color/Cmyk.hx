@@ -110,7 +110,7 @@ abstract Cmyk(Array<Float>) {
     return toRgbx().toGrey();
 
   @:to public function toHcl()
-    return toXyz().toHcl();
+    return toCieLab().toHcl();
 
   @:to public function toHsl()
     return toRgbx().toHsl();

@@ -95,7 +95,7 @@ abstract Yuv(Array<Float>) {
     return toRgbx().toGrey();
 
   @:to public function toHcl()
-    return toRgbx().toHcl();
+    return toCieLab().toHcl();
 
   @:to public function toHsl()
     return toRgbx().toHsl();
