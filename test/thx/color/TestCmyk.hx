@@ -20,7 +20,7 @@ class TestCmyk {
   }
 
   public function testWhite() {
-    Assert.isTrue(Color.white.toCmyk().equals(Cmyk.create(0,0,0,0)));
+    Assert.isTrue(thx.color.palettes.Web.white.toCmyk().equals(Cmyk.create(0,0,0,0)));
   }
 
   public function testFromString() {

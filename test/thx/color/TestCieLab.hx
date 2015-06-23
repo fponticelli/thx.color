@@ -1,6 +1,7 @@
 package thx.color;
 
 import utest.Assert;
+import thx.color.palettes.Web;
 
 class TestCieLab {
   public function new() { }
@@ -29,16 +30,16 @@ class TestCieLab {
   }
 
   public function testDistance() {
-    var orange : CieLab = Color.orange,
-        red : CieLab = Color.red,
-        blue : CieLab = Color.blue,
+    var orange : CieLab = Web.orange,
+        red : CieLab = Web.red,
+        blue : CieLab = Web.blue,
         distOrangeRed = orange.distance(red),
         distOrangeBlue = orange.distance(blue);
     Assert.isTrue(distOrangeRed < distOrangeBlue);
   }
 
   public function testMatch() {
-    var arr : Array<CieLab> = [Color.red, Color.blue];
-    Assert.isTrue((Color.orange : CieLab).match(arr) == (Color.red : CieLab));
+    var arr : Array<CieLab> = [Web.red, Web.blue];
+    Assert.isTrue((Web.orange : CieLab).match(arr) == (Web.red : CieLab));
   }
 }

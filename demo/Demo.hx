@@ -1,12 +1,12 @@
 import MiniCanvas;
 
 import thx.color.*;
+import thx.color.palettes.*;
 using thx.Iterators;
 using thx.Iterables;
 using thx.Functions;
 using thx.Arrays;
 import thx.Ints;
-import thx.color.palettes.Ral;
 
 class Demo {
   static function interpolations() {
@@ -126,7 +126,7 @@ class Demo {
 
   public static function colorTable(ctx, w, h) {
     var columns = 5,
-        colors  = Color.names.keys().toArray().filter(function(n) return n.indexOf(' ') < 0),
+        colors  = Web.names.keys().toArray().filter(function(n) return n.indexOf(' ') < 0),
         cellw   = w / columns,
         cellh   = h / Math.ceil(colors.length / columns);
     ctx.textAlign = "center";
@@ -135,7 +135,7 @@ class Demo {
     colors.mapi(function(name, i) {
       var col   = i % columns,
           row   = Math.floor(i / columns),
-          color = Color.names.get(name);
+          color = Web.names.get(name);
       ctx.fillStyle = color.toString();
       ctx.fillRect(col * cellw, row * cellh, cellw, cellh);
 
@@ -152,8 +152,8 @@ class Demo {
   }
 
   public static function colorBoundaries() {
-    var colors  = Color.names.keys().toArray().filter(function(n) return n.indexOf(' ') < 0),
-        color   = Color.grey,
+    var colors  = Web.names.keys().toArray().filter(function(n) return n.indexOf(' ') < 0),
+        color   = Web.grey,
         min = {
           rgbx: (color : Rgbx),
           rgb:  (color : Rgb),
@@ -187,7 +187,7 @@ class Demo {
           yxy:  (color : Yxy)
         };
     colors.map(function(name) {
-      var color = Color.names.get(name);
+      var color = Web.names.get(name);
 
       min.rgbx = (color : Rgbx).min(min.rgbx);
       min.rgb =  (color : Rgb).min(min.rgb);
