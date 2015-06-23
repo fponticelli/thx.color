@@ -59,6 +59,13 @@ abstract CieLCh(Array<Float>) {
       t.interpolateAngle(hue, other.hue, 360)
     ]);
 
+  public function interpolateWidest(other : CieLCh, t : Float)
+    return new CieLCh([
+      t.interpolate(lightness, other.lightness),
+      t.interpolate(chroma, other.chroma),
+      t.interpolateAngleWidest(hue, other.hue, 360)
+    ]);
+
   public function min(other : CieLCh)
     return create(lightness.min(other.lightness), chroma.min(other.chroma), hue.min(other.hue));
 

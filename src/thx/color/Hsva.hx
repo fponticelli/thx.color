@@ -75,6 +75,14 @@ abstract Hsva(Array<Float>) {
       t.interpolate(alpha, other.alpha)
     ]);
 
+  public function interpolateWidest(other : Hsva, t : Float)
+    return new Hsva([
+      t.interpolateAngleWidest(hue, other.hue),
+      t.interpolate(saturation, other.saturation),
+      t.interpolate(value, other.value),
+      t.interpolate(alpha, other.alpha)
+    ]);
+
   public function rotate(angle : Float)
     return create(hue + angle, saturation, value, alpha).normalize();
 

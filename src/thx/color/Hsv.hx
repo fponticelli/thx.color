@@ -52,6 +52,13 @@ abstract Hsv(Array<Float>) {
       t.interpolate(value, other.value)
     ]);
 
+  public function interpolateWidest(other : Hsv, t : Float)
+    return new Hsv([
+      t.interpolateAngleWidest(hue, other.hue),
+      t.interpolate(saturation, other.saturation),
+      t.interpolate(value, other.value)
+    ]);
+
   public function min(other : Hsv)
     return create(hue.min(other.hue), saturation.min(other.saturation), value.min(other.value));
 

@@ -66,6 +66,13 @@ abstract Hsl(Array<Float>) {
       t.interpolate(lightness, other.lightness)
     ]);
 
+  public function interpolateWidest(other : Hsl, t : Float)
+    return new Hsl([
+      t.interpolateAngleWidest(hue, other.hue, 360),
+      t.interpolate(saturation, other.saturation),
+      t.interpolate(lightness, other.lightness)
+    ]);
+
   public function min(other : Hsl)
     return create(hue.min(other.hue), saturation.min(other.saturation), lightness.min(other.lightness));
 

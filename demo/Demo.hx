@@ -30,6 +30,10 @@ class Demo {
       .display('interpolateCubeHelix');
 
     MiniCanvas.create(400, 20).gradientHorizontal(
+      function(t : Float) : Rgbxa return ((left : CubeHelix).interpolateWidest(right, t) : Rgbxa).normalize())
+      .display('interpolateCubeHelixWidest');
+
+    MiniCanvas.create(400, 20).gradientHorizontal(
       function(t : Float) : Rgbxa return (left : Grey).interpolate(right, t))
       .display('interpolateGrey');
 
@@ -38,8 +42,16 @@ class Demo {
       .display('interpolateHsl');
 
     MiniCanvas.create(400, 20).gradientHorizontal(
+      function(t : Float) : Rgbxa return (left : Hsl).interpolateWidest(right, t))
+      .display('interpolateHslWidest');
+
+    MiniCanvas.create(400, 20).gradientHorizontal(
       function(t : Float) : Rgbxa return (left : Hsv).interpolate(right, t))
       .display('interpolateHsv');
+
+    MiniCanvas.create(400, 20).gradientHorizontal(
+      function(t : Float) : Rgbxa return (left : Hsv).interpolateWidest(right, t))
+      .display('interpolateHsvWidest');
 
     MiniCanvas.create(400, 20).gradientHorizontal(
       function(t : Float) : Rgbxa return (left : CieLab).interpolate(right, t))
@@ -48,6 +60,10 @@ class Demo {
     MiniCanvas.create(400, 20).gradientHorizontal(
       function(t : Float) : Rgbxa return ((left : CieLCh).interpolate(right, t) : Rgbxa).normalize())
       .display('interpolateCielch');
+
+    MiniCanvas.create(400, 20).gradientHorizontal(
+      function(t : Float) : Rgbxa return ((left : CieLCh).interpolateWidest(right, t) : Rgbxa).normalize())
+      .display('interpolateCielchWidest');
 
     MiniCanvas.create(400, 20).gradientHorizontal(
       function(t : Float) : Rgbxa return (left : Xyz).interpolate(right, t))
@@ -77,7 +93,7 @@ class Demo {
     MiniCanvas.create(200, 200)
       .checkboard()
       .box(function(x : Float, y : Float) : Rgbxa
-        return CieLCh.create(60, y * 134, x * 360))
+        return CieLCh.create(80, y * 134, x * 360))
       .display("rainbowCielch");
 
     MiniCanvas.create(200, 200)
