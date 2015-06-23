@@ -26,7 +26,6 @@ class TestRoundTrip {
         cmyk: (_ : Cmyk),
         ch:   (_ : CubeHelix),
         g:    (_ : Grey),
-        hcl:  (_ : Hcl),
         hsl:  (_ : Hsl),
         hsv:  (_ : Hsv),
         hl:   (_ : HunterLab),
@@ -45,7 +44,6 @@ class TestRoundTrip {
     cmyk : Cmyk,
     ch   : CubeHelix,
     g    : Grey,
-    hcl  : Hcl,
     hsl  : Hsl,
     hsv  : Hsv,
     hl   : HunterLab,
@@ -63,7 +61,6 @@ class TestRoundTrip {
         assertRgbx(_.rgbx, _.cmy, _.cmy);
         assertRgbx(_.rgbx, _.cmyk, _.cmyk);
         assertRgbx(_.rgbx, _.ch, _.ch);
-        assertRgbx(_.rgbx, _.hcl, _.hcl);
         assertRgbx(_.rgbx, _.hsl, _.hsl);
         assertRgbx(_.rgbx, _.hsv, _.hsv);
         assertRgbx(_.rgbx, _.hl, _.hl);
@@ -81,7 +78,6 @@ class TestRoundTrip {
         assertCieLab(_.lab, _.cmy, _.cmy);
         assertCieLab(_.lab, _.cmyk, _.cmyk);
         assertCieLab(_.lab, _.ch, _.ch);
-        assertCieLab(_.lab, _.hcl, _.hcl);
         assertCieLab(_.lab, _.hsl, _.hsl);
         assertCieLab(_.lab, _.hsv, _.hsv);
         assertCieLab(_.lab, _.hl, _.hl);
@@ -99,7 +95,6 @@ class TestRoundTrip {
         assertCieLCh(_.lch, _.cmy, _.cmy);
         assertCieLCh(_.lch, _.cmyk, _.cmyk);
         assertCieLCh(_.lch, _.ch, _.ch);
-        assertCieLCh(_.lch, _.hcl, _.hcl);
         assertCieLCh(_.lch, _.hsl, _.hsl);
         assertCieLCh(_.lch, _.hsv, _.hsv);
         assertCieLCh(_.lch, _.hl, _.hl);
@@ -117,7 +112,6 @@ class TestRoundTrip {
         assertCmy(_.cmy, _.rgbx, _.rgbx);
         assertCmy(_.cmy, _.cmyk, _.cmyk);
         assertCmy(_.cmy, _.ch, _.ch);
-        assertCmy(_.cmy, _.hcl, _.hcl);
         assertCmy(_.cmy, _.hsl, _.hsl);
         assertCmy(_.cmy, _.hsv, _.hsv);
         assertCmy(_.cmy, _.hl, _.hl);
@@ -135,7 +129,6 @@ class TestRoundTrip {
         assertCmyk(_.cmyk, _.cmy, _.cmy);
         assertCmyk(_.cmyk, _.rgbx, _.rgbx);
         assertCmyk(_.cmyk, _.ch, _.ch);
-        assertCmyk(_.cmyk, _.hcl, _.hcl);
         assertCmyk(_.cmyk, _.hsl, _.hsl);
         assertCmyk(_.cmyk, _.hsv, _.hsv);
         assertCmyk(_.cmyk, _.hl, _.hl);
@@ -153,31 +146,12 @@ class TestRoundTrip {
         assertCubeHelix(_.ch, _.cmy, _.cmy);
         assertCubeHelix(_.ch, _.cmyk, _.cmyk);
         assertCubeHelix(_.ch, _.rgbx, _.rgbx);
-        assertCubeHelix(_.ch, _.hcl, _.hcl);
         assertCubeHelix(_.ch, _.hsl, _.hsl);
         assertCubeHelix(_.ch, _.hsv, _.hsv);
         assertCubeHelix(_.ch, _.hl, _.hl);
         assertCubeHelix(_.ch, _.xyz, _.xyz);
         assertCubeHelix(_.ch, _.yuv, _.yuv);
         assertCubeHelix(_.ch, _.yxy, _.yxy);
-      });
-  }
-
-  public function testHclRoundtrip() {
-    tests
-      .map.fn({
-        assertHcl(_.hcl, _.lab, _.lab);
-        assertHcl(_.hcl, _.lch, _.lch);
-        assertHcl(_.hcl, _.cmy, _.cmy);
-        assertHcl(_.hcl, _.cmyk, _.cmyk);
-        assertHcl(_.hcl, _.ch, _.ch);
-        assertHcl(_.hcl, _.rgbx, _.rgbx);
-        assertHcl(_.hcl, _.hsl, _.hsl);
-        assertHcl(_.hcl, _.hsv, _.hsv);
-        assertHcl(_.hcl, _.hl, _.hl);
-        assertHcl(_.hcl, _.xyz, _.xyz);
-        assertHcl(_.hcl, _.yuv, _.yuv);
-        assertHcl(_.hcl, _.yxy, _.yxy);
       });
   }
 
@@ -189,7 +163,6 @@ class TestRoundTrip {
         assertHsl(_.hsl, _.cmy, _.cmy);
         assertHsl(_.hsl, _.cmyk, _.cmyk);
         assertHsl(_.hsl, _.ch, _.ch);
-        assertHsl(_.hsl, _.hcl, _.hcl);
         assertHsl(_.hsl, _.rgbx, _.rgbx);
         assertHsl(_.hsl, _.hsv, _.hsv);
         assertHsl(_.hsl, _.hl, _.hl);
@@ -207,7 +180,6 @@ class TestRoundTrip {
         assertHsv(_.hsv, _.cmy, _.cmy);
         assertHsv(_.hsv, _.cmyk, _.cmyk);
         assertHsv(_.hsv, _.ch, _.ch);
-        assertHsv(_.hsv, _.hcl, _.hcl);
         assertHsv(_.hsv, _.hsl, _.hsl);
         assertHsv(_.hsv, _.hl, _.hl);
         assertHsv(_.hsv, _.rgbx, _.rgbx);
@@ -225,7 +197,6 @@ class TestRoundTrip {
         assertXyz(_.xyz, _.cmy, _.cmy);
         assertXyz(_.xyz, _.cmyk, _.cmyk);
         assertXyz(_.xyz, _.ch, _.ch);
-        assertXyz(_.xyz, _.hcl, _.hcl);
         assertXyz(_.xyz, _.hsl, _.hsl);
         assertXyz(_.xyz, _.hsv, _.hsv);
         assertXyz(_.xyz, _.hl, _.hl);
@@ -243,7 +214,6 @@ class TestRoundTrip {
         assertYuv(_.xyz, _.cmy, _.cmy);
         assertYuv(_.xyz, _.cmyk, _.cmyk);
         assertYuv(_.xyz, _.ch, _.ch);
-        assertYuv(_.xyz, _.hcl, _.hcl);
         assertYuv(_.xyz, _.hsl, _.hsl);
         assertYuv(_.xyz, _.hsv, _.hsv);
         assertYuv(_.xyz, _.hl, _.hl);
@@ -261,7 +231,6 @@ class TestRoundTrip {
         assertYxy(_.yxy, _.cmy, _.cmy);
         assertYxy(_.yxy, _.cmyk, _.cmyk);
         assertYxy(_.yxy, _.ch, _.ch);
-        assertYxy(_.yxy, _.hcl, _.hcl);
         assertYxy(_.yxy, _.hsl, _.hsl);
         assertYxy(_.yxy, _.hsv, _.hsv);
         assertYxy(_.yxy, _.hl, _.hl);
@@ -286,8 +255,6 @@ class TestRoundTrip {
         Assert.isTrue(_.ch == t, 'expected ${_.ch} but was $t');
         var t : Grey = _.g.toString();
         Assert.isTrue(_.g == t, 'expected ${_.g} but was $t');
-        var t : Hcl = _.hcl.toString();
-        Assert.isTrue(_.hcl == t, 'expected ${_.hcl} but was $t');
         var t : Hsl = _.hsl.toString();
         Assert.isTrue(_.hsl == t, 'expected ${_.hsl} but was $t');
         var t : Hsv = _.hsv.toString();
@@ -330,11 +297,6 @@ class TestRoundTrip {
 
   static function assertCubeHelix(e : CubeHelix, t : CubeHelix, s : String, ?pos : haxe.PosInfos) {
     Assert.isTrue(e.nearEquals(t, 0.1),
-      '\n      $e expected, but was\n      $t for\n      $s', pos);
-  }
-
-  static function assertHcl(e : Hcl, t : Hcl, s : String, ?pos : haxe.PosInfos) {
-    Assert.isTrue(e.nearEquals(t, 0.01),
       '\n      $e expected, but was\n      $t for\n      $s', pos);
   }
 

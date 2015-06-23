@@ -26,7 +26,8 @@ class Color {
       case 'grey', 'gray':
         Grey.create(ColorParser.getFloatChannels(info.channels, 1, false)[0]);
       case 'hcl':
-        Hcl.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
+        var c = ColorParser.getFloatChannels(info.channels, 3, false);
+        CieLCh.create(c[2], c[1], c[0]);
       case 'hsl':
         Hsl.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
       case 'hsla':

@@ -168,9 +168,6 @@ abstract Hsl(Array<Float>) {
   @:to public function toRgbxa()
     return toRgbx().toRgbxa();
 
-  @:to public function toHcl()
-    return toCieLab().toHcl();
-
   @:to public function toHsla()
     return withAlpha(1.0);
 

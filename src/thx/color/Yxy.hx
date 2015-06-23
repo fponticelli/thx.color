@@ -89,9 +89,6 @@ abstract Yxy(Array<Float>) {
   @:to public function toGrey()
     return toXyz().toGrey();
 
-  @:to public function toHcl()
-    return toCieLab().toHcl();
-
   @:to public function toHsl()
     return toRgbx().toHsl();
 

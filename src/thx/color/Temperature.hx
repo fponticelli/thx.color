@@ -109,9 +109,6 @@ abstract Temperature(Float) from Float to Float {
   @:to public function toCubeHelix()
     return toRgbx().toCubeHelix();
 
-  @:to public function toHcl()
-    return toCieLab().toHcl();
-
   @:to public function toHsl()
     return toRgbx().toHsl();
 

@@ -179,9 +179,6 @@ abstract Rgbx(Array<Float>) {
   public function toPerceivedAccurateGrey()
     return new Grey(Math.pow(redf, 2) * .241 + Math.pow(greenf, 2) * .691 + Math.pow(bluef, 2) * .068);
 
-  @:to public function toHcl()
-    return toCieLab().toHcl();
-
   @:to public function toHsl() {
     var min = redf.min(greenf).min(bluef),
         max = redf.max(greenf).max(bluef),

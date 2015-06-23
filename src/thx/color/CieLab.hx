@@ -114,13 +114,6 @@ abstract CieLab(Array<Float>) {
   @:to public function toGrey()
     return toRgbx().toGrey();
 
-  @:to public function toHcl() {
-    var chroma = Math.sqrt(a * a + b * b),
-        hue = Math.atan2(b, a) / Math.PI * 180;
-    if(hue < 0) hue += 360;
-    return new Hcl([hue, chroma, l]);
-  }
-
   @:to public function toHsl()
     return toRgbx().toHsl();
 

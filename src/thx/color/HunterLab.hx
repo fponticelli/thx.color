@@ -9,7 +9,6 @@ using thx.error.NullArgument;
 
 **/
 @:access(thx.color.CieLCh)
-@:access(thx.color.Hcl)
 @:access(thx.color.Xyz)
 abstract HunterLab(Array<Float>) {
   inline public static function create(l : Float, a : Float, b : Float)
@@ -113,9 +112,6 @@ abstract HunterLab(Array<Float>) {
 
   @:to public function toGrey()
     return toRgbx().toGrey();
-
-  @:to public function toHcl()
-    return toCieLab().toHcl();
 
   @:to public function toHsl()
     return toRgbx().toHsl();

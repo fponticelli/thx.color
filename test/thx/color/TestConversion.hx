@@ -62,15 +62,6 @@ class TestConversion {
     });
   }
 
-  public function testHcl() {
-    Web.names.keys().map(function(name) {
-      var expected : Rgb = Web.names.get(name),
-          color : Hcl = expected,
-          test : Rgb = color;
-      Assert.equals(expected.toString(), test.toString(), 'expected $expected but was $test for $name');
-    });
-  }
-
   public function testHsl() {
     Web.names.keys().map(function(name) {
       var expected : Rgb = Web.names.get(name),
