@@ -31,7 +31,10 @@ abstract CieLCh(Array<Float>) {
 
     return try switch info.name {
       case 'cielch', 'lch':
-        CieLCh.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
+        new CieLCh(ColorParser.getFloatChannels(info.channels, 3, false));
+      case 'hcl':
+        var c = ColorParser.getFloatChannels(info.channels, 3, false);
+        CieLCh.create(c[2], c[1], c[0]);
       case _:
         null;
     } catch(e : Dynamic) null;
@@ -112,6 +115,9 @@ abstract CieLCh(Array<Float>) {
 
   @:to public function toString() : String
     return 'cielch(${lightness},${chroma},${hue})';
+
+  public function toHclString() : String
+    return 'hcl(${hue},${chroma},${lightness})';
 
   @:to public function toCieLab() {
     var hradi = hue * (Math.PI / 180),

@@ -74,12 +74,6 @@ class Demo {
         return Hsl.create(x * 360, 1, y))
       .display("rainbowHsl");
 
-      MiniCanvas.create(200, 200)
-        .checkboard()
-        .box(function(x : Float, y : Float) : Rgbxa
-          return Hcl.create(x * 360, y * 134, 60))
-        .display("rainbowHcl");
-
     MiniCanvas.create(200, 200)
       .checkboard()
       .box(function(x : Float, y : Float) : Rgbxa
@@ -163,7 +157,6 @@ class Demo {
           cmyk: (color : Cmyk),
           ch:   (color : CubeHelix),
           g:    (color : Grey),
-          hcl:  (color : Hcl),
           hsl:  (color : Hsl),
           hsv:  (color : Hsv),
           xyz:  (color : Xyz),
@@ -179,7 +172,6 @@ class Demo {
           cmyk: (color : Cmyk),
           ch:   (color : CubeHelix),
           g:    (color : Grey),
-          hcl:  (color : Hcl),
           hsl:  (color : Hsl),
           hsv:  (color : Hsv),
           xyz:  (color : Xyz),
@@ -197,7 +189,6 @@ class Demo {
       min.cmyk = (color : Cmyk).min(min.cmyk);
       min.ch =   (color : CubeHelix).min(min.ch);
       min.g =    (color : Grey).min(min.g);
-      min.hcl =  (color : Hcl).min(min.hcl);
       min.hsl =  (color : Hsl).min(min.hsl);
       min.hsv =  (color : Hsv).min(min.hsv);
       min.xyz =  (color : Xyz).min(min.xyz);
@@ -212,7 +203,6 @@ class Demo {
       max.cmyk = (color : Cmyk).max(max.cmyk);
       max.ch =   (color : CubeHelix).max(max.ch);
       max.g =    (color : Grey).max(max.g);
-      max.hcl =  (color : Hcl).max(max.hcl);
       max.hsl =  (color : Hsl).max(max.hsl);
       max.hsv =  (color : Hsv).max(max.hsv);
       max.xyz =  (color : Xyz).max(max.xyz);
@@ -228,7 +218,6 @@ class Demo {
     trace('range: ${min.cmyk.roundTo(2)} -> ${max.cmyk.roundTo(2)}');
     trace('range: ${min.ch.roundTo(2)} -> ${max.ch.roundTo(2)}');
     trace('range: ${min.g.roundTo(2)} -> ${max.g.roundTo(2)}');
-    trace('range: ${min.hcl.roundTo(2)} -> ${max.hcl.roundTo(2)}');
     trace('range: ${min.hsl.roundTo(2)} -> ${max.hsl.roundTo(2)}');
     trace('range: ${min.hsv.roundTo(2)} -> ${max.hsv.roundTo(2)}');
     trace('range: ${min.xyz.roundTo(2)} -> ${max.xyz.roundTo(2)}');
