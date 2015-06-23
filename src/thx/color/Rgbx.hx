@@ -263,10 +263,6 @@ abstract Rgbx(Array<Float>) {
     return new Temperature(t);
   }
 
-  static function temperatureToRgb(t : Float) {
-
-  }
-
   @:to public function toXyz() {
     var r = redf,
         g = greenf,
