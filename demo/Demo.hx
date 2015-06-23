@@ -2,8 +2,11 @@ import MiniCanvas;
 
 import thx.color.*;
 using thx.Iterators;
+using thx.Iterables;
+using thx.Functions;
 using thx.Arrays;
 import thx.Ints;
+import thx.color.palettes.Ral;
 
 class Demo {
   static function interpolations() {
@@ -234,7 +237,24 @@ class Demo {
   }
 
   public static function ral() {
-    var lab : CieLab = Rgb.fromInts([214, 199, 148]); // RAL 1000
-    trace(lab);
+    var colors = Ral.codes.keys().map.fn({
+          code  : _,
+          name  : Ral.codes.get(_),
+          color : Ral.names.get(_)
+        });
+    var container = js.Browser.document.createElement("div");
+    container.style.float = "left";
+    container.style.fontFamily = "monospace";
+    js.Browser.document.body.appendChild(container);
+    colors.map.fn({
+      var div = js.Browser.document.createElement("div");
+      var hsl : Hsl = _.color;
+      div.style.backgroundColor = hsl.toCss3();
+      div.style.padding = "4px 8px";
+      if(hsl.lightness < 0.5)
+        div.style.color = "#ffffff";
+      div.innerHTML = '${_.code}: ${_.name}, ${_.color}';
+      container.appendChild(div);
+    });
   }
 }
