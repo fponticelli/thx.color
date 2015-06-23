@@ -80,20 +80,21 @@ abstract Xyz(Array<Float>) {
     return x.nearEquals(other.x, tolerance) && y.nearEquals(other.y, tolerance) && z.nearEquals(other.z, tolerance);
 
   @:to public function toCieLab() : CieLab {
-    var x = x * 0.0105211106,
-        y = y * 0.01,
-        z = z * 0.00918417016,
-        p;
-
-    x = x > 0.008856 ? Math.pow(x, 1/3) : (7.787 * x) + 16/116;
-    y = y > 0.008856 ? Math.pow(y, 1/3) : (7.787 * y) + 16/116;
-    z = z > 0.008856 ? Math.pow(z, 1/3) : (7.787 * z) + 16/116;
-
-    return new CieLab(
-      y > 0.008856 ?
-      [(116 * y) - 16, 500 * (x - y), 200 * (y - z)] :
-      [903.3 * y, 500 * (x - y), 200 * (y - z)]
-    );
+    function f(t : Float) {
+      if(t > (6 / 29) * (6 / 29) * (6 / 29)) {
+        return Math.pow(t, 1 / 3);
+      } else {
+        return 1 / 3 * (29 / 6) * (29 / 6) * t + 4 / 29;
+      }
+    }
+    var x1 = x / Xyz.whiteReference.x,
+        y1 = y / Xyz.whiteReference.y,
+        z1 = z / Xyz.whiteReference.z,
+        fy1 = f(y1),
+        l = 116 * fy1 - 16,
+        a = 500 * (f(x1) - fy1),
+        b = 200 * (fy1 - f(z1));
+    return new CieLab([l, a, b]);
   }
 
   @:to public function toCieLCh()

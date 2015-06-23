@@ -146,21 +146,18 @@ abstract CieLab(Array<Float>) {
     return toRgbx().toTemperature();
 
   @:to public function toXyz() {
-    var y = (l + 16) / 116,
-        x = a / 500 + y,
-        z = y - b / 200,
-        p;
+    function f(t) {
+      if(t > (6 / 29))
+        return Math.pow(t, 3);
+      else
+        return 3 * (6 / 29) * (6 / 29) * (t - 4 / 29);
+    }
 
-    p = Math.pow(y, 3);
-    y = p > 0.008856 ? p : (y - 16 / 116) / 7.787;
+    var x = Xyz.whiteReference.x * f( 1 / 116 * (l + 16) + 1 / 500 * a),
+        y = Xyz.whiteReference.y * f( 1 / 116 * (l + 16)),
+        z = Xyz.whiteReference.z * f( 1 / 116 * (l + 16) - 1 / 200 * b);
 
-    p = Math.pow(x, 3);
-    x = p > 0.008856 ? p : (x - 16 / 116) / 7.787;
-
-    p = Math.pow(z, 3);
-    z = p > 0.008856 ? p : (z - 16 / 116) / 7.787;
-
-    return new Xyz([95.047 * x, 100 * y, 108.883 * z]);
+    return new Xyz([x, y, z]);
   }
 
   @:to public function toYuv()

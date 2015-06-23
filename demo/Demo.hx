@@ -74,19 +74,19 @@ class Demo {
       MiniCanvas.create(200, 200)
         .checkboard()
         .box(function(x : Float, y : Float) : Rgbxa
-          return Hcl.create(x * 360, y * 16, 3))
+          return Hcl.create(x * 360, y * 134, 60))
         .display("rainbowHcl");
 
     MiniCanvas.create(200, 200)
       .checkboard()
       .box(function(x : Float, y : Float) : Rgbxa
-        return CieLCh.create(4, y * 16.22, x * 360))
+        return CieLCh.create(60, y * 134, x * 360))
       .display("rainbowCielch");
 
     MiniCanvas.create(200, 200)
       .checkboard()
       .box(function(x : Float, y : Float) : Rgbxa
-        return CieLab.create(6, x * 26.4 - 13.2, y * 25.84 - 12.92))
+        return CieLab.create(60, x * 200 - 100, y * 200 - 100))
       .display("rainbowCielab");
 
     MiniCanvas.create(200, 200)
@@ -118,6 +118,7 @@ class Demo {
     c.display('colorTable');
 
     colorBoundaries();
+    ral();
   }
 
   public static function colorTable(ctx, w, h) {
@@ -230,5 +231,10 @@ class Demo {
     trace('range: ${min.xyz.roundTo(2)} -> ${max.xyz.roundTo(2)}');
     trace('range: ${min.yuv.roundTo(2)} -> ${max.yuv.roundTo(2)}');
     trace('range: ${min.yxy.roundTo(2)} -> ${max.yxy.roundTo(2)}');
+  }
+
+  public static function ral() {
+    var lab : CieLab = Rgb.fromInts([214, 199, 148]); // RAL 1000
+    trace(lab);
   }
 }
