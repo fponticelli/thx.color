@@ -2,11 +2,30 @@
 
 [![Build Status](https://travis-ci.org/fponticelli/thx.color.svg)](https://travis-ci.org/fponticelli/thx.color)
 
-General purpose color library for Haxe.
+Color library for Haxe. Supports the following color spaces:
+
+  * CieLab (AKA Lab)
+  * CieLCh (AKA HCL)
+  * CieLuv (or LUV)
+  * Cmy
+  * Cmyk
+  * CubeHelix
+  * Grey
+  * Hsl(a)
+  * Hsv(a) (AKA HSB)
+  * HunterLab
+  * Rgb(a)
+  * Rgbx(a) (an high resolution version of RGB)
+  * Temperature
+  * Xyz
+  * Yuv
+  * Yxy
+
+With conversion from/to any color space (notice that you can lose some information in the conversion).
 
 ## intro
 
-API uses abstracts to make it easy to use colors with strings and numbers.
+API uses abstracts to make it easy to create colors from strings and numbers.
 
 ```haxe
     var rgb : Rgb = "#cf8700";
