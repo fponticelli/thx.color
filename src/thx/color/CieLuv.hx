@@ -4,6 +4,17 @@ using thx.Arrays;
 using thx.Floats;
 import thx.color.parse.ColorParser;
 
+/**
+CIELUV is a color space adopted by the International Commission on Illumination
+(CIE) in 1976, as a simple-to-compute transformation of the 1931 CIE XYZ color
+space, but which attempted perceptual uniformity.
+
+It is extensively used for applications such as computer graphics which deal
+with colored lights. Although additive mixtures of different colored lights will
+fall on a line in CIELUV's uniform chromaticity diagram (dubbed the CIE 1976
+UCS), such additive mixtures will not, contrary to popular belief, fall along a
+line in the CIELUV color space unless the mixtures are constant in lightness.
+**/
 @:access(thx.color.Rgbx)
 @:access(thx.color.CieLab)
 @:access(thx.color.Xyz)

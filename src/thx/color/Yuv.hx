@@ -4,6 +4,16 @@ using thx.Arrays;
 using thx.Floats;
 import thx.color.parse.ColorParser;
 
+/**
+YUV is a color space typically used as part of a color image pipeline. It
+encodes a color image or video taking human perception into account, allowing
+reduced bandwidth for chrominance components, thereby typically enabling
+transmission errors or compression artifacts to be more efficiently masked by
+the human perception than using a "direct" RGB-representation. Other color
+spaces have similar properties, and the main reason to implement or investigate
+properties of Y'UV would be for interfacing with analog or digital television or
+photographic equipment that conforms to certain Y'UV standards.
+**/
 @:access(thx.color.Rgbx)
 @:access(thx.color.CieLab)
 @:access(thx.color.Xyz)

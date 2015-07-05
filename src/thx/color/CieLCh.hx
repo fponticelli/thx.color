@@ -5,6 +5,25 @@ using thx.Floats;
 using thx.Tuple;
 import thx.color.parse.ColorParser;
 
+/**
+The CIELCh color space is a CIELab cube color space, whereby instead of
+Cartesian coordinates a*, b*, the cylindrical coordinates C* (chroma,
+relative saturation) and h° (hue angle, angle of the hue in the CIELab color
+wheel) are specified. The CIELab - brightness L* remains unchanged.
+
+The CIELCh color space is not the same as the HSV, HSL or HSB color spaces.
+Although their values can also be interpreted as a base color, brightness and
+saturation of a color tone, and are polar coordinate transformation of what is
+technically defined RGB cube color space, CIELCh is still perceptually uniform.
+
+For example, H and h are not identical, because HSL space use as primary colors,
+the three additive primary colors red, green, blue (H = 0, 120, 240°), instead
+the CIELCh system use four physiological elementary colors yellow, green, blue
+and red (h = 90, 180, 270, 360°). h = 0 mean the achromatic colors to the gray
+axis.
+
+There are simplified spellings LCh, LCH and HLC common.
+**/
 @:access(thx.color.CieLab)
 abstract CieLCh(Array<Float>) {
   public var lightness(get, never) : Float;

@@ -6,6 +6,25 @@ using thx.Ints;
 using thx.Strings;
 import thx.color.parse.ColorParser;
 
+/**
+The RGB color model is an additive color model in which red, green, and blue
+light are added together in various ways to reproduce a broad array of colors.
+The name of the model comes from the initials of the three additive primary
+colors, red, green, and blue.
+
+The main purpose of the RGB color model is for the sensing, representation, and
+display of images in electronic systems, such as televisions and computers,
+though it has also been used in conventional photography. Before the electronic
+age, the RGB color model already had a solid theory behind it, based in human
+perception of colors.
+
+RGB is a device-dependent color model: different devices detect or reproduce a
+given RGB value differently, since the color elements (such as phosphors or
+dyes) and their response to the individual R, G, and B levels vary from
+manufacturer to manufacturer, or even in the same device over time. Thus an RGB
+value does not define the same color across devices without some kind of color
+management.
+**/
 @:access(thx.color.Rgbx)
 abstract Rgb(Int) from Int to Int {
   inline public static function create(red : Int, green : Int, blue : Int)
