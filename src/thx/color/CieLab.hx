@@ -6,7 +6,33 @@ import thx.color.parse.ColorParser;
 using thx.error.NullArgument;
 
 /**
+A Lab color space is a color-opponent space with dimension L for lightness and
+a and b for the color-opponent dimensions, based on nonlinearly compressed
+(e.g. CIE XYZ color space) coordinates. The terminology originates from the
+three dimensions of the Hunter 1948 color space, which are L, a, and b.
+The difference between the original Hunter and CIE color coordinates is that
+the CIE coordinates are based on a cube root transformation of the color data,
+while the Hunter coordinates are based on a square root transformation.
 
+The L*a*b* color space includes all perceivable colors, which means that its
+gamut exceeds those of the RGB and CMYK color models. One of the most important
+attributes of the L*a*b*-model is device independence. This means that the
+colors are defined independent of their nature of creation or the device they
+are displayed on.
+
+The L*a*b* color space is used when graphics for print have to be converted from
+RGB to CMYK, as the L*a*b* gamut includes both the RGB and CMYK gamut.
+Also it is used as an interchange format between different devices as for its
+device independency. The space itself is a three-dimensional Real number space,
+that contains an infinite possible representations of colors.
+
+The lightness, L*, represents the darkest black at L* = 0, and the brightest
+white at L* = 100. The color channels, a* and b*, will represent true neutral
+gray values at a* = 0 and b* = 0. The red/green opponent colors are represented
+along the a* axis, with green at negative a* values and red at positive a*
+values. The yellow/blue opponent colors are represented along the b* axis, with
+blue at negative b* values and yellow at positive b* values. The scaling and
+limits of the a* and b* axes run in the range of ±100 or -128 to +127.
 **/
 @:access(thx.color.CieLCh)
 @:access(thx.color.Hcl)
