@@ -1,5 +1,10 @@
 package thx.color.palettes;
 
+/**
+RAL is a colour matching system used in Europe. In colloquial speech RAL refers
+to the RAL Classic system, mainly used for varnish and powder coating but
+nowadays there are reference panels for plastics as well. 
+**/
 class Ral {
   public static var RAL1000(default, null) : CieLab;
   public static var RAL1001(default, null) : CieLab;

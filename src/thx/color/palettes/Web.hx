@@ -1,5 +1,8 @@
 package thx.color.palettes;
 
+/**
+Colors from [wikipedia](https://en.wikipedia.org/wiki/List_of_colors_(compact)).
+**/
 class Web {
   public static var aliceblue(default, null) : Rgb;
   public static var antiquewhite(default, null) : Rgb;
