@@ -4,6 +4,16 @@ using thx.Arrays;
 using thx.Floats;
 import thx.color.parse.ColorParser;
 
+/**
+The CMYK color model (process color, four color) is a subtractive color model,
+used in color printing, and is also used to describe the printing process
+itself. CMYK refers to the four inks used in some color printing: cyan, magenta,
+yellow, and key (black). Though it varies by print house, press operator,
+press manufacturer, and press run, ink is typically applied in the order of the
+abbreviation.
+
+Values for all the channels should be included in the `0`, `1` range.
+**/
 @:access(thx.color.Cmy)
 @:access(thx.color.Rgbx)
 abstract Cmyk(Array<Float>) {
