@@ -2,7 +2,14 @@ package thx.color;
 
 import thx.color.parse.ColorParser;
 
+/**
+Utility class to parse any supported color space to `Rgbxa`.
+**/
 class Color {
+/**
+Parse a string and returns an `Rgba` instance. If the string cannot be parsed
+it returns `null`.
+**/
   public static function parse(color : String) : Rgbxa {
     var info = ColorParser.parseHex(color);
     if(null == info)

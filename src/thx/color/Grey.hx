@@ -3,6 +3,9 @@ package thx.color;
 using thx.Floats;
 import thx.color.parse.ColorParser;
 
+/**
+A gray scale color space that ranges from white to black.
+**/
 @:access(thx.color.Rgbx)
 abstract Grey(Float) from Float to Float {
   public static var black(default, null) : Grey = new Grey(0);

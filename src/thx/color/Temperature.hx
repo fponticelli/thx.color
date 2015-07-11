@@ -3,6 +3,26 @@ package thx.color;
 using thx.Floats;
 import thx.color.parse.ColorParser;
 
+/**
+The color temperature of a light source is the temperature of an ideal
+black-body radiator that radiates light of comparable hue to that of the light
+source. Color temperature is a characteristic of visible light that has
+important applications in lighting, photography, videography, publishing,
+manufacturing, astrophysics, horticulture, and other fields. In practice, color
+temperature is only meaningful for light sources that do in fact correspond
+somewhat closely to the radiation of some black body, i.e., those on a line from
+reddish/orange via yellow and more or less white to blueish white; it does not
+make sense to speak of the color temperature of, e.g., a green or a purple
+light. Color temperature is conventionally stated in the unit of absolute
+temperature, the Kelvin, having the unit symbol K.
+
+Color temperatures over 5,000K are called cool colors (bluish white), while
+lower color temperatures (2,700–3,000 K) are called warm colors (yellowish white
+through red). This relation, however, is a psychological one in contrast to the
+physical relation implied by Wien's displacement law, according to which the
+spectral peak is shifted towards shorter wavelengths (resulting in a more
+blueish white) for higher temperatures.
+**/
 @:access(thx.color.Rgbx)
 abstract Temperature(Float) from Float to Float {
   public static function temperatureToRgbx(kelvin : Float) {
