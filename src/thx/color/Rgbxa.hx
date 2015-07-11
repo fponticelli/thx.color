@@ -6,6 +6,9 @@ using thx.Ints;
 using thx.Strings;
 import thx.color.parse.ColorParser;
 
+/**
+A version of `Rgbx` with an additional `alpha` channel for transparency.
+**/
 @:access(thx.color.Rgbx)
 abstract Rgbxa(Array<Float>) {
   inline public static function create(red : Float, green : Float, blue : Float, alpha : Float) : Rgbxa

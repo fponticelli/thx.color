@@ -24,6 +24,8 @@ dyes) and their response to the individual R, G, and B levels vary from
 manufacturer to manufacturer, or even in the same device over time. Thus an RGB
 value does not define the same color across devices without some kind of color
 management.
+
+`Rgb` uses an `Int` as the underlying type.
 **/
 @:access(thx.color.Rgbx)
 abstract Rgb(Int) from Int to Int {

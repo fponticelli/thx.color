@@ -5,6 +5,9 @@ using thx.Floats;
 using thx.Tuple;
 import thx.color.parse.ColorParser;
 
+/**
+A version of `Hsl` with support for an additional `alpha` channel.
+**/
 @:access(thx.color.Rgbxa)
 @:access(thx.color.Hsl)
 abstract Hsla(Array<Float>) {
