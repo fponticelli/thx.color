@@ -6,6 +6,11 @@ using thx.Functions;
 using thx.Strings;
 import thx.color.parse.ColorParser;
 
+/**
+A version of `Rgb` with an additional channel for `alpha`.
+
+`Rgba` uses an `Int` as the underlying type.
+**/
 abstract Rgba(Int) from Int to Int {
   inline public static function create(red : Int, green : Int, blue : Int, alpha : Int) : Rgba
     return ((red & 0xFF) << 24) | ((green & 0xFF) << 16) | ((blue & 0xFF) << 8) | ((alpha & 0xFF) << 0);

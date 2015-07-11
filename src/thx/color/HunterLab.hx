@@ -6,7 +6,8 @@ import thx.color.parse.ColorParser;
 using thx.error.NullArgument;
 
 /**
-
+A uniform color scale devised by Hunter in 1958 for use in a color difference
+meter. It is based on Hering's opponent-colors theory of vision.
 **/
 @:access(thx.color.CieLCh)
 @:access(thx.color.Xyz)

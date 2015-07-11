@@ -5,6 +5,21 @@ using thx.Floats;
 using thx.Tuple;
 import thx.color.parse.ColorParser;
 
+/**
+HSV (hue-saturation-value) is one of the most common cylindrical-coordinate
+representations of points in an RGB color model. Developed in the 1970s for
+computer graphics applications, HSL is used today in color pickers, in image
+editing software, and less commonly in image analysis and computer vision.
+
+The representation rearranges the geometry of RGB in an attempt to be more
+intuitive and perceptually relevant than the cartesian (cube) representation,
+by mapping the values into a cylinder loosely inspired by a traditional color
+wheel. The angle around the central vertical axis corresponds to "hue" and the
+distance from the axis corresponds to "saturation". These first two values give
+the two schemes the 'H' and 'S' in its name. The height corresponds to a third
+value, the system's representation of the perceived luminance in relation to the
+saturation.
+**/
 @:access(thx.color.Rgbx)
 @:access(thx.color.Hsva)
 abstract Hsv(Array<Float>) {
