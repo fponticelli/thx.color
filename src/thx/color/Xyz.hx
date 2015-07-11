@@ -4,6 +4,28 @@ using thx.Arrays;
 using thx.Floats;
 import thx.color.parse.ColorParser;
 
+/**
+The CIE XYZ color space encompasses all color sensations that an average person
+can experience. It serves as a standard reference against which many other color
+spaces are defined. A set of color-matching functions, like the spectral
+sensitivity curves of the LMS space but not restricted to be nonnegative
+sensitivities, associates physically produced light spectra with specific
+tristimulus values.
+
+When judging the relative luminance (brightness) of different colors in well-lit
+situations, humans tend to perceive light within the green parts of the spectrum
+as brighter than red or blue light of equal power. The luminosity function that
+describes the perceived brightnesses of different wavelengths is thus roughly
+analogous to the spectral sensitivity of M cones.
+
+The CIE model capitalises on this fact by defining Y as luminance. Z is
+quasi-equal to blue stimulation, or the S cone response, and X is a mix (a
+linear combination) of cone response curves chosen to be nonnegative. The XYZ
+tristimulus values are thus analogous to, but different to, the LMS cone
+responses of the human eye. Defining Y as luminance has the useful result that
+for any given Y value, the XZ plane will contain all possible chromaticities at
+that luminance.
+**/
 @:access(thx.color.Rgbx)
 @:access(thx.color.CieLab)
 @:access(thx.color.CieLuv)
