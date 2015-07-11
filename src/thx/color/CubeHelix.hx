@@ -5,6 +5,10 @@ using thx.Floats;
 using thx.Tuple;
 import thx.color.parse.ColorParser;
 
+/**
+A colour scheme which is intended to be perceived as increasing in intensity.
+Developed by D. A. Green (http://astron-soc.in/bulletin/11June/289392011.pdf).
+**/
 @:access(thx.color.Rgbx)
 abstract CubeHelix(Array<Float>) {
   inline public static var A  = -0.14861;

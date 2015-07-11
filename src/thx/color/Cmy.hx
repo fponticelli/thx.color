@@ -4,6 +4,9 @@ using thx.Arrays;
 using thx.Floats;
 import thx.color.parse.ColorParser;
 
+/**
+`CMY` is a subtractive color space and is the complementar to `Rgbx`.
+**/
 @:access(thx.color.Rgbx)
 @:access(thx.color.Cmyk)
 abstract Cmy(Array<Float>) {

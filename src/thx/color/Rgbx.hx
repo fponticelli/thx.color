@@ -7,6 +7,10 @@ using thx.Strings;
 import thx.color.parse.ColorParser;
 import thx.color.CubeHelix.*;
 
+/**
+`Rgbx` stores its three channels into three floats allowing for a very high
+resolution.
+**/
 @:access(thx.color.Cmy)
 @:access(thx.color.Cmyk)
 @:access(thx.color.CubeHelix)
