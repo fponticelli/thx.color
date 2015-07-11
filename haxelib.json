@@ -5,8 +5,8 @@
   "classPath": "src",
   "tags": ["color", "thx", "cross"],
   "description": "Library for color manipulation. Contains definitions for CieLab, CieLCh, Cmy(K), CubeHelix, Grey, Hcl, Hsl(A), Hsv(A), Rgb(A), Xyz and Yxy as well as alpha versions of the sames and color parsing.",
-  "releasenote": "Added Yuv, HunterLab, CieLuv and RAL colors. Removed Hcl (implemented as LabLCh) and a lot of improvements and fixes.",
-  "version": "0.16.0",
+  "releasenote": "Documentation update.",
+  "version": "0.16.1",
   "contributors": ["fponticelli"],
   "dependencies": {
     "thx.core": ""
