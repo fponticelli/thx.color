@@ -58,6 +58,15 @@ abstract Rgba(Int) from Int to Int {
   public var blue(get, never)  : Int;
   public var alpha(get, never)  : Int;
 
+  public function combineColor(other : Rgb) : Rgb {
+    var a = alpha / 255;
+    return Rgb.fromInts([
+      Math.round((1 - a) * other.red   + a * red),
+      Math.round((1 - a) * other.green + a * green),
+      Math.round((1 - a) * other.blue  + a * blue)
+    ]);
+  }
+
   public function darker(t : Float) : Rgba
     return toRgbxa().darker(t).toRgba();
 

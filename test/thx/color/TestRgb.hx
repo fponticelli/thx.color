@@ -66,4 +66,13 @@ class TestRgb {
     Assert.isTrue(new Rgba(0x00FF00FF).equals("rgba(0,255,0,1)"));
     Assert.isTrue(new Rgba(0x00FF00FF).equals("rgba(0,100%,0,1)"));
   }
+
+  public function testCombineColor() {
+    var rgba     = Rgb.fromInts([255, 0, 0]).withAlphaf(.42),
+        bg       = Rgb.fromInts([153, 200, 224]),
+        combined = rgba.combineColor(bg),
+        result   = Rgb.fromInts([196, 116, 130]);
+
+    Assert.isTrue(result.equals(combined), 'expected ${result} but it is ${combined}');
+  }
 }

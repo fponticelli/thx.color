@@ -59,6 +59,13 @@ abstract Rgbxa(Array<Float>) {
   public var alphaf(get, never) : Float;
   public var inSpace(get, never) : Bool;
 
+  public function combineColor(other : Rgbx) : Rgbx
+    return new Rgbx([
+      (1 - alphaf) * other.redf   + alphaf * redf,
+      (1 - alphaf) * other.greenf + alphaf * greenf,
+      (1 - alphaf) * other.bluef  + alphaf * bluef
+    ]);
+
   public function darker(t : Float)
     return toRgbx().darker(t).withAlpha(alpha);
 
