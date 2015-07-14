@@ -80,6 +80,9 @@ abstract Rgb(Int) from Int to Int {
   public function withAlpha(alpha : Int)
     return Rgba.fromInts([red, green, blue, alpha]);
 
+  public function withAlphaf(newalpha : Float)
+    return Rgba.fromInts([red, green, blue, Math.round(255 * newalpha)]);
+
   public function withRed(newred : Int)
     return Rgb.fromInts([newred, green, blue]);
 
