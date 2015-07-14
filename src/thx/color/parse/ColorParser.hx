@@ -81,7 +81,7 @@ class ColorParser {
         CIDegree(Floats.parse(value));
       case("rad" | "RAD") if(Floats.canParse(value)) :
         CIDegree(Floats.parse(value) * 180 / Math.PI);
-      case "" if (Ints.canParse(value)) :
+      case "" if(value == '${Ints.parse(value)}') :
         var i = Ints.parse(value);
         if(i == 0)
           CIBool(false)
