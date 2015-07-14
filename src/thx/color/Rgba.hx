@@ -76,6 +76,9 @@ abstract Rgba(Int) from Int to Int {
   public function withAlpha(newalpha : Int)
     return Rgba.fromInts([red, green, blue, newalpha]);
 
+  public function withAlphaf(newalpha : Float)
+    return Rgba.fromInts([red, green, blue, Math.round(255 * newalpha)]);
+
   public function withRed(newred : Int)
     return Rgba.fromInts([newred, green, blue]);
 
