@@ -24,14 +24,14 @@ class ColorParser {
   static var isPureHex = ~/^([0-9a-f]{2}){3,4}$/i;
   public function processHex(s : String) : ColorInfo {
     if(!isPureHex.match(s)) {
-      if (s.substr(0, 1) == "#") {
+      if(s.substr(0, 1) == "#") {
         if(s.length == 4) // needs dup
           s = s.charAt(1) + s.charAt(1) + s.charAt(2) + s.charAt(2) + s.charAt(3) + s.charAt(3);
         else if(s.length == 5)// needs dup
           s = s.charAt(1) + s.charAt(1) + s.charAt(2) + s.charAt(2) + s.charAt(3) + s.charAt(3) + s.charAt(4) + s.charAt(4);
         else
           s = s.substr(1);
-      } else if (s.substr(0,2) == "0x")
+      } else if(s.substr(0,2) == "0x")
         s = s.substr(2);
       else
         return null;
@@ -49,11 +49,11 @@ class ColorParser {
   }
 
   public function processColor(s : String) : ColorInfo {
-    if (!pattern_color.match(s))
+    if(!pattern_color.match(s))
       return null;
 
     var name = pattern_color.matched(1);
-    if (null == name) return null;
+    if(null == name) return null;
 
     name = name.toLowerCase();
 
@@ -61,36 +61,36 @@ class ColorParser {
       s_channels = null == m2 ? [] : m2.split(","),
       channels = [],
       channel;
-    for (s_channel in s_channels) {
+    for(s_channel in s_channels) {
       channel = processChannel(s_channel);
-      if (null == channel) return null;
+      if(null == channel) return null;
       channels.push(channel);
     }
     return new ColorInfo(name, channels);
   }
 
   public function processChannel(s : String) : ChannelInfo {
-    if (!pattern_channel.match(s)) return null;
+    if(!pattern_channel.match(s)) return null;
     var value = pattern_channel.matched(1),
-      unit  = pattern_channel.matched(2);
-    if (unit == null) unit = "";
+        unit  = pattern_channel.matched(2);
+    if(unit == null) unit = "";
     return try switch unit {
-      case "%" if (Floats.canParse(value)) :
+      case "%" if(Floats.canParse(value)) :
         CIPercent(Floats.parse(value));
-      case ("deg" | "DEG") if (Floats.canParse(value)) :
+      case("deg" | "DEG") if(Floats.canParse(value)) :
         CIDegree(Floats.parse(value));
-      case ("rad" | "RAD") if (Floats.canParse(value)) :
+      case("rad" | "RAD") if(Floats.canParse(value)) :
         CIDegree(Floats.parse(value) * 180 / Math.PI);
       case "" if (Ints.canParse(value)) :
         var i = Ints.parse(value);
-        if (i == 0)
+        if(i == 0)
           CIBool(false)
-        else if (i == 1)
+        else if(i == 1)
           CIBool(true)
-        else if (i < 256)
+        else if(i < 256)
           CIInt8(i)
         else CIInt(i);
-      case "" if (Floats.canParse(value)) :
+      case "" if(Floats.canParse(value)) :
         CIFloat(Floats.parse(value));
       default: null;
     } catch(e : Dynamic) return null;
