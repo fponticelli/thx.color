@@ -37,13 +37,13 @@ limits of the a* and b* axes run in the range of ±100 or -128 to +127.
 @:access(thx.color.CieLCh)
 @:access(thx.color.Hcl)
 @:access(thx.color.Xyz)
-abstract CieLab(Array<Float>) {
+abstract Lab(Array<Float>) {
   inline public static function create(l : Float, a : Float, b : Float)
-    return new CieLab([l, a, b]);
+    return new Lab([l, a, b]);
 
   @:from public static function fromFloats(arr : Array<Float>) {
     arr.resize(3);
-    return CieLab.create(arr[0], arr[1], arr[2]);
+    return Lab.create(arr[0], arr[1], arr[2]);
   }
 
   @:from public static function fromString(color : String) {
@@ -52,33 +52,33 @@ abstract CieLab(Array<Float>) {
       return null;
 
     return try switch info.name {
-      case 'cielab', 'lab':
-        CieLab.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
+      case 'lab', 'lab':
+        Lab.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
       case _:
         null;
     } catch(e : Dynamic) null;
   }
 
-  inline function new(channels : Array<Float>) : CieLab
+  inline function new(channels : Array<Float>) : Lab
     this = channels;
 
   public var l(get, never) : Float;
   public var a(get, never) : Float;
   public var b(get, never) : Float;
 
-  public function distance(other : CieLab)
+  public function distance(other : Lab)
     return (l - other.l) * (l - other.l) +
            (a - other.a) * (a - other.a) +
            (b - other.b) * (b - other.b);
 
-  public function interpolate(other : CieLab, t : Float)
-    return new CieLab([
+  public function interpolate(other : Lab, t : Float)
+    return new Lab([
       t.interpolate(l, other.l),
       t.interpolate(a, other.a),
       t.interpolate(b, other.b)
     ]);
 
-  public function match(palette : Iterable<CieLab>) {
+  public function match(palette : Iterable<Lab>) {
     palette.throwIfEmpty();
     var dist = Math.POSITIVE_INFINITY,
         closest = null;
@@ -92,32 +92,32 @@ abstract CieLab(Array<Float>) {
     return closest;
   }
 
-  public function min(other : CieLab)
+  public function min(other : Lab)
     return create(l.min(other.l), a.min(other.a), b.min(other.b));
 
-  public function max(other : CieLab)
+  public function max(other : Lab)
     return create(l.max(other.l), a.max(other.a), b.max(other.b));
 
   public function roundTo(decimals : Int)
     return create(l.roundTo(decimals), a.roundTo(decimals), b.roundTo(decimals));
 
-  @:op(A==B) public function equals(other : CieLab) : Bool
+  @:op(A==B) public function equals(other : Lab) : Bool
     return nearEquals(other);
 
-  public function nearEquals(other : CieLab, ?tolerance = Floats.EPSILON) : Bool
+  public function nearEquals(other : Lab, ?tolerance = Floats.EPSILON) : Bool
     return l.nearEquals(other.l, tolerance) && a.nearEquals(other.a, tolerance) && b.nearEquals(other.b, tolerance);
 
   public function withL(newl : Float)
-    return new CieLab([newl, a, b]);
+    return new Lab([newl, a, b]);
 
   public function withA(newa : Float)
-    return new CieLab([l, newa, b]);
+    return new Lab([l, newa, b]);
 
   public function withB(newb : Float)
-    return new CieLab([l, a, newb]);
+    return new Lab([l, a, newb]);
 
   @:to public function toString() : String
-    return 'cielab(${l},${a},${b})';
+    return 'lab(${l},${a},${b})';
 
   @:to public function toCieLCh() {
     var h = Math.atan2(b, a) * 180 / Math.PI,

@@ -8,10 +8,10 @@ using thx.Iterators;
 class TestConversion {
   public function new() {}
 
-  public function testCieLab() {
+  public function testLab() {
     Web.names.keys().map(function(name) {
       var expected : Rgb = Web.names.get(name),
-          color : CieLab = expected,
+          color : Lab = expected,
           test : Rgb = color;
       Assert.equals(expected.toString(), test.toString(), 'expected $expected but was $test for $name');
     });

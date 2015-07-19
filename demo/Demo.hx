@@ -54,7 +54,7 @@ class Demo {
       .display('interpolateHsvWidest');
 
     MiniCanvas.create(400, 20).gradientHorizontal(
-      function(t : Float) : Rgbxa return (left : CieLab).interpolate(right, t))
+      function(t : Float) : Rgbxa return (left : Lab).interpolate(right, t))
       .display('interpolateCielab');
 
     MiniCanvas.create(400, 20).gradientHorizontal(
@@ -99,7 +99,7 @@ class Demo {
     MiniCanvas.create(200, 200)
       .checkboard()
       .box(function(x : Float, y : Float) : Rgbxa
-        return CieLab.create(60, x * 200 - 100, y * 200 - 100))
+        return Lab.create(60, x * 200 - 100, y * 200 - 100))
       .display("rainbowCielab");
 
     MiniCanvas.create(200, 200)
@@ -167,7 +167,7 @@ class Demo {
         min = {
           rgbx: (color : Rgbx),
           rgb:  (color : Rgb),
-          lab:  (color : CieLab),
+          lab:  (color : Lab),
           lch:  (color : CieLCh),
           cmy:  (color : Cmy),
           cmyk: (color : Cmyk),
@@ -182,7 +182,7 @@ class Demo {
         max = {
           rgbx: (color : Rgbx),
           rgb:  (color : Rgb),
-          lab:  (color : CieLab),
+          lab:  (color : Lab),
           lch:  (color : CieLCh),
           cmy:  (color : Cmy),
           cmyk: (color : Cmyk),
@@ -199,7 +199,7 @@ class Demo {
 
       min.rgbx = (color : Rgbx).min(min.rgbx);
       min.rgb =  (color : Rgb).min(min.rgb);
-      min.lab =  (color : CieLab).min(min.lab);
+      min.lab =  (color : Lab).min(min.lab);
       min.lch =  (color : CieLCh).min(min.lch);
       min.cmy =  (color : Cmy).min(min.cmy);
       min.cmyk = (color : Cmyk).min(min.cmyk);
@@ -213,7 +213,7 @@ class Demo {
 
       max.rgbx = (color : Rgbx).max(max.rgbx);
       max.rgb =  (color : Rgb).max(max.rgb);
-      max.lab =  (color : CieLab).max(max.lab);
+      max.lab =  (color : Lab).max(max.lab);
       max.lch =  (color : CieLCh).max(max.lch);
       max.cmy =  (color : Cmy).max(max.cmy);
       max.cmyk = (color : Cmyk).max(max.cmyk);

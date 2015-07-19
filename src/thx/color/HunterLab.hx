@@ -93,11 +93,11 @@ abstract HunterLab(Array<Float>) {
   @:to public function toString() : String
     return 'hunterlab(${l},${a},${b})';
 
-  @:to public function toCieLab()
-    return toXyz().toCieLab();
+  @:to public function toLab()
+    return toXyz().toLab();
 
   @:to public function toCieLCh()
-    return toCieLab().toCieLCh();
+    return toLab().toCieLCh();
 
   @:to public function toCieLuv()
     return toRgbx().toCieLuv();

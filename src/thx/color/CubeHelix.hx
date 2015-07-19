@@ -162,11 +162,11 @@ abstract CubeHelix(Array<Float>) {
     return hue.nearEqualAngles(other.hue, null, tolerance) && saturation.nearEquals(other.saturation, tolerance) && lightness.nearEquals(other.lightness, tolerance) && gamma.nearEquals(other.gamma, tolerance);
   }
 
-  @:to public function toCieLab()
-    return toXyz().toCieLab();
+  @:to public function toLab()
+    return toXyz().toLab();
 
   @:to public function toCieLCh()
-    return toCieLab().toCieLCh();
+    return toLab().toCieLCh();
 
   @:to public function toCieLuv()
     return toRgbx().toCieLuv();

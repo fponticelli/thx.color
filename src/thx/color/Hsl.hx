@@ -150,11 +150,11 @@ abstract Hsl(Array<Float>) {
   public function nearEquals(other : Hsl, ?tolerance = Floats.EPSILON) : Bool
     return hue.nearEqualAngles(other.hue, null, tolerance) && saturation.nearEquals(other.saturation, tolerance) && lightness.nearEquals(other.lightness, tolerance);
 
-  @:to public function toCieLab()
-    return toXyz().toCieLab();
+  @:to public function toLab()
+    return toXyz().toLab();
 
   @:to public function toCieLCh()
-    return toCieLab().toCieLCh();
+    return toLab().toCieLCh();
 
   @:to public function toCieLuv()
     return toRgbx().toCieLuv();

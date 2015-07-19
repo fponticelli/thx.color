@@ -104,11 +104,11 @@ abstract Rgb(Int) from Int to Int {
   @:op(A==B) public function equals(other : Rgb) : Bool
     return red == other.red && green == other.green && blue == other.blue;
 
-  @:to public function toCieLab()
-    return toXyz().toCieLab();
+  @:to public function toLab()
+    return toXyz().toLab();
 
   @:to public function toCieLCh()
-    return toCieLab().toCieLCh();
+    return toLab().toCieLCh();
 
   @:to public function toCieLuv()
     return toRgbx().toCieLuv();

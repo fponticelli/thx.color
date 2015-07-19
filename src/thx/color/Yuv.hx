@@ -15,7 +15,7 @@ properties of Y'UV would be for interfacing with analog or digital television or
 photographic equipment that conforms to certain Y'UV standards.
 **/
 @:access(thx.color.Rgbx)
-@:access(thx.color.CieLab)
+@:access(thx.color.Lab)
 @:access(thx.color.Xyz)
 abstract Yuv(Array<Float>) {
   public var y(get, never) : Float;
@@ -83,11 +83,11 @@ abstract Yuv(Array<Float>) {
   public function nearEquals(other : Yuv, ?tolerance = Floats.EPSILON) : Bool
     return y.nearEquals(other.y, tolerance) && u.nearEquals(other.u, tolerance) && v.nearEquals(other.v, tolerance);
 
-  @:to public function toCieLab()
-    return toXyz().toCieLab();
+  @:to public function toLab()
+    return toXyz().toLab();
 
   @:to public function toCieLCh()
-    return toCieLab().toCieLCh();
+    return toLab().toCieLCh();
 
   @:to public function toCieLuv()
     return toRgbx().toCieLuv();

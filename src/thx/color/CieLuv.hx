@@ -16,7 +16,7 @@ UCS), such additive mixtures will not, contrary to popular belief, fall along a
 line in the CIELUV color space unless the mixtures are constant in lightness.
 **/
 @:access(thx.color.Rgbx)
-@:access(thx.color.CieLab)
+@:access(thx.color.Lab)
 @:access(thx.color.Xyz)
 abstract CieLuv(Array<Float>) {
   public var l(get, never) : Float;
@@ -84,11 +84,11 @@ abstract CieLuv(Array<Float>) {
   public function nearEquals(other : CieLuv, ?tolerance = Floats.EPSILON) : Bool
     return l.nearEquals(other.l, tolerance) && u.nearEquals(other.u, tolerance) && v.nearEquals(other.v, tolerance);
 
-  @:to public function toCieLab()
-    return toXyz().toCieLab();
+  @:to public function toLab()
+    return toXyz().toLab();
 
   @:to public function toCieLCh()
-    return toCieLab().toCieLCh();
+    return toLab().toCieLCh();
 
   @:to public function toCmy()
     return toRgbx().toCmy();

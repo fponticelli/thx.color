@@ -27,7 +27,7 @@ for any given Y value, the XZ plane will contain all possible chromaticities at
 that luminance.
 **/
 @:access(thx.color.Rgbx)
-@:access(thx.color.CieLab)
+@:access(thx.color.Lab)
 @:access(thx.color.CieLuv)
 @:access(thx.color.HunterLab)
 @:access(thx.color.Yxy)
@@ -101,7 +101,7 @@ abstract Xyz(Array<Float>) {
   public function nearEquals(other : Xyz, ?tolerance = Floats.EPSILON) : Bool
     return x.nearEquals(other.x, tolerance) && y.nearEquals(other.y, tolerance) && z.nearEquals(other.z, tolerance);
 
-  @:to public function toCieLab() : CieLab {
+  @:to public function toLab() : Lab {
     function f(t : Float) {
       if(t > (6 / 29) * (6 / 29) * (6 / 29)) {
         return Math.pow(t, 1 / 3);
@@ -116,11 +116,11 @@ abstract Xyz(Array<Float>) {
         l = 116 * fy1 - 16,
         a = 500 * (f(x1) - fy1),
         b = 200 * (fy1 - f(z1));
-    return new CieLab([l, a, b]);
+    return new Lab([l, a, b]);
   }
 
   @:to public function toCieLCh()
-    return toCieLab().toCieLCh();
+    return toLab().toCieLCh();
 
   @:to public function toCieLuv() {
     var x = x * 100,

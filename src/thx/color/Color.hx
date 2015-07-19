@@ -22,7 +22,7 @@ it returns `null`.
 
     return try switch info.name {
       case 'cielab', 'lab':
-        CieLab.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
+        Lab.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
       case 'cielch', 'lch':
         CieLCh.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
       case 'cieluv', 'luv':
@@ -66,6 +66,6 @@ it returns `null`.
   public static function addRgbPalette(palette : Map<String, Rgb>)
     palette.tuples().map.fn(namedColors.set(_.left, _.right));
 
-  public static function addCieLabPalette(palette : Map<String, CieLab>)
+  public static function addLabPalette(palette : Map<String, Lab>)
     palette.tuples().map.fn(namedColors.set(_.left, _.right));
 }

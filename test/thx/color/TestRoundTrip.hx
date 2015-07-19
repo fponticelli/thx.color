@@ -20,7 +20,7 @@ class TestRoundTrip {
       .map.fn({
         rgbx: (_ : Rgbx),
         rgb:  (_ : Rgb),
-        lab:  (_ : CieLab),
+        lab:  (_ : Lab),
         lch:  (_ : CieLCh),
         cmy:  (_ : Cmy),
         cmyk: (_ : Cmyk),
@@ -38,7 +38,7 @@ class TestRoundTrip {
   var tests : Array<{
     rgbx : Rgbx,
     rgb  : Rgb,
-    lab  : CieLab,
+    lab  : Lab,
     lch  : CieLCh,
     cmy  : Cmy,
     cmyk : Cmyk,
@@ -70,20 +70,20 @@ class TestRoundTrip {
       });
   }
 
-  public function testCieLabRoundtrip() {
+  public function testLabRoundtrip() {
     tests
       .map.fn({
-        assertCieLab(_.lab, _.rgbx, _.rgbx);
-        assertCieLab(_.lab, _.lch, _.lch);
-        assertCieLab(_.lab, _.cmy, _.cmy);
-        assertCieLab(_.lab, _.cmyk, _.cmyk);
-        assertCieLab(_.lab, _.ch, _.ch);
-        assertCieLab(_.lab, _.hsl, _.hsl);
-        assertCieLab(_.lab, _.hsv, _.hsv);
-        assertCieLab(_.lab, _.hl, _.hl);
-        assertCieLab(_.lab, _.xyz, _.xyz);
-        assertCieLab(_.lab, _.yuv, _.yuv);
-        assertCieLab(_.lab, _.yxy, _.yxy);
+        assertLab(_.lab, _.rgbx, _.rgbx);
+        assertLab(_.lab, _.lch, _.lch);
+        assertLab(_.lab, _.cmy, _.cmy);
+        assertLab(_.lab, _.cmyk, _.cmyk);
+        assertLab(_.lab, _.ch, _.ch);
+        assertLab(_.lab, _.hsl, _.hsl);
+        assertLab(_.lab, _.hsv, _.hsv);
+        assertLab(_.lab, _.hl, _.hl);
+        assertLab(_.lab, _.xyz, _.xyz);
+        assertLab(_.lab, _.yuv, _.yuv);
+        assertLab(_.lab, _.yxy, _.yxy);
       });
   }
 
@@ -243,7 +243,7 @@ class TestRoundTrip {
   public function testToStringRoundtrip() {
     tests
       .map.fn({
-        var t : CieLab = _.lab.toString();
+        var t : Lab = _.lab.toString();
         Assert.isTrue(_.lab == t, 'expected ${_.lab} but was $t');
         var t : CieLCh = _.lch.toString();
         Assert.isTrue(_.lch == t, 'expected ${_.lch} but was $t');
@@ -275,7 +275,7 @@ class TestRoundTrip {
       '\n      $e expected, but was\n      $t for\n      $s', pos);
   }
 
-  static function assertCieLab(e : CieLab, t : CieLab, s : String, ?pos : haxe.PosInfos) {
+  static function assertLab(e : Lab, t : Lab, s : String, ?pos : haxe.PosInfos) {
     Assert.isTrue(e.nearEquals(t, 0.01),
       '\n      $e expected, but was\n      $t for\n      $s', pos);
   }

@@ -1,4 +1,4 @@
-import thx.color.CieLab;
+import thx.color.Lab;
 import thx.color.CieLCh;
 import thx.color.Cmy;
 import thx.color.Cmyk;

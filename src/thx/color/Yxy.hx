@@ -68,11 +68,11 @@ abstract Yxy(Array<Float>) {
   public function nearEquals(other : Yxy, ?tolerance = Floats.EPSILON) : Bool
     return y1.nearEquals(other.y1, tolerance) && x.nearEquals(other.x, tolerance) && y2.nearEquals(other.y2, tolerance);
 
-  @:to public function toCieLab()
-    return toXyz().toCieLab();
+  @:to public function toLab()
+    return toXyz().toLab();
 
   @:to public function toCieLCh()
-    return toCieLab().toCieLCh();
+    return toLab().toCieLCh();
 
   @:to public function toCieLuv()
     return toRgbx().toCieLuv();

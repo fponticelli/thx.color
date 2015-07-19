@@ -97,11 +97,11 @@ abstract Cmyk(Array<Float>) {
   public function nearEquals(other : Cmyk, ?tolerance = Floats.EPSILON) : Bool
     return cyan.nearEquals(other.cyan, tolerance) && magenta.nearEquals(other.magenta, tolerance) && yellow.nearEquals(other.yellow, tolerance) && black.nearEquals(other.black, tolerance);
 
-  @:to public function toCieLab()
-    return toXyz().toCieLab();
+  @:to public function toLab()
+    return toXyz().toLab();
 
   @:to public function toCieLCh()
-    return toCieLab().toCieLCh();
+    return toLab().toCieLCh();
 
   @:to public function toCieLuv()
     return toRgbx().toCieLuv();

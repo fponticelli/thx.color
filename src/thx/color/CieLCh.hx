@@ -24,7 +24,7 @@ axis.
 
 There are simplified spellings LCh, LCH and HLC common.
 **/
-@:access(thx.color.CieLab)
+@:access(thx.color.Lab)
 abstract CieLCh(Array<Float>) {
   public var lightness(get, never) : Float;
   public var chroma(get, never) : Float;
@@ -145,11 +145,11 @@ abstract CieLCh(Array<Float>) {
   public function toHclString() : String
     return 'hcl(${hue},${chroma},${lightness})';
 
-  @:to public function toCieLab() {
+  @:to public function toLab() {
     var hradi = hue * (Math.PI / 180),
         a = Math.cos(hradi) * chroma,
         b = Math.sin(hradi) * chroma;
-    return new CieLab([lightness, a, b]);
+    return new Lab([lightness, a, b]);
   }
 
   @:to public function toCieLuv()
@@ -183,7 +183,7 @@ abstract CieLCh(Array<Float>) {
     return toRgbxa().toRgba();
 
   @:to public function toRgbx()
-    return toCieLab().toRgbx();
+    return toLab().toRgbx();
 
   @:to public function toRgbxa()
     return toRgbx().toRgbxa();
@@ -192,13 +192,13 @@ abstract CieLCh(Array<Float>) {
     return toRgbx().toTemperature();
 
   @:to public function toXyz()
-    return toCieLab().toXyz();
+    return toLab().toXyz();
 
   @:to public function toYuv()
     return toRgbx().toYuv();
 
   @:to public function toYxy()
-    return toCieLab().toYxy();
+    return toLab().toYxy();
 
   inline function get_lightness() : Float
     return this[0];

@@ -134,11 +134,11 @@ abstract Hsv(Array<Float>) {
   public function nearEquals(other : Hsv, ?tolerance = Floats.EPSILON) : Bool
     return hue.nearEqualAngles(other.hue, null, tolerance) && saturation.nearEquals(other.saturation, tolerance) && value.nearEquals(other.value, tolerance);
 
-  @:to public function toCieLab()
-    return toXyz().toCieLab();
+  @:to public function toLab()
+    return toXyz().toLab();
 
   @:to public function toCieLCh()
-    return toCieLab().toCieLCh();
+    return toLab().toCieLCh();
 
   @:to public function toCieLuv()
     return toRgbx().toCieLuv();

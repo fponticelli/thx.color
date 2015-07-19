@@ -128,11 +128,11 @@ abstract Rgbx(Array<Float>) {
   public function withBlue(newblue : Int)
     return new Rgbx([red, green, newblue]);
 
-  @:to public function toCieLab()
-    return toXyz().toCieLab();
+  @:to public function toLab()
+    return toXyz().toLab();
 
   @:to public function toCieLCh()
-    return toCieLab().toCieLCh();
+    return toLab().toCieLCh();
 
   @:to public function toCieLuv()
     return toXyz().toCieLuv();
