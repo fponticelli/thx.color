@@ -65,4 +65,7 @@ it returns `null`.
 
   public static function addRgbPalette(palette : Map<String, Rgb>)
     palette.tuples().map.fn(namedColors.set(_.left, _.right));
+
+  public static function addCieLabPalette(palette : Map<String, CieLab>)
+    palette.tuples().map.fn(namedColors.set(_.left, _.right));
 }
