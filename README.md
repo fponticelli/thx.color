@@ -6,7 +6,7 @@ Color library for Haxe. Supports the following color spaces:
 
   * Lab (AKA Lab)
   * LCh (AKA HCL)
-  * CieLuv (or LUV)
+  * Luv (or LUV)
   * Cmy
   * Cmyk
   * CubeHelix

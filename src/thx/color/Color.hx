@@ -26,7 +26,7 @@ it returns `null`.
       case 'cielch', 'lch':
         LCh.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
       case 'cieluv', 'luv':
-        CieLuv.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
+        Luv.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
       case 'cmy':
         Cmy.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
       case 'cmyk':

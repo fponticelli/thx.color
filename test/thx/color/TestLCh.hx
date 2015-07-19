@@ -14,12 +14,12 @@ class TestLCh {
 
   public function testString() {
     var color = LCh.create(0.5, 0.4, -10).normalize();
-    Assert.equals("cielch(0.5,0.4,350)", color.toString());
+    Assert.equals("lch(0.5,0.4,350)", color.toString());
   }
 
   public function testParse() {
     var color : LCh = "cielch(100,10,-10)";
-    Assert.equals("cielch(100,10,-10)", color.toString());
+    Assert.equals("lch(100,10,-10)", color.toString());
   }
 
   public function testFromFloat() {

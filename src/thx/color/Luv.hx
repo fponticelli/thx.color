@@ -18,17 +18,17 @@ line in the CIELUV color space unless the mixtures are constant in lightness.
 @:access(thx.color.Rgbx)
 @:access(thx.color.Lab)
 @:access(thx.color.Xyz)
-abstract CieLuv(Array<Float>) {
+abstract Luv(Array<Float>) {
   public var l(get, never) : Float;
   public var u(get, never) : Float;
   public var v(get, never) : Float;
 
   inline public static function create(l : Float, u : Float, v : Float)
-    return new CieLuv([l, u, v]);
+    return new Luv([l, u, v]);
 
   @:from public static function fromFloats(arr : Array<Float>) {
     arr.resize(3);
-    return CieLuv.create(arr[0], arr[1], arr[2]);
+    return Luv.create(arr[0], arr[1], arr[2]);
   }
 
   @:from public static function fromString(color : String) {
@@ -38,26 +38,26 @@ abstract CieLuv(Array<Float>) {
 
     return try switch info.name {
     case 'cieluv', 'luv':
-        new thx.color.CieLuv(ColorParser.getFloatChannels(info.channels, 3, false));
+        new thx.color.Luv(ColorParser.getFloatChannels(info.channels, 3, false));
       case _:
         null;
     } catch(e : Dynamic) null;
   }
 
-  inline function new(channels : Array<Float>) : CieLuv
+  inline function new(channels : Array<Float>) : Luv
     this = channels;
 
-  public function interpolate(other : CieLuv, t : Float)
-    return new CieLuv([
+  public function interpolate(other : Luv, t : Float)
+    return new Luv([
       t.interpolate(l, other.l),
       t.interpolate(u, other.u),
       t.interpolate(v, other.v)
     ]);
 
-  public function min(other : CieLuv)
+  public function min(other : Luv)
     return create(l.min(other.l), u.min(other.u), v.min(other.v));
 
-  public function max(other : CieLuv)
+  public function max(other : Luv)
     return create(l.max(other.l), u.max(other.u), v.max(other.v));
 
   public function normalize()
@@ -67,21 +67,21 @@ abstract CieLuv(Array<Float>) {
     return create(l.roundTo(decimals), u.roundTo(decimals), v.roundTo(decimals));
 
   public function withY(newy : Float)
-    return new CieLuv([newy, u, v]);
+    return new Luv([newy, u, v]);
 
   public function withU(newu : Float)
-    return new CieLuv([l, u, v]);
+    return new Luv([l, u, v]);
 
   public function withV(newv : Float)
-    return new CieLuv([l, u, v]);
+    return new Luv([l, u, v]);
 
   @:to public function toString() : String
     return 'cieluv(${l},${u},${v})';
 
-  @:op(A==B) public function equals(other : CieLuv) : Bool
+  @:op(A==B) public function equals(other : Luv) : Bool
     return nearEquals(other);
 
-  public function nearEquals(other : CieLuv, ?tolerance = Floats.EPSILON) : Bool
+  public function nearEquals(other : Luv, ?tolerance = Floats.EPSILON) : Bool
     return l.nearEquals(other.l, tolerance) && u.nearEquals(other.u, tolerance) && v.nearEquals(other.v, tolerance);
 
   @:to public function toLab()

@@ -80,8 +80,8 @@ abstract Cmy(Array<Float>) {
   @:to public function toLCh()
     return toLab().toLCh();
 
-  @:to public function toCieLuv()
-    return toRgbx().toCieLuv();
+  @:to public function toLuv()
+    return toRgbx().toLuv();
 
   @:to public function toCmyk() {
     var k = cyan.min(magenta).min(yellow);

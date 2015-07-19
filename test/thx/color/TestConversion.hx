@@ -26,10 +26,10 @@ class TestConversion {
     });
   }
 
-  public function testCieLuv() {
+  public function testLuv() {
     Web.names.keys().map(function(name) {
       var expected : Rgb = Web.names.get(name),
-          color : CieLuv = expected,
+          color : Luv = expected,
           test : Rgb = color;
       Assert.equals(expected.toString(), test.toString(), 'expected $expected but was $test for $name');
     });

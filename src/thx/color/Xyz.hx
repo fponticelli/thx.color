@@ -28,7 +28,7 @@ that luminance.
 **/
 @:access(thx.color.Rgbx)
 @:access(thx.color.Lab)
-@:access(thx.color.CieLuv)
+@:access(thx.color.Luv)
 @:access(thx.color.HunterLab)
 @:access(thx.color.Yxy)
 abstract Xyz(Array<Float>) {
@@ -122,7 +122,7 @@ abstract Xyz(Array<Float>) {
   @:to public function toLCh()
     return toLab().toLCh();
 
-  @:to public function toCieLuv() {
+  @:to public function toLuv() {
     var x = x * 100,
         y = y * 100,
         z = z * 100,
@@ -133,7 +133,7 @@ abstract Xyz(Array<Float>) {
               Math.pow(29 / 3, 3) * f,
         u = 13 * l * (u - whiteReference.u * 100),
         v = 13 * l * (v - whiteReference.v * 100);
-    return new CieLuv([l / 100, u / 100, v / 100]);
+    return new Luv([l / 100, u / 100, v / 100]);
   }
 
   @:to public function toCmy()

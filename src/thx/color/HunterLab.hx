@@ -99,8 +99,8 @@ abstract HunterLab(Array<Float>) {
   @:to public function toLCh()
     return toLab().toLCh();
 
-  @:to public function toCieLuv()
-    return toRgbx().toCieLuv();
+  @:to public function toLuv()
+    return toRgbx().toLuv();
 
   @:to public function toCmy()
     return toRgbx().toCmy();
