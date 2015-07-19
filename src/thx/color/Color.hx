@@ -1,6 +1,8 @@
 package thx.color;
 
 import thx.color.parse.ColorParser;
+using thx.Functions;
+using thx.Maps;
 
 /**
 Utility class to parse any supported color space to `Rgbxa`.
@@ -60,4 +62,7 @@ it returns `null`.
         null;
     } catch(e : Dynamic) null;
   }
+
+  public static function addRgbPalette(palette : Map<String, Rgb>)
+    palette.tuples().map.fn(namedColors.set(_.left, _.right));
 }
