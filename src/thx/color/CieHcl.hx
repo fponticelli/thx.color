@@ -1,6 +1,6 @@
 package thx.color;
 
 /**
-Synonym of `LCh`.
+Alias for `LCh`.
 **/
-typedef CieHcl = Hcl;
+typedef CieHcl = LCh;

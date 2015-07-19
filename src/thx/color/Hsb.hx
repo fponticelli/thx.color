@@ -1,6 +1,6 @@
 package thx.color;
 
 /**
-Synonym of `Hsv` where `b` is for 'brightness'.
+Alias for `Hsv` where `b` is for 'brightness'.
 **/
 typedef Hsb = Hsv;

@@ -1,6 +1,6 @@
 package thx.color;
 
 /**
-Synonym of `Luv`.
+Alias of `Luv`.
 **/
 typedef CieLuv = Luv;

@@ -1,6 +1,6 @@
 package thx.color;
 
 /**
-Synonym of `Lab`.
+Alias for `Lab`.
 **/
 typedef CieLab = Lab;
