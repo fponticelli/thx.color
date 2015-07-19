@@ -6,6 +6,7 @@ import thx.color.parse.ColorParser;
 Utility class to parse any supported color space to `Rgbxa`.
 **/
 class Color {
+  static var namedColors : Map<String, Rgbx> = new Map();
 /**
 Parse a string and returns an `Rgba` instance. If the string cannot be parsed
 it returns `null`.
@@ -15,7 +16,7 @@ it returns `null`.
     if(null == info)
       info = ColorParser.parseColor(color);
     if(null == info)
-      return null;
+      return namedColors.get(color);
 
     return try switch info.name {
       case 'cielab', 'lab':
