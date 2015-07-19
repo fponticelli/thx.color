@@ -154,8 +154,6 @@ class Web {
 
   public static var names(default, null) : Map<String, Rgb>;
 
-
-
   static function __init__() {
     names = new Map();
     names.set("aliceblue", aliceblue = 0xf0f8ff);
