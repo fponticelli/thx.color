@@ -24,7 +24,7 @@ it returns `null`.
       case 'cielab', 'lab':
         Lab.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
       case 'cielch', 'lch':
-        CieLCh.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
+        LCh.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
       case 'cieluv', 'luv':
         CieLuv.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
       case 'cmy':
@@ -37,7 +37,7 @@ it returns `null`.
         Grey.create(ColorParser.getFloatChannels(info.channels, 1, false)[0]);
       case 'hcl':
         var c = ColorParser.getFloatChannels(info.channels, 3, false);
-        CieLCh.create(c[2], c[1], c[0]);
+        LCh.create(c[2], c[1], c[0]);
       case 'hsl':
         Hsl.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
       case 'hsla':

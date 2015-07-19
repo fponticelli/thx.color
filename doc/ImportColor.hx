@@ -1,5 +1,5 @@
 import thx.color.Lab;
-import thx.color.CieLCh;
+import thx.color.LCh;
 import thx.color.Cmy;
 import thx.color.Cmyk;
 import thx.color.Color;

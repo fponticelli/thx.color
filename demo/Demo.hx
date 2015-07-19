@@ -58,11 +58,11 @@ class Demo {
       .display('interpolateCielab');
 
     MiniCanvas.create(400, 20).gradientHorizontal(
-      function(t : Float) : Rgbxa return ((left : CieLCh).interpolate(right, t) : Rgbxa).normalize())
+      function(t : Float) : Rgbxa return ((left : LCh).interpolate(right, t) : Rgbxa).normalize())
       .display('interpolateCielch');
 
     MiniCanvas.create(400, 20).gradientHorizontal(
-      function(t : Float) : Rgbxa return ((left : CieLCh).interpolateWidest(right, t) : Rgbxa).normalize())
+      function(t : Float) : Rgbxa return ((left : LCh).interpolateWidest(right, t) : Rgbxa).normalize())
       .display('interpolateCielchWidest');
 
     MiniCanvas.create(400, 20).gradientHorizontal(
@@ -93,7 +93,7 @@ class Demo {
     MiniCanvas.create(200, 200)
       .checkboard()
       .box(function(x : Float, y : Float) : Rgbxa
-        return CieLCh.create(80, y * 134, x * 360))
+        return LCh.create(80, y * 134, x * 360))
       .display("rainbowCielch");
 
     MiniCanvas.create(200, 200)
@@ -168,7 +168,7 @@ class Demo {
           rgbx: (color : Rgbx),
           rgb:  (color : Rgb),
           lab:  (color : Lab),
-          lch:  (color : CieLCh),
+          lch:  (color : LCh),
           cmy:  (color : Cmy),
           cmyk: (color : Cmyk),
           ch:   (color : CubeHelix),
@@ -183,7 +183,7 @@ class Demo {
           rgbx: (color : Rgbx),
           rgb:  (color : Rgb),
           lab:  (color : Lab),
-          lch:  (color : CieLCh),
+          lch:  (color : LCh),
           cmy:  (color : Cmy),
           cmyk: (color : Cmyk),
           ch:   (color : CubeHelix),
@@ -200,7 +200,7 @@ class Demo {
       min.rgbx = (color : Rgbx).min(min.rgbx);
       min.rgb =  (color : Rgb).min(min.rgb);
       min.lab =  (color : Lab).min(min.lab);
-      min.lch =  (color : CieLCh).min(min.lch);
+      min.lch =  (color : LCh).min(min.lch);
       min.cmy =  (color : Cmy).min(min.cmy);
       min.cmyk = (color : Cmyk).min(min.cmyk);
       min.ch =   (color : CubeHelix).min(min.ch);
@@ -214,7 +214,7 @@ class Demo {
       max.rgbx = (color : Rgbx).max(max.rgbx);
       max.rgb =  (color : Rgb).max(max.rgb);
       max.lab =  (color : Lab).max(max.lab);
-      max.lch =  (color : CieLCh).max(max.lch);
+      max.lch =  (color : LCh).max(max.lch);
       max.cmy =  (color : Cmy).max(max.cmy);
       max.cmyk = (color : Cmyk).max(max.cmyk);
       max.ch =   (color : CubeHelix).max(max.ch);

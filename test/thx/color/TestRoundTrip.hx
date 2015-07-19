@@ -21,7 +21,7 @@ class TestRoundTrip {
         rgbx: (_ : Rgbx),
         rgb:  (_ : Rgb),
         lab:  (_ : Lab),
-        lch:  (_ : CieLCh),
+        lch:  (_ : LCh),
         cmy:  (_ : Cmy),
         cmyk: (_ : Cmyk),
         ch:   (_ : CubeHelix),
@@ -39,7 +39,7 @@ class TestRoundTrip {
     rgbx : Rgbx,
     rgb  : Rgb,
     lab  : Lab,
-    lch  : CieLCh,
+    lch  : LCh,
     cmy  : Cmy,
     cmyk : Cmyk,
     ch   : CubeHelix,
@@ -87,20 +87,20 @@ class TestRoundTrip {
       });
   }
 
-  public function testCieLChRoundtrip() {
+  public function testLChRoundtrip() {
     tests
       .map.fn({
-        assertCieLCh(_.lch, _.lab, _.lab);
-        assertCieLCh(_.lch, _.rgbx, _.rgbx);
-        assertCieLCh(_.lch, _.cmy, _.cmy);
-        assertCieLCh(_.lch, _.cmyk, _.cmyk);
-        assertCieLCh(_.lch, _.ch, _.ch);
-        assertCieLCh(_.lch, _.hsl, _.hsl);
-        assertCieLCh(_.lch, _.hsv, _.hsv);
-        assertCieLCh(_.lch, _.hl, _.hl);
-        assertCieLCh(_.lch, _.xyz, _.xyz);
-        assertCieLCh(_.lch, _.yuv, _.yuv);
-        assertCieLCh(_.lch, _.yxy, _.yxy);
+        assertLCh(_.lch, _.lab, _.lab);
+        assertLCh(_.lch, _.rgbx, _.rgbx);
+        assertLCh(_.lch, _.cmy, _.cmy);
+        assertLCh(_.lch, _.cmyk, _.cmyk);
+        assertLCh(_.lch, _.ch, _.ch);
+        assertLCh(_.lch, _.hsl, _.hsl);
+        assertLCh(_.lch, _.hsv, _.hsv);
+        assertLCh(_.lch, _.hl, _.hl);
+        assertLCh(_.lch, _.xyz, _.xyz);
+        assertLCh(_.lch, _.yuv, _.yuv);
+        assertLCh(_.lch, _.yxy, _.yxy);
       });
   }
 
@@ -245,7 +245,7 @@ class TestRoundTrip {
       .map.fn({
         var t : Lab = _.lab.toString();
         Assert.isTrue(_.lab == t, 'expected ${_.lab} but was $t');
-        var t : CieLCh = _.lch.toString();
+        var t : LCh = _.lch.toString();
         Assert.isTrue(_.lch == t, 'expected ${_.lch} but was $t');
         var t : Cmy = _.cmy.toString();
         Assert.isTrue(_.cmy == t, 'expected ${_.cmy} but was $t');
@@ -280,7 +280,7 @@ class TestRoundTrip {
       '\n      $e expected, but was\n      $t for\n      $s', pos);
   }
 
-  static function assertCieLCh(e : CieLCh, t : CieLCh, s : String, ?pos : haxe.PosInfos) {
+  static function assertLCh(e : LCh, t : LCh, s : String, ?pos : haxe.PosInfos) {
     Assert.isTrue(e.nearEquals(t, 0.01),
       '\n      $e expected, but was\n      $t for\n      $s', pos);
   }

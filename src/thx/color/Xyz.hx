@@ -119,8 +119,8 @@ abstract Xyz(Array<Float>) {
     return new Lab([l, a, b]);
   }
 
-  @:to public function toCieLCh()
-    return toLab().toCieLCh();
+  @:to public function toLCh()
+    return toLab().toLCh();
 
   @:to public function toCieLuv() {
     var x = x * 100,

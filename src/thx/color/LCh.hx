@@ -25,13 +25,13 @@ axis.
 There are simplified spellings LCh, LCH and HLC common.
 **/
 @:access(thx.color.Lab)
-abstract CieLCh(Array<Float>) {
+abstract LCh(Array<Float>) {
   public var lightness(get, never) : Float;
   public var chroma(get, never) : Float;
   public var hue(get, never) : Float;
 
   inline public static function create(lightness : Float, chroma : Float, hue : Float)
-    return new CieLCh([
+    return new LCh([
       lightness,
       chroma,
       hue
@@ -39,7 +39,7 @@ abstract CieLCh(Array<Float>) {
 
   @:from public static function fromFloats(arr : Array<Float>) {
     arr.resize(3);
-    return CieLCh.create(arr[0], arr[1], arr[2]);
+    return LCh.create(arr[0], arr[1], arr[2]);
   }
 
 
@@ -50,16 +50,16 @@ abstract CieLCh(Array<Float>) {
 
     return try switch info.name {
       case 'cielch', 'lch':
-        new CieLCh(ColorParser.getFloatChannels(info.channels, 3, false));
+        new LCh(ColorParser.getFloatChannels(info.channels, 3, false));
       case 'hcl':
         var c = ColorParser.getFloatChannels(info.channels, 3, false);
-        CieLCh.create(c[2], c[1], c[0]);
+        LCh.create(c[2], c[1], c[0]);
       case _:
         null;
     } catch(e : Dynamic) null;
   }
 
-  inline function new(channels : Array<Float>) : CieLCh
+  inline function new(channels : Array<Float>) : LCh
     this = channels;
 
   public function analogous(spread = 30.0)
@@ -71,24 +71,24 @@ abstract CieLCh(Array<Float>) {
   public function complement()
     return rotate(180);
 
-  public function interpolate(other : CieLCh, t : Float)
-    return new CieLCh([
+  public function interpolate(other : LCh, t : Float)
+    return new LCh([
       t.interpolate(lightness, other.lightness),
       t.interpolate(chroma, other.chroma),
       t.interpolateAngle(hue, other.hue, 360)
     ]);
 
-  public function interpolateWidest(other : CieLCh, t : Float)
-    return new CieLCh([
+  public function interpolateWidest(other : LCh, t : Float)
+    return new LCh([
       t.interpolate(lightness, other.lightness),
       t.interpolate(chroma, other.chroma),
       t.interpolateAngleWidest(hue, other.hue, 360)
     ]);
 
-  public function min(other : CieLCh)
+  public function min(other : LCh)
     return create(lightness.min(other.lightness), chroma.min(other.chroma), hue.min(other.hue));
 
-  public function max(other : CieLCh)
+  public function max(other : LCh)
     return create(lightness.max(other.lightness), chroma.max(other.chroma), hue.max(other.hue));
 
   public function normalize()
@@ -125,22 +125,22 @@ abstract CieLCh(Array<Float>) {
     );
 
   public function withLightness(newlightness : Float)
-    return new CieLCh([newlightness, chroma, hue]);
+    return new LCh([newlightness, chroma, hue]);
 
   public function withChroma(newchroma : Float)
-    return new CieLCh([lightness, newchroma, hue]);
+    return new LCh([lightness, newchroma, hue]);
 
   public function withHue(newhue : Float)
-    return new CieLCh([lightness, chroma, newhue]);
+    return new LCh([lightness, chroma, newhue]);
 
-  @:op(A==B) public function equals(other : CieLCh) : Bool
+  @:op(A==B) public function equals(other : LCh) : Bool
     return nearEquals(other);
 
-  public function nearEquals(other : CieLCh, ?tolerance = Floats.EPSILON) : Bool
+  public function nearEquals(other : LCh, ?tolerance = Floats.EPSILON) : Bool
     return lightness.nearEqualAngles(other.lightness, null, tolerance) && chroma.nearEquals(other.chroma, tolerance) && hue.nearEquals(other.hue, tolerance);
 
   @:to public function toString() : String
-    return 'cielch(${lightness},${chroma},${hue})';
+    return 'lch(${lightness},${chroma},${hue})';
 
   public function toHclString() : String
     return 'hcl(${hue},${chroma},${lightness})';

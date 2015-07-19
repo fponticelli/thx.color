@@ -34,7 +34,7 @@ values. The yellow/blue opponent colors are represented along the b* axis, with
 blue at negative b* values and yellow at positive b* values. The scaling and
 limits of the a* and b* axes run in the range of ±100 or -128 to +127.
 **/
-@:access(thx.color.CieLCh)
+@:access(thx.color.LCh)
 @:access(thx.color.Hcl)
 @:access(thx.color.Xyz)
 abstract Lab(Array<Float>) {
@@ -119,10 +119,10 @@ abstract Lab(Array<Float>) {
   @:to public function toString() : String
     return 'lab(${l},${a},${b})';
 
-  @:to public function toCieLCh() {
+  @:to public function toLCh() {
     var h = Math.atan2(b, a) * 180 / Math.PI,
         c = Math.sqrt(a * a + b * b);
-    return new CieLCh([l, c, h]);
+    return new LCh([l, c, h]);
   }
 
   @:to public function toCieLuv()
