@@ -17,8 +17,13 @@ it returns `null`.
     var info = ColorParser.parseHex(color);
     if(null == info)
       info = ColorParser.parseColor(color);
-    if(null == info)
-      return namedColors.get(color);
+    if(null == info) {
+      var rgb = namedColors.get(color);
+      if(null == rgb)
+        return null;
+      else
+        return rgb;
+    }
 
     return try switch info.name {
       case 'cielab', 'lab':
