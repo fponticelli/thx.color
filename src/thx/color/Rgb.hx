@@ -32,7 +32,7 @@ abstract Rgb(Int) from Int to Int {
   inline public static function create(red : Int, green : Int, blue : Int)
     return new Rgb(((red & 0xFF) << 16) | ((green & 0xFF) << 8) | ((blue & 0xFF) << 0));
 
-    inline public static function createf(red : Float, green : Float, blue : Float)
+  inline public static function createf(red : Float, green : Float, blue : Float)
     return create((red * 255).round(), (green * 255).round(), (blue * 255).round());
 
   @:from public static function fromString(color : String) : Null<Rgb> {
@@ -72,10 +72,10 @@ abstract Rgb(Int) from Int to Int {
     return toRgbx().interpolate(other.toRgbx(), t).toRgb();
 
   public function min(other : Rgb)
-    return create(red.min(other.red), green.min(other.green), blue.min(other.blue));
+    return Rgb.create(red.min(other.red), green.min(other.green), blue.min(other.blue));
 
   public function max(other : Rgb)
-    return create(red.max(other.red), green.max(other.green), blue.max(other.blue));
+    return Rgb.create(red.max(other.red), green.max(other.green), blue.max(other.blue));
 
   public function withAlpha(alpha : Int)
     return Rgba.fromInts([red, green, blue, alpha]);
