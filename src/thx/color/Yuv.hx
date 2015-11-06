@@ -69,10 +69,10 @@ abstract Yuv(Array<Float>) {
     return new Yuv([newy, u, v]);
 
   public function withU(newu : Float)
-    return new Yuv([y, u, v]);
+    return new Yuv([y, newu, v]);
 
   public function withV(newv : Float)
-    return new Yuv([y, u, v]);
+    return new Yuv([y, u, newv]);
 
   @:to public function toString() : String
     return 'yuv(${y},${u},${v})';

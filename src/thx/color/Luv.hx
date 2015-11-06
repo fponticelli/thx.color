@@ -70,10 +70,10 @@ abstract Luv(Array<Float>) {
     return new Luv([newy, u, v]);
 
   public function withU(newu : Float)
-    return new Luv([l, u, v]);
+    return new Luv([l, newu, v]);
 
   public function withV(newv : Float)
-    return new Luv([l, u, v]);
+    return new Luv([l, u, newv]);
 
   @:to public function toString() : String
     return 'cieluv(${l},${u},${v})';

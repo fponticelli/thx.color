@@ -54,10 +54,10 @@ abstract Yxy(Array<Float>) {
     return new Yxy([newy1, x, y2]);
 
   public function withY(newx : Float)
-    return new Yxy([y1, x, y2]);
+    return new Yxy([y1, newx, y2]);
 
   public function withZ(newy2 : Float)
-    return new Yxy([y1, x, y2]);
+    return new Yxy([y1, x, newy2]);
 
   @:to public function toString() : String
     return 'yxy(${y1},${x},${y2})';
