@@ -5,8 +5,8 @@
   "classPath": "src",
   "tags": ["color", "thx", "cross"],
   "description": "Library for color manipulation. Contains definitions for Lab, LCh, Cmy(K), CubeHelix, Grey, Hcl, Hsl(A), Hsv(A), Rgb(A), Xyz and Yxy as well as alpha versions of the sames and color parsing.",
-  "releasenote": "Fixed issue with thx.core.",
-  "version": "0.17.2",
+  "releasenote": "Fixes to some of the `with` methods.",
+  "version": "0.17.3",
   "contributors": ["fponticelli"],
   "dependencies": {
     "thx.core": ""
