@@ -52,7 +52,7 @@ abstract Lab(Array<Float>) {
       return null;
 
     return try switch info.name {
-      case 'lab', 'lab':
+      case 'lab': 
         Lab.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
       case _:
         null;
