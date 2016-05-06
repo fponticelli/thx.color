@@ -26,7 +26,13 @@ class TestLab {
   public function testFromFloat() {
     var s : Lab = "lab(50,10,-10)",
         f : Lab = [50.0,10.0,-10.0];
-    Assert.isTrue(s == f);
+    Assert.same(s, f);
+  }
+
+  public function testFromString() {
+    var s = "lab(50,10,-10)";
+    var color = Lab.create(50, 10, -10);
+    Assert.same(color, Lab.fromString(s));
   }
 
   public function testDistance() {
