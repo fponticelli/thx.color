@@ -1,7 +1,5 @@
 -cp src
 -cp test
--lib utest
 -lib thx.core
--neko bin/neko.n
+-lib utest
 -main TestAll
--D thx-color

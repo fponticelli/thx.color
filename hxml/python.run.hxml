@@ -1,9 +1,0 @@
--cp src
--cp test
--lib utest
--lib thx.core
--python bin/python.py
--main TestAll
--D thx-color
-
--cmd python3 bin/python.py
