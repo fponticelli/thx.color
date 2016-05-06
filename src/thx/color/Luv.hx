@@ -135,8 +135,8 @@ abstract Luv(Array<Float>) {
         v = v * 100,
         x = 9 * u / (9 * u - 16 * v + 12),
         y = 4 * v / (9 * u - 16 * v + 12),
-        uPrime = (try u / (13 * l) catch(e : Dynamic) 0) + Xyz.whiteReference.u * 100,
-        vPrime = (try v / (13 * l) catch(e : Dynamic) 0) + Xyz.whiteReference.v * 100,
+        uPrime = (l == 0 ? 0 : u / (13 * l)) + Xyz.whiteReference.u * 100,
+        vPrime = (l == 0 ? 0 : v / (13 * l)) + Xyz.whiteReference.v * 100,
         Y = l > 8 ?
               Xyz.whiteReference.y * 100 * Math.pow((l + 16)/116, 3) :
               Xyz.whiteReference.y * 100 * l * Math.pow(3/29, 3),

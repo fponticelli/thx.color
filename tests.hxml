@@ -2,4 +2,5 @@
 -cp test
 -lib thx.core
 -lib utest
+-D travis
 -main TestAll
