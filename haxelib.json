@@ -5,8 +5,8 @@
   "classPath": "src",
   "tags": ["color", "thx", "cross"],
   "description": "Library for color manipulation. Contains definitions for Lab, LCh, Cmy(K), CubeHelix, Grey, Hcl, Hsl(A), Hsv(A), Rgb(A), Xyz and Yxy as well as alpha versions of the sames and color parsing.",
-  "releasenote": "Use travix for travis and some fixes.",
-  "version": "0.18.0",
+  "releasenote": "Fixes to color spaces with alpha channels and added Argb.",
+  "version": "0.19.0",
   "contributors": ["fponticelli"],
   "dependencies": {
     "thx.core": ""
