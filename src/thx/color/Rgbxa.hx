@@ -23,6 +23,7 @@ abstract Rgbxa(Array<Float>) {
     trace(arr);
     arr = arr.resized(4);
     trace(arr);
+    trace([arr[0] / 255.0, arr[1] / 255.0, arr[2] / 255.0, arr[3] / 255.0]);
     return Rgbxa.create(arr[0] / 255.0, arr[1] / 255.0, arr[2] / 255.0, arr[3] / 255.0);
   }
 
@@ -137,10 +138,10 @@ abstract Rgbxa(Array<Float>) {
     return redf.nearEquals(other.redf, tolerance) && greenf.nearEquals(other.greenf, tolerance) && bluef.nearEquals(other.bluef, tolerance) && alphaf.nearEquals(other.alphaf, tolerance);
 
   @:to public function toHsla(): Hsla
-    return toRgbx().toHsl().withAlpha(alpha);
+    return toRgbx().toHsl().withAlpha(alphaf);
 
   @:to public function toHsva(): Hsva
-    return toRgbx().toHsv().withAlpha(alpha);
+    return toRgbx().toHsv().withAlpha(alphaf);
 
   @:to public function toRgb(): Rgb
     return toRgbx().toRgb();
