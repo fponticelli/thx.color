@@ -67,6 +67,14 @@ class TestRgb {
     Assert.isTrue(new Rgba(0x00FF00FF).equals("rgba(0,100%,0,1)"));
   }
 
+  public function testToIntRgba() {
+
+  }
+
+  public function testToIntArgb() {
+
+  }
+
   public function testCombineColor() {
     var rgba     = Rgb.fromInts([255, 0, 0]).withAlphaf(.42),
         bg       = Rgb.fromInts([153, 200, 224]),

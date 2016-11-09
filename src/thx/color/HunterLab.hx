@@ -12,15 +12,15 @@ meter. It is based on Hering's opponent-colors theory of vision.
 @:access(thx.color.LCh)
 @:access(thx.color.Xyz)
 abstract HunterLab(Array<Float>) {
-  inline public static function create(l : Float, a : Float, b : Float)
+  inline public static function create(l: Float, a: Float, b: Float)
     return new HunterLab([l, a, b]);
 
-  @:from public static function fromFloats(arr : Array<Float>) {
-    arr.resize(3);
+  @:from public static function fromFloats(arr: Array<Float>) {
+    arr = arr.resized(3);
     return HunterLab.create(arr[0], arr[1], arr[2]);
   }
 
-  @:from public static function fromString(color : String) {
+  @:from public static function fromString(color: String) {
     var info = ColorParser.parseColor(color);
     if(null == info)
       return null;
@@ -30,29 +30,29 @@ abstract HunterLab(Array<Float>) {
         HunterLab.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
       case _:
         null;
-    } catch(e : Dynamic) null;
+    } catch(e: Dynamic) null;
   }
 
-  inline function new(channels : Array<Float>) : HunterLab
+  inline function new(channels: Array<Float>): HunterLab
     this = channels;
 
-  public var l(get, never) : Float;
-  public var a(get, never) : Float;
-  public var b(get, never) : Float;
+  public var l(get, never): Float;
+  public var a(get, never): Float;
+  public var b(get, never): Float;
 
-  public function distance(other : HunterLab)
+  public function distance(other: HunterLab)
     return (l - other.l) * (l - other.l) +
            (a - other.a) * (a - other.a) +
            (b - other.b) * (b - other.b);
 
-  public function interpolate(other : HunterLab, t : Float)
+  public function interpolate(other: HunterLab, t: Float)
     return new HunterLab([
       t.interpolate(l, other.l),
       t.interpolate(a, other.a),
       t.interpolate(b, other.b)
     ]);
 
-  public function match(palette : Iterable<HunterLab>) {
+  public function match(palette: Iterable<HunterLab>) {
     palette.throwIfEmpty();
     var dist = Math.POSITIVE_INFINITY,
         closest = null;
@@ -66,76 +66,76 @@ abstract HunterLab(Array<Float>) {
     return closest;
   }
 
-  public function min(other : HunterLab)
+  public function min(other: HunterLab)
     return create(l.min(other.l), a.min(other.a), b.min(other.b));
 
-  public function max(other : HunterLab)
+  public function max(other: HunterLab)
     return create(l.max(other.l), a.max(other.a), b.max(other.b));
 
-  public function roundTo(decimals : Int)
+  public function roundTo(decimals: Int)
     return create(l.roundTo(decimals), a.roundTo(decimals), b.roundTo(decimals));
 
-  @:op(A==B) public function equals(other : HunterLab) : Bool
+  @:op(A==B) public function equals(other: HunterLab): Bool
     return nearEquals(other);
 
-  public function nearEquals(other : HunterLab, ?tolerance = Floats.EPSILON) : Bool
+  public function nearEquals(other: HunterLab, ?tolerance = Floats.EPSILON): Bool
     return l.nearEquals(other.l, tolerance) && a.nearEquals(other.a, tolerance) && b.nearEquals(other.b, tolerance);
 
-  public function withL(newl : Float)
+  public function withL(newl: Float)
     return new HunterLab([newl, a, b]);
 
-  public function withA(newa : Float)
+  public function withA(newa: Float)
     return new HunterLab([l, newa, b]);
 
-  public function withB(newb : Float)
+  public function withB(newb: Float)
     return new HunterLab([l, a, newb]);
 
-  @:to public function toString() : String
+  @:to public function toString(): String
     return 'hunterlab(${l},${a},${b})';
 
-  @:to public function toLab()
+  @:to public function toLab(): Lab
     return toXyz().toLab();
 
-  @:to public function toLCh()
+  @:to public function toLCh(): LCh
     return toLab().toLCh();
 
-  @:to public function toLuv()
+  @:to public function toLuv(): Luv
     return toRgbx().toLuv();
 
-  @:to public function toCmy()
+  @:to public function toCmy(): Cmy
     return toRgbx().toCmy();
 
-  @:to public function toCmyk()
+  @:to public function toCmyk(): Cmyk
     return toRgbx().toCmyk();
 
-  @:to public function toCubeHelix()
+  @:to public function toCubeHelix(): CubeHelix
     return toRgbx().toCubeHelix();
 
-  @:to public function toGrey()
+  @:to public function toGrey(): Grey
     return toRgbx().toGrey();
 
-  @:to public function toHsl()
+  @:to public function toHsl(): Hsl
     return toRgbx().toHsl();
 
-  @:to public function toHsv()
+  @:to public function toHsv(): Hsv
     return toRgbx().toHsv();
 
-  @:to public function toRgb()
+  @:to public function toRgb(): Rgb
     return toRgbx().toRgb();
 
-  @:to public function toRgba()
+  @:to public function toRgba(): Rgba
     return toRgbxa().toRgba();
 
-  @:to public function toRgbx()
+  @:to public function toRgbx(): Rgbx
     return toXyz().toRgbx();
 
-  @:to public function toRgbxa()
+  @:to public function toRgbxa(): Rgbxa
     return toRgbx().toRgbxa();
 
-  @:to public function toTemperature()
+  @:to public function toTemperature(): Temperature
     return toRgbx().toTemperature();
 
-  @:to public function toXyz() {
+  @:to public function toXyz(): Xyz {
     var x = (a / 17.5) * (l / 10.0),
         l10 = l / 10.0,
         y = l10 * l10,
@@ -144,16 +144,16 @@ abstract HunterLab(Array<Float>) {
     return new Xyz([(x + y) / 1.02, y, -(z - y) / 0.847]);
   }
 
-  @:to public function toYuv()
+  @:to public function toYuv(): Yuv
     return toRgbx().toYuv();
 
-  @:to public function toYxy()
+  @:to public function toYxy(): Yxy
     return toXyz().toYxy();
 
-  inline function get_l() : Float
+  inline function get_l(): Float
     return this[0];
-  inline function get_a() : Float
+  inline function get_a(): Float
     return this[1];
-  inline function get_b() : Float
+  inline function get_b(): Float
     return this[2];
 }

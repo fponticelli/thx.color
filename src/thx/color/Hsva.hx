@@ -11,20 +11,20 @@ A version of `Hsv` with support for an additional `alpha` channel.
 @:access(thx.color.Rgbxa)
 @:access(thx.color.Hsv)
 abstract Hsva(Array<Float>) {
-  public var hue(get, never) : Float;
-  public var saturation(get, never) : Float;
-  public var value(get, never) : Float;
-  public var alpha(get, never) : Float;
+  public var hue(get, never): Float;
+  public var saturation(get, never): Float;
+  public var value(get, never): Float;
+  public var alpha(get, never): Float;
 
-  inline public static function create(hue : Float, saturation : Float, value : Float, alpha : Float)
+  inline public static function create(hue: Float, saturation: Float, value: Float, alpha: Float)
     return new Hsva([hue, saturation, value, alpha]);
 
-  @:from public static function fromFloats(arr : Array<Float>) {
-    arr.resize(4);
+  @:from public static function fromFloats(arr: Array<Float>) {
+    arr = arr.resized(4);
     return Hsva.create(arr[0], arr[1], arr[2], arr[3]);
   }
 
-  @:from public static function fromString(color : String) {
+  @:from public static function fromString(color: String) {
     var info = ColorParser.parseColor(color);
     if(null == info)
       return null;
@@ -36,10 +36,10 @@ abstract Hsva(Array<Float>) {
         new thx.color.Hsva(ColorParser.getFloatChannels(info.channels, 4, false));
       case _:
         null;
-    } catch(e : Dynamic) null;
+    } catch(e: Dynamic) null;
   }
 
-  inline function new(channels : Array<Float>) : Hsva
+  inline function new(channels: Array<Float>): Hsva
     this = channels;
 
   public function analogous(spread = 30.0)
@@ -54,7 +54,7 @@ abstract Hsva(Array<Float>) {
   public function normalize()
     return create(hue.wrapCircular(360), saturation.normalize(), value.normalize(), alpha.normalize());
 
-  public function transparent(t : Float)
+  public function transparent(t: Float)
     return new Hsva([
       hue,
       saturation,
@@ -62,7 +62,7 @@ abstract Hsva(Array<Float>) {
       t.interpolate(alpha, 0)
     ]);
 
-  public function opaque(t : Float)
+  public function opaque(t: Float)
     return new Hsva([
       hue,
       saturation,
@@ -70,7 +70,7 @@ abstract Hsva(Array<Float>) {
       t.interpolate(alpha, 1)
     ]);
 
-  public function interpolate(other : Hsva, t : Float)
+  public function interpolate(other: Hsva, t: Float)
     return new Hsva([
       t.interpolateAngle(hue, other.hue),
       t.interpolate(saturation, other.saturation),
@@ -78,7 +78,7 @@ abstract Hsva(Array<Float>) {
       t.interpolate(alpha, other.alpha)
     ]);
 
-  public function interpolateWidest(other : Hsva, t : Float)
+  public function interpolateWidest(other: Hsva, t: Float)
     return new Hsva([
       t.interpolateAngleWidest(hue, other.hue),
       t.interpolate(saturation, other.saturation),
@@ -86,10 +86,10 @@ abstract Hsva(Array<Float>) {
       t.interpolate(alpha, other.alpha)
     ]);
 
-  public function rotate(angle : Float)
+  public function rotate(angle: Float)
     return create(hue + angle, saturation, value, alpha).normalize();
 
-  public function roundTo(decimals : Int)
+  public function roundTo(decimals: Int)
     return create(hue.roundTo(decimals), saturation.roundTo(decimals), value.roundTo(decimals), alpha.roundTo(decimals));
 
   public function split(spread = 150.0)
@@ -98,44 +98,44 @@ abstract Hsva(Array<Float>) {
       rotate(spread)
     );
 
-  public function withAlpha(newalpha : Float)
+  public function withAlpha(newalpha: Float)
     return new Hsva([hue, saturation, value, newalpha]);
 
-  public function withHue(newhue : Float)
+  public function withHue(newhue: Float)
     return new Hsva([newhue, saturation, value, alpha]);
 
-  public function withLightness(newvalue : Float)
+  public function withLightness(newvalue: Float)
     return new Hsva([hue, saturation, newvalue, alpha]);
 
-  public function withSaturation(newsaturation : Float)
+  public function withSaturation(newsaturation: Float)
     return new Hsva([hue, newsaturation, value, alpha]);
 
-  public function toString() : String
+  public function toString(): String
     return 'hsva(${hue},${(saturation*100)}%,${(value*100)}%,${alpha})';
 
-  @:op(A==B) public function equals(other : Hsva) : Bool
+  @:op(A==B) public function equals(other: Hsva): Bool
     return nearEquals(other);
 
-  public function nearEquals(other : Hsva, ?tolerance = Floats.EPSILON) : Bool
+  public function nearEquals(other: Hsva, ?tolerance = Floats.EPSILON): Bool
     return hue.nearEqualAngles(other.hue, null, tolerance) && saturation.nearEquals(other.saturation, tolerance) && value.nearEquals(other.value, tolerance) && alpha.nearEquals(other.alpha, tolerance);
 
-  @:to public function toHsv()
+  @:to public function toHsv(): Hsv
     return new Hsv(this.slice(0, 3));
 
-  @:to public function toHsla()
+  @:to public function toHsla(): Hsla
     return toRgbxa().toHsla();
 
-  @:to public function toRgb()
+  @:to public function toRgb(): Rgb
     return toRgbxa().toRgb();
 
-  @:to public function toRgba()
+  @:to public function toRgba(): Rgba
     return toRgbxa().toRgba();
 
-  @:to public function toRgbxa() {
+  @:to public function toRgbxa(): Rgbxa {
     if(saturation == 0)
       return new Rgbxa([value, value, value, alpha]);
 
-    var r : Float, g : Float, b : Float, i : Int, f : Float, p : Float, q : Float, t : Float;
+    var r: Float, g: Float, b: Float, i: Int, f: Float, p: Float, q: Float, t: Float;
     var h = hue / 60;
 
     i = Math.floor(h);
@@ -156,12 +156,12 @@ abstract Hsva(Array<Float>) {
     return new Rgbxa([r, g, b, alpha]);
   }
 
-  inline function get_hue() : Float
+  inline function get_hue(): Float
     return this[0];
-  inline function get_saturation() : Float
+  inline function get_saturation(): Float
     return this[1];
-  inline function get_value() : Float
+  inline function get_value(): Float
     return this[2];
-  inline function get_alpha() : Float
+  inline function get_alpha(): Float
     return this[3];
 }

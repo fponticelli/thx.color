@@ -14,15 +14,15 @@ abstract Cmy(Array<Float>) {
   public var magenta(get, never): Float;
   public var yellow(get, never): Float;
 
-  inline public static function create(cyan: Float, magenta: Float, yellow: Float) : Cmy
+  inline public static function create(cyan: Float, magenta: Float, yellow: Float): Cmy
     return new Cmy([cyan, magenta, yellow]);
 
-  @:from public static function fromFloats(arr : Array<Float>) {
-    arr.resize(3);
+  @:from public static function fromFloats(arr: Array<Float>) {
+    arr = arr.resized(3);
     return Cmy.create(arr[0], arr[1], arr[2]);
   }
 
-  @:from public static function fromString(color : String) {
+  @:from public static function fromString(color: String) {
     var info = ColorParser.parseColor(color);
     if(null == info)
       return null;
@@ -31,59 +31,59 @@ abstract Cmy(Array<Float>) {
         new thx.color.Cmy(ColorParser.getFloatChannels(info.channels, 3, false));
       case _:
         null;
-    } catch(e : Dynamic) null;
+    } catch(e: Dynamic) null;
   }
 
-  inline function new(channels : Array<Float>) : Cmy
+  inline function new(channels: Array<Float>): Cmy
     this = channels;
 
-  public function interpolate(other : Cmy, t : Float)
+  public function interpolate(other: Cmy, t: Float)
     return new Cmy([
       t.interpolate(cyan,    other.cyan),
       t.interpolate(magenta, other.magenta),
       t.interpolate(yellow,  other.yellow)
     ]);
 
-  public function min(other : Cmy)
+  public function min(other: Cmy)
     return create(cyan.min(other.cyan), magenta.min(other.magenta), yellow.min(other.yellow));
 
-  public function max(other : Cmy)
+  public function max(other: Cmy)
     return create(cyan.max(other.cyan), magenta.max(other.magenta), yellow.max(other.yellow));
 
   public function normalize()
     return create(cyan.normalize(), magenta.normalize(), yellow.normalize());
 
-  public function roundTo(decimals : Int)
+  public function roundTo(decimals: Int)
     return create(cyan.roundTo(decimals), magenta.roundTo(decimals), yellow.roundTo(decimals));
 
-  public function withCyan(newcyan : Float)
+  public function withCyan(newcyan: Float)
     return new Cmy([newcyan, magenta, yellow]);
 
-  public function withMagenta(newmagenta : Float)
+  public function withMagenta(newmagenta: Float)
     return new Cmy([cyan, newmagenta, yellow]);
 
-  public function withYellow(newyellow : Float)
+  public function withYellow(newyellow: Float)
     return new Cmy([cyan, magenta, newyellow]);
 
-  @:to public function toString() : String
+  @:to public function toString(): String
     return 'cmy(${cyan},${magenta},${yellow})';
 
-  @:op(A==B) public function equals(other : Cmy) : Bool
+  @:op(A==B) public function equals(other: Cmy): Bool
     return nearEquals(other);
 
-  public function nearEquals(other : Cmy, ?tolerance = Floats.EPSILON) : Bool
+  public function nearEquals(other: Cmy, ?tolerance = Floats.EPSILON): Bool
     return cyan.nearEquals(other.cyan, tolerance) && magenta.nearEquals(other.magenta, tolerance) && yellow.nearEquals(other.yellow, tolerance);
 
-  @:to public function toLab()
+  @:to public function toLab(): Lab
     return toXyz().toLab();
 
-  @:to public function toLCh()
+  @:to public function toLCh(): LCh
     return toLab().toLCh();
 
-  @:to public function toLuv()
+  @:to public function toLuv(): Luv
     return toRgbx().toLuv();
 
-  @:to public function toCmyk() {
+  @:to public function toCmyk(): Cmyk {
     var k = cyan.min(magenta).min(yellow);
     if(k == 1)
       return new Cmyk([0,0,0,1]);
@@ -96,53 +96,53 @@ abstract Cmy(Array<Float>) {
       ]);
   }
 
-  @:to public function toCubeHelix()
+  @:to public function toCubeHelix(): CubeHelix
     return toRgbx().toCubeHelix();
 
-  @:to public function toGrey()
+  @:to public function toGrey(): Grey
     return toRgbx().toGrey();
 
-  @:to public function toHsl()
+  @:to public function toHsl(): Hsl
     return toRgbx().toHsl();
 
-  @:to public function toHsv()
+  @:to public function toHsv(): Hsv
     return toRgbx().toHsv();
 
-  @:to public function toHunterLab()
+  @:to public function toHunterLab(): HunterLab
     return toXyz().toHunterLab();
 
-  @:to public function toRgb()
+  @:to public function toRgb(): Rgb
     return toRgbx().toRgb();
 
-  @:to public function toRgba()
+  @:to public function toRgba(): Rgba
     return toRgbxa().toRgba();
 
-  @:to public function toRgbx()
+  @:to public function toRgbx(): Rgbx
     return new Rgbx([
       1 - cyan,
       1 - magenta,
       1 - yellow
     ]);
 
-  @:to public function toRgbxa() : Rgbxa
+  @:to public function toRgbxa(): Rgbxa
     return toRgbx().toRgbxa();
 
-  @:to public function toTemperature()
+  @:to public function toTemperature(): Temperature
     return toRgbx().toTemperature();
 
-  @:to public function toXyz() : Xyz
+  @:to public function toXyz(): Xyz
     return toRgbx().toXyz();
 
-  @:to public function toYuv()
+  @:to public function toYuv(): Yuv
     return toRgbx().toYuv();
 
-  @:to public function toYxy() : Yxy
+  @:to public function toYxy(): Yxy
     return toRgbx().toYxy();
 
-  inline function get_cyan() : Float
+  inline function get_cyan(): Float
     return this[0];
-  inline function get_magenta() : Float
+  inline function get_magenta(): Float
     return this[1];
-  inline function get_yellow() : Float
+  inline function get_yellow(): Float
     return this[2];
 }

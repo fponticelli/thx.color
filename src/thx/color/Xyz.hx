@@ -36,22 +36,22 @@ abstract Xyz(Array<Float>) {
   public static var epsilon(default, null) = 216.0/24389.0; // 0.008856
   public static var kappa(default, null) = 24389.0/27.0; // 903.3
 
-  public var x(get, never) : Float;
-  public var y(get, never) : Float;
-  public var z(get, never) : Float;
+  public var x(get, never): Float;
+  public var y(get, never): Float;
+  public var z(get, never): Float;
 
-  public var u(get, never) : Float;
-  public var v(get, never) : Float;
+  public var u(get, never): Float;
+  public var v(get, never): Float;
 
-  inline public static function create(x : Float, y : Float, z : Float)
+  inline public static function create(x: Float, y: Float, z: Float)
     return new Xyz([x, y, z]);
 
-  @:from public static function fromFloats(arr : Array<Float>) {
-    arr.resize(3);
+  @:from public static function fromFloats(arr: Array<Float>) {
+    arr = arr.resized(3);
     return create(arr[0], arr[1], arr[2]);
   }
 
-  @:from public static function fromString(color : String) {
+  @:from public static function fromString(color: String) {
     var info = ColorParser.parseColor(color);
     if(null == info)
       return null;
@@ -61,48 +61,48 @@ abstract Xyz(Array<Float>) {
         new thx.color.Xyz(ColorParser.getFloatChannels(info.channels, 3, false));
       case _:
         null;
-    } catch(e : Dynamic) null;
+    } catch(e: Dynamic) null;
   }
 
-  inline function new(channels : Array<Float>) : Xyz
+  inline function new(channels: Array<Float>): Xyz
     this = channels;
 
-  public function interpolate(other : Xyz, t : Float)
+  public function interpolate(other: Xyz, t: Float)
     return new Xyz([
       t.interpolate(x, other.x),
       t.interpolate(y, other.y),
       t.interpolate(z, other.z),
     ]);
 
-  public function min(other : Xyz)
+  public function min(other: Xyz)
     return create(x.min(other.x), y.min(other.y), z.min(other.z));
 
-  public function max(other : Xyz)
+  public function max(other: Xyz)
     return create(x.max(other.x), y.max(other.y), z.max(other.z));
 
-  public function roundTo(decimals : Int)
+  public function roundTo(decimals: Int)
     return create(x.roundTo(decimals), y.roundTo(decimals), z.roundTo(decimals));
 
-  public function withX(newx : Float)
+  public function withX(newx: Float)
     return new Xyz([newx, y, z]);
 
-  public function withY(newy : Float)
+  public function withY(newy: Float)
     return new Xyz([x, newy, z]);
 
-  public function withZ(newz : Float)
+  public function withZ(newz: Float)
     return new Xyz([x, y, newz]);
 
-  @:to public function toString() : String
+  @:to public function toString(): String
     return 'xyz(${x},${y},${z})';
 
-  @:op(A==B) public function equals(other : Xyz) : Bool
+  @:op(A==B) public function equals(other: Xyz): Bool
     return nearEquals(other);
 
-  public function nearEquals(other : Xyz, ?tolerance = Floats.EPSILON) : Bool
+  public function nearEquals(other: Xyz, ?tolerance = Floats.EPSILON): Bool
     return x.nearEquals(other.x, tolerance) && y.nearEquals(other.y, tolerance) && z.nearEquals(other.z, tolerance);
 
-  @:to public function toLab() : Lab {
-    function f(t : Float) {
+  @:to public function toLab(): Lab {
+    function f(t: Float) {
       if(t > (6 / 29) * (6 / 29) * (6 / 29)) {
         return Math.pow(t, 1 / 3);
       } else {
@@ -119,55 +119,55 @@ abstract Xyz(Array<Float>) {
     return new Lab([l, a, b]);
   }
 
-  @:to public function toLCh()
+  @:to public function toLCh(): LCh
     return toLab().toLCh();
 
-  @:to public function toLuv() {
+  @:to public function toLuv(): Luv {
     var x = x * 100,
         y = y * 100,
         z = z * 100,
         f = y / (whiteReference.y * 100),
         r = Math.pow(6/29, 3),
         l = f > r ?
-              116 * Math.pow(f, 1.0 / 3.0) - 16 :
+              116 * Math.pow(f, 1.0 / 3.0) - 16:
               Math.pow(29 / 3, 3) * f,
         u = 13 * l * (u - whiteReference.u * 100),
         v = 13 * l * (v - whiteReference.v * 100);
     return new Luv([l / 100, u / 100, v / 100]);
   }
 
-  @:to public function toCmy()
+  @:to public function toCmy(): Cmy
     return toRgbx().toCmy();
 
-  @:to public function toCmyk()
+  @:to public function toCmyk(): Cmyk
     return toRgbx().toCmyk();
 
-  @:to public function toCubeHelix()
+  @:to public function toCubeHelix(): CubeHelix
     return toRgbx().toCubeHelix();
 
-  @:to public function toGrey()
+  @:to public function toGrey(): Grey
     return toRgbx().toGrey();
 
-  @:to public function toHsl()
+  @:to public function toHsl(): Hsl
     return toRgbx().toHsl();
 
-  @:to public function toHsv()
+  @:to public function toHsv(): Hsv
     return toRgbx().toHsv();
 
-  @:to public function toHunterLab() {
+  @:to public function toHunterLab(): HunterLab {
     var l = 10.0 * Math.sqrt(y),
-        a = y != 0 ? 17.5 * (((1.02 * x) - y) / Math.sqrt(y)) : 0,
-        b = y != 0 ? 7.0 * ((y - (.847 * z)) / Math.sqrt(y)) : 0;
+        a = y != 0 ? 17.5 * (((1.02 * x) - y) / Math.sqrt(y)): 0,
+        b = y != 0 ? 7.0 * ((y - (.847 * z)) / Math.sqrt(y)): 0;
     return new HunterLab([l, a, b]);
   }
 
-  @:to public function toRgb()
+  @:to public function toRgb(): Rgb
     return toRgbx().toRgb();
 
-  @:to public function toRgba()
+  @:to public function toRgba(): Rgba
     return toRgbxa().toRgba();
 
-  @:to public function toRgbx() {
+  @:to public function toRgbx(): Rgbx {
     var x = x,
         y = y,
         z = z,
@@ -175,39 +175,39 @@ abstract Xyz(Array<Float>) {
         g = x * -0.9689 + y *  1.8758 + z *  0.0415,
         b = x *  0.0557 + y * -0.2040 + z *  1.0570;
 
-    r = r > 0.0031308 ? 1.055 * Math.pow(r, 1.0 / 2.4) - 0.055 : 12.92 * r;
-    g = g > 0.0031308 ? 1.055 * Math.pow(g, 1.0 / 2.4) - 0.055 : 12.92 * g;
-    b = b > 0.0031308 ? 1.055 * Math.pow(b, 1.0 / 2.4) - 0.055 : 12.92 * b;
+    r = r > 0.0031308 ? 1.055 * Math.pow(r, 1.0 / 2.4) - 0.055: 12.92 * r;
+    g = g > 0.0031308 ? 1.055 * Math.pow(g, 1.0 / 2.4) - 0.055: 12.92 * g;
+    b = b > 0.0031308 ? 1.055 * Math.pow(b, 1.0 / 2.4) - 0.055: 12.92 * b;
 
     return new Rgbx([r,g,b]);
   }
 
-  @:to public function toRgbxa()
+  @:to public function toRgbxa(): Rgbxa
     return toRgbx().toRgbxa();
 
-  @:to public function toTemperature()
+  @:to public function toTemperature(): Temperature
     return toRgbx().toTemperature();
 
-  @:to public function toYuv()
+  @:to public function toYuv(): Yuv
     return toRgbx().toYuv();
 
-  @:to public function toYxy() {
+  @:to public function toYxy(): Yxy {
     var sum = x + y + z;
     return new Yxy([
       y,
-      sum == 0 ? 1 : x / sum,
-      sum == 0 ? 1 : y / sum
+      sum == 0 ? 1: x / sum,
+      sum == 0 ? 1: y / sum
     ]);
   }
 
-  inline function get_x() : Float
+  inline function get_x(): Float
     return this[0];
-  inline function get_y() : Float
+  inline function get_y(): Float
     return this[1];
-  inline function get_z() : Float
+  inline function get_z(): Float
     return this[2];
-  function get_u() : Float
-    return try (4 * x) / (x + 15 * y + 3 * z) catch(e : Dynamic) 0;
-  function get_v() : Float
-    return try (9 * y) / (x + 15 * y + 3 * z) catch(e : Dynamic) 0;
+  function get_u(): Float
+    return try (4 * x) / (x + 15 * y + 3 * z) catch(e: Dynamic) 0;
+  function get_v(): Float
+    return try (9 * y) / (x + 15 * y + 3 * z) catch(e: Dynamic) 0;
 }

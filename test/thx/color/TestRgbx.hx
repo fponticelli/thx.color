@@ -20,6 +20,14 @@ class TestRgbx {
     Assert.equals("rgb(0%,0%,100%)", color.toString());
   }
 
+  public function testToIntRgbx() {
+
+  }
+
+  public function testToIntArgb() {
+
+  }
+
   public function testFromString() {
     Assert.isTrue(Rgbx.create(0,1,0).equals("#00ff00"));
     Assert.isTrue(Rgbx.create(0,1,0).equals("#0f0"));

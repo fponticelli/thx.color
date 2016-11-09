@@ -24,12 +24,12 @@ abstract Rgbx(Array<Float>) {
     return new Rgbx([red, green, blue]);
 
   @:from public static function fromFloats(arr : Array<Float>) {
-    arr.resize(3);
+    arr = arr.resized(3);
     return Rgbx.create(arr[0], arr[1], arr[2]);
   }
 
   @:from public static function fromInts(arr : Array<Int>) {
-    arr.resize(3);
+    arr = arr.resized(3);
     return Rgbx.create(arr[0] / 255.0, arr[1] / 255.0, arr[2] / 255.0);
   }
 
@@ -128,13 +128,13 @@ abstract Rgbx(Array<Float>) {
   public function withBlue(newblue : Int)
     return new Rgbx([red, green, newblue]);
 
-  @:to public function toLab()
+  @:to public function toLab(): Lab
     return toXyz().toLab();
 
-  @:to public function toLCh()
+  @:to public function toLCh(): LCh
     return toLab().toLCh();
 
-  @:to public function toLuv()
+  @:to public function toLuv(): Luv
     return toXyz().toLuv();
 
   @:to public function toCmy() : Cmy
@@ -144,7 +144,7 @@ abstract Rgbx(Array<Float>) {
       1 - bluef
     ]);
 
-  @:to public function toCmyk() {
+  @:to public function toCmyk(): Cmyk {
     var c = 0.0, y = 0.0, m = 0.0, k;
     if (redf + greenf + bluef == 0) {
       k = 1.0;
@@ -157,7 +157,7 @@ abstract Rgbx(Array<Float>) {
     return new Cmyk([c, m, y, k]);
   }
 
-  @:to inline public function toCubeHelix()
+  @:to inline public function toCubeHelix(): CubeHelix
     return toCubeHelixWithGamma(1);
 
   public function toCubeHelixWithGamma(gamma : Float) {
@@ -174,7 +174,7 @@ abstract Rgbx(Array<Float>) {
     return new CubeHelix([h, s, l, 1]);
   }
 
-  @:to public function toGrey()
+  @:to public function toGrey(): Grey
     return new Grey(redf * .2126 + greenf * .7152 + bluef * .0722);
 
   public function toPerceivedGrey()
@@ -183,7 +183,7 @@ abstract Rgbx(Array<Float>) {
   public function toPerceivedAccurateGrey()
     return new Grey(Math.pow(redf, 2) * .241 + Math.pow(greenf, 2) * .691 + Math.pow(bluef, 2) * .068);
 
-  @:to public function toHsl() {
+  @:to public function toHsl(): Hsl {
     var min = redf.min(greenf).min(bluef),
         max = redf.max(greenf).max(bluef),
         delta = max - min,
@@ -209,7 +209,7 @@ abstract Rgbx(Array<Float>) {
     return new Hsl([h, s, l]);
   }
 
-  @:to public function toHsv() {
+  @:to public function toHsv(): Hsv {
     var min = redf.min(greenf).min(bluef),
         max = redf.max(greenf).max(bluef),
         delta = max - min,
@@ -237,16 +237,16 @@ abstract Rgbx(Array<Float>) {
     return new Hsv([h, s, v]);
   }
 
-  @:to public function toHunterLab()
+  @:to public function toHunterLab(): HunterLab
     return toXyz().toHunterLab();
 
-  @:to public function toRgb()
+  @:to public function toRgb(): Rgb
     return Rgb.createf(redf, greenf, bluef);
 
-  @:to public function toRgbxa()
+  @:to public function toRgbxa(): Rgbxa
     return withAlpha(1.0);
 
-  @:to public function toTemperature() {
+  @:to public function toTemperature(): Temperature {
     var t : Float = 0,
         rgb,
         epsilon = 0.4,
@@ -290,7 +290,7 @@ abstract Rgbx(Array<Float>) {
     return new Yuv([y, u, v]);
   }
 
-  @:to public function toYxy()
+  @:to public function toYxy(): Yxy
     return toXyz().toYxy();
 
   function get_red() : Int

@@ -25,9 +25,9 @@ blueish white) for higher temperatures.
 **/
 @:access(thx.color.Rgbx)
 abstract Temperature(Float) from Float to Float {
-  public static function temperatureToRgbx(kelvin : Float) {
+  public static function temperatureToRgbx(kelvin: Float) {
     var t = kelvin / 100.0;
-    var r : Float, g : Float, b : Float;
+    var r: Float, g: Float, b: Float;
 
     // red
     if(t < 66.0) {
@@ -67,10 +67,10 @@ abstract Temperature(Float) from Float to Float {
     return new Rgbx([r, g, b]);
   }
 
-  @:from inline public static function create(v : Float)
+  @:from inline public static function create(v: Float)
     return new Temperature(v);
 
-  @:from public static function fromString(color : String) : Null<Temperature> {
+  @:from public static function fromString(color: String): Null<Temperature> {
     var info = ColorParser.parseColor(color);
     if(null == info)
       return null;
@@ -80,73 +80,73 @@ abstract Temperature(Float) from Float to Float {
         new thx.color.Temperature(ColorParser.getFloatChannels(info.channels, 1, false)[0]);
       case _:
         null;
-    } catch(e : Dynamic) null;
+    } catch(e: Dynamic) null;
   }
 
-  public var kelvin(get, never) : Float;
-  inline public function new(kelvin : Float) : Temperature
+  public var kelvin(get, never): Float;
+  inline public function new(kelvin: Float): Temperature
     this = kelvin;
 
-  public function interpolate(other : Temperature, t : Float)
+  public function interpolate(other: Temperature, t: Float)
     return new Temperature(t.interpolate(kelvin, other.kelvin));
 
-  public function min(other : Temperature)
+  public function min(other: Temperature)
     return create(kelvin.min(other.kelvin));
 
-  public function max(other : Temperature)
+  public function max(other: Temperature)
     return create(kelvin.max(other.kelvin));
 
-  public function roundTo(decimals : Int)
+  public function roundTo(decimals: Int)
     return create(kelvin.roundTo(decimals));
 
-  @:to public function toString() : String
+  @:to public function toString(): String
     return 'temperature(${kelvin})';
 
-  @:op(A==B) public function equals(other : Temperature) : Bool
+  @:op(A==B) public function equals(other: Temperature): Bool
     return nearEquals(other);
 
-  public function nearEquals(other : Temperature, ?tolerance = Floats.EPSILON) : Bool
+  public function nearEquals(other: Temperature, ?tolerance = Floats.EPSILON): Bool
     return this.nearEquals(other.kelvin, tolerance);
 
-  inline function get_kelvin() : Float
+  inline function get_kelvin(): Float
     return this;
 
-  @:to public function toLab()
+  @:to public function toLab(): Lab
     return toXyz().toLab();
 
-  @:to public function toLCh()
+  @:to public function toLCh(): LCh
     return toLab().toLCh();
 
-  @:to public function toLuv()
+  @:to public function toLuv(): Luv
     return toRgbx().toLuv();
 
-  @:to public function toCmy()
+  @:to public function toCmy(): Cmy
     return toRgbx().toCmy();
 
-  @:to public function toCmyk()
+  @:to public function toCmyk(): Cmyk
     return toRgbx().toCmyk();
 
-  @:to public function toCubeHelix()
+  @:to public function toCubeHelix(): CubeHelix
     return toRgbx().toCubeHelix();
 
-  @:to public function toHsl()
+  @:to public function toHsl(): Hsl
     return toRgbx().toHsl();
 
-  @:to public function toHsv()
+  @:to public function toHsv(): Hsv
     return toRgbx().toHsv();
 
-  @:to public function toHunterLab()
+  @:to public function toHunterLab(): HunterLab
     return toXyz().toHunterLab();
 
-  @:to public function toRgb()
+  @:to public function toRgb(): Rgb
     return toRgbx().toRgb();
 
-  @:to public function toRgba()
+  @:to public function toRgba(): Rgba
     return toRgbxa().toRgba();
 
   public function toRgbxTannerHelland() {
     var t = kelvin / 100,
-        r : Float, g : Float, b : Float;
+        r: Float, g: Float, b: Float;
 
     // red
     if(t <= 66) {
@@ -185,18 +185,18 @@ abstract Temperature(Float) from Float to Float {
     return new Rgbx([r, g, b]);
   }
 
-  @:to public function toRgbx()
+  @:to public function toRgbx(): Rgbx
     return Temperature.temperatureToRgbx(this);
 
-  @:to public function toRgbxa()
+  @:to public function toRgbxa(): Rgbxa
     return toRgbx().toRgbxa();
 
-  @:to public function toYuv()
+  @:to public function toYuv(): Yuv
     return toRgbx().toYuv();
 
-  @:to public function toXyz()
+  @:to public function toXyz(): Xyz
     return toRgbx().toXyz();
 
-  @:to public function toYxy()
+  @:to public function toYxy(): Yxy
     return toRgbx().toYxy();
 }

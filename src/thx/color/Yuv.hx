@@ -18,19 +18,19 @@ photographic equipment that conforms to certain Y'UV standards.
 @:access(thx.color.Lab)
 @:access(thx.color.Xyz)
 abstract Yuv(Array<Float>) {
-  public var y(get, never) : Float;
-  public var u(get, never) : Float;
-  public var v(get, never) : Float;
+  public var y(get, never): Float;
+  public var u(get, never): Float;
+  public var v(get, never): Float;
 
-  inline public static function create(y : Float, u : Float, v : Float)
+  inline public static function create(y: Float, u: Float, v: Float)
     return new Yuv([y, u, v]);
 
-  @:from public static function fromFloats(arr : Array<Float>) {
-    arr.resize(3);
+  @:from public static function fromFloats(arr: Array<Float>) {
+    arr = arr.resized(3);
     return Yuv.create(arr[0], arr[1], arr[2]);
   }
 
-  @:from public static function fromString(color : String) {
+  @:from public static function fromString(color: String) {
     var info = ColorParser.parseColor(color);
     if(null == info)
       return null;
@@ -40,86 +40,86 @@ abstract Yuv(Array<Float>) {
         new thx.color.Yuv(ColorParser.getFloatChannels(info.channels, 3, false));
       case _:
         null;
-    } catch(e : Dynamic) null;
+    } catch(e: Dynamic) null;
   }
 
-  inline function new(channels : Array<Float>) : Yuv
+  inline function new(channels: Array<Float>): Yuv
     this = channels;
 
-  public function interpolate(other : Yuv, t : Float)
+  public function interpolate(other: Yuv, t: Float)
     return new Yuv([
       t.interpolate(y, other.y),
       t.interpolate(u,  other.u),
       t.interpolate(v, other.v)
     ]);
 
-  public function min(other : Yuv)
+  public function min(other: Yuv)
     return create(y.min(other.y), u.min(other.u), v.min(other.v));
 
-  public function max(other : Yuv)
+  public function max(other: Yuv)
     return create(y.max(other.y), u.max(other.u), v.max(other.v));
 
   public function normalize()
     return create(y.normalize(), u.clampSym(0.436), v.clampSym(0.615));
 
-  public function roundTo(decimals : Int)
+  public function roundTo(decimals: Int)
     return create(y.roundTo(decimals), u.roundTo(decimals), v.roundTo(decimals));
 
-  public function withY(newy : Float)
+  public function withY(newy: Float)
     return new Yuv([newy, u, v]);
 
-  public function withU(newu : Float)
+  public function withU(newu: Float)
     return new Yuv([y, newu, v]);
 
-  public function withV(newv : Float)
+  public function withV(newv: Float)
     return new Yuv([y, u, newv]);
 
-  @:to public function toString() : String
+  @:to public function toString(): String
     return 'yuv(${y},${u},${v})';
 
-  @:op(A==B) public function equals(other : Yuv) : Bool
+  @:op(A==B) public function equals(other: Yuv): Bool
     return nearEquals(other);
 
-  public function nearEquals(other : Yuv, ?tolerance = Floats.EPSILON) : Bool
+  public function nearEquals(other: Yuv, ?tolerance = Floats.EPSILON): Bool
     return y.nearEquals(other.y, tolerance) && u.nearEquals(other.u, tolerance) && v.nearEquals(other.v, tolerance);
 
-  @:to public function toLab()
+  @:to public function toLab(): Lab
     return toXyz().toLab();
 
-  @:to public function toLCh()
+  @:to public function toLCh(): LCh
     return toLab().toLCh();
 
-  @:to public function toLuv()
+  @:to public function toLuv(): Luv
     return toRgbx().toLuv();
 
-  @:to public function toCmy()
+  @:to public function toCmy(): Cmy
     return toRgbx().toCmy();
 
-  @:to public function toCmyk()
+  @:to public function toCmyk(): Cmyk
     return toRgbx().toCmyk();
 
-  @:to public function toCubeHelix()
+  @:to public function toCubeHelix(): CubeHelix
     return toRgbx().toCubeHelix();
 
-  @:to public function toGrey()
+  @:to public function toGrey(): Grey
     return toRgbx().toGrey();
 
-  @:to public function toHsl()
+  @:to public function toHsl(): Hsl
     return toRgbx().toHsl();
 
-  @:to public function toHsv()
+  @:to public function toHsv(): Hsv
     return toRgbx().toHsv();
 
-  @:to public function toHunterLab()
+  @:to public function toHunterLab(): HunterLab
     return toXyz().toHunterLab();
 
-  @:to public function toRgb()
+  @:to public function toRgb(): Rgb
     return toRgbx().toRgb();
 
-  @:to public function toRgba()
+  @:to public function toRgba(): Rgba
     return toRgbxa().toRgba();
 
-  @:to public function toRgbx() {
+  @:to public function toRgbx(): Rgbx {
     var r = y + 1.139837398373983740  * v,
         g = y - 0.3946517043589703515 * u - 0.5805986066674976801 * v,
         b = y + 2.032110091743119266  * u;
@@ -127,22 +127,22 @@ abstract Yuv(Array<Float>) {
     return new Rgbx([r, g, b]);
   }
 
-  @:to public function toRgbxa()
+  @:to public function toRgbxa(): Rgbxa
     return toRgbx().toRgbxa();
 
-  @:to public function toTemperature()
+  @:to public function toTemperature(): Temperature
     return toRgbx().toTemperature();
 
-  @:to public function toYxy()
+  @:to public function toYxy(): Yxy
     return toRgbx().toYxy();
 
-  @:to public function toXyz()
+  @:to public function toXyz(): Xyz
     return toRgbx().toXyz();
 
-  inline function get_y() : Float
+  inline function get_y(): Float
     return this[0];
-  inline function get_u() : Float
+  inline function get_u(): Float
     return this[1];
-  inline function get_v() : Float
+  inline function get_v(): Float
     return this[2];
 }

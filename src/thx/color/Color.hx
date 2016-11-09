@@ -8,12 +8,12 @@ using thx.Maps;
 Utility class to parse any supported color space to `Rgbxa`.
 **/
 class Color {
-  static var namedColors : Map<String, Rgbx> = new Map();
+  static var namedColors: Map<String, Rgbx> = new Map();
 /**
 Parse a string and returns an `Rgba` instance. If the string cannot be parsed
 it returns `null`.
 **/
-  public static function parse(color : String) : Rgbxa {
+  public static function parse(color: String): Rgbxa {
     var info = ColorParser.parseHex(color);
     if(null == info)
       info = ColorParser.parseColor(color);
@@ -65,12 +65,12 @@ it returns `null`.
         Yxy.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
       case _:
         null;
-    } catch(e : Dynamic) null;
+    } catch(e: Dynamic) null;
   }
 
-  public static function addRgbPalette(palette : Map<String, Rgb>)
+  public static function addRgbPalette(palette: Map<String, Rgb>)
     palette.tuples().map.fn(namedColors.set(_.left, _.right));
 
-  public static function addLabPalette(palette : Map<String, Lab>)
+  public static function addLabPalette(palette: Map<String, Lab>)
     palette.tuples().map.fn(namedColors.set(_.left, _.right));
 }

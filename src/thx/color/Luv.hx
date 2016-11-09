@@ -19,19 +19,19 @@ line in the CIELUV color space unless the mixtures are constant in lightness.
 @:access(thx.color.Lab)
 @:access(thx.color.Xyz)
 abstract Luv(Array<Float>) {
-  public var l(get, never) : Float;
-  public var u(get, never) : Float;
-  public var v(get, never) : Float;
+  public var l(get, never): Float;
+  public var u(get, never): Float;
+  public var v(get, never): Float;
 
-  inline public static function create(l : Float, u : Float, v : Float)
+  inline public static function create(l: Float, u: Float, v: Float)
     return new Luv([l, u, v]);
 
-  @:from public static function fromFloats(arr : Array<Float>) {
-    arr.resize(3);
+  @:from public static function fromFloats(arr: Array<Float>) {
+    arr = arr.resized(3);
     return Luv.create(arr[0], arr[1], arr[2]);
   }
 
-  @:from public static function fromString(color : String) {
+  @:from public static function fromString(color: String) {
     var info = ColorParser.parseColor(color);
     if(null == info)
       return null;
@@ -41,104 +41,104 @@ abstract Luv(Array<Float>) {
         new thx.color.Luv(ColorParser.getFloatChannels(info.channels, 3, false));
       case _:
         null;
-    } catch(e : Dynamic) null;
+    } catch(e: Dynamic) null;
   }
 
-  inline function new(channels : Array<Float>) : Luv
+  inline function new(channels: Array<Float>): Luv
     this = channels;
 
-  public function interpolate(other : Luv, t : Float)
+  public function interpolate(other: Luv, t: Float)
     return new Luv([
       t.interpolate(l, other.l),
       t.interpolate(u, other.u),
       t.interpolate(v, other.v)
     ]);
 
-  public function min(other : Luv)
+  public function min(other: Luv)
     return create(l.min(other.l), u.min(other.u), v.min(other.v));
 
-  public function max(other : Luv)
+  public function max(other: Luv)
     return create(l.max(other.l), u.max(other.u), v.max(other.v));
 
   public function normalize()
     return create(l.normalize(), u.clampSym(0.436), v.clampSym(0.615));
 
-  public function roundTo(decimals : Int)
+  public function roundTo(decimals: Int)
     return create(l.roundTo(decimals), u.roundTo(decimals), v.roundTo(decimals));
 
-  public function withY(newy : Float)
+  public function withY(newy: Float)
     return new Luv([newy, u, v]);
 
-  public function withU(newu : Float)
+  public function withU(newu: Float)
     return new Luv([l, newu, v]);
 
-  public function withV(newv : Float)
+  public function withV(newv: Float)
     return new Luv([l, u, newv]);
 
-  @:to public function toString() : String
+  @:to public function toString(): String
     return 'cieluv(${l},${u},${v})';
 
-  @:op(A==B) public function equals(other : Luv) : Bool
+  @:op(A==B) public function equals(other: Luv): Bool
     return nearEquals(other);
 
-  public function nearEquals(other : Luv, ?tolerance = Floats.EPSILON) : Bool
+  public function nearEquals(other: Luv, ?tolerance = Floats.EPSILON): Bool
     return l.nearEquals(other.l, tolerance) && u.nearEquals(other.u, tolerance) && v.nearEquals(other.v, tolerance);
 
-  @:to public function toLab()
+  @:to public function toLab(): Lab
     return toXyz().toLab();
 
-  @:to public function toLCh()
+  @:to public function toLCh(): LCh
     return toLab().toLCh();
 
-  @:to public function toCmy()
+  @:to public function toCmy(): Cmy
     return toRgbx().toCmy();
 
-  @:to public function toCmyk()
+  @:to public function toCmyk(): Cmyk
     return toRgbx().toCmyk();
 
-  @:to public function toCubeHelix()
+  @:to public function toCubeHelix(): CubeHelix
     return toRgbx().toCubeHelix();
 
-  @:to public function toGrey()
+  @:to public function toGrey(): Grey
     return toRgbx().toGrey();
 
-  @:to public function toHsl()
+  @:to public function toHsl(): Hsl
     return toRgbx().toHsl();
 
-  @:to public function toHsv()
+  @:to public function toHsv(): Hsv
     return toRgbx().toHsv();
 
-  @:to public function toHunterLab()
+  @:to public function toHunterLab(): HunterLab
     return toXyz().toHunterLab();
 
-  @:to public function toRgb()
+  @:to public function toRgb(): Rgb
     return toRgbx().toRgb();
 
-  @:to public function toRgba()
+  @:to public function toRgba(): Rgba
     return toRgbxa().toRgba();
 
-  @:to public function toRgbx()
+  @:to public function toRgbx(): Rgbx
     return toXyz().toRgbx();
 
-  @:to public function toRgbxa()
+  @:to public function toRgbxa(): Rgbxa
     return toRgbx().toRgbxa();
 
-  @:to public function toTemperature()
+  @:to public function toTemperature(): Temperature
     return toRgbx().toTemperature();
 
-  @:to public function toYxy()
+  @:to public function toYxy(): Yxy
     return toRgbx().toYxy();
 
-  @:to public function toXyz() {
+  @:to public function toXyz(): Xyz {
     var l = l * 100,
         u = u * 100,
         v = v * 100,
         x = 9 * u / (9 * u - 16 * v + 12),
         y = 4 * v / (9 * u - 16 * v + 12),
-        uPrime = (l == 0 ? 0 : u / (13 * l)) + Xyz.whiteReference.u * 100,
-        vPrime = (l == 0 ? 0 : v / (13 * l)) + Xyz.whiteReference.v * 100,
+        uPrime = (l == 0 ? 0: u / (13 * l)) + Xyz.whiteReference.u * 100,
+        vPrime = (l == 0 ? 0: v / (13 * l)) + Xyz.whiteReference.v * 100,
         Y = l > 8 ?
-              Xyz.whiteReference.y * 100 * Math.pow((l + 16)/116, 3) :
+              Xyz.whiteReference.y * 100 * Math.pow((l + 16)/116, 3):
               Xyz.whiteReference.y * 100 * l * Math.pow(3/29, 3),
         X = Y * 9 * uPrime / (4 * vPrime),
         Z = Y * (12 - 3 * uPrime - 20 * vPrime) / (4 * vPrime);
@@ -146,10 +146,10 @@ abstract Luv(Array<Float>) {
     return new Xyz([X / 100, Y / 100, Z / 100]);
   }
 
-  inline function get_l() : Float
+  inline function get_l(): Float
     return this[0];
-  inline function get_u() : Float
+  inline function get_u(): Float
     return this[1];
-  inline function get_v() : Float
+  inline function get_v(): Float
     return this[2];
 }
