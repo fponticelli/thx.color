@@ -140,6 +140,9 @@ abstract Rgb(Int) from Int {
   @:to public function toRgba(): Rgba
     return withAlpha(255);
 
+  @:to public function toArgb(): Argb
+    return toRgba().toArgb();
+
   @:to public function toRgbxa(): Rgbxa
     return toRgba().toRgbxa();
 

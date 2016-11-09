@@ -90,13 +90,13 @@ abstract Rgba(Int) from Int {
     return Rgba.fromInts([red, green, blue, Math.round(255 * newalpha)]);
 
   public function withRed(newred: Int)
-    return Rgba.fromInts([newred, green, blue]);
+    return Rgba.fromInts([newred, green, blue, alpha]);
 
   public function withGreen(newgreen: Int)
-    return Rgba.fromInts([red, newgreen, blue]);
+    return Rgba.fromInts([red, newgreen, blue, alpha]);
 
   public function withBlue(newblue: Int)
-    return Rgba.fromInts([red, green, newblue]);
+    return Rgba.fromInts([red, green, newblue, alpha]);
 
   @:to public function toHsla(): Hsla
     return toRgbxa().toHsla();
@@ -106,6 +106,9 @@ abstract Rgba(Int) from Int {
 
   @:to public function toRgb(): Rgb
     return Rgb.create(red, green, blue);
+
+  @:to public function toArgb(): Argb
+    return Argb.create(alpha, red, green, blue);
 
   @:to public function toRgbx(): Rgbx
     return Rgbx.fromInts([red, green, blue]);
@@ -120,7 +123,7 @@ abstract Rgba(Int) from Int {
     return toCss3();
 
   public function toHex(prefix = "#")
-    return '$prefix${alpha.hex(2)}${red.hex(2)}${green.hex(2)}${blue.hex(2)}';
+    return '$prefix${red.hex(2)}${green.hex(2)}${blue.hex(2)}${alpha.hex(2)}';
 
   @:op(A==B) public function equals(other: Rgba): Bool
     return red == other.red && alpha == other.alpha && green == other.green && blue == other.blue;

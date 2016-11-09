@@ -170,6 +170,9 @@ abstract Hsv(Array<Float>) {
   @:to public function toRgba(): Rgba
     return toRgbxa().toRgba();
 
+  @:to public function toArgb(): Argb
+    return toRgbxa().toArgb();
+
   @:to public function toRgbx(): Rgbx {
     if(saturation == 0)
       return new Rgbx([value, value, value]);

@@ -144,6 +144,9 @@ abstract Temperature(Float) from Float to Float {
   @:to public function toRgba(): Rgba
     return toRgbxa().toRgba();
 
+  @:to public function toArgb(): Argb
+    return toRgbxa().toArgb();
+
   public function toRgbxTannerHelland() {
     var t = kelvin / 100,
         r: Float, g: Float, b: Float;

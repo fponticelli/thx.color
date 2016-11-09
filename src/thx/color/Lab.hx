@@ -155,6 +155,9 @@ abstract Lab(Array<Float>) {
   @:to public function toRgba(): Rgba
     return toRgbxa().toRgba();
 
+  @:to public function toArgb(): Argb
+    return toRgbxa().toArgb();
+
   @:to public function toRgbx(): Rgbx
     return toXyz().toRgbx();
 

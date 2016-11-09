@@ -128,8 +128,8 @@ abstract Hsva(Array<Float>) {
   @:to public function toRgb(): Rgb
     return toRgbxa().toRgb();
 
-  @:to public function toRgba(): Rgba
-    return toRgbxa().toRgba();
+  @:to public function toArgb(): Argb
+    return toRgbxa().toArgb();
 
   @:to public function toRgbxa(): Rgbxa {
     if(saturation == 0)

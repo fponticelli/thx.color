@@ -195,6 +195,9 @@ abstract CubeHelix(Array<Float>) {
   @:to public function toRgba(): Rgba
     return toRgbxa().toRgba();
 
+  @:to public function toArgb(): Argb
+    return toRgbxa().toArgb();
+
   @:to public function toRgbx(): Rgbx {
     var h = Math.isNaN(hue) ? 0: (hue + 120) / 180 * Math.PI,
         l = Math.pow(lightness, gamma),

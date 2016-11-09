@@ -20,10 +20,7 @@ abstract Rgbxa(Array<Float>) {
   }
 
   @:from public static function fromInts(arr: Array<Int>) {
-    trace(arr);
     arr = arr.resized(4);
-    trace(arr);
-    trace([arr[0] / 255.0, arr[1] / 255.0, arr[2] / 255.0, arr[3] / 255.0]);
     return Rgbxa.create(arr[0] / 255.0, arr[1] / 255.0, arr[2] / 255.0, arr[3] / 255.0);
   }
 
@@ -114,13 +111,13 @@ abstract Rgbxa(Array<Float>) {
     return new Rgbxa([red, green, blue, newalpha]);
 
   public function withRed(newred: Int)
-    return new Rgbxa([newred, green, blue, alpha]);
+    return new Rgbxa([newred, green, blue, alphaf]);
 
   public function withGreen(newgreen: Int)
-    return new Rgbxa([red, newgreen, blue, alpha]);
+    return new Rgbxa([red, newgreen, blue, alphaf]);
 
   public function withBlue(newblue: Int)
-    return new Rgbxa([red, green, newblue, alpha]);
+    return new Rgbxa([red, green, newblue, alphaf]);
 
   public function toCss3(): String
     return toString();
@@ -151,6 +148,9 @@ abstract Rgbxa(Array<Float>) {
 
   @:to public function toRgba(): Rgba
     return Rgba.fromFloats([redf, greenf, bluef, alphaf]);
+
+  @:to public function toArgb(): Argb
+    return Argb.fromFloats([alphaf, redf, greenf, bluef]);
 
   function get_red(): Int
     return (redf   * 255).round();

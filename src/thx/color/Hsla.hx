@@ -142,6 +142,9 @@ abstract Hsla(Array<Float>) {
   @:to public function toRgba(): Rgba
     return toRgbxa().toRgba();
 
+  @:to public function toArgb(): Argb
+    return toRgbxa().toArgb();
+
   @:access(thx.color.Hsl._c)
   @:to public function toRgbxa(): Rgbxa
     return new Rgbxa([
