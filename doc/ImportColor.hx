@@ -1,3 +1,4 @@
+import thx.color.Argb;
 import thx.color.CieHcl;
 import thx.color.CieLab;
 import thx.color.CieLCh;
