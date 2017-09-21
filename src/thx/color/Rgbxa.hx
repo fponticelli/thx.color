@@ -1,8 +1,8 @@
 package thx.color;
 
 using thx.Arrays;
-using thx.Floats;
-using thx.Ints;
+import thx.Floats;
+import thx.Ints;
 using thx.Strings;
 import thx.color.parse.ColorParser;
 
@@ -77,7 +77,7 @@ abstract Rgbxa(Array<Float>) {
       redf,
       greenf,
       bluef,
-      t.interpolate(alphaf, 0)
+      Floats.interpolate(t, alphaf, 0)
     ]);
 
   public function opaque(t: Float)
@@ -85,27 +85,27 @@ abstract Rgbxa(Array<Float>) {
       redf,
       greenf,
       bluef,
-      t.interpolate(alphaf, 1)
+      Floats.interpolate(t, alphaf, 1)
     ]);
 
   public function interpolate(other: Rgbxa, t: Float)
     return new Rgbxa([
-      t.interpolate(redf, other.redf),
-      t.interpolate(greenf, other.greenf),
-      t.interpolate(bluef, other.bluef),
-      t.interpolate(alphaf, other.alphaf)
+      Floats.interpolate(t, redf, other.redf),
+      Floats.interpolate(t, greenf, other.greenf),
+      Floats.interpolate(t, bluef, other.bluef),
+      Floats.interpolate(t, alphaf, other.alphaf)
     ]);
 
   public function normalize()
     return new Rgbx([
-      redf.normalize(),
-      greenf.normalize(),
-      bluef.normalize(),
-      alphaf.normalize()
+      Floats.normalize(redf),
+      Floats.normalize(greenf),
+      Floats.normalize(bluef),
+      Floats.normalize(alphaf)
     ]);
 
   public function roundTo(decimals: Int)
-    return create(redf.roundTo(decimals), greenf.roundTo(decimals), bluef.roundTo(decimals), alphaf.roundTo(decimals));
+    return create(Floats.roundTo(redf, decimals), Floats.roundTo(greenf, decimals), Floats.roundTo(bluef, decimals), Floats.roundTo(alphaf, decimals));
 
   public function withAlpha(newalpha: Float)
     return new Rgbxa([red, green, blue, newalpha]);
@@ -132,7 +132,7 @@ abstract Rgbxa(Array<Float>) {
     return nearEquals(other);
 
   public function nearEquals(other: Rgbxa, ?tolerance = Floats.EPSILON): Bool
-    return redf.nearEquals(other.redf, tolerance) && greenf.nearEquals(other.greenf, tolerance) && bluef.nearEquals(other.bluef, tolerance) && alphaf.nearEquals(other.alphaf, tolerance);
+    return Floats.nearEquals(redf, other.redf, tolerance) && Floats.nearEquals(greenf, other.greenf, tolerance) && Floats.nearEquals(bluef, other.bluef, tolerance) && Floats.nearEquals(alphaf, other.alphaf, tolerance);
 
   @:to public function toHsla(): Hsla
     return toRgbx().toHsl().withAlpha(alphaf);
@@ -153,13 +153,13 @@ abstract Rgbxa(Array<Float>) {
     return Argb.fromFloats([alphaf, redf, greenf, bluef]);
 
   function get_red(): Int
-    return (redf   * 255).round();
+    return Math.round(redf * 255);
   function get_green(): Int
-    return (greenf * 255).round();
+    return Math.round(greenf * 255);
   function get_blue(): Int
-    return (bluef  * 255).round();
+    return Math.round(bluef * 255);
   function get_alpha(): Int
-    return (alphaf * 255).round();
+    return Math.round(alphaf * 255);
 
   inline function get_redf(): Float
     return this[0];

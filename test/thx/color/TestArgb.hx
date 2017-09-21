@@ -75,4 +75,26 @@ class TestArgb {
 
     Assert.isTrue(result.equals(combined), 'expected ${result} but it is ${combined}');
   }
+
+  public function testIssue30() {
+    var red = new Argb(0xFFFF0000);
+    var reddishWhite = new Argb(0xFFDDAAAA);
+    var white = new Argb(0xFFFFFFFF);
+
+    // to int
+    Assert.equals(red.toInt(), 0xFFFF0000);
+    Assert.equals(white.toInt(), 0xFFFFFFFF);
+    Assert.equals(reddishWhite.toInt(), 0xFFDDAAAA);
+
+    // round trip through rgbxa
+    Assert.isTrue(white == white.toRgbxa().toArgb());
+    Assert.isTrue(reddishWhite == reddishWhite.toRgbxa().toArgb());
+    Assert.isTrue(red == red.toRgbxa().toArgb());
+
+    // interpolation
+    Assert.isTrue(white == white.interpolate(red, 0));
+    Assert.isTrue(red == white.interpolate(red, 1));
+    Assert.isTrue(white.interpolate(red, 0.9).toInt() > red.toInt());
+    Assert.isTrue(white.interpolate(red, 0.9).toInt() < white.toInt());
+  }
 }
