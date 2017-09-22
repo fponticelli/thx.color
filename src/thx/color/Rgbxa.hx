@@ -38,9 +38,11 @@ abstract Rgbxa(Array<Float>) {
 
     return try switch info.name {
       case 'rgb':
-        thx.color.Rgbx.fromFloats(ColorParser.getFloatChannels(info.channels, 3, true)).toRgbxa();
+        thx.color.Rgbx.fromFloats(ColorParser.getFloatChannels(info.channels, 3, [HexMode, HexMode, HexMode])).toRgbxa();
       case 'rgba':
-        thx.color.Rgbxa.fromFloats(ColorParser.getFloatChannels(info.channels, 4, true));
+        thx.color.Rgbxa.fromFloats(ColorParser.getFloatChannels(info.channels, 4, [HexMode, HexMode, HexMode, NaturalMode]));
+      case 'hexa':
+        thx.color.Rgbxa.fromFloats(ColorParser.getFloatChannels(info.channels, 4, [HexMode, HexMode, HexMode, HexMode]));
       case _:
         null;
     } catch(e: Dynamic) null;

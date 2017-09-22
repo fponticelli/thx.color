@@ -77,7 +77,7 @@ abstract Temperature(Float) from Float to Float {
 
     return try switch info.name {
     case 'temperature':
-        new thx.color.Temperature(ColorParser.getFloatChannels(info.channels, 1, false)[0]);
+        new thx.color.Temperature(ColorParser.getFloatChannels(info.channels, 1, [NaturalMode, NaturalMode, NaturalMode])[0]);
       case _:
         null;
     } catch(e: Dynamic) null;

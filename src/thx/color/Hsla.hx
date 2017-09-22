@@ -31,9 +31,9 @@ abstract Hsla(Array<Float>) {
 
     return try switch info.name {
       case 'hsl':
-        new thx.color.Hsl(ColorParser.getFloatChannels(info.channels, 3, false)).toHsla();
+        new thx.color.Hsl(ColorParser.getFloatChannels(info.channels, 3, [DegreeMode, NaturalMode, NaturalMode])).toHsla();
       case 'hsla':
-        new thx.color.Hsla(ColorParser.getFloatChannels(info.channels, 4, false));
+        new thx.color.Hsla(ColorParser.getFloatChannels(info.channels, 4, [DegreeMode, NaturalMode, NaturalMode, NaturalMode]));
       case _:
         null;
     } catch(e: Dynamic) null;

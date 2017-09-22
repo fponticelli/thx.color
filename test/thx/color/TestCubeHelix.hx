@@ -19,7 +19,7 @@ class TestCubeHelix {
   }
 
   public function testFromString() {
-    Assert.isTrue(CubeHelix.create(0.5, 0.2, 0.1).equals("cubehelix(50%,0.2,10%)"));
+    Assert.isTrue(CubeHelix.create(180, 0.2, 0.1).equals("cubehelix(50%,0.2,10%)"));
   }
 
   public function testNearEquals() {

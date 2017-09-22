@@ -43,9 +43,9 @@ abstract CubeHelix(Array<Float>) {
 
     return try switch info.name {
     case 'cubehelix' if(info.channels.length >= 4):
-        new thx.color.CubeHelix(ColorParser.getFloatChannels(info.channels, 4, false));
+        new thx.color.CubeHelix(ColorParser.getFloatChannels(info.channels, 4, [DegreeMode, NaturalMode, NaturalMode, NaturalMode]));
     case 'cubehelix':
-        new thx.color.CubeHelix(ColorParser.getFloatChannels(info.channels, 3, false).concat([1.0]));
+        new thx.color.CubeHelix(ColorParser.getFloatChannels(info.channels, 3, [DegreeMode, NaturalMode, NaturalMode]).concat([1.0]));
       case _:
         null;
     } catch(e: Dynamic) null;

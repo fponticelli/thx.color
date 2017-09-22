@@ -53,7 +53,7 @@ abstract Lab(Array<Float>) {
 
     return try switch info.name {
       case 'lab', 'l*a*b*', 'cielab':
-        Lab.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
+        Lab.fromFloats(ColorParser.getFloatChannels(info.channels, 3, [NaturalMode, NaturalMode, NaturalMode]));
       case _:
         null;
     } catch(e: Dynamic) null;

@@ -37,7 +37,7 @@ abstract Yuv(Array<Float>) {
 
     return try switch info.name {
     case 'yuv':
-        new thx.color.Yuv(ColorParser.getFloatChannels(info.channels, 3, false));
+        new thx.color.Yuv(ColorParser.getFloatChannels(info.channels, 3, [NaturalMode, NaturalMode, NaturalMode]));
       case _:
         null;
     } catch(e: Dynamic) null;

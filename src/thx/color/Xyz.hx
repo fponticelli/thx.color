@@ -58,7 +58,7 @@ abstract Xyz(Array<Float>) {
 
     return try switch info.name {
       case 'ciexyz', 'xyz':
-        new thx.color.Xyz(ColorParser.getFloatChannels(info.channels, 3, false));
+        new thx.color.Xyz(ColorParser.getFloatChannels(info.channels, 3, [NaturalMode, NaturalMode, NaturalMode]));
       case _:
         null;
     } catch(e: Dynamic) null;

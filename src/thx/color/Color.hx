@@ -27,42 +27,44 @@ it returns `null`.
 
     return try switch info.name {
       case 'cielab', 'lab':
-        Lab.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
+        Lab.fromFloats(ColorParser.getFloatChannels(info.channels, 3, [NaturalMode, NaturalMode, NaturalMode]));
       case 'cielch', 'lch':
-        LCh.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
+        LCh.fromFloats(ColorParser.getFloatChannels(info.channels, 3, [NaturalMode, NaturalMode, DegreeMode]));
       case 'cieluv', 'luv':
-        Luv.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
+        Luv.fromFloats(ColorParser.getFloatChannels(info.channels, 3, [NaturalMode, NaturalMode, NaturalMode]));
       case 'cmy':
-        Cmy.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
+        Cmy.fromFloats(ColorParser.getFloatChannels(info.channels, 3, [NaturalMode, NaturalMode, NaturalMode]));
       case 'cmyk':
-        Cmyk.fromFloats(ColorParser.getFloatChannels(info.channels, 4, false));
+        Cmyk.fromFloats(ColorParser.getFloatChannels(info.channels, 4, [NaturalMode, NaturalMode, NaturalMode, NaturalMode]));
       case 'cubehelix':
-        CubeHelix.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
+        CubeHelix.fromFloats(ColorParser.getFloatChannels(info.channels, 3, [NaturalMode, NaturalMode, NaturalMode]));
       case 'grey', 'gray':
-        Grey.create(ColorParser.getFloatChannels(info.channels, 1, false)[0]);
+        Grey.create(ColorParser.getFloatChannels(info.channels, 1, [NaturalMode])[0]);
       case 'hcl':
-        var c = ColorParser.getFloatChannels(info.channels, 3, false);
+        var c = ColorParser.getFloatChannels(info.channels, 3, [DegreeMode, NaturalMode, NaturalMode]);
         LCh.create(c[2], c[1], c[0]);
       case 'hsl':
-        Hsl.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
+        Hsl.fromFloats(ColorParser.getFloatChannels(info.channels, 3, [DegreeMode, NaturalMode, NaturalMode]));
       case 'hsla':
-        Hsla.fromFloats(ColorParser.getFloatChannels(info.channels, 4, false));
+        Hsla.fromFloats(ColorParser.getFloatChannels(info.channels, 4, [DegreeMode, NaturalMode, NaturalMode, NaturalMode]));
       case 'hsv', 'hsb':
-        Hsv.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
+        Hsv.fromFloats(ColorParser.getFloatChannels(info.channels, 3, [DegreeMode, NaturalMode, NaturalMode]));
       case 'hsva':
-        Hsva.fromFloats(ColorParser.getFloatChannels(info.channels, 4, false));
+        Hsva.fromFloats(ColorParser.getFloatChannels(info.channels, 4, [DegreeMode, NaturalMode, NaturalMode, NaturalMode]));
       case 'hunterlab':
-        HunterLab.fromFloats(ColorParser.getFloatChannels(info.channels, 4, false));
+        HunterLab.fromFloats(ColorParser.getFloatChannels(info.channels, 4, [NaturalMode, NaturalMode, NaturalMode, NaturalMode]));
       case 'rgb':
-        Rgbx.fromFloats(ColorParser.getFloatChannels(info.channels, 3, true));
+        Rgbx.fromFloats(ColorParser.getFloatChannels(info.channels, 3, [HexMode, HexMode, HexMode]));
       case 'rgba':
-        Rgbxa.fromFloats(ColorParser.getFloatChannels(info.channels, 4, true));
+        Rgbxa.fromFloats(ColorParser.getFloatChannels(info.channels, 4, [HexMode, HexMode, HexMode, NaturalMode]));
+      case 'hexa':
+        Rgbxa.fromFloats(ColorParser.getFloatChannels(info.channels, 4, [HexMode, HexMode, HexMode, HexMode]));
       case 'ciexyz', 'xyz':
-        Xyz.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
+        Xyz.fromFloats(ColorParser.getFloatChannels(info.channels, 3, [NaturalMode, NaturalMode, NaturalMode]));
       case 'yuv':
-        Yuv.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
+        Yuv.fromFloats(ColorParser.getFloatChannels(info.channels, 3, [NaturalMode, NaturalMode, NaturalMode]));
       case 'yxy':
-        Yxy.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
+        Yxy.fromFloats(ColorParser.getFloatChannels(info.channels, 3, [NaturalMode, NaturalMode, NaturalMode]));
       case _:
         null;
     } catch(e: Dynamic) null;

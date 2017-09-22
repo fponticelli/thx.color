@@ -27,7 +27,7 @@ abstract HunterLab(Array<Float>) {
 
     return try switch info.name {
     case 'hunterlab':
-        HunterLab.fromFloats(ColorParser.getFloatChannels(info.channels, 3, false));
+        HunterLab.fromFloats(ColorParser.getFloatChannels(info.channels, 3, [NaturalMode, NaturalMode, NaturalMode]));
       case _:
         null;
     } catch(e: Dynamic) null;

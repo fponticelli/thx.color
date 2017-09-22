@@ -25,7 +25,7 @@ abstract Yxy(Array<Float>) {
 
     return try switch info.name {
       case 'yxy':
-        new thx.color.Yxy(ColorParser.getFloatChannels(info.channels, 3, false));
+        new thx.color.Yxy(ColorParser.getFloatChannels(info.channels, 3, [NaturalMode, NaturalMode, NaturalMode]));
       case _:
         null;
     } catch(e: Dynamic) null;

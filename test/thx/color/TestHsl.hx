@@ -17,10 +17,11 @@ class TestHsl {
     var hsl = Hsl.create(0, 0, 1);
     Assert.equals("hsl(0,0%,100%)", hsl.toString());
     Assert.equals("hsl(0,0%,100%)", hsl.toCss3());
+    Assert.equals("hsl(180,0%,100%)", Hsl.create(180, 0, 1).toCss3());
   }
 
   public function testFromString() {
-    Assert.isTrue(Hsl.create(0.5, 0.2, 0.1).equals("hsl(50%,0.2,10%)"));
-    Assert.isTrue(Hsla.create(0.5, 0.2, 0.1, 0.3).equals("hsla(50%,0.2,10%,0.3)"));
+    Assert.isTrue(Hsl.create(180, 0.2, 0.1).equals("hsl(50%,0.2,10%)"));
+    Assert.isTrue(Hsla.create(180, 0.2, 0.1, 0.3).equals("hsla(50%,0.2,10%,0.3)"));
   }
 }

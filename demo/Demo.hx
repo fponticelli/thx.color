@@ -142,7 +142,7 @@ class Demo {
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.font = '${Math.round(cellh*0.4)}px Verdana, sans-serif';
-    colors.mapi(function(name, i) {
+    colors.eachi(function(name, i) {
       var col   = i % columns,
           row   = Math.floor(i / columns),
           color = Web.names.get(name);

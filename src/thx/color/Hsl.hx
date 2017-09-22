@@ -42,7 +42,7 @@ abstract Hsl(Array<Float>) {
 
     return try switch info.name {
       case 'hsl':
-        new thx.color.Hsl(ColorParser.getFloatChannels(info.channels, 3, false));
+        new thx.color.Hsl(ColorParser.getFloatChannels(info.channels, 3, [DegreeMode, NaturalMode, NaturalMode]));
       case _:
         null;
     } catch(e: Dynamic) null;

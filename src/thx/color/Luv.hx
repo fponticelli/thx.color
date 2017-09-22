@@ -38,7 +38,7 @@ abstract Luv(Array<Float>) {
 
     return try switch info.name {
     case 'cieluv', 'luv':
-        new thx.color.Luv(ColorParser.getFloatChannels(info.channels, 3, false));
+        new thx.color.Luv(ColorParser.getFloatChannels(info.channels, 3, [NaturalMode, NaturalMode, NaturalMode]));
       case _:
         null;
     } catch(e: Dynamic) null;
