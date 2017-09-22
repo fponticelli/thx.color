@@ -50,9 +50,9 @@ abstract LCh(Array<Float>) {
 
     return try switch info.name {
       case 'cielch', 'lch':
-        new LCh(ColorParser.getFloatChannels(info.channels, 3, false));
+        new LCh(ColorParser.getFloatChannels(info.channels, 3, [NaturalMode, NaturalMode, DegreeMode]));
       case 'hcl':
-        var c = ColorParser.getFloatChannels(info.channels, 3, false);
+        var c = ColorParser.getFloatChannels(info.channels, 3, [DegreeMode, NaturalMode, NaturalMode]);
         LCh.create(c[2], c[1], c[0]);
       case _:
         null;

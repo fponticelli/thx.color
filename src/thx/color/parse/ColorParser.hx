@@ -1,5 +1,6 @@
 ﻿package thx.color.parse;
 
+using thx.Arrays;
 import thx.Floats;
 import thx.Ints;
 
@@ -39,11 +40,11 @@ class ColorParser {
 
     var channels = [];
     while(s.length > 0) {
-      channels.push(CIInt8(Std.parseInt('0x${s.substr(0,2)}')));
+      channels.push(CIInt(Std.parseInt('0x${s.substr(0,2)}')));
       s = s.substr(2);
     }
     if(channels.length == 4)
-      return new ColorInfo("rgba", channels.slice(1).concat([channels[0]]));
+      return new ColorInfo("hexa", channels.slice(1).concat([channels[0]]));
     else
       return new ColorInfo("rgb", channels);
   }
@@ -83,23 +84,17 @@ class ColorParser {
         CIDegree(Floats.parse(value) * 180 / Math.PI);
       case "" if(value == '${Ints.parse(value)}') :
         var i = Ints.parse(value);
-        if(i == 0)
-          CIBool(false)
-        else if(i == 1)
-          CIBool(true)
-        else if(i < 256)
-          CIInt8(i)
-        else CIInt(i);
+        CIInt(i);
       case "" if(Floats.canParse(value)) :
         CIFloat(Floats.parse(value));
       default: null;
     } catch(e : Dynamic) return null;
   }
 
-  public static function getFloatChannels(channels : Array<ChannelInfo>, length : Int, useInt8 : Bool) {
+  public static function getFloatChannels(channels : Array<ChannelInfo>, length : Int, modes : Array<Int2FloatMode>) {
     if(length != channels.length)
       throw 'invalid number of channels, expected $length but it is ${channels.length}';
-    return channels.map(getFloatChannel.bind(_, useInt8));
+    return channels.mapi((v, i) -> getFloatChannel(v, modes[i]));
   }
 
   public static function getInt8Channels(channels : Array<ChannelInfo>, length : Int) {
@@ -108,22 +103,22 @@ class ColorParser {
     return channels.map(getInt8Channel);
   }
 
-  public static function getFloatChannel(channel : ChannelInfo, useInt8 = true)
-    return switch(channel) {
-      case CIBool(v): v ? 1 : 0;
-      case CIFloat(v): v;
-      case CIInt(v): v;
-      case CIDegree(v): v;
-      case CIInt8(v) if(useInt8): v / 255;
-      case CIInt8(v): v;
-      case CIPercent(v): v / 100;
+  public static function getFloatChannel(channel : ChannelInfo, mode: Int2FloatMode)
+    return switch [channel, mode] {
+      case [CIFloat(v) , _]: v;
+      case [CIInt(v) , HexMode]: v / 255;
+      case [CIInt(v) , DegreeMode]:
+      v;
+      case [CIInt(v) , NaturalMode]: v;
+      case [CIDegree(v) , _]: v;
+      case [CIPercent(v) , DegreeMode]: v / 100 * 360;
+      case [CIPercent(v) , _]: v / 100;
       default: throw 'can\'t get a float value from $channel';
     };
 
   public static function getInt8Channel(channel : ChannelInfo)
     return switch(channel) {
-      case CIBool(v) : v ? 1 : 0;
-      case CIInt8(v) : v;
+      case CIInt(v) if(v >= 0 && v <=255): v;
       case CIPercent(v): Math.round(255 * v / 100);
       default : throw "unable to extract a valid int8 value";
     };
@@ -142,11 +137,15 @@ class ColorInfo {
     return '$name, channels: $channels';
 }
 
+enum Int2FloatMode {
+  HexMode;
+  DegreeMode;
+  NaturalMode;
+}
+
 enum ChannelInfo {
-  CIPercent(value : Float);
-  CIFloat(value : Float);
   CIDegree(value : Float);
-  CIInt8(value : Int);
+  CIFloat(value : Float);
   CIInt(value : Int);
-  CIBool(value : Bool);
+  CIPercent(value : Float);
 }

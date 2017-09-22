@@ -44,7 +44,14 @@ abstract Rgba(Int) from Int {
           ColorParser.getInt8Channel(info.channels[0]),
           ColorParser.getInt8Channel(info.channels[1]),
           ColorParser.getInt8Channel(info.channels[2]),
-          Math.round(ColorParser.getFloatChannel(info.channels[3]) * 255)
+          Math.round(ColorParser.getFloatChannel(info.channels[3], NaturalMode) * 255)
+        );
+      case 'hexa':
+        Rgba.create(
+          ColorParser.getInt8Channel(info.channels[0]),
+          ColorParser.getInt8Channel(info.channels[1]),
+          ColorParser.getInt8Channel(info.channels[2]),
+          ColorParser.getInt8Channel(info.channels[3])
         );
       case _:
         null;

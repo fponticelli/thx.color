@@ -47,6 +47,10 @@ class TestColor {
     assertEquals(new Rgba(0x00FF00FF), Color.parse("rgba(0,100%,0,1)"));
   }
 
+  public function testParseRgbIssueWithOne() {
+    assertEquals(Color.parse("RGB(1,33,105)"), Rgb.fromInts([1, 33, 105]));
+  }
+
   public function assertEquals(a : Rgbxa, b : Rgbxa, ?pos : PosInfos)
     Assert.isTrue(a.equals(b), 'expected $a but was $b', pos);
 }

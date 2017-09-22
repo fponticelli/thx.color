@@ -36,7 +36,7 @@ abstract Cmyk(Array<Float>) {
       return null;
     return try switch info.name {
       case 'cmyk':
-        new thx.color.Cmyk(ColorParser.getFloatChannels(info.channels, 4, false));
+        new thx.color.Cmyk(ColorParser.getFloatChannels(info.channels, 4, [NaturalMode, NaturalMode, NaturalMode, NaturalMode]));
       case _:
         null;
     } catch(e: Dynamic) null;

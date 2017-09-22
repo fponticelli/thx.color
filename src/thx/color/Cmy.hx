@@ -28,7 +28,7 @@ abstract Cmy(Array<Float>) {
       return null;
     return try switch info.name {
       case 'cmy':
-        new thx.color.Cmy(ColorParser.getFloatChannels(info.channels, 3, false));
+        new thx.color.Cmy(ColorParser.getFloatChannels(info.channels, 3, [NaturalMode, NaturalMode, NaturalMode]));
       case _:
         null;
     } catch(e: Dynamic) null;

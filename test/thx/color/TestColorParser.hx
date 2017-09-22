@@ -10,16 +10,16 @@ class TestColorParser {
 
   public function testFeatures() {
     assert(
-      "a",  [CIInt8(2)],
+      "a",  [CIInt(2)],
       "a(2)");
     assert(
-      "aa", [CIInt8(2)],
+      "aa", [CIInt(2)],
       "aa(2)");
     assert(
-      "rgb",  [CIInt8(2)],
+      "rgb",  [CIInt(2)],
       "rgb(2)");
     assert(
-      "rgba", [CIInt8(2)],
+      "rgba", [CIInt(2)],
       "rgba(2)");
     assert(
       "hsla", [CIDegree(1), CIPercent(2), CIPercent(3), CIFloat(0.5)],
@@ -30,9 +30,7 @@ class TestColorParser {
     assertStringChannel(CIDegree(1),  "1deg");
     assertStringChannel(CIPercent(1), "1%");
     assertStringChannel(CIFloat(0.1), "0.1");
-    assertStringChannel(CIBool(false),  "0");
-    assertStringChannel(CIBool(true), "1");
-    assertStringChannel(CIInt8(2),    "2");
+    assertStringChannel(CIInt(2),    "2");
     assertStringChannel(CIInt(256),   "256");
   }
 

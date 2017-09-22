@@ -47,7 +47,7 @@ abstract Rgbx(Array<Float>) {
 
     return try switch info.name {
       case 'rgb':
-        Rgbx.fromFloats(ColorParser.getFloatChannels(info.channels, 3, true));
+        Rgbx.fromFloats(ColorParser.getFloatChannels(info.channels, 3, [HexMode, HexMode, HexMode]));
       case _:
         null;
     } catch(e : Dynamic) null;

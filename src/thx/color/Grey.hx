@@ -21,7 +21,7 @@ abstract Grey(Float) from Float to Float {
 
     return try switch info.name {
       case 'grey', 'gray':
-        new thx.color.Grey(ColorParser.getFloatChannels(info.channels, 1, false)[0]);
+        new thx.color.Grey(ColorParser.getFloatChannels(info.channels, 1, [NaturalMode])[0]);
       case _:
         null;
     } catch(e: Dynamic) null;

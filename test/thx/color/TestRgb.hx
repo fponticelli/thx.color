@@ -64,6 +64,7 @@ class TestRgb {
 
     Assert.isTrue(new Rgba(0x00FF00FF).equals("#ff00ff00"));
     Assert.isTrue(new Rgba(0x00FF00FF).equals("#f0f0"));
+
     Assert.isTrue(new Rgba(0x00FF00FF).equals("rgba(0,255,0,1)"));
     Assert.isTrue(new Rgba(0x00FF00FF).equals("rgba(0,100%,0,1)"));
   }
